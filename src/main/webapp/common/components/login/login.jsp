@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/style.css">
 
+<script src="${pageContext.request.contextPath}/common/components/login/script.js" defer></script>
+
 <div id="login-overlay">
   <div id="login-main-container">
     <div id="image-container">
@@ -21,7 +23,7 @@
           <div class="user-box">
             <label for="password-form">Password</label>
             <input id="password-form" type="password" name="password"/>
-            <span id="password-toggle-icon" class="material-icons md-18">visibility_off</span>
+            <span id="password-toggle-icon" class="password-icon material-icons md-18" onClick="showPassword()">visibility</span>
           </div>
           <div class="user-box">
             <input type="submit" value="Accedi"/>

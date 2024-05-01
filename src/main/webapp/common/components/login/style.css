@@ -125,6 +125,8 @@
 
   color: #132a13;
   font-size: 2vw;
+
+  user-select: none;
 }
 
 #login-overlay input[type="submit"] {
