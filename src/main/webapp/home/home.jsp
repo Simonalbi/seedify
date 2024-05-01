@@ -12,10 +12,7 @@
 	<script src="${pageContext.request.contextPath}/home/script.js" defer></script>
 </head>
 <body>
-	<div id="login-overlay-container" style="display: none">
-		<jsp:include page="/common/components/login/login.jsp"/>
-	</div>
-
+	<jsp:include page="/common/components/login/login.jsp"/>
 	<jsp:include page="/common/components/header/header.jsp"/>
 	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 

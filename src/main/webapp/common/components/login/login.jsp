@@ -4,7 +4,7 @@
 
 <script src="${pageContext.request.contextPath}/common/components/login/script.js" defer></script>
 
-<div id="login-overlay">
+<div id="login-overlay" style="display: none">
   <div id="login-main-container">
     <div id="image-container">
       <img src="${pageContext.request.contextPath}/common/assets/img/login-background.jpg"/>
@@ -23,7 +23,7 @@
           <div class="user-box">
             <label for="password-form">Password</label>
             <input id="password-form" type="password" name="password"/>
-            <span id="password-toggle-icon" class="password-icon material-icons md-18" onClick="showPassword()">visibility</span>
+            <span id="password-toggle-icon" class="password-icon material-icons md-18" onClick="togglePassword()">visibility</span>
           </div>
           <div class="user-box">
             <input type="submit" value="Accedi"/>
