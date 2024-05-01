@@ -1,0 +1,85 @@
+body {
+  height: 100vh;
+  background: linear-gradient(122deg, rgba(19,42,19,1) 26%, rgba(79,119,45,1) 68%, rgba(200,168,4,1) 100%);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-container {
+  height: 35%;
+  width: 45%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1vw;
+  color: cornsilk;
+}
+
+
+.question {
+  color: rgb(233, 213, 33);
+}
+
+#logo-container {
+  height: 5vw;
+}
+
+#logo-container img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.5vw;
+}
+
+.page p, h3 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.page p {
+  font-size: 0.9vw;
+}
+
+.page h3 {
+  font-size: 1vw;
+}
+
+#help-icon {
+  margin-right: 0.5vw;
+  font-size: 1.3vw;
+}
+
+.redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a:link {
+  color: rgba(200,168,4,1);
+}
+
+a:visited {
+  color: rgba(200,168,4,1);
+}
