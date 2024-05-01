@@ -43,8 +43,8 @@
     justify-content: center;
     align-items: center;
 
-    padding: 0vw 0vw 0vw 1vw;
-    border-radius: 0px 50px 50px 0px;
+    padding: 0 0 0 1vw;
+    border-radius: 0 50px 50px 0;
 
     width: fit-content;
     height: fit-content;
@@ -72,7 +72,7 @@
 }
 
 .expandable:hover {
-    left: 0vw;
+    left: 0;
 
     .material-icons {
         transform: rotate(360deg);
@@ -114,7 +114,7 @@
     align-items: flex-start;
 
     margin-right: 1vw;
-    padding: 0vw 1vw;
+    padding: 0 1vw;
     transition: padding ease 0.3s;
 
     border-radius: 25pX;
@@ -196,7 +196,7 @@
     max-width: 20vw;
     height: 25vw;
 
-    margin: 0vw 1vw 0vw 1vw;
+    margin: 0 1vw 0 1vw;
     padding: 1vw;
 
     border-radius: 2vw;
