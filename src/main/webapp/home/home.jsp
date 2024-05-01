@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
 </head>
 <body>
-    <jsp:include page="/common/components/header/header.jsp"/>
+    <jsp:include page="/common/components/header/heade.jsp"/>
     <jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 
     <div id="main-container">
