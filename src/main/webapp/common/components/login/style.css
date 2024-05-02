@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+#login-overlay {
+  position: fixed;
+  z-index: 30;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(31, 31, 31, 0.65);
+}
+
+#login-overlay #login-main-container {
+  position: relative;
+
+  background-color: #132a13;
+
+  width: 50vw;
+  height: 30vw;
+
+  margin-left: 25%;
+  margin-top: 10%;
+
+  display: flex;
+
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#login-overlay #image-container {
+  background-color: #0F210F;
+  width: 50%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+#login-overlay #image-container img {
+  height: 100%;
+  object-fit: cover;
+
+  margin-left: -9vw;
+}
+
+#login-overlay #login-container {
+  background-color: #132a13;
+  box-shadow: inset 20px 20px 60px #0d1d0d, inset -20px -20px 60px #193719;
+
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 3vw 2vw;
+}
+
+#login-overlay #animated-bird {
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+
+  top: 2vw;
+  right: -1.8vw;
+}
+
+#login-overlay #logo-container {
+  width: 100%;
+  height: 4vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-overlay #logo-container img {
+  height: 100%;
+  object-fit: cover;
+}
+
+#login-overlay #form-container {
+  width: 100%;
+  height: 10vw;
+  margin-top: 1.5vw;
+}
+
+#login-overlay .user-box {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+
+  margin-bottom: 1vw;
+}
+
+#login-overlay .user-box label {
+  margin-bottom: 0.5vw;
+  color: #b5d73c;
+  font-weight: 400;
+  font-size: 1.3vw;
+}
+
+#login-overlay .user-box input {
+  border: 1px solid #c5c6c9;
+  border-radius: 5px;
+  padding: 8px 12px;
+  height: 3vw;
+  max-height: 3vw;
+  font-size: 1.4vw;
+}
+
+#login-overlay .user-box input:focus {
+  outline: none;
+}
+
+#login-overlay #password-toggle-icon {
+  position: absolute;
+  transform: translate(18.5vw, 2.6vw);
+
+  cursor: pointer;
+
+  color: #132a13;
+  font-size: 2vw;
+
+  user-select: none;
+}
+
+#login-overlay input[type="submit"] {
+  position: relative;
+  top: 5vw;
+
+  height: 3vw;
+
+  border: 0 solid #c5c6c9;
+  background-color: #b5d73c;
+  padding: 8px 12px;
+
+  font-size: 1.4vw;
+  font-weight: 500;
+
+  cursor: pointer;
+}
