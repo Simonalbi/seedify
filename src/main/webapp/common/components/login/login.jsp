@@ -16,17 +16,20 @@
       </div>
       <div id="form-container">
         <form action="#" method="post">
-          <div class="user-box">
-            <label for="email-form">Email</label>
-            <input id="email-form" type="email" name="email"/>
+          <div id="email-box">
+            <jsp:include page="/common/components/forms/email-input-box.jsp">
+              <jsp:param name="labelColor" value="#398301" />
+            </jsp:include>
           </div>
-          <div class="user-box">
-            <label for="password-form">Password</label>
-            <input id="password-form" type="password" name="password"/>
-            <span id="password-toggle-icon" class="password-icon material-icons md-18" onClick="togglePassword()">visibility</span>
+          <div id="password-box">
+            <jsp:include page="/common/components/forms/password-input-box.jsp">
+              <jsp:param name="labelColor" value="#398301" />
+            </jsp:include>
           </div>
-          <div class="user-box">
-            <input type="submit" value="Accedi"/>
+          <div id="submit-box">
+            <jsp:include page="/common/components/forms/submit-input-box.jsp">
+              <jsp:param name="value" value="Accedi" />
+            </jsp:include>
           </div>
         </form>
       </div>
