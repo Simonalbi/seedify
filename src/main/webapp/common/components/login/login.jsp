@@ -7,12 +7,12 @@
 <div id="login-overlay" style="display: none">
   <div id="login-main-container">
     <div id="image-container">
-      <img src="${pageContext.request.contextPath}/common/assets/img/login-background.jpg"/>
+      <img src="${pageContext.request.contextPath}/common/assets/img/login_background.jpg"/>
     </div>
     <div id="login-container">
       <lord-icon id="animated-bird" src="https://cdn.lordicon.com/xzbjjswf.json" trigger="loop" colors="primary:#b5d73c,secondary:#FFFFFF"></lord-icon>
       <div id="logo-container">
-        <img src="${pageContext.request.contextPath}/common/assets/img/logo/horizontal-logo.png"/>
+        <img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300.png"/>
       </div>
       <div id="form-container">
         <form action="#" method="post">

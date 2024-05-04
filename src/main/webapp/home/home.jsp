@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<!-- https://unsplash.com/it/foto/frutto-rotondo-rosso-su-terreno-marrone-hTKYAYwJoSQ -->
-			<img src="${pageContext.request.contextPath}/common/assets/img/growing-plant.jpg" alt="">
+			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg" alt="">
 		</div>
 		<div class="section-separator"></div>
 		<div id="products-container">

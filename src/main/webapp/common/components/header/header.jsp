@@ -4,7 +4,7 @@
 
 <div id="header">
 	<div id="logo-container">
-		<img src="${pageContext.request.contextPath}/common/assets/img/logo/horizontal-logo-small.png" alt="">
+		<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300_small.png" alt="">
 	</div>
 		<div id="menu-container">
 		  <div class="menu-option">
