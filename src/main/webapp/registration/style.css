@@ -1,0 +1,202 @@
+body {
+  overflow: hidden;
+}
+
+#main-container {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+}
+
+#left-container {
+  width: 40%;
+  height: 100%;
+}
+
+#image-container {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+  width: 100%;
+}
+
+#background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: brightness(85%);
+}
+
+#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  margin: 0.7vw;
+  filter: brightness(0) invert(1);
+
+  height: 3.5vw;
+  width: 3.5vw;
+}
+
+#slogan-container {
+  position: absolute;
+  z-index: 3;
+  bottom: 2vw;
+  left: 4vw;
+
+  width: 40%;
+
+  display: flex;
+  justify-content: center;
+
+  font-size: 2vw;
+  color: white;
+}
+
+#right-container {
+  background: #CDDD92;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 60%;
+  height: 100%;
+}
+
+#registration-container {
+  width: 75%;
+  height: 90%;
+}
+
+#title-container, #subtitle-container {
+  width: 100%;
+  text-align: center;
+}
+
+#title-container h1 {
+  font-size: 4vw;
+}
+
+#subtitle-container {
+  margin-top: 1vw;
+}
+
+#subtitle-container p {
+  font-size: 1.2vw;
+}
+
+#subtitle-container a{
+  color: #398300;
+}
+
+.form-row {
+  margin-top: 1vw;
+}
+
+#name-box, #surname-box, #password-box, #password-confirmation-box {
+  width: 48%;
+}
+
+#email-box, #submit-box {
+  width: 100%;
+}
+
+#submit-row {
+  margin-top: 0;
+}
+
+#password-security-level-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 2vw;
+  width: 100%;
+  height: 10vw;
+}
+
+#security-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vw;
+
+  width: 55%;
+  height: 100%;
+}
+
+#animation-container {
+  width: 45%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+#details-title {
+  font-size: 1vw;
+}
+
+.datail {
+  display: flex;
+}
+
+.detail span, .detail p {
+  font-size: 0.8vw;
+}
+
+.incomplete-step {
+  color: #FF0000;
+}
+
+.complete-step {
+  color: #398300;
+}
+
+.dirt-container {
+  position: relative;
+  top: 70%;
+
+  display: flex;
+
+  width: 100%;
+  height: 30%;
+}
+
+.dirt {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+  width: 30%;
+}
+
+.left-dirt {
+  background-color: rgb(114, 26, 26);
+  border-radius: 2vw 3vw 0 0;
+
+  transform: translate(10vw, 2vw);
+}
+
+.right-dirt {
+  background-color: #8a2d2d;
+  border-radius: 3vw 2vw 0 0;
+
+  transform: translate(-1vw, 1.5vw);
+}
+
+#sunflower {
+  position: absolute;
+  left: 9.7vw;
+  top: 2.2vw;
+  z-index: 1;
+
+  width: 2vw;
+  height: 2vw;
+
+  transition: transform 1s ease;
+  transform-origin: bottom center;
+}

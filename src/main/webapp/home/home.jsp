@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Seedify</title>
-
 	<jsp:include page="/common/general/metadata.jsp"/>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
@@ -30,7 +26,7 @@
 				</div>
 				<div id="login-container">
 					<div id="sign-up-button" class="animated-round-button">
-						<a href="#">
+						<a href="${pageContext.request.contextPath}/registration/registration.jsp">
 							<lord-icon class="round-button" src="https://cdn.lordicon.com/ysonqgnt.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
 							Registrati
 						</a>

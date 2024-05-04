@@ -1,6 +1,6 @@
-function togglePassword() {
-    var passwordForm = document.getElementById("password-input-box");
-    var passwordIcon = document.getElementsByClassName("password-toggle-icon")[0];
+function togglePassword(formId) {
+    const passwordForm = document.getElementById(formId);
+    const passwordIcon = document.getElementById(`${formId}-toggle-icon`);
     if (passwordForm.type === "password") {
         passwordForm.type = "text";
         passwordIcon.innerHTML = "visibility_off";

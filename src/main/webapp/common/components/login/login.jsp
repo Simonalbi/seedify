@@ -16,17 +16,21 @@
       </div>
       <div id="form-container">
         <form action="#" method="post">
-          <div id="email-box">
+          <div id="email-box" class="rubik-400">
             <jsp:include page="/common/components/forms/email-input-box.jsp">
-              <jsp:param name="labelColor" value="#398301" />
+              <jsp:param name="id" value="email-input-box" />
+              <jsp:param name="name" value="email" />
+              <jsp:param name="label" value="Email" />
             </jsp:include>
           </div>
-          <div id="password-box">
+          <div id="password-box" class="rubik-400">
             <jsp:include page="/common/components/forms/password-input-box.jsp">
-              <jsp:param name="labelColor" value="#398301" />
+              <jsp:param name="id" value="password-input-box" />
+              <jsp:param name="name" value="password" />
+              <jsp:param name="label" value="Password" />
             </jsp:include>
           </div>
-          <div id="submit-box">
+          <div id="submit-box" class="rubik-400">
             <jsp:include page="/common/components/forms/submit-input-box.jsp">
               <jsp:param name="value" value="Accedi" />
             </jsp:include>
