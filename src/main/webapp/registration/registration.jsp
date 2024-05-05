@@ -31,42 +31,50 @@
         <form action="#" method="post">
           <div class="form-row">
             <div id="name-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/text-input-box.jsp">
-                <jsp:param name="id" value="name-input-box" />
-                <jsp:param name="name" value="name" />
+              <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Nome" />
+                <jsp:param name="id" value="name-input-box" />
+                <jsp:param name="type" value="text" />
+                <jsp:param name="name" value="name" />
               </jsp:include>
             </div>
             <div id="surname-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/text-input-box.jsp">
-                <jsp:param name="id" value="surname-input-box" />
-                <jsp:param name="name" value="surname" />
+              <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Cognome" />
+                <jsp:param name="id" value="surname-input-box" />
+                <jsp:param name="type" value="text" />
+                <jsp:param name="name" value="surname" />
               </jsp:include>
             </div>
           </div>
           <div class="form-row">
             <div id="email-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/email-input-box.jsp">
-                <jsp:param name="id" value="email-input-box" />
-                <jsp:param name="name" value="email" />
+              <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Email" />
+                <jsp:param name="id" value="email-input-box" />
+                <jsp:param name="type" value="email" />
+                <jsp:param name="name" value="email" />
+                <jsp:param name="placeholder" value="nome@email.com" />
               </jsp:include>
             </div>
           </div>
           <div class="form-row">
             <div id="password-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/password-input-box.jsp">
-                <jsp:param name="id" value="password-input-box" />
-                <jsp:param name="name" value="password" />
+              <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Password" />
+                <jsp:param name="id" value="password-input-box" />
+                <jsp:param name="type" value="password" />
+                <jsp:param name="name" value="password" />
+                <jsp:param name="placeholder" value="Min. 8 caratteri" />
               </jsp:include>
             </div>
             <div id="password-confirmation-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/password-input-box.jsp">
-                <jsp:param name="id" value="password-confirmation-input-box" />
-                <jsp:param name="name" value="password-confirmation" />
+              <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Conferma password" />
+                <jsp:param name="id" value="password-confirmation-input-box" />
+                <jsp:param name="type" value="password" />
+                <jsp:param name="name" value="password-confirmation" />
+                <jsp:param name="placeholder" value="Min. 8 caratteri" />
               </jsp:include>
             </div>
           </div>
@@ -114,8 +122,10 @@
           </div>
           <div id="submit-row">
             <div id="submit-box" class="dark rubik-400">
-              <jsp:include page="/common/components/forms/submit-input-box.jsp">
+              <jsp:include page="/common/components/input-box/input-box.jsp">
+                <jsp:param name="type" value="submit" />
                 <jsp:param name="value" value="Registrati" />
+                <jsp:param name="enabled" value="false" />
               </jsp:include>
             </div>
           </div>

@@ -17,21 +17,25 @@
       <div id="form-container">
         <form action="#" method="post">
           <div id="email-box" class="rubik-400">
-            <jsp:include page="/common/components/forms/email-input-box.jsp">
-              <jsp:param name="id" value="email-input-box" />
-              <jsp:param name="name" value="email" />
+            <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Email" />
+              <jsp:param name="id" value="email-input-box" />
+              <jsp:param name="type" value="email" />
+              <jsp:param name="name" value="email" />
+              <jsp:param name="placeholder" value="nome@email.com" />
             </jsp:include>
           </div>
           <div id="password-box" class="rubik-400">
-            <jsp:include page="/common/components/forms/password-input-box.jsp">
-              <jsp:param name="id" value="password-input-box" />
-              <jsp:param name="name" value="password" />
+            <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Password" />
+              <jsp:param name="id" value="password-input-box" />
+              <jsp:param name="type" value="password" />
+              <jsp:param name="name" value="password" />
             </jsp:include>
           </div>
           <div id="submit-box" class="rubik-400">
-            <jsp:include page="/common/components/forms/submit-input-box.jsp">
+            <jsp:include page="/common/components/input-box/input-box.jsp">
+              <jsp:param name="type" value="submit" />
               <jsp:param name="value" value="Accedi" />
             </jsp:include>
           </div>
