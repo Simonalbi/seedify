@@ -83,19 +83,16 @@ body {
 }
 
 #subtitle-container {
-  margin-top: 1vw;
+  margin-top: 0.5vw;
+  margin-bottom: 1vw;
 }
 
 #subtitle-container p {
   font-size: 1.2vw;
 }
 
-#subtitle-container a{
+#subtitle-container a {
   color: #398300;
-}
-
-.form-row {
-  margin-top: 1vw;
 }
 
 #name-box, #surname-box, #password-box, #password-confirmation-box {

@@ -32,7 +32,7 @@
 }
 
 .dark input:focus {
-  outline: #398300 solid 2px !important;
+  outline: #398300 solid 2px;
 }
 
 .input-box input[type="submit"]:enabled {
@@ -69,6 +69,19 @@
 
   color: #132a13;
   font-size: 2vw;
+
+  user-select: none;
+}
+
+.invalid-input {
+  outline: #FF0000 solid 2px !important;
+}
+
+.error-text {
+  color: transparent;
+  margin-top: 0.3vw;
+
+  font-size: 1vw;
 
   user-select: none;
 }

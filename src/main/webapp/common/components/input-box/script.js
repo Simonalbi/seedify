@@ -9,3 +9,21 @@ function togglePassword(formId) {
         passwordIcon.innerHTML = "visibility";
     }
 }
+
+document.addEventListener("input", (event) => {
+    const element = event.target;
+    if(element.classList.contains("wrongable")) {
+        const errorTextElements = element.parentNode.getElementsByClassName("error-text");
+        if (!element.checkValidity()) {
+           Array.from(errorTextElements).forEach(element => {
+                element.style.color = "#FF0000";
+            });
+            element.classList.add("invalid-input");
+        } else {
+           Array.from(errorTextElements).forEach(element => {
+                element.style.color = "transparent";
+            });
+            element.classList.remove("invalid-input");
+        }
+    }
+});

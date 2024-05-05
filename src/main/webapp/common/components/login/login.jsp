@@ -23,6 +23,8 @@
               <jsp:param name="type" value="email" />
               <jsp:param name="name" value="email" />
               <jsp:param name="placeholder" value="nome@email.com" />
+              <jsp:param name="pattern" value="[a-z0-9.]+@[a-z0-9.]+.[a-z]+"/>
+              <jsp:param name="errorMessage" value="Email non valida"/>
             </jsp:include>
           </div>
           <div id="password-box" class="rubik-400">
