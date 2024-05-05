@@ -1,8 +1,8 @@
 <jsp:include page="/common/general/metadata.jsp"/>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/forms/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/style.css">
 
-<script src="${pageContext.request.contextPath}/common/components/forms/script.js" defer></script>
+<script src="${pageContext.request.contextPath}/common/components/input-box/script.js" defer></script>
 
 <div class="input-box">
   <% if (!"submit".equals(request.getParameter("type"))) { %>
