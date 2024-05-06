@@ -99,12 +99,14 @@ function checkPasswordsMatch() {
 function enableRegistration() {
     let allFormsFilled = true;
     for (let i = 0; i < FORMS_IDS.length; i++) {
-        const formValue = document.getElementById(FORMS_IDS[i]).querySelector("input").value
-        if (formValue === "") {
+        const form = document.getElementById(FORMS_IDS[i]).querySelector("input")
+        if (form.value === "" || !form.checkValidity()) {
             allFormsFilled = false;
             break;
         }
     }
+
+    console.log(allFormsFilled, IS_PASSWORD_VALID, PASSWORDS_MATCH);
 
     const submitBox = document.getElementById("submit-box");
     if (allFormsFilled && IS_PASSWORD_VALID && PASSWORDS_MATCH) {
