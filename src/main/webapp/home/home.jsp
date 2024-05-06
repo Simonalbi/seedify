@@ -4,8 +4,6 @@
 	<jsp:include page="/common/general/metadata.jsp"/>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
-
-	<script src="${pageContext.request.contextPath}/home/script.js" defer></script>
 </head>
 <body>
 	<jsp:include page="/common/components/login/login.jsp"/>

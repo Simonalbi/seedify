@@ -1,7 +1,3 @@
-<jsp:include page="/common/general/metadata.jsp"/>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/header/style.css">
-
 <div id="header">
 	<div id="logo-container">
 		<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300_small.png" alt="">

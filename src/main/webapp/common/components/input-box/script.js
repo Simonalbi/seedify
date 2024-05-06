@@ -10,20 +10,33 @@ function togglePassword(formId) {
     }
 }
 
+function enableSubmitButton() {
+    const submitButton = document.getElementById("submit-button");
+    submitButton.disabled = false;
+}
+
+function disableSubmitButton() {
+    const submitButton = document.getElementById("submit-button");
+    submitButton.disabled = true;
+}
+
 document.addEventListener("input", (event) => {
-    const element = event.target;
-    if(element.classList.contains("wrongable")) {
-        const errorTextElements = element.parentNode.getElementsByClassName("error-text");
-        if (!element.checkValidity()) {
-           Array.from(errorTextElements).forEach(element => {
-                element.style.color = "#FF0000";
-            });
-            element.classList.add("invalid-input");
-        } else {
-           Array.from(errorTextElements).forEach(element => {
-                element.style.color = "transparent";
-            });
-            element.classList.remove("invalid-input");
-        }
+    let isFormFilled = true;
+
+    let isFormValid = true;
+    const inputBoxes = document.getElementsByClassName("input-box");
+    for (let i = 0; i < inputBoxes.length; i++) {
+        const input = inputBoxes[i].querySelector("input");
+        isFormFilled = isFormFilled && input.value !== "";
+        isFormValid = isFormValid && input.checkValidity();
+    }
+
+    console.log(event.target.id, event.target.checkValidity, event.target.value);
+    console.log(isFormFilled, isFormValid);
+
+    if (isFormFilled && isFormValid) {
+        enableSubmitButton();
+    } else {
+        disableSubmitButton();
     }
 });
