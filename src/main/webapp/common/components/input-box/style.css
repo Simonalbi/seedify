@@ -73,10 +73,6 @@
   user-select: none;
 }
 
-.invalid-input {
-  outline: #FF0000 solid 2px !important;
-}
-
 .error-text {
   color: transparent;
   margin-top: 0.3vw;
@@ -84,4 +80,12 @@
   font-size: 1vw;
 
   user-select: none;
+}
+
+.input-box input:invalid {
+  outline: #FF0000 solid 2px;
+}
+
+.input-box:has(input:invalid) p.error-text {
+  color: #FF0000;
 }
