@@ -31,8 +31,10 @@
           </div>
           <div id="submit-box" class="rubik-400">
             <jsp:include page="/common/components/input-box/input-box.jsp">
+              <jsp:param name="id" value="submit-button" />
               <jsp:param name="type" value="submit" />
               <jsp:param name="value" value="Accedi" />
+              <jsp:param name="enabled" value="false" />
             </jsp:include>
           </div>
         </form>
