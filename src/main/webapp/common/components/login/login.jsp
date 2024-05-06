@@ -1,10 +1,4 @@
-<jsp:include page="/common/general/metadata.jsp"/>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/style.css">
-
-<script src="${pageContext.request.contextPath}/common/components/login/script.js" defer></script>
-
-<div id="login-overlay" style="display: none">
+<div id="login" style="display: none">
   <div id="login-main-container">
     <div id="image-container">
       <img src="${pageContext.request.contextPath}/common/assets/img/login_background.jpg"/>
@@ -24,7 +18,7 @@
               <jsp:param name="name" value="email" />
               <jsp:param name="placeholder" value="nome@email.com" />
               <jsp:param name="pattern" value="[a-z0-9.]+@[a-z0-9.]+.[a-z]+"/>
-              <jsp:param name="errorMessage" value="Email non valida"/>
+              <jsp:param name="errorMessage" value="Email non valida" />
             </jsp:include>
           </div>
           <div id="password-box" class="rubik-400">

@@ -1,5 +1,5 @@
 function showLogin() {
-    const loginOverlay = document.getElementById("login-overlay");
+    const loginOverlay = document.getElementById("login");
     loginOverlay.style.display = "block";
 
     loginOverlay.addEventListener('click', function(event) {
