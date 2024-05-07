@@ -22,17 +22,14 @@ function disableSubmitButton() {
 
 document.addEventListener("input", (event) => {
     let isFormFilled = true;
-
     let isFormValid = true;
+
     const inputBoxes = document.getElementsByClassName("input-box");
     for (let i = 0; i < inputBoxes.length; i++) {
         const input = inputBoxes[i].querySelector("input");
         isFormFilled = isFormFilled && input.value !== "";
         isFormValid = isFormValid && input.checkValidity();
     }
-
-    console.log(event.target.id, event.target.checkValidity, event.target.value);
-    console.log(isFormFilled, isFormValid);
 
     if (isFormFilled && isFormValid) {
         enableSubmitButton();
