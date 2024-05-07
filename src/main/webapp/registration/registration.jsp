@@ -3,9 +3,9 @@
 <head>
   <jsp:include page="/common/general/metadata.jsp"/>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/registration/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/registration/styles/style.css">
 
-  <script src="${pageContext.request.contextPath}/registration/script.js" defer></script>
+  <script src="${pageContext.request.contextPath}/registration/scripts/script.js" defer></script>
 </head>
 <body>
 <div id="main-container">

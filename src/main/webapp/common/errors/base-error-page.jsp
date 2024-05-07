@@ -4,7 +4,7 @@
 <head>
   <jsp:include page="/common/general/metadata.jsp"/>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/common/errors/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/common/errors/styles/style.css">
 </head>
 <body>
 <div class="page">
