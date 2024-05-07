@@ -5,22 +5,27 @@
 <link rel="icon" href="${pageContext.request.contextPath}/common/assets/img/logo/favicon.png" type="image/png">
 
 <!-- GENERAL STYLESHEETS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/style/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/style/fonts.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/fonts.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material Icons Outlined'>
 
+<!-- GENERAL SCRIPTS -->
+<script src="${pageContext.request.contextPath}/common/general/scripts/script.js"></script>
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
+<!-- COMPONENTS -->
 <!-- chat-button -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/chat-button/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/chat-button/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/chat-button/scripts/script.js" defer></script>
 
 <!-- header -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/header/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/header/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/header/scripts/script.js" defer></script>
 
 <!-- input-box -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/style.css">
-<script src="${pageContext.request.contextPath}/common/components/input-box/script.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/input-box/scripts/script.js" defer></script>
 
 <!-- login -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/style.css">
-<script src="${pageContext.request.contextPath}/common/components/login/script.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/login/scripts/script.js" defer></script>

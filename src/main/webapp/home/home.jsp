@@ -3,7 +3,7 @@
 <head>
 	<jsp:include page="/common/general/metadata.jsp"/>
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/styles/style.css">
 </head>
 <body>
 	<jsp:include page="/common/components/login/login.jsp"/>
