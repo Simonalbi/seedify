@@ -1,4 +1,4 @@
-#header {
+#main-navbar {
   position: fixed;
   z-index: 10;
   width: 100%;
@@ -15,7 +15,7 @@
   box-shadow: 0 0.5vw 4vw 0 rgba(19, 42, 19, 0.75);
 }
 
-#header #logo-container {
+#main-navbar #logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,13 +26,13 @@
   padding: 0.3vw 0;
 }
 
-#header img {
+#main-navbar img {
   width: 65%;
   height: 100%;
   object-fit: cover;
 }
 
-#header #menu-container {
+#main-navbar #menu-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +41,7 @@
   height: 100%;
 }
 
-#header .selection-underline {
+#main-navbar .selection-underline {
   position: relative;
   background-color: white;
 
@@ -52,7 +52,7 @@
   top: -0.5vw;
 }
 
-#header .menu-option {
+#main-navbar .menu-option {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -64,11 +64,11 @@
   margin-top: 0.5vw;
 }
 
-#header .menu-option .material-icons {
+#main-navbar .menu-option .material-icons {
   margin-right: 0.3vw;
 }
 
-#header .menu-option a {
+#main-navbar .menu-option a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -77,30 +77,30 @@
 }
 
 @media screen and (max-width: 600px){
-  #header .menu-option .material-icons {
+  #main-navbar .menu-option .material-icons {
     font-size: 1.8vw;
   }
 
-  #header .menu-option a {
+  #main-navbar .menu-option a {
     font-size: 1.4vw;
   }
 }
 
 @media screen and (min-width: 601px) {
-  #header .menu-option .material-icons {
+  #main-navbar .menu-option .material-icons {
     font-size: 1.4vw;
   }
 
-  #header .menu-option a {
+  #main-navbar .menu-option a {
     font-size: 1.2vw;
   }
 }
 
-#header .menu-option:hover .selection-underline {
+#main-navbar .menu-option:hover .selection-underline {
   width: 100%;
 }
 
-#header .menu-separator {
+#main-navbar .menu-separator {
   background-color: white;
   width: 0.1vw;
   height: 70%;
@@ -108,7 +108,7 @@
   margin: 0 1vw;
 }
 
-#header #actions-container {
+#main-navbar #actions-container {
   width: 15vw;
   height: 100%;
 
@@ -117,16 +117,16 @@
   align-items: center;
 }
 
-#header #actions-container lord-icon {
+#main-navbar #actions-container lord-icon {
   width: 2vw;
   height: 2vw;
 }
 
-#header .action {
+#main-navbar .action {
   display: flex;
 }
 
-#header .action .notification {
+#main-navbar .action .notification {
   position: relative;
   z-index: 11;
   right: 0.6vw;
@@ -142,7 +142,7 @@
   border-radius: 50px;
 }
 
-#header .action p {
+#main-navbar .action p {
   color: rgb(205, 202, 50);
   font-size: 0.8vw;
 }

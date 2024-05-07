@@ -1,4 +1,4 @@
-<div id="header">
+<nav id="main-navbar">
 	<div id="logo-container">
 		<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300_small.png" alt="">
 	</div>
@@ -41,4 +41,4 @@
 				</div>
 			</div>
 		</div>
-</div>
+</nav>
