@@ -19,8 +19,8 @@
 <script src="${pageContext.request.contextPath}/common/components/chat-button/scripts/script.js" defer></script>
 
 <!-- header -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/header/styles/style.css">
-<script src="${pageContext.request.contextPath}/common/components/header/scripts/script.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-navbar/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js" defer></script>
 
 <!-- input-box -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/styles/style.css">
