@@ -88,6 +88,7 @@
                 <jsp:param name="name" value="password-confirmation" />
                 <jsp:param name="placeholder" value="Min. 8 caratteri" />
                 <jsp:param name="group" value="registration" />
+                <jsp:param name="errorMessage" value="Le password non corrisponde" />
               </jsp:include>
             </div>
           </div>

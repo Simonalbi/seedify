@@ -11,7 +11,7 @@
     <% if ("password".equals(request.getParameter("type"))) { %>
       <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons md-18" onClick="togglePassword('${param.id}')">visibility</span>
     <% } %>
-    <% if (request.getParameter("pattern") != null) { %>
+    <% if (request.getParameter("errorMessage") != null) { %>
       <p class="error-text">${param.errorMessage}</p>
     <% } %>
   <% } else { %>
