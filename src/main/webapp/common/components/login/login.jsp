@@ -21,17 +21,17 @@
               <jsp:param name="errorMessage" value="Email non valida" />
             </jsp:include>
           </div>
-          <div id="password-box" class="rubik-400">
+          <div id="login-password-box" class="rubik-400">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Password" />
-              <jsp:param name="id" value="password-input-box" />
+              <jsp:param name="id" value="login-password-input-box" />
               <jsp:param name="type" value="password" />
               <jsp:param name="name" value="password" />
             </jsp:include>
           </div>
-          <div id="submit-box" class="rubik-400">
+          <div id="login-submit-box" class="rubik-400">
             <jsp:include page="/common/components/input-box/input-box.jsp">
-              <jsp:param name="id" value="submit-button" />
+              <jsp:param name="id" value="login-submit-button" />
               <jsp:param name="type" value="submit" />
               <jsp:param name="value" value="Accedi" />
               <jsp:param name="enabled" value="false" />
