@@ -10,30 +10,38 @@ function togglePassword(formId) {
     }
 }
 
-function enableSubmitButton() {
+function enableSubmitButton(group) {
+    const submitButtons = document.querySelectorAll(`input[type="submit"].${group}`)
     const submitButton = document.getElementById("submit-button");
+
     submitButton.disabled = false;
 }
 
-function disableSubmitButton() {
+function disableSubmitButton(group) {
     const submitButton = document.getElementById("submit-button");
     submitButton.disabled = true;
 }
 
 document.addEventListener("input", (event) => {
+    const classesArray = Array.from(event.target.classList);
+    const group = classesArray.find(c => c.endsWith("-input-box-group"));
+
     let isFormFilled = true;
     let isFormValid = true;
 
+    console.log(group);
     const inputBoxes = document.getElementsByClassName("input-box");
     for (let i = 0; i < inputBoxes.length; i++) {
         const input = inputBoxes[i].querySelector("input");
-        isFormFilled = isFormFilled && input.value !== "";
-        isFormValid = isFormValid && input.checkValidity();
+        if (input.classList.contains(group)) {
+            isFormFilled = isFormFilled && input.value !== "";
+            isFormValid = isFormValid && input.checkValidity();
+        }
     }
 
     if (isFormFilled && isFormValid) {
-        enableSubmitButton();
+        enableSubmitButton(group);
     } else {
-        disableSubmitButton();
+        disableSubmitButton(group);
     }
 });

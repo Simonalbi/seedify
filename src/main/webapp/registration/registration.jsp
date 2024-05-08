@@ -40,6 +40,7 @@
                 <jsp:param name="name" value="name" />
                 <jsp:param name="pattern" value="[A-Za-z\s]+" />
                 <jsp:param name="errorMessage" value="Nome non valido"/>
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
             <div id="surname-box" class="dark rubik-400">
@@ -50,6 +51,7 @@
                 <jsp:param name="name" value="surname" />
                 <jsp:param name="pattern" value="[A-Za-z\s]+" />
                 <jsp:param name="errorMessage" value="Cognome non valido" />
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
           </div>
@@ -63,6 +65,7 @@
                 <jsp:param name="placeholder" value="nome@email.com" />
                 <jsp:param name="pattern" value="[a-z0-9.]+@[a-z0-9.]+\.[a-z]+" />
                 <jsp:param name="errorMessage" value="Email non valida" />
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
           </div>
@@ -74,6 +77,7 @@
                 <jsp:param name="type" value="password" />
                 <jsp:param name="name" value="password" />
                 <jsp:param name="placeholder" value="Min. 8 caratteri" />
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
             <div id="password-confirmation-box" class="dark rubik-400">
@@ -83,6 +87,7 @@
                 <jsp:param name="type" value="password" />
                 <jsp:param name="name" value="password-confirmation" />
                 <jsp:param name="placeholder" value="Min. 8 caratteri" />
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
           </div>
@@ -135,6 +140,7 @@
                 <jsp:param name="type" value="submit" />
                 <jsp:param name="value" value="Registrati" />
                 <jsp:param name="enabled" value="false" />
+                <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
           </div>
