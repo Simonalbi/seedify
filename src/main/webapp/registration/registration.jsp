@@ -8,6 +8,8 @@
   <script src="${pageContext.request.contextPath}/registration/scripts/script.js" defer></script>
 </head>
 <body>
+<jsp:include page="/common/components/login/login.jsp"/>
+
 <div id="main-container">
   <div id="left-container">
     <div id="slogan-container" class="oleo-400">
@@ -25,7 +27,7 @@
         <h1 class="rubik-600">Registrati su Seedify</h1>
       </div>
       <div id="subtitle-container">
-        <p class="rubik-300">Hai già un account? <a href="${pageContext.request.contextPath}/home/home.jsp">Accedi</a></p>
+        <p class="rubik-300">Hai già un account? <span id="login-button" onclick="showLogin()">Accedi</span></p>
       </div>
       <div id="form-container">
         <form action="#" method="post">
