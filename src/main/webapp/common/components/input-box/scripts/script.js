@@ -11,14 +11,12 @@ function togglePassword(formId) {
 }
 
 function enableSubmitButton(group) {
-    const submitButtons = document.querySelectorAll(`input[type="submit"].${group}`)
-    const submitButton = document.getElementById("submit-button");
-
+    const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
     submitButton.disabled = false;
 }
 
 function disableSubmitButton(group) {
-    const submitButton = document.getElementById("submit-button");
+    const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
     submitButton.disabled = true;
 }
 
@@ -29,7 +27,6 @@ document.addEventListener("input", (event) => {
     let isFormFilled = true;
     let isFormValid = true;
 
-    console.log(group);
     const inputBoxes = document.getElementsByClassName("input-box");
     for (let i = 0; i < inputBoxes.length; i++) {
         const input = inputBoxes[i].querySelector("input");
