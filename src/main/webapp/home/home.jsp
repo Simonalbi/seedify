@@ -7,7 +7,7 @@
 </head>
 <body>
 	<jsp:include page="/common/components/login/login.jsp"/>
-	<jsp:include page="/common/components/header/header.jsp"/>
+	<jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
 	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 
 	<div id="main-container">
