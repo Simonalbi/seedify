@@ -13,7 +13,7 @@
 <div id="main-container">
   <div id="left-container">
     <div id="slogan-container" class="oleo-400">
-      <p class="rubik-300">Il tuo giardino virtuale inizia qui!</p>
+      <h6 class="rubik-300">Il tuo giardino virtuale inizia qui!</h6>
     </div>
     <div id="image-container">
       <!-- https://unsplash.com/it/foto/donna-in-t-shirt-girocollo-nera-che-tiene-pianta-verde-I8fwQMjR67M -->
@@ -24,7 +24,7 @@
   <div id="right-container">
     <div id="registration-container">
       <div id="title-container">
-        <h1 class="rubik-600">Registrati su Seedify</h1>
+        <h3 class="rubik-600">Registrati su Seedify</h3>
       </div>
       <div id="subtitle-container">
         <p class="rubik-300">Hai già un account? <span id="login-button" onclick="showLogin()">Accedi</span></p>
@@ -92,57 +92,61 @@
               </jsp:include>
             </div>
           </div>
-          <div id="password-security-level-container">
-            <div id="security-details-container">
-              <p id="details-title" class="rubik-500">Crea una password sicura!</p>
-              <div id="length-constraint" class="detail">
-                <p class="rubik-400">
-                  <span class="material-icons md-18 incomplete-step">close</span>
-                  Utilizza almeno 8 caratteri
-                </p>
+          <div id="submit-container">
+            <div id="password-security-level-container">
+              <div id="security-details-container">
+                <p id="details-title" class="rubik-500">Crea una password sicura!</p>
+                <div id="length-constraint" class="detail">
+                  <p class="rubik-400">
+                    <span class="material-icons md-18 incomplete-step">close</span>
+                    Utilizza almeno 8 caratteri
+                  </p>
+                </div>
+                <div id="letters-constraint" class="detail">
+                  <p class="rubik-400">
+                    <span class="material-icons md-18 incomplete-step">close</span>
+                    Utilizza lettere maiuscole e minuscole
+                  </p>
+                </div>
+                <div id="number-constraint" class="detail">
+                  <p class="rubik-400">
+                    <span class="material-icons md-18 incomplete-step">close</span>
+                    Utilizza almeno un numero
+                  </p>
+                </div>
+                <div id="special-characters-constraint" class="detail">
+                  <p class="rubik-400">
+                    <span class="material-icons md-18 incomplete-step">close</span>
+                    Utilizza almeno un carattere speciale tra $, #, &, ., %, !, *, @
+                  </p>
+                </div>
+                <div id="match-constraint" class="detail">
+                  <p class="rubik-400">
+                    <span class="material-icons md-18 incomplete-step">close</span>
+                    Le password corrispondono
+                  </p>
+                </div>
               </div>
-              <div id="letters-constraint" class="detail">
-                <p class="rubik-400">
-                  <span class="material-icons md-18 incomplete-step">close</span>
-                  Utilizza lettere maiuscole e minuscole
-                </p>
-              </div>
-              <div id="number-constraint" class="detail">
-                <p class="rubik-400">
-                  <span class="material-icons md-18 incomplete-step">close</span>
-                  Utilizza almeno un numero
-                </p>
-              </div>
-              <div id="special-characters-constraint" class="detail">
-                <p class="rubik-400">
-                  <span class="material-icons md-18 incomplete-step">close</span>
-                  Utilizza almeno un carattere speciale tra $, #, &, ., %, !, *, @
-                </p>
-              </div>
-              <div id="match-constraint" class="detail">
-                <p class="rubik-400">
-                  <span class="material-icons md-18 incomplete-step">close</span>
-                  Le password corrispondono
-                </p>
+              <div id="animation-container">
+                <div id="sunflower-container">
+                  <lord-icon id="sunflower" src="https://cdn.lordicon.com/ucjpmssl.json" trigger="loop"></lord-icon>
+                </div>
+                <div class="dirt-container">
+                  <div class="dirt left-dirt"></div>
+                  <div class="dirt right-dirt"></div>
+                </div>
               </div>
             </div>
-            <div id="animation-container">
-              <div class="dirt-container">
-                <div class="dirt left-dirt"></div>
-                <div class="dirt right-dirt"></div>
-                <lord-icon id="sunflower" src="https://cdn.lordicon.com/ucjpmssl.json" trigger="loop"></lord-icon>
+            <div id="submit-row">
+              <div id="submit-box" class="dark rubik-400">
+                <jsp:include page="/common/components/input-box/input-box.jsp">
+                  <jsp:param name="id" value="submit-button" />
+                  <jsp:param name="type" value="submit" />
+                  <jsp:param name="value" value="Registrati" />
+                  <jsp:param name="enabled" value="false" />
+                  <jsp:param name="group" value="registration" />
+                </jsp:include>
               </div>
-            </div>
-          </div>
-          <div id="submit-row">
-            <div id="submit-box" class="dark rubik-400">
-              <jsp:include page="/common/components/input-box/input-box.jsp">
-                <jsp:param name="id" value="submit-button" />
-                <jsp:param name="type" value="submit" />
-                <jsp:param name="value" value="Registrati" />
-                <jsp:param name="enabled" value="false" />
-                <jsp:param name="group" value="registration" />
-              </jsp:include>
             </div>
           </div>
         </form>

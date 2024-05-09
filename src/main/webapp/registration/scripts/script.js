@@ -44,7 +44,7 @@ function validatePassword(password) {
     }
 
     const sunflowerElement = document.getElementById("sunflower");
-    sunflowerElement.style.transform = `scale(${1.5 * completedSteps})`;
+    sunflowerElement.style.transform = `translateY(100%) scale(${1.5 * completedSteps})`;
 
     return completedSteps === 4;
 }
