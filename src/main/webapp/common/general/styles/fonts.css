@@ -35,3 +35,37 @@
   font-weight: 600;
   font-style: normal;
 }
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+  font-size: calc(40px + 0.390625vw);
+}
+
+h4 {
+  font-size: calc(35px + 0.390625vw);
+}
+
+h5 {
+  font-size: calc(30px + 0.390625vw);
+}
+
+h6 {
+  font-size: calc(25px + 0.390625vw);
+}
+
+label, input {
+  font-size: calc(18px + 0.390625vw);
+}
+
+p, a {
+  font-size: calc(15px + 0.390625vw);
+}
+
+.md-18 {
+  font-size: calc(25px + 0.390625vw);
+}
