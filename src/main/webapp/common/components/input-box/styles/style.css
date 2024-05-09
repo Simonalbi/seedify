@@ -4,27 +4,57 @@
 }
 
 .input-box {
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
-  margin-bottom: 1vw;
+}
+
+.input-box-label-container {
+  width: inherit;
+  height: fit-content;
+
+  margin-bottom: 5px;
+}
+
+.input-box-input-container {
+  width: inherit;
+  height: 40%;
+}
+
+.input-box-error-container {
+  margin-top: 5px;
+
+  width: inherit;
+  height: 20%;
 }
 
 .input-box label {
-  margin-bottom: 0.5vw;
+  width: inherit;
+  height: 100%;
+
   color: #b5d73c;
-  font-size: 1.3vw;
 }
 
 .input-box input {
+  width: inherit;
+  height: 100%;
+
   border: 1px solid #c5c6c9;
   border-radius: 5px;
 
   padding: 8px 12px;
 
-  height: 3vw;
-  max-height: 3vw;
+  /*font-size: 1.4vw;*/
+}
 
-  font-size: 1.4vw;
+.error-text {
+  width: inherit;
+  height: 100%;
+
+  color: transparent;
+  user-select: none;
 }
 
 .input-box input:focus {
@@ -35,6 +65,10 @@
   outline: #398300 solid 2px;
 }
 
+.input-box input:invalid {
+  outline: #FF0000 solid 2px;
+}
+
 .input-box input[type="submit"]:enabled {
   height: 3vw;
 
@@ -42,7 +76,7 @@
   background-color: #b5d73c;
   padding: 8px 12px;
 
-  font-size: 1.4vw;
+  /*font-size: 1.4vw;*/
   font-weight: 500;
 
   cursor: pointer;
@@ -63,29 +97,15 @@
 
 .input-box .password-toggle-icon {
   position: absolute;
-  transform: translate(18.5vw, 2.6vw);
+  transform: translate(-42px, 7px);
 
   cursor: pointer;
 
   color: #132a13;
-  font-size: 2vw;
 
   user-select: none;
 }
 
-.error-text {
-  color: transparent;
-  margin-top: 0.3vw;
-
-  font-size: 1vw;
-
-  user-select: none;
-}
-
-.input-box input:invalid {
-  outline: #FF0000 solid 2px;
-}
-
-.input-box:has(input:invalid) p.error-text {
+.input-box:has(input:invalid) .error-text {
   color: #FF0000;
 }
