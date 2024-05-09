@@ -37,9 +37,11 @@
 }
 
 h1 {
+  font-size: calc(50px + 0.390625vw);
 }
 
 h2 {
+  font-size: calc(45px + 0.390625vw);
 }
 
 h3 {
