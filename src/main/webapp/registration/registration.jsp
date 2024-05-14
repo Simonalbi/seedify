@@ -32,13 +32,13 @@
           <p class="rubik-300">Hai già un account? <span id="login-button" onclick="showLogin()">Accedi</span></p>
         </div>
       </div>
-      <div id="form-container">
+      <div id="registration-form-container">
         <form action="#" method="post">
-          <div id="boxes-container">
-            <div id="name-box" class="dark rubik-400">
+          <div id="registration-boxes-container">
+            <div id="registration-name-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Nome" />
-                <jsp:param name="id" value="name-input-box" />
+                <jsp:param name="id" value="registration-name-input-box" />
                 <jsp:param name="type" value="text" />
                 <jsp:param name="name" value="name" />
                 <jsp:param name="pattern" value="[A-Za-z\s]+" />
@@ -46,10 +46,10 @@
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-            <div id="surname-box" class="dark rubik-400">
+            <div id="registration-surname-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Cognome" />
-                <jsp:param name="id" value="surname-input-box" />
+                <jsp:param name="id" value="registration-surname-input-box" />
                 <jsp:param name="type" value="text" />
                 <jsp:param name="name" value="surname" />
                 <jsp:param name="pattern" value="[A-Za-z\s]+" />
@@ -57,10 +57,10 @@
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-            <div id="email-box" class="dark rubik-400">
+            <div id="registration-email-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Email" />
-                <jsp:param name="id" value="email-input-box" />
+                <jsp:param name="id" value="registration-email-input-box" />
                 <jsp:param name="type" value="email" />
                 <jsp:param name="name" value="email" />
                 <jsp:param name="placeholder" value="nome@email.com" />
@@ -69,20 +69,20 @@
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-            <div id="password-box" class="dark rubik-400">
+            <div id="registration-password-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Password" />
-                <jsp:param name="id" value="password-input-box" />
+                <jsp:param name="id" value="registration-password-input-box" />
                 <jsp:param name="type" value="password" />
                 <jsp:param name="name" value="password" />
                 <jsp:param name="placeholder" value="Min. 8 caratteri" />
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-            <div id="password-confirmation-box" class="dark rubik-400">
+            <div id="registration-password-confirmation-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Conferma password" />
-                <jsp:param name="id" value="password-confirmation-input-box" />
+                <jsp:param name="id" value="registration-password-confirmation-input-box" />
                 <jsp:param name="type" value="password" />
                 <jsp:param name="name" value="password-confirmation" />
                 <jsp:param name="placeholder" value="Min. 8 caratteri" />
@@ -139,7 +139,7 @@
             <div id="submit-row">
               <div id="submit-box" class="dark rubik-400">
                 <jsp:include page="/common/components/input-box/input-box.jsp">
-                  <jsp:param name="id" value="submit-button" />
+                  <jsp:param name="id" value="registration-submit-button" />
                   <jsp:param name="type" value="submit" />
                   <jsp:param name="value" value="Registrati" />
                   <jsp:param name="enabled" value="false" />

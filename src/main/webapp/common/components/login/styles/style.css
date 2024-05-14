@@ -1,6 +1,6 @@
 #login {
   position: fixed;
-  z-index: 30;
+  z-index: 100;
 
   width: 100%;
   height: 100%;
@@ -8,16 +8,15 @@
   background-color: rgba(31, 31, 31, 0.65);
 }
 
-#login #login-main-container {
+#login-main-container {
   position: relative;
 
   background-color: #132a13;
 
-  width: 50vw;
-  height: 30vw;
+  width: 50%;
+  height: 500px;
 
-  margin-left: 25%;
-  margin-top: 10%;
+  margin: 50px 25%;
 
   display: flex;
 
@@ -25,60 +24,93 @@
   overflow: hidden;
 }
 
-#login #image-container {
+#login-left-container {
   background-color: #0F210F;
-  width: 50%;
+  width: 40%;
   height: 100%;
 
   overflow: hidden;
 }
 
-#login #image-container img {
+#login-left-container img {
   height: 100%;
+  width: 100%;
   object-fit: cover;
-
-  margin-left: -9vw;
 }
 
-#login #login-container {
+#login-right-container {
   background-color: #132a13;
   box-shadow: inset 20px 20px 60px #0d1d0d, inset -20px -20px 60px #193719;
 
-  width: 50%;
+  width: 60%;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  padding: 3vw 2vw;
+  padding: 3% 2%;
 }
 
-#login #animated-bird {
+#animated-bird {
   position: absolute;
-  width: 6vw;
-  height: 6vw;
+  right: -27px;
 
-  top: 2vw;
-  right: -1.8vw;
+  width: 90px;
+  height: 90px;
 }
 
-#login #logo-container {
+#login-form-container {
   width: 100%;
-  height: 4vw;
+  height: 100%;
+}
+
+#login-logo-container {
+  width: 100%;
+  height: 100px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#login #logo-container img {
+#login-logo-container img {
+  width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-#login #form-container {
+#login-boxes-container {
   width: 100%;
-  height: 10vw;
-  margin-top: 1.5vw;
+  height: 350px;
+
+  margin-top: 30px;
+}
+
+#login-email-box,
+#login-password-box,
+#login-submit-box {
+  width: 100%;
+  height: 100px;
+}
+
+@media screen and (max-width: 450px) {
+  #animated-bird {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #login-main-container {
+    width: 90%;
+    margin: 50px 5%;
+  }
+
+  #login-left-container {
+    display: none;
+  }
+
+  #login-right-container {
+    width: 100%;
+  }
 }
