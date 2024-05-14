@@ -252,6 +252,10 @@ body {
     display: none;
   }
 
+  #right-container {
+    width: 100%;
+  }
+
   #form-container {
     height: 800px;
   }
@@ -270,9 +274,5 @@ body {
   #surname-box,
   #password-confirmation-box {
     float: none;
-  }
-
-  #right-container {
-    width: 100%;
   }
 }
