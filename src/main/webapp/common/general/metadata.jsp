@@ -27,5 +27,5 @@
 <script src="${pageContext.request.contextPath}/common/components/input-box/scripts/script.js" defer></script>
 
 <!-- login -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/styles/style.css">
+<!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/styles/style.css"> -->
 <script src="${pageContext.request.contextPath}/common/components/login/scripts/script.js" defer></script>

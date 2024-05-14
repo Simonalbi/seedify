@@ -18,6 +18,8 @@
     <div class="input-box-error-container">
       <% if (request.getParameter("errorMessage") != null) { %>
         <p class="error-text">${param.errorMessage}</p>
+      <% } else { %>
+        <br>
       <% } %>
     </div>
   <% } else { %>

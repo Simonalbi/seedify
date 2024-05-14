@@ -21,17 +21,20 @@
       <img id="logo" src="${pageContext.request.contextPath}/common/assets/img/logo/logo_500x500.png" alt="">
     </div>
   </div>
+  <div id="left-container-placeholder"></div>
   <div id="right-container">
     <div id="registration-container">
-      <div id="title-container">
-        <h3 class="rubik-600">Registrati su Seedify</h3>
-      </div>
-      <div id="subtitle-container">
-        <p class="rubik-300">Hai già un account? <span id="login-button" onclick="showLogin()">Accedi</span></p>
+      <div id="main-title-container">
+        <div id="title-container">
+          <h3 class="rubik-600">Registrati su Seedify</h3>
+        </div>
+        <div id="subtitle-container">
+          <p class="rubik-300">Hai già un account? <span id="login-button" onclick="showLogin()">Accedi</span></p>
+        </div>
       </div>
       <div id="form-container">
         <form action="#" method="post">
-          <div class="form-row">
+          <div id="boxes-container">
             <div id="name-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Nome" />
@@ -54,8 +57,6 @@
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-          </div>
-          <div class="form-row">
             <div id="email-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Email" />
@@ -68,8 +69,6 @@
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>
-          </div>
-          <div class="form-row">
             <div id="password-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Password" />
@@ -95,33 +94,33 @@
           <div id="submit-container">
             <div id="password-security-level-container">
               <div id="security-details-container">
-                <p id="details-title" class="rubik-500">Crea una password sicura!</p>
+                <p id="details-title" class="large-p rubik-500">Crea una password sicura!</p>
                 <div id="length-constraint" class="detail">
-                  <p class="rubik-400">
+                  <p class="small-p rubik-400">
                     <span class="material-icons md-18 incomplete-step">close</span>
                     Utilizza almeno 8 caratteri
                   </p>
                 </div>
                 <div id="letters-constraint" class="detail">
-                  <p class="rubik-400">
+                  <p class="small-p rubik-400">
                     <span class="material-icons md-18 incomplete-step">close</span>
                     Utilizza lettere maiuscole e minuscole
                   </p>
                 </div>
                 <div id="number-constraint" class="detail">
-                  <p class="rubik-400">
+                  <p class="small-p rubik-400">
                     <span class="material-icons md-18 incomplete-step">close</span>
                     Utilizza almeno un numero
                   </p>
                 </div>
                 <div id="special-characters-constraint" class="detail">
-                  <p class="rubik-400">
+                  <p class="small-p rubik-400">
                     <span class="material-icons md-18 incomplete-step">close</span>
                     Utilizza almeno un carattere speciale tra $, #, &, ., %, !, *, @
                   </p>
                 </div>
                 <div id="match-constraint" class="detail">
-                  <p class="rubik-400">
+                  <p class="small-p rubik-400">
                     <span class="material-icons md-18 incomplete-step">close</span>
                     Le password corrispondono
                   </p>
