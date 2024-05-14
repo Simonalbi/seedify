@@ -203,7 +203,7 @@ body {
   height: 90%;
 }
 
-.dirt-container {
+#dirt-container {
   display: flex;
   justify-content: center;
 
@@ -232,14 +232,14 @@ body {
   width: 80px;
 }
 
-.left-dirt {
+#left-dirt {
   background-color: rgb(114, 26, 26);
   border-radius: 25px 35px 0 0;
 
   transform: translateX(10px);
 }
 
-.right-dirt {
+#right-dirt {
   background-color: #8a2d2d;
   border-radius: 35px 25px 0 0;
 

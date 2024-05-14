@@ -130,9 +130,9 @@
                 <div id="sunflower-container">
                   <lord-icon id="sunflower" src="https://cdn.lordicon.com/ucjpmssl.json" trigger="loop"></lord-icon>
                 </div>
-                <div class="dirt-container">
-                  <div class="dirt left-dirt"></div>
-                  <div class="dirt right-dirt"></div>
+                <div id="dirt-container">
+                  <div id="left-dirt" class="dirt"></div>
+                  <div id="right-dirt" class="dirt"></div>
                 </div>
               </div>
             </div>
