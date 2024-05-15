@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/styles/style.css">
 </head>
 <body>
-	<jsp:include page="/common/components/logi/login.jsp"/>
+	<jsp:include page="/common/components/login/login.jsp"/>
 	<jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
 	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 
