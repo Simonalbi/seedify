@@ -14,14 +14,14 @@
     </div>
     <div class="message-container">
       <div class="question">
-        <h3>${param.errorMessage}</h3>
+        <h4>${param.errorMessage}</h4>
       </div>
       <div class="message">
         <p>${param.errorDescription}</p>
       </div>
       <div class="redirect">
         <span class="material-icons md-18">chevron_right</span>
-        <p><b><a href="${pageContext.request.contextPath}/home/home.jsp">Clicca qui</a> per ritornare alla homepage di Seedify!</b></p>
+        <span><b><a href="${pageContext.request.contextPath}/home/home.jsp">Clicca qui</a> per ritornare alla homepage di Seedify!</b></span>
       </div>
     </div>
   </div>
