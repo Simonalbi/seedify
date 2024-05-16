@@ -2,17 +2,17 @@
   position: fixed;
   z-index: 10;
   width: 100%;
-  height: 3vw;
+  height: 60px;
 
   display: flex;
   justify-content: space-between;
 
-  padding: 0 1vw;
+  padding: 0 5px;
 
   background: rgb(19,42,19);
   background: linear-gradient(122deg, rgba(19,42,19,1) 26%, rgba(79,119,45,1) 55%, rgba(200,168,4,1) 100%);
 
-  box-shadow: 0 0.5vw 4vw 0 rgba(19, 42, 19, 0.75);
+  box-shadow: 0 5px 50px 0 rgba(19, 42, 19, 0.75);
 }
 
 #main-navbar #logo-container {
@@ -20,16 +20,16 @@
   justify-content: center;
   align-items: center;
 
-  width: 15vw;
+  width: 25%;
   height: 100%;
 
   padding: 0.3vw 0;
 }
 
-#main-navbar img {
-  width: 65%;
+#main-navbar #logo-container img {
+  width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #main-navbar #menu-container {
@@ -37,19 +37,8 @@
   justify-content: center;
   align-items: center;
 
-  width: 35vw;
+  width: 50%;
   height: 100%;
-}
-
-#main-navbar .selection-underline {
-  position: relative;
-  background-color: white;
-
-  width: 30%;
-  transition: width ease 0.3s;
-
-  height: 0.05vw;
-  top: -0.5vw;
 }
 
 #main-navbar .menu-option {
@@ -61,39 +50,31 @@
   width: fit-content;
   height: 100%;
 
-  margin-top: 0.5vw;
+  margin-top: 5px;
 }
 
 #main-navbar .menu-option .material-icons {
-  margin-right: 0.3vw;
+  margin-right: 5px;
 }
 
 #main-navbar .menu-option a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
   color: white;
   text-decoration: none;
 }
 
-@media screen and (max-width: 600px){
-  #main-navbar .menu-option .material-icons {
-    font-size: 1.8vw;
-  }
+#main-navbar .menu-option .selection-underline {
+  position: relative;
+  background-color: white;
 
-  #main-navbar .menu-option a {
-    font-size: 1.4vw;
-  }
-}
+  width: 30%;
+  transition: width ease 0.3s;
 
-@media screen and (min-width: 601px) {
-  #main-navbar .menu-option .material-icons {
-    font-size: 1.4vw;
-  }
-
-  #main-navbar .menu-option a {
-    font-size: 1.2vw;
-  }
+  height: 1px;
+  top: -10px;
 }
 
 #main-navbar .menu-option:hover .selection-underline {
@@ -102,47 +83,64 @@
 
 #main-navbar .menu-separator {
   background-color: white;
-  width: 0.1vw;
+
+  width: 1px;
   height: 70%;
 
-  margin: 0 1vw;
+  margin: 0 15px;
 }
 
 #main-navbar #actions-container {
-  width: 15vw;
-  height: 100%;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
 
-#main-navbar #actions-container lord-icon {
-  width: 2vw;
-  height: 2vw;
+  width: 25%;
+  height: 100%;
 }
 
 #main-navbar .action {
   display: flex;
 }
 
+#main-navbar #actions-container lord-icon {
+  width: 35px;
+  height: 35px;
+}
+
 #main-navbar .action .notification {
   position: relative;
   z-index: 11;
-  right: 0.6vw;
+  right: 10px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   background-color: #1f6119;
-  width: 0.9vw;
-  height: 0.9vw;
+  width: 15px;
+  height: 15px;
 
   border-radius: 50px;
 }
 
-#main-navbar .action p {
+#main-navbar .action .notification p {
   color: rgb(205, 202, 50);
-  font-size: 0.8vw;
+  font-size: 13px;
+}
+
+@media screen and (max-width: 750px) {
+  #main-navbar .menu-option .option-label, .selection-underline {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  #main-navbar #menu-container {
+    gap: 10px;
+  }
+
+  #main-navbar .menu-separator {
+    display: none;
+  }
 }
