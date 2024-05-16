@@ -1,11 +1,14 @@
 #main-navbar {
   position: fixed;
   z-index: 10;
-  width: 100%;
-  height: 60px;
 
+  width: 100%;
+  height: 100px;
+}
+
+#main-navbar #top-navbar,
+#main-navbar #sub-navbar-container {
   display: flex;
-  justify-content: space-between;
 
   padding: 0 5px;
 
@@ -13,6 +16,16 @@
   background: linear-gradient(122deg, rgba(19,42,19,1) 26%, rgba(79,119,45,1) 55%, rgba(200,168,4,1) 100%);
 
   box-shadow: 0 5px 50px 0 rgba(19, 42, 19, 0.75);
+}
+
+#main-navbar #top-navbar {
+  justify-content: space-between;
+  height: 60px;
+}
+
+#main-navbar #sub-navbar-container {
+  justify-content: center;
+  gap: 10px;
 }
 
 #main-navbar #logo-container {
@@ -130,7 +143,20 @@
 }
 
 @media screen and (max-width: 750px) {
-  #main-navbar .menu-option .option-label, .selection-underline {
+  #main-navbar {
+    position: relative;
+  }
+
+  #top-navbar {
+    height: 60px;
+  }
+
+  #sub-navbar {
+    display: block !important;
+    height: 40px;
+  }
+
+  #top-navbar #menu-container {
     display: none;
   }
 }
