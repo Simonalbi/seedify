@@ -2,29 +2,17 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  margin: 2vw;
+  margin: 20px;
 
-  border-radius: 50%;
-
-  background: radial-gradient(circle, rgba(79,119,45,1) 10%, rgba(200,168,4,1) 70%);
-
-  width: 4vw;
-  height: 4vw;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.chat-button-content {
+  border: 2px solid rgba(200,168,4,1);
   border-radius: 50%;
 
   background-color: #132A13;
   box-shadow: inset 20px 20px 60px #0d1d0d,
-  inset -20px -20px 60px #193719;
+  inset -20px -20px 65px #193719;
 
-  width: 3.8vw;
-  height: 3.8vw;
+  width: 70px;
+  height: 70px;
 
   display: flex;
   align-items: center;
@@ -32,6 +20,18 @@
 }
 
 .chat-button lord-icon {
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 45px;
+  height: 45px;
+}
+
+@media screen and (max-width: 750px) {
+  .chat-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .chat-button lord-icon {
+    width: 30px;
+    height: 30px;
+  }
 }
