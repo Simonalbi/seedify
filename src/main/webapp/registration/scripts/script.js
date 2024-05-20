@@ -50,10 +50,7 @@ function validatePassword(password) {
 }
 
 function checkPasswordsMatch() {
-    const passwordBox = document.getElementById("password-box");
     const password = passwordBox.querySelector("input").value;
-
-    const passwordConfirmationBox = document.getElementById("password-confirmation-box");
     const confirmationPassword = passwordConfirmationBox.querySelector("input").value;
 
     let empty = false;
@@ -72,7 +69,7 @@ function checkPasswordsMatch() {
     return valid;
 }
 
-const passwordBox = document.getElementById("password-box");
+const passwordBox = document.getElementById("registration-password-box");
 passwordBox.addEventListener("input", (event) => {
     const password = event.target.value;
     if (!validatePassword(password)) {
@@ -82,7 +79,7 @@ passwordBox.addEventListener("input", (event) => {
     }
 });
 
-const passwordConfirmationBox = document.getElementById("password-confirmation-box");
+const passwordConfirmationBox = document.getElementById("registration-password-confirmation-box");
 passwordConfirmationBox.addEventListener("input", (event) => {
     if (!checkPasswordsMatch()) {
         event.target.setCustomValidity("Passwords do not match.");
