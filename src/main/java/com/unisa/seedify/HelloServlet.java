@@ -17,6 +17,7 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Just testing the connection to the database
         System.out.println("Inizio");
 
         UserBean user = new UserBean();
@@ -24,11 +25,12 @@ public class HelloServlet extends HttpServlet {
         user.setPassword("b");
         user.setName("c");
         user.setSurname("d");
-        user.setRuolo("e");
-        user.setFotoProfilo("f");
+        user.setRole(UserBean.Roles.CLIENT);
+        user.setProfilePicture(new byte[0]);
 
         try {
-            UserDao.doSave(user);
+            UserDao userDao = new UserDao();
+            userDao.doSave(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

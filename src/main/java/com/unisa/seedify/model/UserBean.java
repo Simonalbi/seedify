@@ -3,15 +3,31 @@ package com.unisa.seedify.model;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {
+    public enum Roles {
+        ADMIN("AMMINISTRATORE"),
+        EMPLOYEE("DIPENDENTE"),
+        CLIENT("CLIENTE");
+
+        private final String translation;
+
+        Roles(String translation) {
+            this.translation = translation;
+        }
+
+        @Override
+        public String toString() {
+            return this.translation;
+        }
+    }
+
+    private static final long serialVersionID = 1L;
+
     private String email;
     private String password;
+    private byte[] profilePicture;
     private String name;
     private String surname;
-    private String ruolo;
-    private String fotoProfilo;
-
-    public UserBean() {
-    }
+    private Roles role;
 
     public String getEmail() {
         return email;
@@ -29,12 +45,12 @@ public class UserBean implements Serializable {
         this.password = password;
     }
 
-    public String getSurname() {
-        return surname;
+    public byte[] getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public String getName() {
@@ -45,19 +61,19 @@ public class UserBean implements Serializable {
         this.name = name;
     }
 
-    public String getRuolo() {
-        return ruolo;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setRuolo(String ruolo) {
-        this.ruolo = ruolo;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getFotoProfilo() {
-        return fotoProfilo;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setFotoProfilo(String fotoProfilo) {
-        this.fotoProfilo = fotoProfilo;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

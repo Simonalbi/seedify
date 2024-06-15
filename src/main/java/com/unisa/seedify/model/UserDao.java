@@ -1,42 +1,40 @@
 package com.unisa.seedify.model;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UserDao {
-    private static DataSource ds;
+public class UserDao extends BaseDao implements GenericDao<UserBean> {
+    private static final String TABLE_NAME = "utenti";
 
-    static {
-        try {
-            Context initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+    @Override
+    public synchronized void doSave(UserBean user) throws SQLException {
+        String query = "INSERT INTO " + UserDao.TABLE_NAME + " (email, password, foto_profilo, nome, cognome, ruolo) VALUES (?, ?, ?, ?, ?, ?)";
 
-            ds = (DataSource) envCtx.lookup("jdbc/storage");
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-        }
-        catch (NamingException e) {
-            System.out.println("Error:" + e.getMessage());
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setBytes(3, user.getProfilePicture());
+            preparedStatement.setString(4, user.getName());
+            preparedStatement.setString(5, user.getSurname());
+            preparedStatement.setString(6, user.getRole().toString());
+
+            preparedStatement.executeUpdate();
         }
     }
 
-    private static final String TABLE_NAME = "utenti";
+    @Override
+    public synchronized void doDelete(UserBean user) throws SQLException {
+        String query = "DELETE FROM " + UserDao.TABLE_NAME + " WHERE email = ?";
 
-    public static synchronized void doSave(UserBean user) throws SQLException {
-        try (Connection connection = ds.getConnection()) {
-            String query = "INSERT INTO " + UserDao.TABLE_NAME + " (email, password, nome, cognome, ruolo, fotoProfilo) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, user.getEmail());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getName());
-            statement.setString(4, user.getSurname());
-            statement.setString(5, user.getRuolo());
-            statement.setString(6, user.getFotoProfilo());
-            statement.executeUpdate();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, user.getEmail());
+
+            preparedStatement.executeUpdate();
         }
     }
 }
