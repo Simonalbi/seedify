@@ -69,7 +69,7 @@ CREATE TABLE ordini (
 
     FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE merce (
