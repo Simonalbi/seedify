@@ -1,6 +1,10 @@
 package com.unisa.seedify;
 
+import com.unisa.seedify.model.UserBean;
+import com.unisa.seedify.model.UserDao;
+
 import java.io.*;
+import java.sql.SQLException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -13,13 +17,21 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+        System.out.println("Inizio");
 
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        UserBean user = new UserBean();
+        user.setEmail("a");
+        user.setPassword("b");
+        user.setName("c");
+        user.setSurname("d");
+        user.setRuolo("e");
+        user.setFotoProfilo("f");
+
+        try {
+            UserDao.doSave(user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void destroy() {
