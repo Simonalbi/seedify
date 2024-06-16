@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class FavoritesBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -26,5 +27,18 @@ public class FavoritesBean implements Serializable {
 
     public void setProducts(List<ProductBean> products) {
         this.products = products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FavoritesBean that = (FavoritesBean) o;
+        return Objects.equals(user, that.user) && Objects.equals(products, that.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, products);
     }
 }

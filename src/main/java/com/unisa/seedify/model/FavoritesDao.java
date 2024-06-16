@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -46,5 +48,10 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean> {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public void doUpdate(FavoritesBean favoritesBean) throws SQLException, NotImplementedException {
+        throw new NotImplementedException();
     }
 }

@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AddressBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -88,5 +89,18 @@ public class AddressBean implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressBean that = (AddressBean) o;
+        return addressId == that.addressId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(addressId);
     }
 }

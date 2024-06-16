@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class UserBean implements Serializable {
     public enum Roles {
@@ -75,5 +76,18 @@ public class UserBean implements Serializable {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBean userBean = (UserBean) o;
+        return Objects.equals(email, userBean.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(email);
     }
 }

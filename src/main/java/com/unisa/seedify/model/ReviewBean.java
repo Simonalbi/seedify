@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 public class ReviewBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -62,5 +63,18 @@ public class ReviewBean implements Serializable {
 
     public void setDateAdded(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReviewBean that = (ReviewBean) o;
+        return reviewId == that.reviewId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(reviewId);
     }
 }

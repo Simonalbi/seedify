@@ -42,4 +42,27 @@ public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
             preparedStatement.executeUpdate();
         }
     }
+
+    @Override
+    public void doUpdate(AddressBean addressBean) throws SQLException {
+        String query = "UPDATE " + AddressDao.TABLE_NAME +
+                       " SET provincia = ?, citta = ?, cap = ?, via = ?, nome = ?, cognome = ?, numero_di_telefono = ?, note = ? " +
+                       " WHERE codice_indirizzo = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, addressBean.getProvince());
+            preparedStatement.setString(2, addressBean.getCity());
+            preparedStatement.setString(3, addressBean.getCap());
+            preparedStatement.setString(4, addressBean.getStreet());
+            preparedStatement.setString(5, addressBean.getName());
+            preparedStatement.setString(6, addressBean.getSurname());
+            preparedStatement.setString(7, addressBean.getPhone());
+            preparedStatement.setString(8, addressBean.getNote());
+            preparedStatement.setInt(9, addressBean.getAddressId());
+
+            preparedStatement.executeUpdate();
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -64,5 +66,10 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 throw e;
             }
         }
+    }
+
+    @Override
+    public void doUpdate(MemorizationsBean memorizationsBeans) throws SQLException, NotImplementedException {
+        throw new NotImplementedException();
     }
 }

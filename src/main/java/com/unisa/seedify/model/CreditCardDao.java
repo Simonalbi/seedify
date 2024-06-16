@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -42,5 +44,10 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public void doUpdate(CreditCardBean creditCardBean) throws SQLException, NotImplementedException {
+        throw new NotImplementedException();
     }
 }

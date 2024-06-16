@@ -48,4 +48,32 @@ public class CartDao extends BaseDao implements GenericDao<CartBean> {
             preparedStatement.executeUpdate();
         }
     }
+
+    @Override
+    public void doUpdate(CartBean cartBean) throws SQLException {
+        String query = "UPDATE " + CartDao.TABLE_NAME +
+                       " SET quantita = ? " +
+                       " WHERE email = ? AND codice_prodotto = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+
+            connection.setAutoCommit(false);
+
+            try {
+                preparedStatement.setString(2, cartBean.getUser().getEmail());
+
+                for (CartItemBean cartItemBean: cartBean.getCartItems()) {
+                    preparedStatement.setInt(3, cartItemBean.getProduct().getProductId());
+                    preparedStatement.setInt(1, cartItemBean.getQuantity());
+
+                    preparedStatement.executeUpdate();
+                }
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            }
+        }
+    }
 }
