@@ -1,4 +1,4 @@
-package com.unisa.seedify;
+package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.UserBean;
 import com.unisa.seedify.model.UserDao;
