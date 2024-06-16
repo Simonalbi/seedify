@@ -9,9 +9,9 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
     @Override
     public void doSave(ProductBean productBean) throws SQLException {
-        String query =  "INSERT INTO " + ProductDao.TABLE_NAME +
-                        " (nome, immagine, prezzo, quantita, stagionalita, quantita_acqua, tipologia_pianta, descrizione, data_aggiunta)" +
-                        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO " + ProductDao.TABLE_NAME +
+                       " (nome, immagine, prezzo, quantita, stagionalita, quantita_acqua, tipologia_pianta, descrizione, data_aggiunta)" +
+                       " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -32,8 +32,8 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
     @Override
     public void doDelete(ProductBean productBean) throws SQLException {
-            String query =  "DELETE FROM " + ProductDao.TABLE_NAME +
-                            " WHERE codice_prodotto = ?";
+            String query = "DELETE FROM " + ProductDao.TABLE_NAME +
+                           " WHERE codice_prodotto = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -46,9 +46,9 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
     @Override
     public void doUpdate(ProductBean productBean) throws SQLException {
-        String query =  "UPDATE " + ProductDao.TABLE_NAME +
-                        " SET nome = ?, immagine = ?, prezzo = ?, quantita = ?, stagionalita = ?, quantita_acqua = ?, tipologia_pianta = ?, descrizione = ?, data_aggiunta = ?" +
-                        " WHERE codice_prodotto = ?";
+        String query = "UPDATE " + ProductDao.TABLE_NAME +
+                       " SET nome = ?, immagine = ?, prezzo = ?, quantita = ?, stagionalita = ?, quantita_acqua = ?, tipologia_pianta = ?, descrizione = ?, data_aggiunta = ?" +
+                       " WHERE codice_prodotto = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
