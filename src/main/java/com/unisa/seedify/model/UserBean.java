@@ -20,7 +20,7 @@ public class UserBean implements Serializable {
         }
     }
 
-    private static final long serialVersionID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private String email;
     private String password;
