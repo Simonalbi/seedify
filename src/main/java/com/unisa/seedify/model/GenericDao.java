@@ -8,4 +8,6 @@ public interface GenericDao<T> {
     void doDelete(T bean) throws SQLException;
 
     void doUpdate(T bean) throws SQLException;
+
+    T doRetrive(EntityPrimaryKey primaryKey) throws SQLException;
 }

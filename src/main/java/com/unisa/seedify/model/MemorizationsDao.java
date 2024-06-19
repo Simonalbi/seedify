@@ -2,9 +2,8 @@ package com.unisa.seedify.model;
 
 import com.unisa.seedify.exceptions.NotImplementedException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 
 public class MemorizationsDao extends BaseDao implements GenericDao<MemorizationsBean>, DetailedDao<MemorizationsBean, CreditCardBean> {
     private static final String TABLE_NAME = "memorizzazioni";
@@ -119,5 +118,45 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     @Override
     public void doUpdateOne(MemorizationsBean collection, CreditCardBean bean) throws SQLException, NotImplementedException {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public MemorizationsBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + MemorizationsDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            MemorizationsBean memorizationsBean = null;
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                memorizationsBean = new MemorizationsBean();
+
+                UserDao userDao = new UserDao();
+                EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                userPrimaryKey.addKey("email", email);
+                UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                memorizationsBean.setUser(userBean);
+
+                List<CreditCardBean> creditCards = memorizationsBean.getCreditCards();
+                while (resultSet.next()) {
+                    CreditCardBean creditCardBean = new CreditCardBean();
+                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
+                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
+                    creditCardBean.setName(resultSet.getString("nome"));
+                    creditCardBean.setSurname(resultSet.getString("cognome"));
+
+                    memorizationsBean.getCreditCards().add(creditCardBean);
+                }
+
+                return memorizationsBean;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ public class GoodsBean implements Serializable {
     private List<GoodsItemBean> goods;
 
     public GoodsBean() {
+        this.goods = new ArrayList<>();
     }
 
     public OrderBean getOrder() {

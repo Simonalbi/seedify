@@ -4,7 +4,9 @@ import com.unisa.seedify.exceptions.NotImplementedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, DetailedDao<LocationsBean, AddressBean> {
     private static final String TABLE_NAME = "locazione";
@@ -23,7 +25,7 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
             try {
                 preparedStatement.setString(1, locationsBean.getUser().getEmail());
 
-                for (AddressBean addressBean : locationsBean.getAddress()) {
+                for (AddressBean addressBean : locationsBean.getAddresses()) {
                     preparedStatement.setInt(2, addressBean.getAddressId());
 
                     preparedStatement.executeUpdate();
@@ -57,7 +59,7 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
 
     @Override
     public void doSaveOne(LocationsBean locationsBean, AddressBean addressBean) throws SQLException {
-        locationsBean.getAddress().add(addressBean);
+        locationsBean.getAddresses().add(addressBean);
 
         String query = "INSERT INTO " + LocationsDao.TABLE_NAME +
                        " (email, codice_indirizzo) " +
@@ -75,7 +77,7 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
 
     @Override
     public void doDeleteOne(LocationsBean locationsBean, AddressBean addressBean) throws SQLException {
-        locationsBean.getAddress().remove(addressBean);
+        locationsBean.getAddresses().remove(addressBean);
 
         String query = "DELETE FROM " + LocationsDao.TABLE_NAME +
                        " WHERE email = ? AND codice_indirizzo = ?";
@@ -93,5 +95,46 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
     @Override
     public void doUpdateOne(LocationsBean locationsBean, AddressBean addressBean) throws SQLException, NotImplementedException {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public LocationsBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + LocationsDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        LocationsBean locationsBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                locationsBean = new LocationsBean();
+
+                UserDao userDao = new UserDao();
+                EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                userPrimaryKey.addKey("email", email);
+                UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                locationsBean.setUser(userBean);
+
+                AddressDao addressDao = new AddressDao();
+                List<AddressBean> addresses = locationsBean.getAddresses();
+                while (resultSet.next()) {
+                    int addressId = resultSet.getInt("codice_indirizzo");
+
+                    EntityPrimaryKey addressPrimaryKey = new EntityPrimaryKey();
+                    addressPrimaryKey.addKey("codice_indirizzo", addressId);
+                    AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);
+
+                    addresses.add(addressBean);
+                }
+
+                locationsBean.setAddresses(addresses);
+            }
+        }
+
+        return locationsBean;
     }
 }

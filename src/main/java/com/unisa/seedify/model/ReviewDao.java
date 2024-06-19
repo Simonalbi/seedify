@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
@@ -57,5 +58,46 @@ public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public ReviewBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        int productId = (int) primaryKey.getKey("codice_prodotto");
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + ReviewDao.TABLE_NAME +
+                       " WHERE codice_prodotto = ? AND email = ?";
+
+        ReviewBean reviewBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, productId);
+            preparedStatement.setString(2, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    reviewBean = new ReviewBean();
+
+                    UserDao userDao = new UserDao();
+                    EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                    userPrimaryKey.addKey("email", email);
+                    UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                    reviewBean.setUser(userBean);
+
+                    ProductDao productDao = new ProductDao();
+                    EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                    productPrimaryKey.addKey("codice_prodotto", productId);
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+                    reviewBean.setProduct(productBean);
+
+                    reviewBean.setComment(resultSet.getString("commento"));
+                    reviewBean.setStarRating(resultSet.getInt("numero_stelle"));
+                    reviewBean.setDateAdded(resultSet.getDate("data_aggiunta"));
+                }
+            }
+        }
+
+        return reviewBean;
     }
 }

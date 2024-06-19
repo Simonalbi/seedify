@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao extends BaseDao implements GenericDao<UserBean> {
@@ -59,5 +60,34 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public UserBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + UserDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        UserBean userBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    userBean = new UserBean();
+                    userBean.setEmail(resultSet.getString("email"));
+                    userBean.setPassword(resultSet.getString("password"));
+                    userBean.setProfilePicture(resultSet.getBytes("foto_profilo"));
+                    userBean.setName(resultSet.getString("nome"));
+                    userBean.setSurname(resultSet.getString("cognome"));
+                    userBean.setRole(UserBean.Roles.valueOf(resultSet.getString("ruolo")));
+                }
+            }
+        }
+
+        return userBean;
     }
 }

@@ -36,7 +36,7 @@ public class CreditCardBean implements Serializable {
         return expirationDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpirationDate(Date expiryDate) {
         this.expirationDate = expiryDate;
     }
 

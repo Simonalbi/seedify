@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ public class MemorizationsBean implements Serializable {
     private List<CreditCardBean> creditCards;
 
     public MemorizationsBean() {
+        this.creditCards = new ArrayList<>();
     }
 
     public UserBean getUser() {

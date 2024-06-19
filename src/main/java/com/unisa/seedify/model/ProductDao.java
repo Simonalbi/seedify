@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
@@ -66,5 +67,37 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public ProductBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        int productId = (int) primaryKey.getKey("codice_prodotto");
+
+        String query = "SELECT * FROM " + ProductDao.TABLE_NAME +
+                       " WHERE codice_prodotto = ?";
+
+        ProductBean productBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, productId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    productBean = new ProductBean();
+                    productBean.setProductId(resultSet.getInt("codice_prodotto"));
+                    productBean.setName(resultSet.getString("nome"));
+                    productBean.setImage(resultSet.getBytes("immagine"));
+                    productBean.setPrice(resultSet.getFloat("prezzo"));
+                    productBean.setQuantity(resultSet.getInt("quantita"));
+                    productBean.setSeason(ProductBean.Seasons.valueOf(resultSet.getString("stagionalita")));
+                    productBean.setRequiredWater(ProductBean.RequiredWater.valueOf(resultSet.getString("quantita_acqua")));
+                    productBean.setPlantType(resultSet.getString("tipologia_pianta"));
+                    productBean.setDescription(resultSet.getString("descrizione"));
+                    productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                }
+            }
+        }
+        return productBean;
     }
 }

@@ -4,7 +4,9 @@ import com.unisa.seedify.exceptions.NotImplementedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, DetailedDao<FavoritesBean, ProductBean> {
     private static final String TABLE_NAME = "preferiti";
@@ -93,5 +95,44 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
     @Override
     public void doUpdateOne(FavoritesBean favoritesBean, ProductBean productBean) throws SQLException, NotImplementedException {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public FavoritesBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + FavoritesDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        FavoritesBean favoritesBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                favoritesBean = new FavoritesBean();
+
+                UserDao userDao = new UserDao();
+                EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                userPrimaryKey.addKey("email", email);
+                UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                favoritesBean.setUser(userBean);
+
+                ProductDao productDao = new ProductDao();
+                List<ProductBean> favorites = favoritesBean.getProducts();
+                while (resultSet.next()) {
+                    EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                    productPrimaryKey.addKey("codice_prodotto", resultSet.getInt("codice_prodotto"));
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+
+                    favorites.add(productBean);
+                }
+
+                favoritesBean.setProducts(favorites);
+            }
+        }
+        
+        return favoritesBean;
     }
 }

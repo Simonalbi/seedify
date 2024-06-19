@@ -2,7 +2,9 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDao<CartBean, CartItemBean> {
     private static final String TABLE_NAME = "carrelli";
@@ -135,5 +137,47 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
                 throw new SQLException("CartItemBean not found in CartBean");
             }
         }
+    }
+
+    @Override
+    public CartBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String email = (String) primaryKey.getKey("email");
+
+        String query = "SELECT * FROM " + CartDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        CartBean cartBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                cartBean = new CartBean();
+
+                UserDao userDao = new UserDao();
+                EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                userPrimaryKey.addKey("email", email);
+                UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                cartBean.setUser(userBean);
+
+                ProductDao productDao = new ProductDao();
+                List<CartItemBean> cartItems = cartBean.getCartItems();
+                while (resultSet.next()) {
+                    CartItemBean cartItemBean = new CartItemBean();
+
+                    EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                    productPrimaryKey.addKey("codice_prodotto", resultSet.getInt("codice_prodotto"));
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+
+                    cartItemBean.setProduct(productBean);
+                    cartItemBean.setQuantity(resultSet.getInt("quantita"));
+                    cartItems.add(cartItemBean);
+                }
+
+                cartBean.setCartItems(cartItems);
+            }
+        }
+        return cartBean;
     }
 }

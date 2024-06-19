@@ -5,7 +5,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BaseDao {
+// TODO: Trasformare le DAO in singleton
+public abstract class BaseDao {
     protected static DataSource dataSource;
     static {
         try {

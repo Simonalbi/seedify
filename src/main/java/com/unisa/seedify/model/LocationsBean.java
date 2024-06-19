@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,9 +9,10 @@ public class LocationsBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private UserBean user;
-    private List<AddressBean> address;
+    private List<AddressBean> addresses;
 
     public LocationsBean() {
+        this.addresses = new ArrayList<>();
     }
 
     public UserBean getUser() {
@@ -21,12 +23,12 @@ public class LocationsBean implements Serializable {
         this.user = user;
     }
 
-    public List<AddressBean> getAddress() {
-        return address;
+    public List<AddressBean> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(List<AddressBean> address) {
-        this.address = address;
+    public void setAddresses(List<AddressBean> addresses) {
+        this.addresses = addresses;
     }
 
     @Override
@@ -34,11 +36,11 @@ public class LocationsBean implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LocationsBean that = (LocationsBean) o;
-        return Objects.equals(user, that.user) && Objects.equals(address, that.address);
+        return Objects.equals(user, that.user) && Objects.equals(addresses, that.addresses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, address);
+        return Objects.hash(user, addresses);
     }
 }

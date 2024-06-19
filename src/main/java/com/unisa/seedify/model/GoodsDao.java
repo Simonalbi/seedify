@@ -2,7 +2,10 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoodsDao extends BaseDao implements GenericDao<GoodsBean> {
     private static final String TABLE_NAME = "merce";
@@ -75,5 +78,49 @@ public class GoodsDao extends BaseDao implements GenericDao<GoodsBean> {
                 throw e;
             }
         }
+    }
+
+    @Override
+    public GoodsBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        int orderId = (int) primaryKey.getKey("codice_ordine");
+
+        String query = "SELECT * FROM " + GoodsDao.TABLE_NAME +
+                       " WHERE codice_ordine = ?";
+
+        GoodsBean goodsBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, orderId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                goodsBean = new GoodsBean();
+
+                OrderDao orderDao = new OrderDao();
+                EntityPrimaryKey orderPrimaryKey = new EntityPrimaryKey();
+                orderPrimaryKey.addKey("codice_ordine", orderId);
+                OrderBean orderBean = orderDao.doRetrive(orderPrimaryKey);
+                goodsBean.setOrder(orderBean);
+
+                ProductDao productDao = new ProductDao();
+                List<GoodsItemBean> goods = goodsBean.getGoods();
+                while (resultSet.next()) {
+                    GoodsItemBean goodsItemBean = new GoodsItemBean();
+
+                    EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                    productPrimaryKey.addKey("codice_prodotto", resultSet.getInt("codice_prodotto"));
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+                    goodsItemBean.setProduct(productBean);
+
+                    goodsItemBean.setQuantity(resultSet.getInt("quantita"));
+
+                    goods.add(goodsItemBean);
+                }
+
+                goodsBean.setGoods(goods);
+            }
+        }
+
+        return goodsBean;
     }
 }

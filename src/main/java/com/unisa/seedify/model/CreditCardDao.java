@@ -2,9 +2,7 @@ package com.unisa.seedify.model;
 
 import com.unisa.seedify.exceptions.NotImplementedException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean> {
     private static final String TABLE_NAME = "carte_di_credito";
@@ -49,5 +47,41 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
     @Override
     public void doUpdate(CreditCardBean creditCardBean) throws SQLException, NotImplementedException {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public CreditCardBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        String cardNumber = (String) primaryKey.getKey("numero_carta");
+        String cvv = (String) primaryKey.getKey("cvv");
+        Date expirationDate = (Date) primaryKey.getKey("scadenza");
+        String name = (String) primaryKey.getKey("nome");
+        String surname = (String) primaryKey.getKey("cognome");
+
+        String query = "SELECT * FROM " + CreditCardDao.TABLE_NAME +
+                       " WHERE numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
+
+        CreditCardBean creditCardBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, cardNumber);
+            preparedStatement.setString(2, cvv);
+            preparedStatement.setDate(3, expirationDate);
+            preparedStatement.setString(4, name);
+            preparedStatement.setString(5, surname);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    creditCardBean = new CreditCardBean();
+                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
+                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
+                    creditCardBean.setName(resultSet.getString("nome"));
+                    creditCardBean.setSurname(resultSet.getString("cognome"));
+                }
+            }
+        }
+
+        return creditCardBean;
     }
 }

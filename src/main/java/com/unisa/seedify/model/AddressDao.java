@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
@@ -64,5 +65,37 @@ public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
 
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public AddressBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
+        int addressId = (int) primaryKey.getKey("codice_indirizzo");
+
+        String query = "SELECT * FROM " + AddressDao.TABLE_NAME +
+                       " WHERE codice_indirizzo = ?";
+
+        AddressBean addressBean = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, addressId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    addressBean = new AddressBean();
+                    addressBean.setAddressId(resultSet.getInt("codice_indirizzo"));
+                    addressBean.setProvince(resultSet.getString("provincia"));
+                    addressBean.setCity(resultSet.getString("citta"));
+                    addressBean.setCap(resultSet.getString("cap"));
+                    addressBean.setStreet(resultSet.getString("via"));
+                    addressBean.setName(resultSet.getString("nome"));
+                    addressBean.setSurname(resultSet.getString("cognome"));
+                    addressBean.setPhone(resultSet.getString("numero_di_telefono"));
+                    addressBean.setNote(resultSet.getString("note"));
+                }
+            }
+        }
+
+        return addressBean;
     }
 }
