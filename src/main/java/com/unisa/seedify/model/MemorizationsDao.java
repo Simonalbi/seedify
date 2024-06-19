@@ -1,6 +1,6 @@
 package com.unisa.seedify.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.unisa.seedify.exceptions.NotImplementedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
