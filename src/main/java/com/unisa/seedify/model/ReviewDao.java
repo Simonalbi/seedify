@@ -29,14 +29,13 @@ public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
     @Override
     public void doDelete(ReviewBean reviewBean) throws SQLException {
         String query = "DELETE FROM " + ReviewDao.TABLE_NAME +
-                       " WHERE codice_recensione = ? and codice_prodotto = ? and email = ?";
+                       " WHERE codice_prodotto = ? AND email = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, reviewBean.getReviewId());
-            preparedStatement.setInt(2, reviewBean.getProduct().getProductId());
-            preparedStatement.setString(3, reviewBean.getUser().getEmail());
+            preparedStatement.setInt(1, reviewBean.getProduct().getProductId());
+            preparedStatement.setString(2, reviewBean.getUser().getEmail());
 
             preparedStatement.executeUpdate();
         }
@@ -46,16 +45,15 @@ public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
     public void doUpdate(ReviewBean reviewBean) throws SQLException {
         String query = "UPDATE " + ReviewDao.TABLE_NAME +
                        " SET commento = ?, numero_stelle = ? " +
-                       " WHERE codice_recensione = ? and codice_prodotto = ? and email = ?";
+                       " WHERE codice_prodotto = ? AND email = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, reviewBean.getComment());
             preparedStatement.setInt(2, reviewBean.getStarRating());
-            preparedStatement.setInt(3, reviewBean.getReviewId());
-            preparedStatement.setInt(4, reviewBean.getProduct().getProductId());
-            preparedStatement.setString(5, reviewBean.getUser().getEmail());
+            preparedStatement.setInt(3, reviewBean.getProduct().getProductId());
+            preparedStatement.setString(4, reviewBean.getUser().getEmail());
 
             preparedStatement.executeUpdate();
         }

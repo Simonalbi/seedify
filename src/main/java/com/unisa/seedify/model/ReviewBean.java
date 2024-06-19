@@ -7,7 +7,6 @@ import java.util.Objects;
 public class ReviewBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int reviewId;
     private UserBean user;
     private ProductBean product;
     private String comment;
@@ -15,14 +14,6 @@ public class ReviewBean implements Serializable {
     private Date addedDate;
 
     public ReviewBean() {
-    }
-
-    public int getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
     }
 
     public UserBean getUser() {
@@ -70,11 +61,11 @@ public class ReviewBean implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewBean that = (ReviewBean) o;
-        return reviewId == that.reviewId;
+        return Objects.equals(user, that.user) && Objects.equals(product, that.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(reviewId);
+        return Objects.hash(user, product);
     }
 }
