@@ -33,7 +33,7 @@
         </div>
       </div>
       <div id="registration-form-container">
-        <form action="#" method="post">
+        <form action="${pageContext.request.contextPath}/registration-servlet" method="POST">
           <div id="registration-boxes-container">
             <div id="registration-name-box" class="dark rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
@@ -42,7 +42,7 @@
                 <jsp:param name="type" value="text" />
                 <jsp:param name="name" value="name" />
                 <jsp:param name="pattern" value="[A-Za-z\s]+" />
-                <jsp:param name="errorMessage" value="Nome non valido"/>
+                <jsp:param name="errorMessage" value="Nome non valido" />
                 <jsp:param name="group" value="registration" />
               </jsp:include>
             </div>

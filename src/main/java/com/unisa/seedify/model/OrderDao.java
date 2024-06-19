@@ -44,4 +44,20 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
             preparedStatement.executeUpdate();
         }
     }
+
+    @Override
+    public void doUpdate(OrderBean orderBean) throws SQLException {
+        String query = "UPDATE " + OrderDao.TABLE_NAME +
+                       " SET data_consegna = ?" +
+                       " WHERE codice_ordine = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setDate(1, orderBean.getDeliveryDate());
+            preparedStatement.setInt(2, orderBean.getOrderId());
+
+            preparedStatement.executeUpdate();
+        }
+    }
 }

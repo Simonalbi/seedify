@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class MemorizationsBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -26,5 +27,18 @@ public class MemorizationsBean implements Serializable {
 
     public void setCreditCards(List<CreditCardBean> creditCards) {
         this.creditCards = creditCards;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemorizationsBean that = (MemorizationsBean) o;
+        return Objects.equals(user, that.user) && Objects.equals(creditCards, that.creditCards);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, creditCards);
     }
 }

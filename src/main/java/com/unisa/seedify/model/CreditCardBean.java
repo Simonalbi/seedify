@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 public class CreditCardBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -53,5 +54,18 @@ public class CreditCardBean implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreditCardBean that = (CreditCardBean) o;
+        return Objects.equals(cardNumber, that.cardNumber) && Objects.equals(cvv, that.cvv) && Objects.equals(expirationDate, that.expirationDate) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardNumber, cvv, expirationDate, name, surname);
     }
 }

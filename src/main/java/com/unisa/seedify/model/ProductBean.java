@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 public class ProductBean implements Serializable {
     public enum Seasons {
@@ -140,6 +141,19 @@ public class ProductBean implements Serializable {
 
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductBean that = (ProductBean) o;
+        return productId == that.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(productId);
     }
 }
 

@@ -40,4 +40,24 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
             preparedStatement.executeUpdate();
         }
     }
+
+    @Override
+    public void doUpdate(UserBean userBean) throws SQLException {
+        String query = "UPDATE " + UserDao.TABLE_NAME +
+                       " set password = ?, foto_profilo = ?, nome = ?, cognome = ?, ruolo = ?" +
+                       " WHERE email = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userBean.getPassword());
+            preparedStatement.setBytes(2, userBean.getProfilePicture());
+            preparedStatement.setString(3, userBean.getName());
+            preparedStatement.setString(4, userBean.getSurname());
+            preparedStatement.setString(5, userBean.getRole().toString());
+            preparedStatement.setString(6, userBean.getEmail());
+
+            preparedStatement.executeUpdate();
+        }
+    }
 }

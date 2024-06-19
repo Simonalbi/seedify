@@ -2,6 +2,7 @@ package com.unisa.seedify.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 public class OrderBean implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -73,5 +74,18 @@ public class OrderBean implements Serializable {
     //TODO: implementare un metodo per calcolare il prezzo totale
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderBean orderBean = (OrderBean) o;
+        return orderId == orderBean.orderId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(orderId);
     }
 }
