@@ -8,6 +8,18 @@ import java.sql.SQLException;
 public class UserDao extends BaseDao implements GenericDao<UserBean> {
     private static final String TABLE_NAME = "utenti";
 
+    private static UserDao instance = null;
+
+    private UserDao() {
+    }
+
+    public static UserDao getInstance() {
+        if (instance == null) {
+            instance = new UserDao();
+        }
+        return instance;
+    }
+
     @Override
     public synchronized void doSave(UserBean userBean) throws SQLException {
         String query = "INSERT INTO " + UserDao.TABLE_NAME +

@@ -11,10 +11,9 @@ import javax.servlet.annotation.*;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-    private String message;
+    private static final UserDao userDao = UserDao.getInstance();
 
     public void init() {
-        message = "Hello World!";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,7 +29,6 @@ public class HelloServlet extends HttpServlet {
         user.setProfilePicture(new byte[0]);
 
         try {
-            UserDao userDao = new UserDao();
             userDao.doSave(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);

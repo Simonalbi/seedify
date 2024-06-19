@@ -7,6 +7,18 @@ import java.sql.*;
 public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean> {
     private static final String TABLE_NAME = "carte_di_credito";
 
+    private static CreditCardDao instance = null;
+
+    private CreditCardDao() {
+    }
+
+    public static CreditCardDao getInstance() {
+        if (instance == null) {
+            instance = new CreditCardDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(CreditCardBean creditCardBean) throws SQLException {
         String query = "INSERT INTO " + CreditCardDao.TABLE_NAME +

@@ -11,6 +11,21 @@ import java.util.List;
 public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, DetailedDao<FavoritesBean, ProductBean> {
     private static final String TABLE_NAME = "preferiti";
 
+    private static FavoritesDao instance = null;
+
+    private static final ProductDao productDao = ProductDao.getInstance();
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private FavoritesDao() {
+    }
+
+    public static FavoritesDao getInstance() {
+        if (instance == null) {
+            instance = new FavoritesDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(FavoritesBean favoritesBean) throws SQLException {
         String query = "INSERT INTO " + FavoritesDao.TABLE_NAME +
@@ -113,13 +128,11 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 favoritesBean = new FavoritesBean();
 
-                UserDao userDao = new UserDao();
                 EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                 userPrimaryKey.addKey("email", email);
                 UserBean userBean = userDao.doRetrive(userPrimaryKey);
                 favoritesBean.setUser(userBean);
 
-                ProductDao productDao = new ProductDao();
                 List<ProductBean> favorites = favoritesBean.getProducts();
                 while (resultSet.next()) {
                     EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();

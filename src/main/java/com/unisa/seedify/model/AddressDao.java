@@ -8,6 +8,18 @@ import java.sql.SQLException;
 public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
     private static final String TABLE_NAME = "indirizzi";
 
+    private static AddressDao instance = null;
+
+    private AddressDao() {
+    }
+
+    public static AddressDao getInstance() {
+        if (instance == null) {
+            instance = new AddressDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(AddressBean addressBean) throws SQLException {
         String query = "INSERT INTO " + AddressDao.TABLE_NAME +

@@ -8,6 +8,18 @@ import java.sql.SQLException;
 public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
     private static final String TABLE_NAME = "prodotti";
 
+    private static ProductDao instance = null;
+
+    private ProductDao() {
+    }
+
+    public static ProductDao getInstance() {
+        if (instance == null) {
+            instance = new ProductDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(ProductBean productBean) throws SQLException {
         String query = "INSERT INTO " + ProductDao.TABLE_NAME +

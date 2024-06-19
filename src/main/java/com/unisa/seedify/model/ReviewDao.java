@@ -8,6 +8,21 @@ import java.sql.SQLException;
 public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
     private static final String TABLE_NAME = "recensioni";
 
+    private static ReviewDao instance = null;
+
+    private static final ProductDao productDao = ProductDao.getInstance();
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private ReviewDao() {
+    }
+    
+    public static ReviewDao getInstance() {
+        if (instance == null) {
+            instance = new ReviewDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(ReviewBean reviewBean) throws SQLException {
         String query = "INSERT INTO " + ReviewDao.TABLE_NAME +
@@ -79,13 +94,11 @@ public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
                 if (resultSet.next()) {
                     reviewBean = new ReviewBean();
 
-                    UserDao userDao = new UserDao();
                     EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                     userPrimaryKey.addKey("email", email);
                     UserBean userBean = userDao.doRetrive(userPrimaryKey);
                     reviewBean.setUser(userBean);
 
-                    ProductDao productDao = new ProductDao();
                     EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
                     productPrimaryKey.addKey("codice_prodotto", productId);
                     ProductBean productBean = productDao.doRetrive(productPrimaryKey);

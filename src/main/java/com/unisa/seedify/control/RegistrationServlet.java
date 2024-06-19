@@ -19,6 +19,8 @@ import java.sql.SQLException;
 // TODO: Validare l'input e in caso di errore far apparire nella pagina l'errore
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
 public class RegistrationServlet extends HttpServlet {
+    private static final UserDao userDao = UserDao.getInstance();
+
     public void init() {
     }
 
@@ -58,7 +60,6 @@ public class RegistrationServlet extends HttpServlet {
         user.setProfilePicture(byteArrayOutputStream.toByteArray());
 
         try {
-            UserDao userDao = new UserDao();
             userDao.doSave(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);

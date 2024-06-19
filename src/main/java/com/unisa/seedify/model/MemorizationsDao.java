@@ -8,6 +8,20 @@ import java.util.List;
 public class MemorizationsDao extends BaseDao implements GenericDao<MemorizationsBean>, DetailedDao<MemorizationsBean, CreditCardBean> {
     private static final String TABLE_NAME = "memorizzazioni";
 
+    private static MemorizationsDao instance = null;
+
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private MemorizationsDao() {
+    }
+
+    public static MemorizationsDao getInstance() {
+        if (instance == null) {
+            instance = new MemorizationsDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(MemorizationsBean memorizationsBeans) throws SQLException {
         String query = "INSERT INTO " + MemorizationsDao.TABLE_NAME +
@@ -137,7 +151,6 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 memorizationsBean = new MemorizationsBean();
 
-                UserDao userDao = new UserDao();
                 EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                 userPrimaryKey.addKey("email", email);
                 UserBean userBean = userDao.doRetrive(userPrimaryKey);

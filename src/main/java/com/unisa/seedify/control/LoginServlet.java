@@ -17,6 +17,8 @@ import java.sql.SQLException;
 
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
+    private static final UserDao userDao = UserDao.getInstance();
+
     public void init() {
     }
 
@@ -45,7 +47,6 @@ public class LoginServlet extends HttpServlet {
         user.setProfilePicture(byteArrayOutputStream.toByteArray());
 
         try {
-            UserDao userDao = new UserDao();
             userDao.doSave(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);

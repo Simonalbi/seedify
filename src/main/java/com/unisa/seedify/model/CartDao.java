@@ -9,6 +9,21 @@ import java.util.List;
 public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDao<CartBean, CartItemBean> {
     private static final String TABLE_NAME = "carrelli";
 
+    private static CartDao instance = null;
+
+    private static final ProductDao productDao = ProductDao.getInstance();
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private CartDao() {
+    }
+
+    public static CartDao getInstance() {
+        if (instance == null) {
+            instance = new CartDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(CartBean cartBean) throws SQLException {
         String query = "INSERT INTO " + CartDao.TABLE_NAME +
@@ -155,13 +170,11 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 cartBean = new CartBean();
 
-                UserDao userDao = new UserDao();
                 EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                 userPrimaryKey.addKey("email", email);
                 UserBean userBean = userDao.doRetrive(userPrimaryKey);
                 cartBean.setUser(userBean);
 
-                ProductDao productDao = new ProductDao();
                 List<CartItemBean> cartItems = cartBean.getCartItems();
                 while (resultSet.next()) {
                     CartItemBean cartItemBean = new CartItemBean();

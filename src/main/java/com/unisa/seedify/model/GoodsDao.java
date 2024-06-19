@@ -10,6 +10,21 @@ import java.util.List;
 public class GoodsDao extends BaseDao implements GenericDao<GoodsBean> {
     private static final String TABLE_NAME = "merce";
 
+    private static GoodsDao instance = null;
+
+    private static final ProductDao productDao = ProductDao.getInstance();
+    private static final OrderDao orderDao = OrderDao.getInstance();
+
+    private GoodsDao() {
+    }
+
+    public static GoodsDao getInstance() {
+        if (instance == null) {
+            instance = new GoodsDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(GoodsBean goodsBean) throws SQLException {
         String query = "INSERT INTO " + GoodsDao.TABLE_NAME +
@@ -96,13 +111,11 @@ public class GoodsDao extends BaseDao implements GenericDao<GoodsBean> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 goodsBean = new GoodsBean();
 
-                OrderDao orderDao = new OrderDao();
                 EntityPrimaryKey orderPrimaryKey = new EntityPrimaryKey();
                 orderPrimaryKey.addKey("codice_ordine", orderId);
                 OrderBean orderBean = orderDao.doRetrive(orderPrimaryKey);
                 goodsBean.setOrder(orderBean);
 
-                ProductDao productDao = new ProductDao();
                 List<GoodsItemBean> goods = goodsBean.getGoods();
                 while (resultSet.next()) {
                     GoodsItemBean goodsItemBean = new GoodsItemBean();

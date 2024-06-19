@@ -9,6 +9,21 @@ import java.sql.SQLException;
 public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
     private static final String TABLE_NAME = "ordini";
 
+    private static OrderDao instance = null;
+
+    private static final AddressDao addressDao = AddressDao.getInstance();
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private OrderDao() {
+    }
+
+    public static OrderDao getInstance() {
+        if (instance == null) {
+            instance = new OrderDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(OrderBean orderBean) throws SQLException {
         String query = "INSERT INTO " + OrderDao.TABLE_NAME +
@@ -89,13 +104,11 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     creditCardBean.setSurname(resultSet.getString("cognome"));
                     orderBean.setCreditCard(creditCardBean);
 
-                    UserDao userDao = new UserDao();
                     EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                     userPrimaryKey.addKey("email", resultSet.getString("email"));
                     UserBean userBean = userDao.doRetrive(userPrimaryKey);
                     orderBean.setUser(userBean);
 
-                    AddressDao addressDao = new AddressDao();
                     EntityPrimaryKey addressPrimaryKey = new EntityPrimaryKey();
                     addressPrimaryKey.addKey("codice_indirizzo", resultSet.getInt("codice_indirizzo"));
                     AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);

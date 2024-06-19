@@ -11,6 +11,21 @@ import java.util.List;
 public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, DetailedDao<LocationsBean, AddressBean> {
     private static final String TABLE_NAME = "locazione";
 
+    private static LocationsDao instance = null;
+
+    private static final AddressDao addressDao = AddressDao.getInstance();
+    private static final UserDao userDao = UserDao.getInstance();
+
+    private LocationsDao() {
+    }
+
+    public static LocationsDao getInstance() {
+        if (instance == null) {
+            instance = new LocationsDao();
+        }
+        return instance;
+    }
+
     @Override
     public void doSave(LocationsBean locationsBean) throws SQLException {
         String query = "INSERT INTO " + LocationsDao.TABLE_NAME +
@@ -113,13 +128,11 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 locationsBean = new LocationsBean();
 
-                UserDao userDao = new UserDao();
                 EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
                 userPrimaryKey.addKey("email", email);
                 UserBean userBean = userDao.doRetrive(userPrimaryKey);
                 locationsBean.setUser(userBean);
 
-                AddressDao addressDao = new AddressDao();
                 List<AddressBean> addresses = locationsBean.getAddresses();
                 while (resultSet.next()) {
                     int addressId = resultSet.getInt("codice_indirizzo");
