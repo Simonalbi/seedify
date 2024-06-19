@@ -108,14 +108,13 @@ CREATE TABLE locazione (
 );
 
 CREATE TABLE recensioni (
-    codice_recensione INT AUTO_INCREMENT NOT NULL,
     email VARCHAR(100) NOT NULL,
     codice_prodotto INT NOT NULL,
     commento TINYTEXT NOT NULL,
     numero_stelle TINYINT NOT NULL,
     data_aggiunta DATE NOT NULL,
 
-    PRIMARY KEY(codice_recensione, codice_prodotto, email),
+    PRIMARY KEY(codice_prodotto, email),
 
     FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
