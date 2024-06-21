@@ -67,9 +67,9 @@ CREATE TABLE ordini (
 
     PRIMARY KEY(codice_ordine),
 
-    FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo),
+    FOREIGN KEY(email) REFERENCES utenti(email),
+    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome)
 );
 
 CREATE TABLE merce (
@@ -79,8 +79,8 @@ CREATE TABLE merce (
 
     PRIMARY KEY(codice_ordine, codice_prodotto),
 
-    FOREIGN KEY(codice_ordine) REFERENCES ordini(codice_ordine) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(codice_ordine) REFERENCES ordini(codice_ordine),
+    FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto)
 );
 
 CREATE TABLE memorizzazioni (
@@ -93,7 +93,7 @@ CREATE TABLE memorizzazioni (
 
     PRIMARY KEY(email, numero_carta, cvv, scadenza, nome, cognome),
 
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
     FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -103,7 +103,7 @@ CREATE TABLE locazione (
 
     PRIMARY KEY(email, codice_indirizzo),
 
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
     FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -117,7 +117,7 @@ CREATE TABLE recensioni (
     PRIMARY KEY(codice_prodotto, email),
 
     FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
 
     CONSTRAINT stelle CHECK(numero_stelle BETWEEN 1 AND 5)
 );
