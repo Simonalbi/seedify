@@ -6,6 +6,7 @@ public class EntityPrimaryKey {
     private HashMap<String, Object> keys;
 
     public EntityPrimaryKey() {
+        this.keys = new HashMap<>();
     }
 
     public EntityPrimaryKey addKey(String key, Object value) {

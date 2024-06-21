@@ -95,7 +95,7 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
                     userBean.setProfilePicture(resultSet.getBytes("foto_profilo"));
                     userBean.setName(resultSet.getString("nome"));
                     userBean.setSurname(resultSet.getString("cognome"));
-                    userBean.setRole(UserBean.Roles.valueOf(resultSet.getString("ruolo")));
+                    userBean.setRole(UserBean.Roles.fromString(resultSet.getString("ruolo")));
                 }
             }
         }

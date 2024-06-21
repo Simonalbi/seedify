@@ -10,7 +10,7 @@
           <img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300.png"/>
         </div>
         <div id="login-boxes-container" >
-          <form action="#" method="post">
+          <form action="${pageContext.request.contextPath}/login-servlet" method="post">
             <div id="login-email-box" class="rubik-400">
               <jsp:include page="/common/components/input-box/input-box.jsp">
                 <jsp:param name="label" value="Email" />

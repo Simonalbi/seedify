@@ -1,6 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.control.utils.InputValidation;
+import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 import com.unisa.seedify.model.UserDao;
 
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+// TODO Ajax per inviare i messaggi di errore al client
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
     private static final UserDao userDao = UserDao.getInstance();
@@ -23,9 +26,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        UserBean user = new UserBean();
-
-        String email = request.getParameter("email").toLowerCase();
+        String email = request.getParameter("email").trim().toLowerCase();
         if (!InputValidation.isEmailValid(email)) {
             throw new IllegalArgumentException("Invalid email");
         }
@@ -35,22 +36,23 @@ public class LoginServlet extends HttpServlet {
             throw new IllegalArgumentException("Password is not strong enough");
         }
 
-        user.setEmail(email);
-        user.setPassword(InputValidation.sha256(password));
+        EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+        userPrimaryKey.addKey("email", email);
+        userPrimaryKey.addKey("password", InputValidation.sha256(password));
 
-        user.setRole(UserBean.Roles.CLIENT);
-
-        String imagePath = getServletContext().getRealPath("/common/assets/img/profile/default.png");
-        BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
-        user.setProfilePicture(byteArrayOutputStream.toByteArray());
-
+        UserBean user = null;
         try {
-            userDao.doSave(user);
+            user = userDao.doRetrive(userPrimaryKey);
+            // TODO: Get role from user and redirect to correct page
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        System.out.println("User " + user.getEmail() + " logged in");
     }
 
     public void destroy() {

@@ -19,6 +19,15 @@ public class UserBean implements Serializable {
         public String toString() {
             return this.translation;
         }
+
+        public static Roles fromString(String translation) {
+            for (Roles role : Roles.values()) {
+                if (role.translation.equals(translation)) {
+                    return role;
+                }
+            }
+            return null;
+        }
     }
 
     private static final long serialVersionUID = 1L;
