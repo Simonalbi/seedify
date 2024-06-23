@@ -1,68 +1,83 @@
-<nav id="main-navbar">
-	<div id="top-navbar">
-		<div id="logo-container">
-			<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300_small.png" alt="">
+<div id="sidebar-opacity-layer" onclick="hideSideBar()"></div>
+<aside id="sidebar">
+	<div id="sidebar-content">
+		<div id="account-details-container">
+			<div id="profile-picture">
+				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png" alt="...">
+			</div>
+			<div id="account-details">
+				<span>Name (Role)</span>
+				<span>justemail@gmail.com</span>
+			</div>
 		</div>
-		<div id="menu-container">
-			<div class="menu-option">
+		<div id="options-container">
+			<div class="sidebar-option">
 				<a href="#">
 					<span class="material-icons md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
-				<div class="selection-underline"></div>
 			</div>
-			<div class="menu-separator"></div>
-			<div class="menu-option">
+			<div class="sidebar-option">
 				<a href="#">
 					<span class="material-icons md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
-				<div class="selection-underline"></div>
 			</div>
-			<div class="menu-separator"></div>
-			<div class="menu-option">
+			<div class="sidebar-option">
 				<a href="#">
 					<span class="material-icons md-18">groups</span>
 					<span class="option-label">Community</span>
 				</a>
-				<div class="selection-underline"></div>
-			</div>
-		</div>
-		<div id="actions-container">
-			<div class="action">
-				<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
-				<div class="notification">
-					<p>0</p>
-				</div>
-			</div>
-			<div class="action">
-				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
-				<div class="notification">
-					<p>0</p>
-				</div>
 			</div>
 		</div>
 	</div>
-	<nav id="sub-navbar" style="display: none">
-		<div id="sub-navbar-container">
-			<div class="menu-option">
+</aside>
+<nav id="main-navbar">
+	<div id="logo-container">
+		<span class="material-icons-round" id="burger-menu-icon" onclick="showSideBar()">menu</span>
+		<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300.png" alt="">
+	</div>
+	<div id="menu-container">
+		<div class="menu-option">
+			<div class="menu-option-content-container">
 				<a href="#">
 					<span class="material-icons md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
+				<div class="selection-underline"></div>
 			</div>
-			<div class="menu-option">
+		</div>
+		<div class="menu-option">
+			<div class="menu-option-content-container">
 				<a href="#">
 					<span class="material-icons md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
+				<div class="selection-underline"></div>
 			</div>
-			<div class="menu-option">
+		</div>
+		<div class="menu-option">
+			<div class="menu-option-content-container">
 				<a href="#">
 					<span class="material-icons md-18">groups</span>
 					<span class="option-label">Community</span>
 				</a>
+				<div class="selection-underline"></div>
 			</div>
 		</div>
-	</nav>
+	</div>
+	<div id="actions-container">
+		<div class="action">
+			<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
+			<div class="notification">
+				<span>0</span>
+			</div>
+		</div>
+		<div class="action">
+			<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
+			<div class="notification">
+				<span>0</span>
+			</div>
+		</div>
+	</div>
 </nav>

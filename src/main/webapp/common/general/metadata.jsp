@@ -7,7 +7,9 @@
 <!-- GENERAL STYLESHEETS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/fonts.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material Icons Outlined'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Round">
 
 <!-- GENERAL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/common/general/scripts/script.js"></script>
@@ -18,9 +20,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/chat-button/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/chat-button/scripts/script.js" defer></script>
 
-<!-- header -->
+<!-- main-navbar -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-navbar/styles/style.css">
-<script src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js" defer></script>
+<script src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js"></script>
 
 <!-- input-box -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/styles/style.css">
