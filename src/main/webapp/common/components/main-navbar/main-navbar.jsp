@@ -2,7 +2,7 @@
 <aside id="sidebar">
 	<div id="sidebar-content">
 		<div id="account-details-container">
-			<div id="profile-picture">
+			<div class="profile-picture">
 				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png" alt="...">
 			</div>
 			<div id="account-details">
@@ -13,19 +13,19 @@
 		<div id="options-container">
 			<div class="sidebar-option">
 				<a href="#">
-					<span class="material-icons md-18">home</span>
+					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
 			</div>
 			<div class="sidebar-option">
 				<a href="#">
-					<span class="material-icons md-18">shopping_bag</span>
+					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
 			</div>
 			<div class="sidebar-option">
 				<a href="#">
-					<span class="material-icons md-18">groups</span>
+					<span class="material-icons-round md-18">groups</span>
 					<span class="option-label">Community</span>
 				</a>
 			</div>

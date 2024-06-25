@@ -8,10 +8,21 @@
   font-family: "Material Icons Outlined";
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 img {
   user-select: none;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ui-block {
+  border: 1px solid var(--gainsboro);
 }
