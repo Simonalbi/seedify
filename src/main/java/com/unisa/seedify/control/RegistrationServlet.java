@@ -1,6 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.control.utils.InputValidation;
+import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 import com.unisa.seedify.model.UserDao;
 
@@ -15,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// TODO: Implementare un metodo per controllare se un email è già in uso
 // TODO: Validare l'input e in caso di errore far apparire nella pagina l'errore
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
 public class RegistrationServlet extends HttpServlet {
@@ -60,7 +60,14 @@ public class RegistrationServlet extends HttpServlet {
         user.setProfilePicture(byteArrayOutputStream.toByteArray());
 
         try {
-            userDao.doSave(user);
+            EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+            userPrimaryKey.addKey("email", email);
+            UserBean userBean = userDao.doRetrive(userPrimaryKey);
+            if (userBean == null) {
+                userDao.doSave(user);
+            } else {
+                throw new IllegalArgumentException("User already exists");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
