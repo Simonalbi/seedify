@@ -353,10 +353,14 @@ function updateTable(records) {
 }
 
 function getTableData() {
-    const selectedTable = document.getElementById('table-selector').value;
+    const loadingOverlay = document.getElementById('table-loading-overlay');
+    loadingOverlay.style.visibility = 'visible';
 
     // TODO Request table data with AJAX and show loading circle during the request
+    // Simulate a delay
+    setTimeout(() => {loadingOverlay.style.visibility = 'hidden'}, 1000)
 
+    const selectedTable = document.getElementById('table-selector').value;
     if (selectedTable === 'employees') {
         updateTable(EMPLOYEES);
     } else if (selectedTable === 'users') {

@@ -59,7 +59,11 @@
             <option value="orders">Ordini</option>
           </select>
         </nav>
-        <div id="main-table"></div>
+        <div id="main-table">
+          <div id="table-loading-overlay">
+            <img src="${pageContext.request.contextPath}/common/assets/img/loader.svg">
+          </div>
+        </div>
       </div>
     </div>
   </body>
