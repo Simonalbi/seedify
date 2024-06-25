@@ -71,7 +71,7 @@ public class OrderBean implements Serializable {
         return totalPrice;
     }
 
-    //TODO: implementare un metodo per calcolare il prezzo totale
+    //TODO: Implementare un metodo per calcolare il prezzo totale
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }

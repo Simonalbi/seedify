@@ -3,15 +3,18 @@
 	<div id="sidebar-content">
 		<div id="account-details-container">
 			<div class="profile-picture">
-				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png" alt="...">
+				<%--TODO Add link to home page--%>
+				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png">
 			</div>
 			<div id="account-details">
+				<%--TODO Add real data--%>
 				<span>Name (Role)</span>
 				<span>justemail@gmail.com</span>
 			</div>
 		</div>
 		<div id="options-container">
 			<div class="sidebar-option">
+				<%--TODO Add link to home page--%>
 				<a href="#">
 					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
