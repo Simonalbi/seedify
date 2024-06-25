@@ -8,9 +8,15 @@
   --pale-goldenrod: #ECF39E;
   --eggshell: #EFF0D8;
   --granite-gray: #62646A;
-  --gainsboro: #dedee4;
+  --gainsboro: #DEDEE4;
   --cultured: #F5F5F5;
+  --platinum: #E6E6E6;
   --pure-white: #FFFFFF;
   --pure-black: #000000;
   --chinise-gold: #C8A804;
+  --old-gold: #CDCA32;
+  --licorice: #0D1D0D;
+  --phthalo-green: #193719;
+  --royal-green: #1F6119;
+  --transparent-black: rgba(0, 0, 0, 0.3);
 }
