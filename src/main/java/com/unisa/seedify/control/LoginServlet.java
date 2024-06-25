@@ -5,15 +5,12 @@ import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 import com.unisa.seedify.model.UserDao;
 
-import javax.imageio.ImageIO;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.Console;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -38,11 +35,23 @@ public class LoginServlet extends HttpServlet {
 
         EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
         userPrimaryKey.addKey("email", email);
-        userPrimaryKey.addKey("password", InputValidation.sha256(password));
 
         UserBean user = null;
         try {
             user = userDao.doRetrive(userPrimaryKey);
+            switch (user.getRole()) {
+                case ADMIN:
+                    response.sendRedirect("admin/admin.jsp");
+                    break;
+                case EMPLOYEE:
+                    // TODO Redirect to employee page
+                    break;
+                case CLIENT:
+                    // TODO Redirect to client page
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid role");
+            }
             // TODO: Get role from user and redirect to correct page
         } catch (SQLException e) {
             throw new RuntimeException(e);
