@@ -1,14 +1,24 @@
+<%@ page import="com.unisa.seedify.model.UserBean" %>
+
+<%
+	UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+%>
+
 <div id="sidebar-opacity-layer" onclick="hideSideBar()"></div>
 <aside id="sidebar" class="rubik-300">
 	<div id="sidebar-content">
 		<div id="account-details-container">
-			<div class="profile-picture">
-				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
-			</div>
-			<div id="account-details">
-				<span><%= userBean.getName() %> (<%= userBean.getRole().toString() %>)</span>
-				<span><%= userBean.getEmail()%></span>
-			</div>
+			<% if (userBean != null) { %>
+				<div class="profile-picture">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
+				</div>
+				<div id="account-details">
+					<span><%= userBean.getName() %> (<%= userBean.getRole().toString() %>)</span>
+					<span><%= userBean.getEmail()%></span>
+				</div>
+			<% } else { %>
+				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
+			<% } %>
 		</div>
 		<div class="sidebar-separator"></div>
 		<div id="options-container">
@@ -77,9 +87,13 @@
 			</div>
 		</div>
 		<div class="action">
-			<div class="profile-picture">
-				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
-			</div>
+			<% if (userBean != null) { %>
+				<div class="profile-picture">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
+				</div>
+			<% } else { %>
+				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
+			<% } %>
 		</div>
 	</div>
 </nav>

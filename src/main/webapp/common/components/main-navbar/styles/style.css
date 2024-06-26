@@ -57,6 +57,7 @@
   color: var(--granite-gray);
 }
 
+#sidebar lord-icon,
 #sidebar #account-details-container>.profile-picture {
   width: 60px;
   height: 60px;
@@ -229,11 +230,6 @@
 #main-navbar .action .notification span {
   color: var(--pure-white);
   font-size: 13px;
-}
-
-#main-navbar .profile-picture {
-  width: 35px;
-  height: 35px;
 }
 
 @media screen and (max-width: 610px) {
