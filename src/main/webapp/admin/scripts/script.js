@@ -306,7 +306,63 @@ const ORDERS = [
     }
 ]
 
-function buildTable(records) {
+const PRODUCTS = [
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    },
+    {
+        "Immagine": "",
+        "Nome": "pianta",
+        "Data": "2024-06-20",
+        "Tipologia": "grassa",
+        "Descrizione": "Pianta molto bella"
+    }
+]
+
+function buildTable(tableData) {
+    const canEdit = tableData.canEdit;
+    const canDelete = tableData.canDelete;
+    const haveActions = canEdit || canDelete;
+
     const table = document.createElement('table');
 
     const thead = document.createElement('thead');
@@ -321,6 +377,13 @@ function buildTable(records) {
         th.textContent = key;
         hr.appendChild(th);
     }
+
+    if (haveActions) {
+        const th = document.createElement('th');
+        th.textContent = 'Azioni';
+        hr.appendChild(th);
+    }
+
     thead.appendChild(hr);
 
     for (const record of records) {
@@ -330,6 +393,26 @@ function buildTable(records) {
             td.textContent = record[key];
             tr.appendChild(td);
         }
+
+        if (haveActions) {
+            const td = document.createElement('td');
+            td.classList.add("table-actions")
+
+            if (canEdit) {
+                const editAction = document.createElement('div');
+                editAction.innerHTML = '<span class="material-icons-round md-18">edit</span>';
+                td.appendChild(editAction);
+            }
+
+            if (canDelete) {
+                const deleteAction = document.createElement('div');
+                deleteAction.innerHTML = '<span class="material-icons-round md-18">delete</span>';
+                td.appendChild(deleteAction);
+            }
+
+            tr.appendChild(td);
+        }
+
         tbody.appendChild(tr);
     }
 
@@ -339,11 +422,11 @@ function buildTable(records) {
     return table;
 }
 
-function updateTable(records) {
+function updateTable(tableData) {
     const mainTable = document.getElementById('main-table');
 
     const oldTable = mainTable.querySelector('table');
-    const newTable = buildTable(records);
+    const newTable = buildTable(tableData);
 
     if (oldTable) {
         mainTable.replaceChild(newTable, oldTable);
@@ -362,11 +445,15 @@ function getTableData() {
 
     const selectedTable = document.getElementById('table-selector').value;
     if (selectedTable === 'employees') {
-        updateTable(EMPLOYEES);
+        response.data = EMPLOYEES
     } else if (selectedTable === 'users') {
-        updateTable(USERS);
+        response.data = USERS
     } else if (selectedTable === 'orders') {
-        updateTable(ORDERS);
+        response.data = ORDERS
+    } else if (selectedTable === 'products') {
+        response.canEdit = true
+        response.canDelete = true;
+        response.data = PRODUCTS
     }
 }
 

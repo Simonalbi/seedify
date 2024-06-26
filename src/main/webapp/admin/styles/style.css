@@ -126,20 +126,20 @@ nav {
 
 #search-container {
   user-select: none;
+}
 
-  .material-icons-round {
-    position: absolute;
-    transform: translate(-35px, 2px);
-    cursor: pointer;
-    color: var(--dark-jungle-green);
-  }
+#search-container .material-icons-round {
+  position: absolute;
+  transform: translate(-35px, 2px);
+  cursor: pointer;
+  color: var(--dark-jungle-green);
 }
 
 #search-text:focus, #table-selector:focus{
   outline: var(--android-green) solid 1px;
 }
 
-#main-table>#table-loading-overlay {
+#main-table > #table-loading-overlay {
   visibility: hidden;
 
   position: absolute;

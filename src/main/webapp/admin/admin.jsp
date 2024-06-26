@@ -57,6 +57,7 @@
             <option value="employees">Dipendenti</option>
             <option value="users">Utenti</option>
             <option value="orders">Ordini</option>
+            <option value="products">Prodotti</option>
           </select>
           <div id="search-container">
             <input type="text" name="search" id="search-text" placeholder="Cerca...">
