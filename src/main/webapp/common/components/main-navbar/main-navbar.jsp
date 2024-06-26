@@ -4,7 +4,7 @@
 		<div id="account-details-container">
 			<div class="profile-picture">
 				<%--TODO Add link to home page--%>
-				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png">
+				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 			</div>
 			<div id="account-details">
 				<%--TODO Add real data--%>
@@ -82,7 +82,7 @@
 		<div class="action">
 			<div class="profile-picture">
 				<%--TODO Add link to home page--%>
-				<img src="${pageContext.request.contextPath}/common/assets/img/profile/client/3.png">
+				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 			</div>
 		</div>
 	</div>
