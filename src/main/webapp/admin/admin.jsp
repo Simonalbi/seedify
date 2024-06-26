@@ -6,7 +6,6 @@
 
 <!-- TODO Filter page access -->
 <!-- TODO Navbar style -->
-<!-- TODO Replace stats and other data with real data -->
 
 <%
   UserBean userBean = (UserBean) request.getSession().getAttribute("user");

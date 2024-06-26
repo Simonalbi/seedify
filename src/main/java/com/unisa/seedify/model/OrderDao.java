@@ -2,7 +2,6 @@ package com.unisa.seedify.model;
 
 import java.sql.*;
 
-// TODO: realizzare un metodo per calcolare il prezzo totale degli ordini
 public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
     private static final String TABLE_NAME = "ordini";
 
