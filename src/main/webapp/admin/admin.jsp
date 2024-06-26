@@ -6,9 +6,8 @@
 
 <!-- TODO Filter page access -->
 <!-- TODO Navbar style -->
-
 <%
-  UserBean userBean = (UserBean) request.getSession().getAttribute("user");
+  UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
 
   UserDao userDao = UserDao.getInstance();
   OrderDao orderDao = OrderDao.getInstance();
