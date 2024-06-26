@@ -1,9 +1,6 @@
 package com.unisa.seedify.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDao extends BaseDao implements GenericDao<UserBean> {
     private static final String TABLE_NAME = "utenti";
@@ -23,8 +20,8 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
     @Override
     public synchronized void doSave(UserBean userBean) throws SQLException {
         String query = "INSERT INTO " + UserDao.TABLE_NAME +
-                       " (email, password, foto_profilo, nome, cognome, ruolo)" +
-                       " VALUES (?, ?, ?, ?, ?, ?)";
+                " (email, password, foto_profilo, nome, cognome, ruolo)" +
+                " VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -43,7 +40,7 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
     @Override
     public synchronized void doDelete(UserBean userBean) throws SQLException {
         String query = "DELETE FROM " + UserDao.TABLE_NAME +
-                       " WHERE email = ?";
+                " WHERE email = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -57,8 +54,8 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
     @Override
     public void doUpdate(UserBean userBean) throws SQLException {
         String query = "UPDATE " + UserDao.TABLE_NAME +
-                       " set password = ?, foto_profilo = ?, nome = ?, cognome = ?, ruolo = ?" +
-                       " WHERE email = ?";
+                " set password = ?, foto_profilo = ?, nome = ?, cognome = ?, ruolo = ?" +
+                " WHERE email = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -79,7 +76,7 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
         String email = (String) primaryKey.getKey("email");
 
         String query = "SELECT * FROM " + UserDao.TABLE_NAME +
-                       " WHERE email = ?";
+                " WHERE email = ?";
 
         UserBean userBean = null;
         try (Connection connection = dataSource.getConnection();
@@ -101,5 +98,34 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
         }
 
         return userBean;
+    }
+
+    private int getEntityAmount(UserBean.Roles role) {
+        String query = "SELECT COUNT(*) AS entity_count FROM " + UserDao.TABLE_NAME +
+                       " WHERE ruolo = ?";
+
+        int entityCount = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, role.toString());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    entityCount = resultSet.getInt("entity_count");
+                }
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return entityCount;
+    }
+
+    public int getEmployeesAmount() {
+        return this.getEntityAmount(UserBean.Roles.EMPLOYEE);
+    }
+
+    public int getUsersAmount() {
+        return this.getEntityAmount(UserBean.Roles.CLIENT);
     }
 }

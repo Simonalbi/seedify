@@ -1,9 +1,6 @@
 package com.unisa.seedify.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
     private static final String TABLE_NAME = "prodotti";
@@ -111,5 +108,22 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
             }
         }
         return productBean;
+    }
+
+    public int getProductsAmount() {
+        String query = "SELECT COUNT(*) AS products_count FROM " + ProductDao.TABLE_NAME;
+
+        int productsAmount = 0;
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);) {
+
+            if (resultSet.next()) {
+                productsAmount = resultSet.getInt("products_count");
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return productsAmount;
     }
 }

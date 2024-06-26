@@ -1,9 +1,6 @@
 package com.unisa.seedify.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 // TODO: realizzare un metodo per calcolare il prezzo totale degli ordini
 public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
@@ -122,5 +119,22 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
         }
 
         return orderBean;
+    }
+
+    public int getOrdersAmount() {
+        String query = "SELECT COUNT(*) AS orders_count FROM " + OrderDao.TABLE_NAME;
+
+        int ordersAmount = 0;
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);) {
+
+            if (resultSet.next()) {
+                ordersAmount = resultSet.getInt("orders_count");
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return ordersAmount;
     }
 }
