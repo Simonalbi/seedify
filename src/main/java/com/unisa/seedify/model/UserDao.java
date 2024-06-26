@@ -20,8 +20,8 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
     @Override
     public synchronized void doSave(UserBean userBean) throws SQLException {
         String query = "INSERT INTO " + UserDao.TABLE_NAME +
-                " (email, password, foto_profilo, nome, cognome, ruolo)" +
-                " VALUES (?, ?, ?, ?, ?, ?)";
+                       " (email, password, foto_profilo, nome, cognome, ruolo)" +
+                       " VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
