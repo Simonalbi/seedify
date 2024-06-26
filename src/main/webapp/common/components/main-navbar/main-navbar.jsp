@@ -3,20 +3,17 @@
 	<div id="sidebar-content">
 		<div id="account-details-container">
 			<div class="profile-picture">
-				<%--TODO Add link to home page--%>
 				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 			</div>
 			<div id="account-details">
-				<%--TODO Add real data--%>
-				<span>Name (Role)</span>
-				<span>justemail@gmail.com</span>
+				<span><%= userBean.getName() %> (<%= userBean.getRole().toString() %>)</span>
+				<span><%= userBean.getEmail()%></span>
 			</div>
 		</div>
 		<div class="sidebar-separator"></div>
 		<div id="options-container">
 			<div class="sidebar-option">
-				<%--TODO Add link to home page--%>
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/home/home.jsp">
 					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
@@ -81,7 +78,6 @@
 		</div>
 		<div class="action">
 			<div class="profile-picture">
-				<%--TODO Add link to home page--%>
 				<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 			</div>
 		</div>
