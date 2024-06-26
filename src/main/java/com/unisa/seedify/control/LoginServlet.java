@@ -20,9 +20,6 @@ import java.util.UUID;
 public class LoginServlet extends HttpServlet {
     private static final UserDao userDao = UserDao.getInstance();
 
-    public void init() {
-    }
-
     private void redirectUser(HttpServletRequest request, HttpServletResponse response, UserBean.Roles role) throws ServletException, IOException {
         switch (role) {
             case ADMIN:
@@ -48,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("user", user);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter("email").trim().toLowerCase();
         if (!InputValidation.isEmailValid(email)) {
             throw new IllegalArgumentException("Invalid email");
@@ -85,8 +82,5 @@ public class LoginServlet extends HttpServlet {
 
         // DUBUG
         System.out.println("User " + user.getEmail() + " logged in");
-    }
-
-    public void destroy() {
     }
 }

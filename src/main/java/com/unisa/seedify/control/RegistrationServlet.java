@@ -21,10 +21,7 @@ import java.sql.SQLException;
 public class RegistrationServlet extends HttpServlet {
     private static final UserDao userDao = UserDao.getInstance();
 
-    public void init() {
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UserBean user = new UserBean();
 
         String email = request.getParameter("email").toLowerCase();
@@ -71,8 +68,5 @@ public class RegistrationServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void destroy() {
     }
 }
