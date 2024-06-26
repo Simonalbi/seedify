@@ -57,6 +57,7 @@
   color: var(--granite-gray);
 }
 
+#sidebar lord-icon,
 #sidebar #account-details-container>.profile-picture {
   width: 60px;
   height: 60px;
@@ -231,6 +232,7 @@
   font-size: 13px;
 }
 
+#sidebar lord-icon,
 #main-navbar .profile-picture {
   width: 35px;
   height: 35px;
