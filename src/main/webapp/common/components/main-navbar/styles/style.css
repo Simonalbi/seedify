@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
 
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--transparent-black);
 }
 
 #sidebar {
@@ -19,7 +19,14 @@
 
   height: 100%;
 
-  background-color: rgba(19,42,19,1);
+  background-color: var(--pure-white);
+}
+
+#sidebar .sidebar-separator {
+  width: 100%;
+  height: 1px;
+
+  background-color: var(--platinum);
 }
 
 #sidebar-content {
@@ -46,7 +53,8 @@
 
   padding: 5px;
 
-  color: white;
+  text-overflow: ellipsis;
+  color: var(--granite-gray);
 }
 
 #sidebar #account-details-container>.profile-picture {
@@ -80,10 +88,11 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 10px;
 
   height: 100%;
 
-  color: white;
+  color: var(--granite-gray);
   text-decoration: none;
 }
 
@@ -97,10 +106,11 @@
   display: flex;
   justify-content: space-between;
 
+  border-bottom: 1px solid var(--gainsboro);
   padding: 0 1%;
 
-  background: rgb(19,42,19);
-  background: linear-gradient(122deg, rgba(19,42,19,1) 26%, rgba(79,119,45,1) 55%, rgba(200,168,4,1) 100%);
+  background: var(--cal-poly-pomona-green);
+  background: linear-gradient(122deg, var(--dark-jungle-green) 26%, var(--royal-green) 55%, var(--android-green) 100%);
 }
 
 #main-navbar #logo-container {
@@ -119,7 +129,7 @@
   margin-right: 5px;
 
   font-size: 36px;
-  color: white;
+  color: var(--pure-white);
 
   cursor: pointer;
 }
@@ -135,7 +145,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 10px;
+  gap: 30px;
 
   height: 100%;
 }
@@ -164,12 +174,12 @@
   align-items: center;
   justify-content: flex-start;
 
-  color: white;
+  color: var(--pure-white);
   text-decoration: none;
 }
 
 #main-navbar .menu-option .selection-underline {
-  background-color: white;
+  background-color: var(--pure-white);
 
   width: 30%;
   transition: width ease 0.3s;
@@ -185,6 +195,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 10px;
 
   height: 100%;
 }
@@ -202,13 +213,13 @@
 #main-navbar .action .notification {
   position: absolute;
   z-index: 11;
-  right: -4px;
+  right: -3px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: #1f6119;
+  background-color: var(--royal-green);
   width: 15px;
   height: 15px;
 
@@ -216,11 +227,16 @@
 }
 
 #main-navbar .action .notification span {
-  color: rgb(205, 202, 50);
+  color: var(--pure-white);
   font-size: 13px;
 }
 
-@media screen and (max-width: 540px) {
+#main-navbar .profile-picture {
+  width: 35px;
+  height: 35px;
+}
+
+@media screen and (max-width: 610px) {
   #burger-menu-icon {
     display: block;
   }

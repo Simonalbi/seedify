@@ -25,13 +25,13 @@
 
 .input-box label {
   width: inherit;
-  color: #b5d73c;
+  color: var(--android-green);
 }
 
 .input-box input {
   width: inherit;
 
-  border: 1px solid #c5c6c9;
+  border: 1px solid var(--lavaneder-gray);
   border-radius: 5px;
 
   padding: 8px 12px;
@@ -45,20 +45,20 @@
 }
 
 .input-box input:focus {
-  outline: #b5d73c solid 2px;
+  outline: var(--android-green) solid 2px;
 }
 
 .dark input:focus {
-  outline: #398300 solid 2px;
+  outline: var(--metallic-green) solid 2px;
 }
 
 .input-box input:invalid {
-  outline: #FF0000 solid 2px;
+  outline: var(--pure-red) solid 2px;
 }
 
 .input-box input[type="submit"]:enabled {
-  border: 0 solid #c5c6c9;
-  background-color: #b5d73c;
+  border: 1px solid var(--android-green);
+  background-color: var(--android-green);
   padding: 8px 12px;
 
   font-weight: 500;
@@ -67,21 +67,22 @@
 }
 
 .dark input[type="submit"]:enabled {
-  background-color: #398300 !important;
-  color: white !important;
+  border: 1px solid var(--metallic-green);
+  background-color: var(--metallic-green) !important;
+  color: var(--pure-white) !important;
 }
 
 .input-box input[type="submit"]:disabled {
-  background-color: #c1c2bf
+  background-color: var(--argent);
 }
 
 .dark label {
-  color: #398300 !important;
+  color: var(--metallic-green) !important;
 }
 
 .input-box .password-toggle-icon {
   position: absolute;
-  transform: translate(-42px, 7px);
+  transform: translate(-42px, 50%);
 
   cursor: pointer;
 
@@ -91,5 +92,5 @@
 }
 
 .input-box:has(input:invalid) .error-text {
-  color: #FF0000;
+  color: var(--pure-red);
 }

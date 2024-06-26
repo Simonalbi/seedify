@@ -97,31 +97,31 @@
                 <p id="details-title" class="large-p rubik-500">Crea una password sicura!</p>
                 <div id="length-constraint" class="detail">
                   <p class="small-p rubik-400">
-                    <span class="material-icons md-18 incomplete-step">close</span>
+                    <span class="material-icons-round md-18 incomplete-step">close</span>
                     Utilizza almeno 8 caratteri
                   </p>
                 </div>
                 <div id="letters-constraint" class="detail">
                   <p class="small-p rubik-400">
-                    <span class="material-icons md-18 incomplete-step">close</span>
+                    <span class="material-icons-round md-18 incomplete-step">close</span>
                     Utilizza lettere maiuscole e minuscole
                   </p>
                 </div>
                 <div id="number-constraint" class="detail">
                   <p class="small-p rubik-400">
-                    <span class="material-icons md-18 incomplete-step">close</span>
+                    <span class="material-icons-round md-18 incomplete-step">close</span>
                     Utilizza almeno un numero
                   </p>
                 </div>
                 <div id="special-characters-constraint" class="detail">
                   <p class="small-p rubik-400">
-                    <span class="material-icons md-18 incomplete-step">close</span>
+                    <span class="material-icons-round md-18 incomplete-step">close</span>
                     Utilizza almeno un carattere speciale tra $, #, &, ., %, !, *, @
                   </p>
                 </div>
                 <div id="match-constraint" class="detail">
                   <p class="small-p rubik-400">
-                    <span class="material-icons md-18 incomplete-step">close</span>
+                    <span class="material-icons-round md-18 incomplete-step">close</span>
                     Le password corrispondono
                   </p>
                 </div>

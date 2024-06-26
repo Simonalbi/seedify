@@ -1,29 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Oleo+Script:wght@400;700&display=swap');
 
-#main-container {
-  width: 100%;
-  background-color: #132a13;
+body {
+  background-color: var(--cultured);
 }
 
-.section-separator {
+#main-container {
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  padding: 90px 50px 50px 50px;
+}
+
+/*.section-separator {
   width: 100%;
   height: 0.5vw;
   background: radial-gradient(circle, rgba(79,119,45,1) 55%, rgba(200,168,4,1) 100%);
-}
+}*/
 
 #welcome-container {
-  width: 100%;
-  height: 35vw;
+  position: relative;
+
+  width: 80%;
+  height: 350px;
+
+  display: flex;
+  align-items: center;
+
   overflow: hidden;
+
+  border-radius: 25px;
 }
 
 #welcome-container img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+
   filter: brightness(70%);
 }
 
-.expandable {
+/*.expandable {
   background-color: #132a13;
   box-shadow: inset 20px 20px 60px #0d1d0d,
   inset -20px -20px 60px #193719;
@@ -76,31 +97,37 @@
 
 .expandable:hover a {
   font-size: 1.5vw;
-}
+}*/
 
-#message-container {
+#welcome-message-container {
   position: absolute;
   z-index: 1;
-  left: 55vw;
-  top: 7vw;
-  width: 40vw;
-  height: 25vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: fit-content;
+}
+
+#slogan-container {;
+  width: 80%;
+  text-align: center;
 }
 
 #slogan {
-  font-family: "Oleo Script", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 4.3vw;
-  color: white;
+  color: var(--pure-white);
+  text-align: center;
 }
 
 #login-container {
-  width: 100%;
-  height: 6vw;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+
+  width: 80%;
+  height: 70px;
 }
 
 .animated-round-button {
@@ -108,49 +135,38 @@
   justify-content: center;
   align-items: flex-start;
 
-  margin-right: 1vw;
-  padding: 0 1vw;
+  margin-right: 3%;
+  padding: 0 20px;
   transition: padding ease 0.3s;
 
-  border-radius: 25pX;
+  border-radius: 25px;
 }
 
 .animated-round-button a {
-  color: white;
-  text-align: center;
-  text-decoration: none;
   display: flex;
   align-items: center;
 
-  font-size: 1.5vw;
-  transition: font-size ease 0.3s;
-  font-family: "Oleo Script", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
+  color: white;
+  text-align: center;
+  text-decoration: none;
 
-.animated-round-button p {
-  font-size: 1.5vw;
   transition: font-size ease 0.3s;
-  font-family: "Oleo Script", system-ui;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .animated-round-button lord-icon {
   position: relative;
-  width: 3vw;
-  height: 3vw;
+  width: 50px;
+  height: 50px;
 
   transition: margin-right ease 0.3s;
 }
 
 .animated-round-button:hover {
-  padding: 0.5vw 1.5vw;
+  padding: 5px 25px;
 }
 
 .animated-round-button:hover a {
-  font-size: 1.8vw;
+  font-size: calc(20px + 0.390625vw);
 }
 
 .animated-round-button:hover lord-icon {

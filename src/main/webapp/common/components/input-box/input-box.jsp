@@ -12,7 +12,7 @@
              <% if (request.getParameter("pattern") != null) { %> pattern="${param.pattern}" <% } %>
       />
       <% if ("password".equals(request.getParameter("type"))) { %>
-        <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons md-18" onClick="togglePassword('${param.id}')">visibility</span>
+        <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons-round md-18" onClick="togglePassword('${param.id}')">visibility</span>
       <% } %>
     </div>
     <div class="input-box-error-container">

@@ -12,17 +12,17 @@
 
 	<div id="main-container">
 		<div id="welcome-container">
-			<div class="expandable">
+			<%--<div class="expandable">
 				<a href="#">
 					Chi siamo?
 					<span class="material-icons md-18">info</span>
 				</a>
-			</div>
-			<div id="message-container">
+			</div>--%>
+			<div id="welcome-message-container">
 				<div id="slogan-container">
-					<p id="slogan">Dove ogni seme è un sogno in attesa di fiorire</p>
+					<h2 id="slogan" class="oleo-400">Dove ogni seme è un sogno in attesa di fiorire</h2>
 				</div>
-				<div id="login-container">
+				<div id="login-container" class="oleo-400">
 					<div id="sign-up-button" class="animated-round-button">
 						<a href="${pageContext.request.contextPath}/registration/registration.jsp">
 							<lord-icon class="round-button" src="https://cdn.lordicon.com/ysonqgnt.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
@@ -38,10 +38,9 @@
 				</div>
 			</div>
 			<!-- https://unsplash.com/it/foto/frutto-rotondo-rosso-su-terreno-marrone-hTKYAYwJoSQ -->
-			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg" alt="">
+			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg">
 		</div>
-		<div class="section-separator"></div>
-		<div id="products-container">
+		<%--<div id="products-container">
 			<div id="products-preview-container">
 				<div class="product-container">
 					<div class="product-thumbnail">
@@ -59,8 +58,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="section-separator"></div>
-		</div>
+		</div>--%>
 	</div>
 	<footer>
 	</footer>

@@ -4,14 +4,18 @@
   --licorice: #0D1D0D;
   --dark-jungle-green: #132A13;
   --phthalo-green: #193719;
+  --black-leather-jacket: #213B1E;
+  --cal-poly-pomona-green :#264726;
   --royal-green: #1F6119;
   --mughal-green: #31572C;
   --sap-green: #4F772D;
+  --japanese-laurel: #3C7135;
   --metallic-green: #398300;
   --moss-green: #90A955;
   --medium-spring-bud: #CDDD92;
   --android-green: #B6D83D;
   --pale-goldenrod: #ECF39E;
+  --pale-spring-bud: #E7F3B8;
 
   --granite-gray: #62646A;
   --argent: #C1C2BF;
@@ -30,4 +34,15 @@
   --old-gold: #CDCA32;
 
   --transparent-black: rgba(0, 0, 0, 0.3);
+
+
+
+
+
+
+
+
+
+
+
 }

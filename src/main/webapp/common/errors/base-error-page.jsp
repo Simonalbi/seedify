@@ -20,7 +20,7 @@
         <p>${param.errorDescription}</p>
       </div>
       <div class="redirect">
-        <span class="material-icons md-18">chevron_right</span>
+        <span class="material-icons-round md-18">chevron_right</span>
         <span class="span-text"><b><a href="${pageContext.request.contextPath}/home/home.jsp">Clicca qui</a> per ritornare alla homepage di Seedify!</b></span>
       </div>
     </div>
