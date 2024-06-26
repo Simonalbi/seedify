@@ -13,7 +13,7 @@
     <script src="${pageContext.request.contextPath}/admin/scripts/script.js" defer></script>
   </head>
   <body>
-    <jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
+    <%@ include file="/common/components/main-navbar/main-navbar.jsp" %>
     <div class="main-page-content">
       <div id="info-container">
         <div class="ui-block" id="welcome-message-container">
@@ -58,6 +58,10 @@
             <option value="users">Utenti</option>
             <option value="orders">Ordini</option>
           </select>
+          <div id="search-container">
+            <input type="text" name="search" id="search-text" placeholder="Cerca...">
+            <span class="material-icons-round md-18">search</span>
+          </div>
         </nav>
         <div id="main-table">
           <div id="table-loading-overlay">

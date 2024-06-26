@@ -110,6 +110,35 @@ body {
   margin-bottom: 2px;
 }
 
+nav {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+}
+
+#table-selector {
+  border-radius: 10%;
+  border-color: var(--android-green);
+  font-size: 17px;
+  user-select: none;
+}
+
+#search-container {
+  user-select: none;
+
+  .material-icons-round {
+    position: absolute;
+    transform: translate(-35px, 2px);
+    cursor: pointer;
+    color: var(--dark-jungle-green);
+  }
+}
+
+#search-text:focus, #table-selector:focus{
+  outline: var(--android-green) solid 1px;
+}
+
 #main-table>#table-loading-overlay {
   visibility: hidden;
 
