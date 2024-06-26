@@ -372,7 +372,7 @@ function buildTable(tableData) {
     tbody.classList.add('rubik-300');
 
     const hr = document.createElement('tr');
-    for (const key in records[0]) {
+    for (const key in tableData.data[0]) {
         const th = document.createElement('th');
         th.textContent = key;
         hr.appendChild(th);
@@ -386,7 +386,7 @@ function buildTable(tableData) {
 
     thead.appendChild(hr);
 
-    for (const record of records) {
+    for (const record of tableData.data) {
         const tr = document.createElement('tr');
         for (const key in record) {
             const td = document.createElement('td');
@@ -441,7 +441,13 @@ function getTableData() {
 
     // TODO Request table data with AJAX and show loading circle during the request
     // Simulate a delay
-    setTimeout(() => {loadingOverlay.style.visibility = 'hidden'}, 1000)
+    setTimeout(() => {loadingOverlay.style.visibility = 'hidden'}, 1000);
+
+    const response = {
+        canEdit: false,
+        canDelete: false,
+        data: []
+    }
 
     const selectedTable = document.getElementById('table-selector').value;
     if (selectedTable === 'employees') {
@@ -455,6 +461,13 @@ function getTableData() {
         response.canDelete = true;
         response.data = PRODUCTS
     }
+
+    updateTable(response)
 }
 
-updateTable(EMPLOYEES);
+const response = {
+    canEdit: false,
+    canDelete: false,
+    data: EMPLOYEES
+}
+updateTable(response);

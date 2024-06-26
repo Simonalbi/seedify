@@ -2,6 +2,10 @@ body {
   background-color: var(--cultured);
 }
 
+.material-icons-round {
+  vertical-align: bottom;
+}
+
 .main-page-content {
   display: flex;
   flex-direction: column;
@@ -69,10 +73,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.material-icons-round{
-  vertical-align: bottom;
 }
 
 .stat {
@@ -155,7 +155,7 @@ nav {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-#main-table>#table-loading-overlay>img {
+#main-table > #table-loading-overlay > img {
   width: 200px;
   height: 200px;
   animation: spin 2.2s linear infinite;
@@ -217,6 +217,17 @@ tr:nth-child(even) {
 
 #main-table thead th:last-child {
   border-right: 0 !important;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  height: 100%;
+
+  color: var(--royal-green);
 }
 
 @media screen and (max-width: 700px) {
