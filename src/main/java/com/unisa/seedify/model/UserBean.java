@@ -39,11 +39,22 @@ public class UserBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("password")
     private String password;
+
+    @SerializedName("foto_profilo")
     private byte[] profilePicture;
+
+    @SerializedName("nome")
     private String name;
+
+    @SerializedName("cognome")
     private String surname;
+
+    @SerializedName("ruolo")
     private Roles role;
 
     public String getEmail() {
