@@ -1,19 +1,38 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class AddressBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("id_indirizzo")
     private int addressId;
+
+    @SerializedName("provincia")
     private String province;
+
+    @SerializedName("citta")
     private String city;
+
+    @SerializedName("cap")
     private String cap;
+
+    @SerializedName("via")
     private String street;
+
+    @SerializedName("nome")
     private String name;
+
+    @SerializedName("cognome")
     private String surname;
+
+    @SerializedName("telefono")
     private String phone;
+
+    @SerializedName("note")
     private String note;
 
     public AddressBean() {
