@@ -1,8 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ page import="com.unisa.seedify.model.UserBean" %>
 <%@ page import="com.unisa.seedify.model.UserDao" %>
 <%@ page import="com.unisa.seedify.model.OrderDao" %>
 <%@ page import="com.unisa.seedify.model.ProductDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- TODO Filter page access -->
 <!-- TODO Navbar style -->

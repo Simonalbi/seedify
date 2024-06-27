@@ -133,7 +133,7 @@ body {
 .animated-round-button {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   margin-right: 3%;
   padding: 0 20px;
@@ -141,16 +141,19 @@ body {
 
   border-radius: 25px;
 }
+.animated-round-button a,
+.animated-round-button span {
+  color: white;
+
+  transition: font-size ease 0.3s;
+}
 
 .animated-round-button a {
   display: flex;
   align-items: center;
 
-  color: white;
   text-align: center;
   text-decoration: none;
-
-  transition: font-size ease 0.3s;
 }
 
 .animated-round-button lord-icon {

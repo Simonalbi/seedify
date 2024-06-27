@@ -1,4 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="com.unisa.seedify.model.UserBean" %>
+
+<%
+	UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+%>
+
 <html lang="en">
 <head>
 	<jsp:include page="/common/general/metadata.jsp"/>
@@ -22,20 +29,20 @@
 				<div id="slogan-container">
 					<h2 id="slogan" class="oleo-400">Dove ogni seme è un sogno in attesa di fiorire</h2>
 				</div>
-				<div id="login-container" class="oleo-400">
-					<div id="sign-up-button" class="animated-round-button">
-						<a href="${pageContext.request.contextPath}/registration/registration.jsp">
-							<lord-icon class="round-button" src="https://cdn.lordicon.com/ysonqgnt.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
-							Registrati
-						</a>
-					</div>
-					<div id="sign-in-button" class="animated-round-button" onclick="showLogin()">
-						<a href="#">
+				<% if (userBean == null) { %>
+					<div id="login-container" class="oleo-400">
+						<div id="sign-up-button" class="animated-round-button">
+							<a href="${pageContext.request.contextPath}/registration/registration.jsp">
+								<lord-icon class="round-button" src="https://cdn.lordicon.com/ysonqgnt.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
+								<span>Registrati</span>
+							</a>
+						</div>
+						<div id="sign-in-button" class="animated-round-button" onclick="showLogin()">
 							<lord-icon class="round-button" src="https://cdn.lordicon.com/lsfszdzd.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
-							Accedi
-						</a>
+							<span>Accedi</span>
+						</div>
 					</div>
-				</div>
+				<% } %>
 			</div>
 			<!-- https://unsplash.com/it/foto/frutto-rotondo-rosso-su-terreno-marrone-hTKYAYwJoSQ -->
 			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg">
