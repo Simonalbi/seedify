@@ -121,11 +121,11 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
         return entityCount;
     }
 
-    public int getEmployeesAmount() {
+    public int getTotalEmployees() {
         return this.getEntityAmount(UserBean.Roles.EMPLOYEE);
     }
 
-    public int getUsersAmount() {
+    public int getTotalClients() {
         return this.getEntityAmount(UserBean.Roles.CLIENT);
     }
 }

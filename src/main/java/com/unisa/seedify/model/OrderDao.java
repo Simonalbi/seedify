@@ -120,7 +120,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
         return orderBean;
     }
 
-    public int getOrdersAmount() {
+    public int getTotalOrders() {
         String query = "SELECT COUNT(*) AS orders_count FROM " + OrderDao.TABLE_NAME;
 
         int ordersAmount = 0;

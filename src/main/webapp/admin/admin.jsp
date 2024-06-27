@@ -43,19 +43,19 @@
           <div id="stats">
             <div class="stat">
               <span class="material-icons-round md-18">badge</span>
-              <span class="rubik-300">Dipendenti: <span class="stat-value rubik-400"><%= userDao.getEmployeesAmount() %></span></span>
+              <span class="rubik-300">Dipendenti: <span class="stat-value rubik-400"><%= userDao.getTotalEmployees() %></span></span>
             </div>
             <div class="stat">
               <span class="material-icons-round md-18">people</span>
-              <span class="rubik-300">Utenti: <span class="stat-value rubik-400"><%= userDao.getUsersAmount() %></span></span>
+              <span class="rubik-300">Utenti: <span class="stat-value rubik-400"><%= userDao.getTotalClients() %></span></span>
             </div>
             <div class="stat">
               <span class="material-icons-round md-18">local_shipping</span>
-              <span class="rubik-300">Ordini: <span class="stat-value rubik-400"><%= orderDao.getOrdersAmount() %></span></span>
+              <span class="rubik-300">Ordini: <span class="stat-value rubik-400"><%= orderDao.getTotalOrders() %></span></span>
             </div>
             <div class="stat">
               <span class="material-icons-round md-18">inventory_2</span>
-              <span class="rubik-300">Prodotti: <span class="stat-value rubik-400"><%= productDao.getProductsAmount() %></span></span>
+              <span class="rubik-300">Prodotti: <span class="stat-value rubik-400"><%= productDao.getTotalProducts() %></span></span>
             </div>
           </div>
         </div>

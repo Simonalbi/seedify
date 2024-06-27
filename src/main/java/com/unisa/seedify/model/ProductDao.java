@@ -110,7 +110,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
         return productBean;
     }
 
-    public int getProductsAmount() {
+    public int getTotalProducts() {
         String query = "SELECT COUNT(*) AS products_count FROM " + ProductDao.TABLE_NAME;
 
         int productsAmount = 0;

@@ -1,20 +1,21 @@
 <%@ page import="com.unisa.seedify.model.UserBean" %>
 
 <%
-	UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+	UserBean mainNavbarUserBean = (UserBean) request.getSession(true).getAttribute("user");
 %>
 
 <div id="sidebar-opacity-layer" onclick="hideSideBar()"></div>
 <aside id="sidebar" class="rubik-300">
 	<div id="sidebar-content">
 		<div id="account-details-container">
-			<% if (userBean != null) { %>
+			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
 					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 				</div>
 				<div id="account-details">
-					<span><%= userBean.getName() %> (<%= userBean.getRole().toString() %>)</span>
-					<span><%= userBean.getEmail()%></span>
+					<span><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
+					<br>
+					<span><%= mainNavbarUserBean.getEmail()%></span>
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
@@ -53,7 +54,7 @@
 	<div id="menu-container">
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/home/home.jsp">
 					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
@@ -87,7 +88,7 @@
 			</div>
 		</div>
 		<div class="action">
-			<% if (userBean != null) { %>
+			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
 					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
 				</div>
