@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,10 @@ import java.util.Objects;
 public class GoodsBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("ordine")
     private OrderBean order;
+
+    @SerializedName("prodotti_ordine")
     private List<GoodsItemBean> goods;
 
     public GoodsBean() {
