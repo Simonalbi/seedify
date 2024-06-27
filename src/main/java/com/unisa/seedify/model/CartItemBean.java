@@ -1,12 +1,17 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class CartItemBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("prodotto")
     private ProductBean product;
+
+    @SerializedName("quantita")
     private int quantity;
 
     public CartItemBean() {
