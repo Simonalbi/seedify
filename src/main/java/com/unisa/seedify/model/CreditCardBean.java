@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
@@ -7,10 +9,19 @@ import java.util.Objects;
 public class CreditCardBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("numero_di_carta")
     private String cardNumber;
+
+    @SerializedName("cvv")
     private String cvv;
+
+    @SerializedName("data_di_scadenza")
     private Date expirationDate;
+
+    @SerializedName("nome")
     private String name;
+
+    @SerializedName("cognome")
     private String surname;
 
     public CreditCardBean() {
