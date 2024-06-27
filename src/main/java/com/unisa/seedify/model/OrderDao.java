@@ -1,6 +1,8 @@
 package com.unisa.seedify.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
     private static final String TABLE_NAME = "ordini";
@@ -90,6 +92,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     orderBean = new OrderBean();
+
                     orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
                     CreditCardBean creditCardBean = new CreditCardBean();
@@ -113,6 +116,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     orderBean.setOrderDate(resultSet.getDate("data_ordine"));
                     orderBean.setDeliveryDate(resultSet.getDate("data_consegna"));
                     orderBean.setTotalPrice(resultSet.getFloat("prezzo_totale"));
+
+                    return orderBean;
                 }
             }
         }
@@ -135,5 +140,48 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
         }
 
         return ordersAmount;
+    }
+
+    public List<OrderBean> getAllOrders() {
+        String query = "SELECT * FROM " + OrderDao.TABLE_NAME;
+
+        List<OrderBean> orders = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                OrderBean orderBean = new OrderBean();
+
+                orderBean.setOrderId(resultSet.getInt("codice_ordine"));
+
+                CreditCardBean creditCardBean = new CreditCardBean();
+                creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
+                creditCardBean.setCvv(resultSet.getString("cvv"));
+                creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
+                creditCardBean.setName(resultSet.getString("nome"));
+                creditCardBean.setSurname(resultSet.getString("cognome"));
+                orderBean.setCreditCard(creditCardBean);
+
+                EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
+                userPrimaryKey.addKey("email", resultSet.getString("email"));
+                UserBean userBean = userDao.doRetrive(userPrimaryKey);
+                orderBean.setUser(userBean);
+
+                EntityPrimaryKey addressPrimaryKey = new EntityPrimaryKey();
+                addressPrimaryKey.addKey("codice_indirizzo", resultSet.getInt("codice_indirizzo"));
+                AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);
+                orderBean.setAddress(addressBean);
+
+                orderBean.setOrderDate(resultSet.getDate("data_ordine"));
+                orderBean.setDeliveryDate(resultSet.getDate("data_consegna"));
+                orderBean.setTotalPrice(resultSet.getFloat("prezzo_totale"));
+
+                orders.add(orderBean);
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return orders;
     }
 }

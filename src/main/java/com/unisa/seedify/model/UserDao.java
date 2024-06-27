@@ -1,6 +1,8 @@
 package com.unisa.seedify.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao extends BaseDao implements GenericDao<UserBean> {
     private static final String TABLE_NAME = "utenti";
@@ -121,11 +123,47 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
         return entityCount;
     }
 
+    private List<UserBean> getAllEntity(UserBean.Roles role) {
+        String query = "SELECT * FROM " + UserDao.TABLE_NAME +
+                       " WHERE ruolo = ?";
+
+        List<UserBean> customers = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, role.toString());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    UserBean userBean = new UserBean();
+                    userBean.setEmail(resultSet.getString("email"));
+                    userBean.setPassword(resultSet.getString("password"));
+                    userBean.setProfilePicture(resultSet.getBytes("foto_profilo"));
+                    userBean.setName(resultSet.getString("nome"));
+                    userBean.setSurname(resultSet.getString("cognome"));
+                    userBean.setRole(UserBean.Roles.fromString(resultSet.getString("ruolo")));
+                    customers.add(userBean);
+                }
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return customers;
+    }
+
     public int getTotalEmployees() {
         return this.getEntityAmount(UserBean.Roles.EMPLOYEE);
     }
 
-    public int getTotalClients() {
-        return this.getEntityAmount(UserBean.Roles.CLIENT);
+    public int getTotalCustomers() {
+        return this.getEntityAmount(UserBean.Roles.CUSTOMER);
+    }
+
+    public List<UserBean> getAllEmployee() {
+        return this.getAllEntity(UserBean.Roles.EMPLOYEE);
+    }
+
+    public List<UserBean> getAllCustomers() {
+        return this.getAllEntity(UserBean.Roles.CUSTOMER);
     }
 }

@@ -47,7 +47,7 @@
             </div>
             <div class="stat">
               <span class="material-icons-round md-18">people</span>
-              <span class="rubik-300">Utenti: <span class="stat-value rubik-400"><%= userDao.getTotalClients() %></span></span>
+              <span class="rubik-300">Utenti: <span class="stat-value rubik-400"><%= userDao.getTotalCustomers() %></span></span>
             </div>
             <div class="stat">
               <span class="material-icons-round md-18">local_shipping</span>
@@ -62,11 +62,14 @@
       </div>
       <div class="ui-block" id="table-container">
         <nav id="main-table-navbar">
+          <%-- TODO Add ordini effettuati all'utente --%>
+          <%-- TODO Concatenare dati indirizzo --%>
+          <%-- TODO Visualizzare l'immagine restituita del prodotto --%>
           <select name="table-selector" id="table-selector" onchange="getTableData()">
-            <option value="employees">Dipendenti</option>
-            <option value="users">Utenti</option>
-            <option value="orders">Ordini</option>
-            <option value="products">Prodotti</option>
+            <option value="get_employees-name,surname,email">Dipendenti</option>
+            <option value="get_customers-name,surname,email">Utenti</option>
+            <option value="get_orders-user.email,orderId,orderDate,deliveryDate,creditCard.cardNumber,address.city,address.province,address.cap,address.street,address.phone">Ordini</option>
+            <option value="get_products-name,price,quantity,season,requiredWater,plantType,description">Prodotti</option>
           </select>
           <div id="search-container">
             <input type="text" name="search" id="search-text" placeholder="Cerca...">

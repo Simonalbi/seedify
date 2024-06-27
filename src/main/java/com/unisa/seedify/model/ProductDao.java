@@ -1,6 +1,8 @@
 package com.unisa.seedify.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
     private static final String TABLE_NAME = "prodotti";
@@ -125,5 +127,34 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
         }
 
         return productsAmount;
+    }
+
+    public List<ProductBean> getAllProducts() {
+        String query = "SELECT * FROM " + ProductDao.TABLE_NAME;
+
+        List<ProductBean> products = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                ProductBean productBean = new ProductBean();
+                productBean.setProductId(resultSet.getInt("codice_prodotto"));
+                productBean.setName(resultSet.getString("nome"));
+                productBean.setImage(resultSet.getBytes("immagine"));
+                productBean.setPrice(resultSet.getFloat("prezzo"));
+                productBean.setQuantity(resultSet.getInt("quantita"));
+                productBean.setSeason(ProductBean.Seasons.fromString(resultSet.getString("stagionalita")));
+                productBean.setRequiredWater(ProductBean.RequiredWater.fromString(resultSet.getString("quantita_acqua")));
+                productBean.setPlantType(resultSet.getString("tipologia_pianta"));
+                productBean.setDescription(resultSet.getString("descrizione"));
+                productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+
+                products.add(productBean);
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return products;
     }
 }

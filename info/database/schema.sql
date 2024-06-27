@@ -158,4 +158,41 @@ VALUES ('s.albino2@studenti.unisa.it',
         'Simone Francesco',
         'Albino',
         'AMMINISTRATORE');
-    
+
+INSERT INTO utenti (email, password, foto_profilo, nome, cognome, ruolo) VALUES
+     ('mario@example.com', 'hashed_password', '...', 'Mario', 'Rossi', 'CLIENTE'),
+
+     ('mario.rossi@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Mario', 'Rossi', 'DIPENDENTE'),
+     ('luigi.bianchi@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Luigi', 'Bianchi', 'DIPENDENTE'),
+     ('giulia.verdi@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Giulia', 'Verdi', 'DIPENDENTE'),
+     ('marco.neri@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Marco', 'Neri', 'DIPENDENTE'),
+     ('sara.gialli@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Sara', 'Gialli', 'DIPENDENTE'),
+     ('alessandro.marroni@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Alessandro', 'Marroni', 'DIPENDENTE'),
+     ('francesca.rossi@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Francesca', 'Rossi', 'DIPENDENTE'),
+     ('giovanni.colombo@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Giovanni', 'Colombo', 'DIPENDENTE'),
+     ('anna.ricci@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Anna', 'Ricci', 'DIPENDENTE'),
+     ('paolo.ferrari@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Paolo', 'Ferrari', 'DIPENDENTE'),
+     ('laura.esposito@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Laura', 'Esposito', 'DIPENDENTE'),
+     ('davide.conti@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Davide', 'Conti', 'DIPENDENTE'),
+     ('martina.costa@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Martina', 'Costa', 'DIPENDENTE'),
+     ('stefano.barbieri@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Stefano', 'Barbieri', 'DIPENDENTE'),
+     ('elisa.moretti@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Elisa', 'Moretti', 'DIPENDENTE'),
+     ('andrea.greco@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Andrea', 'Greco', 'DIPENDENTE'),
+     ('chiara.marini@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Chiara', 'Marini', 'DIPENDENTE'),
+     ('leonardo.romano@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Leonardo', 'Romano', 'DIPENDENTE'),
+     ('roberta.rinaldi@example.com', 'b302755195decc9bc98dcbdfb3126d84ffa431d500b44fa5e850f642ab5d4090', '...', 'Roberta', 'Rinaldi', 'DIPENDENTE');
+
+INSERT INTO indirizzi (provincia, citta, cap, via, nome, cognome, numero_di_telefono, note) VALUES
+    ('MI', 'Milano', '20100', 'Via Roma 1', 'Mario', 'Rossi', '+39 02 1234567', 'Residenza principale');
+
+INSERT INTO carte_di_credito (numero_carta, cvv, scadenza, nome, cognome) VALUES
+    ('1234567890123456', '123', '2025-12-31', 'Mario', 'Rossi');
+
+INSERT INTO prodotti (nome, immagine, prezzo, quantita, stagionalita, quantita_acqua, tipologia_pianta, descrizione, data_aggiunta) VALUES
+    ('Orchidea bianca', '...', 39.99, 10, 'ESTATE', 'NORMALE', 'Orchidea', 'Elegante orchidea bianca, ideale per decorare interni.', CURDATE());
+
+INSERT INTO ordini (codice_indirizzo, email, numero_carta, cvv, scadenza, nome, cognome, data_ordine, prezzo_totale) VALUES
+    (1, 'mario@example.com', '1234567890123456', '123', '2025-12-31', 'Mario', 'Rossi', CURDATE(), 39.99);
+
+INSERT INTO merce (codice_ordine, codice_prodotto, quantita) VALUES
+    (LAST_INSERT_ID(), 1, 1);
