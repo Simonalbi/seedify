@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
@@ -7,12 +9,25 @@ import java.util.Objects;
 public class OrderBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("id_ordine")
     private int orderId;
+
+    @SerializedName("carta_di_credito")
     private CreditCardBean creditCard;
+
+    @SerializedName("utente")
     private UserBean user;
+
+    @SerializedName("indirizzo")
     private AddressBean address;
+
+    @SerializedName("data_ordine")
     private Date orderDate;
+
+    @SerializedName("data_consegna")
     private Date deliveryDate;
+
+    @SerializedName("prezzo_totale")
     private float totalPrice;
 
     public OrderBean() {
