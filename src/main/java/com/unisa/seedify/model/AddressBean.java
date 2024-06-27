@@ -14,7 +14,7 @@ public class AddressBean implements Serializable {
     @SerializedName("provincia")
     private String province;
 
-    @SerializedName("citta")
+    @SerializedName("città")
     private String city;
 
     @SerializedName("cap")

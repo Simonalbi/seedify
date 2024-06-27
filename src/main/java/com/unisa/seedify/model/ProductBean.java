@@ -84,7 +84,7 @@ public class ProductBean implements Serializable {
     @SerializedName("prezzo")
     private float price;
 
-    @SerializedName("quantita")
+    @SerializedName("quantità")
     private int quantity;
 
     @SerializedName("stagione")

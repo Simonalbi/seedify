@@ -1,6 +1,5 @@
 package com.unisa.seedify.control;
 
-import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 import org.apache.tika.Tika;
 
