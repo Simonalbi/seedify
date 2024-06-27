@@ -15,15 +15,16 @@ function buildTable(tableData) {
     tbody.classList.add('rubik-300');
 
     const hr = document.createElement('tr');
-    for (const key in tableData.data[0]) {
-        const th = document.createElement('th');
-        th.textContent = key;
-        hr.appendChild(th);
-    }
-
     if (haveActions) {
         const th = document.createElement('th');
         th.textContent = 'Azioni';
+        hr.appendChild(th);
+    }
+
+    for (let key in tableData.data[0]) {
+        const th = document.createElement('th');
+        key = key.replaceAll("_", " ");
+        th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
         hr.appendChild(th);
     }
 
@@ -31,12 +32,6 @@ function buildTable(tableData) {
 
     for (const record of tableData.data) {
         const tr = document.createElement('tr');
-        for (const key in record) {
-            const td = document.createElement('td');
-            td.textContent = record[key];
-            tr.appendChild(td);
-        }
-
         if (haveActions) {
             const td = document.createElement('td');
             td.classList.add("table-actions")
@@ -56,6 +51,12 @@ function buildTable(tableData) {
             tr.appendChild(td);
         }
 
+        for (const key in record) {
+            const td = document.createElement('td');
+            td.textContent = record[key];
+            tr.appendChild(td);
+        }
+
         tbody.appendChild(tr);
     }
 
@@ -68,13 +69,24 @@ function buildTable(tableData) {
 function updateTable(tableData) {
     const mainTable = document.getElementById('main-table');
 
-    const oldTable = mainTable.querySelector('table');
-    const newTable = buildTable(tableData);
+    let oldTableElement = mainTable.querySelector('table');
+    if (oldTableElement === null) {
+        oldTableElement = mainTable.querySelector('p');
+    }
 
-    if (oldTable) {
-        mainTable.replaceChild(newTable, oldTable);
+    let newTableElement = null;
+    if (tableData['data'].length !== 0) {
+        newTableElement = buildTable(tableData);
     } else {
-        mainTable.appendChild(newTable);
+        newTableElement = document.createElement('p');
+        newTableElement.classList.add('rubik-300', 'no-results-message');
+        newTableElement.textContent = 'Nessun risultato trovato!';
+    }
+
+    if (oldTableElement) {
+        mainTable.replaceChild(newTableElement, oldTableElement);
+    } else {
+        mainTable.appendChild(newTableElement);
     }
 }
 
@@ -84,12 +96,14 @@ function getTableData() {
     const loadingOverlay = document.getElementById('table-loading-overlay');
     loadingOverlay.style.visibility = 'visible';
 
+    // TODO Costruire richiesta ajax in base al motore di ricerca
     // TODO Set timeout slide 43
     const ajaxTableDataRequest = new XMLHttpRequest();
     ajaxTableDataRequest.onreadystatechange = function () {
         if (ajaxTableDataRequest.readyState === 4) {
              if (ajaxTableDataRequest.status === 200) {
-                 updateTable(JSON.parse(ajaxTableDataRequest.responseText));
+                 const tableData = JSON.parse(ajaxTableDataRequest.responseText);
+                 updateTable(tableData);
                  loadingOverlay.style.visibility = 'hidden';
              }
         }
@@ -97,7 +111,6 @@ function getTableData() {
 
     // TODO Capire come recuperare la prima parte dell'url fino a seedify_war compreso
     const url = `${window.location.origin}/seedify_war/admin-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
-    console.log(url);
     ajaxTableDataRequest.open("get", url, true);
     ajaxTableDataRequest.send(null);
 }

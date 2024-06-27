@@ -171,6 +171,15 @@ nav {
   border-radius: 25px;
 }
 
+#main-table .no-results-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
 #main-table table,
 #main-table th,
 #main-table td {
