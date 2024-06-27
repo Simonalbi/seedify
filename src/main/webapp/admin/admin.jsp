@@ -66,9 +66,9 @@
           <%-- TODO Concatenare dati indirizzo --%>
           <%-- TODO Visualizzare l'immagine restituita del prodotto --%>
           <select name="table-selector" id="table-selector" onchange="getTableData()">
-            <option value="get_employees-name,surname,email">Dipendenti</option>
-            <option value="get_customers-name,surname,email">Utenti</option>
-            <option value="get_orders-user.email,orderId,orderDate,deliveryDate,creditCard.cardNumber,address.city,address.province,address.cap,address.street,address.phone">Ordini</option>
+            <option value="get_employees-nome,cognome,email">Dipendenti</option>
+            <option value="get_customers-nome,cognome,email">Utenti</option>
+            <option value="get_orders-utente.email,id_ordine,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.citta,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
             <option value="get_products-name,price,quantity,season,requiredWater,plantType,description">Prodotti</option>
           </select>
           <div id="search-container">
