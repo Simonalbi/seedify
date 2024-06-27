@@ -13,7 +13,7 @@ import java.io.*;
 
 @WebServlet(name = "resourcesServlet", value = "/resources-servlet")
 public class ResourcesServlet extends HttpServlet {
-    private byte[] getUserProfilePicture(HttpServletRequest request, HttpServletResponse response) {
+    private byte[] getSessionUserProfilePicture(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("user");
 
@@ -30,7 +30,7 @@ public class ResourcesServlet extends HttpServlet {
         byte[] resource = null;
         switch (resourceType) {
             case "profile_picture": {
-                resource = this.getUserProfilePicture(request, response);
+                resource = this.getSessionUserProfilePicture(request, response);
                 break;
             }
         }

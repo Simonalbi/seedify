@@ -53,6 +53,8 @@
 
   padding: 5px;
 
+  font-size: 12px;
+  text-wrap: nowrap;
   text-overflow: ellipsis;
   color: var(--granite-gray);
 }
@@ -206,7 +208,8 @@
   display: flex;
 }
 
-#main-navbar #actions-container lord-icon {
+#main-navbar #actions-container lord-icon,
+#main-navbar #actions-container .profile-picture {
   width: 35px;
   height: 35px;
 }

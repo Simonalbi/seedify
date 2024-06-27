@@ -25,4 +25,5 @@ img {
 
 .ui-block {
   border: 1px solid var(--gainsboro);
+  padding: 10px;
 }

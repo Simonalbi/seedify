@@ -1,6 +1,4 @@
 function showSideBar() {
-    console.log("show sidebar");
-
     const sidebar = document.getElementById("sidebar");
     const sidebarContent = document.getElementById("sidebar-content");
     const opacityLayer = document.getElementById("sidebar-opacity-layer");
@@ -11,8 +9,6 @@ function showSideBar() {
 }
 
 function hideSideBar() {
-    console.log("hide sidebar");
-
     const sidebar = document.getElementById("sidebar");
     const sidebarContent = document.getElementById("sidebar-content");
     const opacityLayer = document.getElementById("sidebar-opacity-layer");
