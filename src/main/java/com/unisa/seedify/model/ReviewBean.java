@@ -1,5 +1,7 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
@@ -7,10 +9,19 @@ import java.util.Objects;
 public class ReviewBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("utente")
     private UserBean user;
+
+    @SerializedName("prodotto")
     private ProductBean product;
+
+    @SerializedName("commento")
     private String comment;
+
+    @SerializedName("voto_stelle")
     private int starRating;
+
+    @SerializedName("data_aggiunta")
     private Date addedDate;
 
     public ReviewBean() {
