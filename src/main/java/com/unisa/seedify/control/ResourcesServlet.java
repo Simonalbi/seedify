@@ -2,6 +2,7 @@ package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
+import org.apache.tika.Tika;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +18,14 @@ public class ResourcesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("user");
 
-        // TODO Auto identify file type
+        byte[] profilePicture = userBean.getProfilePicture();
         response.setContentType("image/png");
 
-        return userBean.getProfilePicture();
+        Tika tika = new Tika();
+        String mimeType = tika.detect(profilePicture);
+        response.setContentType(mimeType);
+
+        return profilePicture;
     }
 
     @Override
