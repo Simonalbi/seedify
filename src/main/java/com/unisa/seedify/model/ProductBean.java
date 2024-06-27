@@ -72,15 +72,34 @@ public class ProductBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("id_prodotto")
     private int productId;
+
+    @SerializedName("nome")
     private String name;
+
+    @SerializedName("immagine")
     private byte[] image;
+
+    @SerializedName("prezzo")
     private float price;
+
+    @SerializedName("quantita")
     private int quantity;
+
+    @SerializedName("stagione")
     private Seasons season;
+
+    @SerializedName("acqua_richiesta")
     private RequiredWater requiredWater;
+
+    @SerializedName("tipologia")
     private String plantType;
+
+    @SerializedName("descrizione")
     private String description;
+
+    @SerializedName("data_aggiunta")
     private Date addedDate;
 
     public ProductBean() {
