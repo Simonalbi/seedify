@@ -1,14 +1,23 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 public class ProductBean implements Serializable {
     public enum Seasons {
+        @SerializedName("INVERNO")
         WINTER("INVERNO"),
+
+        @SerializedName("PRIMAVERA")
         SPRING("PRIMAVERA"),
+
+        @SerializedName("ESTATE")
         SUMMER("ESTATE"),
+
+        @SerializedName("AUTUNNO")
         AUTUMN("AUTUNNO");
 
         private final String translation;
@@ -20,11 +29,25 @@ public class ProductBean implements Serializable {
         public String toString() {
             return this.translation;
         }
+
+        public static Seasons fromString(String translation) {
+            for (Seasons season : Seasons.values()) {
+                if (season.translation.equals(translation)) {
+                    return season;
+                }
+            }
+            return null;
+        }
     }
 
     public enum RequiredWater {
+        @SerializedName("POCA")
         LITTLE("POCA"),
+
+        @SerializedName("NORMALE")
         NORMAL("NORMALE"),
+
+        @SerializedName("MOLTA")
         A_LOT("MOLTA");
 
         private final String translation;
@@ -36,12 +59,20 @@ public class ProductBean implements Serializable {
         public String toString() {
             return this.translation;
         }
+
+        public static RequiredWater fromString(String translation) {
+            for (RequiredWater requiredWater : RequiredWater.values()) {
+                if (requiredWater.translation.equals(translation)) {
+                    return requiredWater;
+                }
+            }
+            return null;
+        }
     }
 
     private static final long serialVersionUID = 1L;
 
     private int productId;
-    private int productName;
     private String name;
     private byte[] image;
     private float price;
@@ -61,14 +92,6 @@ public class ProductBean implements Serializable {
 
     public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    public int getProductName() {
-        return productName;
-    }
-
-    public void setProductName(int productName) {
-        this.productName = productName;
     }
 
     public String getName() {

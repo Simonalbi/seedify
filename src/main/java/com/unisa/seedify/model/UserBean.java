@@ -1,13 +1,20 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class UserBean implements Serializable {
     public enum Roles {
+        @SerializedName("AMMINISTRATORE")
         ADMIN("AMMINISTRATORE"),
+
+        @SerializedName("DIPENDENTE")
         EMPLOYEE("DIPENDENTE"),
-        CLIENT("CLIENTE");
+
+        @SerializedName("CLIENTE")
+        CUSTOMER("CLIENTE");
 
         private final String translation;
 

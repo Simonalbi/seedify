@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             case EMPLOYEE:
                 // TODO Redirect to employee page
                 break;
-            case CLIENT:
+            case CUSTOMER:
                 // TODO Redirect to client page
                 break;
             default:

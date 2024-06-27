@@ -48,7 +48,7 @@ public class RegistrationServlet extends HttpServlet {
         user.setPassword(InputValidation.sha256(password));
         user.setName(name);
         user.setSurname(surname);
-        user.setRole(UserBean.Roles.CLIENT);
+        user.setRole(UserBean.Roles.CUSTOMER);
 
         String imagePath = getServletContext().getRealPath("/common/assets/img/profile/default.png");
         BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
