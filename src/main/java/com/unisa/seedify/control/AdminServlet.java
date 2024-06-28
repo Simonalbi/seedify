@@ -18,12 +18,16 @@ import java.util.*;
 public class AdminServlet extends HttpServlet {
     private static class TableDataResponse {
         private final boolean canEdit;
+        private final String editCall;
         private final boolean canDelete;
+        private final String deleteCall;
         private final List<Object> data;
 
-        public TableDataResponse(boolean canEdit, boolean canDelete, List<Object> data) {
+        public TableDataResponse(boolean canEdit, String editCall, boolean canDelete, String deleteCall, List<Object> data) {
             this.canEdit = canEdit;
+            this.editCall = editCall;
             this.canDelete = canDelete;
+            this.deleteCall = deleteCall;
             this.data = data;
         }
     }
@@ -79,9 +83,12 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         ArrayList<String> fields = new ArrayList<>(Arrays.asList(request.getParameter("fields").split(",")));
+        fields.add("entity_primary_key");
 
         boolean canEdit = false;
+        String editCall = null;
         boolean canDelete = false;
+        String deleteCall = null;
 
         ArrayList<Object> data = null;
         switch (action) {
@@ -99,8 +106,10 @@ public class AdminServlet extends HttpServlet {
             }
             case "get_products": {
                 canEdit = true;
+                editCall = "";
                 canDelete = true;
-                data = new ArrayList<>(productDao.getAllProducts());
+                deleteCall = "delete_product";
+                data = new ArrayList<>(productDao.getAllActiveProducts());
                 break;
             }
             default: {
@@ -108,7 +117,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
 
-        TableDataResponse tableDataResponse = new TableDataResponse(canEdit, canDelete, data);
+        TableDataResponse tableDataResponse = new TableDataResponse(canEdit, editCall, canDelete, deleteCall, data);
         JsonObject jsonResponseObject = this.gson.toJsonTree(tableDataResponse).getAsJsonObject();
 
         JsonArray rawData = jsonResponseObject.get("data").getAsJsonArray();
