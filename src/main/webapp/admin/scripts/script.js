@@ -1,6 +1,3 @@
-// TODO Inserire solo alcune colonne
-// TODO In caso di 0 risultati far uscire un messaggio
-
 function buildTable(tableData) {
     const canEdit = tableData['canEdit'];
     const canDelete = tableData['canDelete'];
@@ -56,7 +53,6 @@ function buildTable(tableData) {
             td.textContent = record[key];
             tr.appendChild(td);
         }
-
         tbody.appendChild(tr);
     }
 

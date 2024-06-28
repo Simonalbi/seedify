@@ -1,8 +1,10 @@
 package com.unisa.seedify.model;
 
+import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.sql.Date;
 import java.util.Objects;
 
