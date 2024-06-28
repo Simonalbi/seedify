@@ -71,6 +71,7 @@
             <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
             <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
           </select>
+            <%-- TODO Inserire ajax per la ricerca --%>
           <div id="search-container">
             <input type="text" name="search" id="search-text" placeholder="Cerca...">
             <span class="material-icons-round md-18">search</span>
@@ -78,7 +79,7 @@
         </nav>
         <div id="main-table">
           <div id="table-loading-overlay">
-            <img src="${pageContext.request.contextPath}/common/assets/img/loader.svg">
+            <img src="${pageContext.request.contextPath}/common/assets/img/loader.svg" alt="Caricamento...">
           </div>
         </div>
       </div>

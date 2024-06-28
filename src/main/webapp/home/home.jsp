@@ -19,12 +19,6 @@
 
 	<div id="main-container">
 		<div id="welcome-container">
-			<%--<div class="expandable">
-				<a href="#">
-					Chi siamo?
-					<span class="material-icons md-18">info</span>
-				</a>
-			</div>--%>
 			<div id="welcome-message-container">
 				<div id="slogan-container">
 					<h2 id="slogan" class="oleo-400">Dove ogni seme è un sogno in attesa di fiorire</h2>

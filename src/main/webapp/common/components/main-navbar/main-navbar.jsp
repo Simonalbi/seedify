@@ -19,6 +19,9 @@
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
+				<div id="account-details">
+					<span>Guest</span>
+				</div>
 			<% } %>
 		</div>
 		<div class="sidebar-separator"></div>
@@ -39,10 +42,31 @@
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
 				<a href="#">
-					<span class="material-icons-round md-18">groups</span>
-					<span class="option-label">Community</span>
+					<span class="material-icons-round md-18">info_outline</span>
+					<span class="option-label">Chi Siamo</span>
 				</a>
 			</div>
+			<div class="sidebar-separator"></div>
+			<% if (mainNavbarUserBean != null) {
+                if (mainNavbarUserBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
+					<div class="sidebar-option">
+						<a href="${pageContext.request.contextPath}/admin/admin.jsp">
+							<span class="material-icons-round md-18">display_settings</span>
+							<span class="option-label">Gestione</span>
+						</a>
+					</div>
+					<div class="sidebar-separator"></div>	
+			<% 	}
+			} %>
+			<% if (mainNavbarUserBean != null) { %>
+				<div class="sidebar-option">
+					<a href="#">
+						<span class="material-icons-round md-18">logout</span>
+						<span class="option-label">Esci</span>
+					</a>
+				</div>
+				<div class="sidebar-separator"></div>
+			<% } %>
 		</div>
 	</div>
 </aside>
@@ -73,8 +97,8 @@
 		<div class="menu-option">
 			<div class="menu-option-content-container">
 				<a href="#">
-					<span class="material-icons-round md-18">groups</span>
-					<span class="option-label">Community</span>
+					<span class="material-icons-round md-18">info_outline</span>
+					<span class="option-label">Chi Siamo</span>
 				</a>
 				<div class="selection-underline"></div>
 			</div>
@@ -90,7 +114,7 @@
 		<div class="action">
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
-					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture" alt="Foto">
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
