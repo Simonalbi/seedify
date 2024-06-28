@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Round">
 
 <!-- GENERAL SCRIPTS -->
-<script src="${pageContext.request.contextPath}/common/general/scripts/script.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/common/general/scripts/script.js"></script>
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 <!-- COMPONENTS -->
