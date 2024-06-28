@@ -1,5 +1,6 @@
 package com.unisa.seedify.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EntityPrimaryKey {
@@ -29,6 +30,10 @@ public class EntityPrimaryKey {
 
     @Override
     public String toString() {
-        return keys.toString();
+        ArrayList<String> keysValuesPairs = new ArrayList<>();
+        for (String key : this.keys.keySet()) {
+            keysValuesPairs.add(key + "=" + keys.get(key));
+        }
+        return String.join(",", keysValuesPairs);
     }
 }

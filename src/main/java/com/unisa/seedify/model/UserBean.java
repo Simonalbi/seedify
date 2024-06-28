@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class UserBean implements Serializable {
+public class UserBean extends BaseBean implements Serializable {
     public enum Roles {
         @SerializedName("AMMINISTRATORE")
         ADMIN("AMMINISTRATORE"),

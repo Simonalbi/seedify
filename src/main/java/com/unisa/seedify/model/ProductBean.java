@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 import java.sql.Date;
 import java.util.Objects;
 
-public class ProductBean implements Serializable {
+public class ProductBean extends BaseBean implements Serializable {
     public enum Seasons {
         @SerializedName("INVERNO")
         WINTER("INVERNO"),
@@ -198,6 +198,13 @@ public class ProductBean implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(productId);
+    }
+
+    @Override
+    public EntityPrimaryKey getPrimaryKey() {
+        EntityPrimaryKey primaryKey = new EntityPrimaryKey();
+        primaryKey.addKey("codice_prodotto", this.productId);
+        return primaryKey;
     }
 }
 
