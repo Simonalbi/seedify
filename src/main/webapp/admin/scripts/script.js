@@ -62,7 +62,7 @@ function buildTable(tableData) {
     }
 
     for (let key in tableData.data[0]) {
-        if (!(key in blackList)) {
+        if (!blackList.includes(key)) {
             const th = document.createElement('th');
             key = key.replaceAll("_", " ");
             th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
@@ -123,7 +123,7 @@ function buildTable(tableData) {
         }
 
         for (const key in record) {
-            if ((key in blackList)) {
+            if (blackList.includes(key)) {
                 continue;
             }
 
