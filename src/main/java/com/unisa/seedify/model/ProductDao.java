@@ -101,8 +101,8 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     productBean.setImage(resultSet.getBytes("immagine"));
                     productBean.setPrice(resultSet.getFloat("prezzo"));
                     productBean.setQuantity(resultSet.getInt("quantita"));
-                    productBean.setSeason(ProductBean.Seasons.valueOf(resultSet.getString("stagionalita")));
-                    productBean.setRequiredWater(ProductBean.RequiredWater.valueOf(resultSet.getString("quantita_acqua")));
+                    productBean.setSeason(ProductBean.Seasons.fromString(resultSet.getString("stagionalita")));
+                    productBean.setRequiredWater(ProductBean.RequiredWater.fromString(resultSet.getString("quantita_acqua")));
                     productBean.setPlantType(resultSet.getString("tipologia_pianta"));
                     productBean.setDescription(resultSet.getString("descrizione"));
                     productBean.setAddedDate(resultSet.getDate("data_aggiunta"));

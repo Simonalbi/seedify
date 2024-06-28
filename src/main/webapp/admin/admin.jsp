@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/styles/style.css">
 
-    <script src="${pageContext.request.contextPath}/admin/scripts/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/admin/scripts/script.js" defer></script>
   </head>
   <body>
     <%@ include file="/common/components/main-navbar/main-navbar.jsp" %>
@@ -65,12 +65,11 @@
         <nav id="main-table-navbar">
           <%-- TODO Add ordini effettuati all'utente --%>
           <%-- TODO Concatenare dati indirizzo --%>
-          <%-- TODO Visualizzare l'immagine restituita del prodotto --%>
           <select name="table-selector" id="table-selector" onchange="getTableData()">
             <option value="get_employees-nome,cognome,email">Dipendenti</option>
             <option value="get_customers-nome,cognome,email">Utenti</option>
-            <option value="get_orders-id_ordine,utente.email,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
-            <option value="get_products-nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
+            <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
+            <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
           </select>
             <%-- TODO Inserire ajax per la ricerca --%>
           <div id="search-container">

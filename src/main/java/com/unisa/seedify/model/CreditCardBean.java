@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class CreditCardBean implements Serializable {
+public class CreditCardBean extends BaseBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @SerializedName("numero_di_carta")

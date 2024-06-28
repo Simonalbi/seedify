@@ -1,3 +1,7 @@
+import { getAjaxRequestObject } from '../../common/general/scripts/script.js';
+
+window.getTableData = getTableData;
+
 function buildTable(tableData) {
     const canEdit = tableData['canEdit'];
     const canDelete = tableData['canDelete'];
@@ -50,7 +54,15 @@ function buildTable(tableData) {
 
         for (const key in record) {
             const td = document.createElement('td');
-            td.textContent = record[key];
+            if (record[key].startsWith("image/")) {
+                const resourceParams = record[key].replace("image/", "");
+                const img = document.createElement('img');
+                img.classList.add('table-image');
+                img.src = `${window.location.origin}/seedify_war/resources-servlet?${resourceParams}`
+                td.appendChild(img);
+            } else {
+                td.textContent = record[key];
+            }
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
@@ -92,13 +104,13 @@ function getTableData() {
     const loadingOverlay = document.getElementById('table-loading-overlay');
     loadingOverlay.style.visibility = 'visible';
 
-    // TODO Costruire richiesta ajax in base al motore di ricerca
     // TODO Set timeout slide 43
-    const ajaxTableDataRequest = new XMLHttpRequest();
+    const ajaxTableDataRequest = getAjaxRequestObject();
     ajaxTableDataRequest.onreadystatechange = function () {
         if (ajaxTableDataRequest.readyState === 4) {
              if (ajaxTableDataRequest.status === 200) {
                  const tableData = JSON.parse(ajaxTableDataRequest.responseText);
+                 console.log(tableData);
                  updateTable(tableData);
                  loadingOverlay.style.visibility = 'hidden';
              }

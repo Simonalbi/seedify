@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class OrderBean implements Serializable {
+public class OrderBean extends BaseBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @SerializedName("id_ordine")
