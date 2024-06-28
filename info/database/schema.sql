@@ -13,6 +13,7 @@ CREATE TABLE prodotti (
     tipologia_pianta VARCHAR(50) NOT NULL,
     descrizione TINYTEXT NOT NULL,
     data_aggiunta DATE NOT NULL,
+    stato ENUM("ATTIVO", "ELIMINATO") NOT NULL DEFAULT "ATTIVO",
 
     PRIMARY KEY(codice_prodotto)
 );
@@ -68,7 +69,7 @@ CREATE TABLE ordini (
     PRIMARY KEY(codice_ordine),
 
     FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo),
-    FOREIGN KEY(email) REFERENCES utenti(email),
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
     FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome)
 );
 
@@ -129,7 +130,7 @@ CREATE TABLE carrelli (
 
     PRIMARY KEY(email, codice_prodotto),
 
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
     FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -139,6 +140,6 @@ CREATE TABLE preferiti (
 
     PRIMARY KEY(email, codice_prodotto),
 
-    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
     FOREIGN KEY(codice_prodotto) REFERENCES prodotti(codice_prodotto) ON UPDATE CASCADE ON DELETE CASCADE
 );
