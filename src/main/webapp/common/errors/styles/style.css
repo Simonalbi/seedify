@@ -1,11 +1,13 @@
 .page {
-  background: linear-gradient(122deg, rgba(19,42,19,1) 26%, rgba(79,119,45,1) 68%, rgba(200,168,4,1) 100%);
   width: 100%;
   height: 100%;
-
   display: flex;
+
   flex-direction: column;
   align-items: center;
+
+  background: var(--cal-poly-pomona-green);
+  background: linear-gradient(122deg, var(--dark-jungle-green) 26%, var(--royal-green) 55%, var(--android-green) 100%);
 }
 
 .error-container {
@@ -16,7 +18,7 @@
   flex-direction: column;
   align-items: center;
 
-  color: cornsilk;
+  color: var(--pure-white);
 }
 
 #logo-container {
@@ -44,17 +46,18 @@
 }
 
 .question {
-  color: rgb(233, 213, 33);
+  color: var(--chinise-gold);
 }
 
 .message {
   padding: 10px;
 }
 
-.redirect .material-icons {
+.redirect-message .material-icons-round {
   vertical-align: middle;
 }
 
 a {
-  color: rgba(200,168,4,1);
+  color: var(--chinise-gold);
+  text-decoration: none;
 }
