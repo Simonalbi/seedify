@@ -72,6 +72,34 @@ public class ProductBean extends BaseBean implements Serializable {
         }
     }
 
+    public enum States {
+        @SerializedName("ATTIVO")
+        ACTIVE("ATTIVO"),
+
+        @SerializedName("ELIMINATO")
+        DELETED("ELIMINATO");
+
+
+        private final String translation;
+        States(String translation) {
+            this.translation = translation;
+        }
+
+        @Override
+        public String toString() {
+            return this.translation;
+        }
+
+        public static States fromString(String translation) {
+            for (States state : States.values()) {
+                if (state.translation.equals(translation)) {
+                    return state;
+                }
+            }
+            return null;
+        }
+    }
+
     private static final long serialVersionUID = 1L;
 
     @SerializedName("id_prodotto")
@@ -103,6 +131,9 @@ public class ProductBean extends BaseBean implements Serializable {
 
     @SerializedName("data_aggiunta")
     private Date addedDate;
+
+    @SerializedName("stato")
+    private States state;
 
     public ProductBean() {
     }
@@ -185,6 +216,14 @@ public class ProductBean extends BaseBean implements Serializable {
 
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public States getState() {
+        return state;
+    }
+
+    public void setState(States state) {
+        this.state = state;
     }
 
     @Override

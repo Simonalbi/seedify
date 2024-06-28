@@ -44,8 +44,9 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
     @Override
     public void doDelete(ProductBean productBean) throws SQLException {
-            String query = "DELETE FROM " + ProductDao.TABLE_NAME +
-                           " WHERE codice_prodotto = ?";
+        String query = "UPDATE " + ProductDao.TABLE_NAME +
+                     " SET stato = 'ELIMINATO'" +
+                     " WHERE codice_prodotto = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -129,8 +130,9 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
         return productsAmount;
     }
 
-    public List<ProductBean> getAllProducts() {
-        String query = "SELECT * FROM " + ProductDao.TABLE_NAME;
+    public List<ProductBean> getAllActiveProducts() {
+        String query = "SELECT * FROM " + ProductDao.TABLE_NAME +
+                       "  WHERE stato = 'ATTIVO'";
 
         List<ProductBean> products = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
