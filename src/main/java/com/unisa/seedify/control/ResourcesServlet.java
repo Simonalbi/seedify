@@ -1,9 +1,6 @@
 package com.unisa.seedify.control;
 
-import com.unisa.seedify.model.EntityPrimaryKey;
-import com.unisa.seedify.model.ProductBean;
-import com.unisa.seedify.model.ProductDao;
-import com.unisa.seedify.model.UserBean;
+import com.unisa.seedify.model.*;
 import org.apache.tika.Tika;
 
 import javax.servlet.annotation.WebServlet;
@@ -34,26 +31,8 @@ public class ResourcesServlet extends HttpServlet {
             return null;
         }
 
-        EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
-        ArrayList<String> productPrimaryKeyValues = new ArrayList<>(Arrays.asList(rawProductPrimaryKey.split(",")));
-        for (String value : productPrimaryKeyValues) {
-            String[] keyValue = value.split("=");
-
-            Object effectiveValue;
-            try {
-                effectiveValue = Integer.parseInt(keyValue[1]);
-            } catch (NumberFormatException ignored) {
-                try {
-                    effectiveValue = Float.parseFloat(keyValue[1]);
-                } catch (NumberFormatException ignored2) {
-                    effectiveValue = keyValue[1];
-                }
-            }
-
-            productPrimaryKey.addKey(keyValue[0], effectiveValue);
-        }
-
         try {
+            EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
             ProductBean productBean = productDao.doRetrive(productPrimaryKey);
             return productBean.getImage();
         } catch (SQLException ignored) {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.*;
 
 @WebServlet(name="adminServlet", value="/admin-servlet")
@@ -58,6 +59,20 @@ public class AdminServlet extends HttpServlet {
         }
 
         return filteredData;
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
+        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
+        if (rawProductPrimaryKey == null) {
+            return;
+        }
+
+        try {
+            EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
+            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+            productDao.doDelete(productBean);
+        } catch (SQLException ignored) {
+        }
     }
 
     @Override
@@ -111,6 +126,16 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doDelete(request, response);
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "delete_product": {
+                deleteProduct(request, response);
+                break;
+            }
+            default: {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+            }
+        }
     }
 }
