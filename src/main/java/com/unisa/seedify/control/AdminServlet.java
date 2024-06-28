@@ -2,6 +2,7 @@ package com.unisa.seedify.control;
 
 import com.google.gson.*;
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.model.serializers.ProductBeanSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import java.util.*;
 
 @WebServlet(name="adminServlet", value="/admin-servlet")
 public class AdminServlet extends HttpServlet {
-    private class TableDataResponse {
+    private static class TableDataResponse {
         private final boolean canEdit;
         private final boolean canDelete;
         private final List<Object> data;
@@ -30,7 +31,9 @@ public class AdminServlet extends HttpServlet {
     private static final OrderDao orderDao = OrderDao.getInstance();
     private static final ProductDao productDao = ProductDao.getInstance();
 
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(ProductBean.class, new ProductBeanSerializer())
+            .create();
 
     private JsonArray filterJsonArray(JsonArray jsonArray, List<String> fields) {
         JsonArray filteredData = new JsonArray();
@@ -64,6 +67,7 @@ public class AdminServlet extends HttpServlet {
 
         boolean canEdit = false;
         boolean canDelete = false;
+
         ArrayList<Object> data = null;
         switch (action) {
             case "get_employees": {
@@ -103,5 +107,10 @@ public class AdminServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print(jsonResponseObject);
         out.flush();
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        super.doDelete(request, response);
     }
 }
