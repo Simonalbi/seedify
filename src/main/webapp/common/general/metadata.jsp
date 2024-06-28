@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/fonts.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/colors.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/general/styles/buttons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Round">
