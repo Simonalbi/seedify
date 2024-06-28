@@ -235,8 +235,6 @@ tr:nth-child(even) {
   gap: 30px;
 
   height: 100%;
-
-  color: var(--royal-green);
 }
 
 .table-image {
