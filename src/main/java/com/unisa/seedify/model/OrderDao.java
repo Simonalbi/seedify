@@ -184,4 +184,25 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
         return orders;
     }
+
+    public int getTotalOrdersByUser(String email) {
+        String query = "SELECT COUNT(*) AS orders_count FROM " + OrderDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        int ordersAmount = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    ordersAmount = resultSet.getInt("orders_count");
+                }
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return ordersAmount;
+    }
 }
