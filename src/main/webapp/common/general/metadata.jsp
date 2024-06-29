@@ -33,3 +33,7 @@
 <!-- login -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/login/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/login/scripts/script.js" defer></script>
+
+<!-- scrollable-container -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/scrollable-container/styles/style.css">
+<script type="module" src="${pageContext.request.contextPath}/common/components/scrollable-container/scripts/script.js" defer></script>

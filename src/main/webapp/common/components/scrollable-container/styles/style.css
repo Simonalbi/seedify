@@ -1,0 +1,43 @@
+.scrollable-container {
+  position: relative;
+
+  width: 100%;
+  height: fit-content;
+}
+
+.scrollable-command-button {
+  position: absolute;
+  z-index: 1;
+
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.previous-button {
+  left: -10px;
+}
+
+.next-button {
+  right: -10px;
+}
+
+.scrollable-container .material-button:hover {
+  color: var(--metallic-green);
+}
+
+.scrollable-elements-container {
+  position: relative;
+  z-index: 0;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  padding: 0 30px;
+
+  overflow-x: scroll;
+}
+
+.scrollable-elements-container::-webkit-scrollbar {
+  display: none;
+}

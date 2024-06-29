@@ -11,6 +11,8 @@
 	<jsp:include page="/common/general/metadata.jsp"/>
 
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/home/styles/style.css">
+
+	<script type="module" src="${pageContext.request.contextPath}/home/scripts/script.js" defer></script>
 </head>
 <body>
 	<jsp:include page="/common/components/login/login.jsp"/>
@@ -41,25 +43,10 @@
 			<!-- https://unsplash.com/it/foto/frutto-rotondo-rosso-su-terreno-marrone-hTKYAYwJoSQ -->
 			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg">
 		</div>
-		<%--<div id="products-container">
-			<div id="products-preview-container">
-				<div class="product-container">
-					<div class="product-thumbnail">
-						<img src="https://blog.dutch-bulbs.com/wp-content/uploads/2023/04/Peony-2.jpg" alt="">
-					</div>
-					<div class="product-title">
-						<p>Fiorellino rosa rubato, ce ne saranno altri</p>
-					</div>
-					<div class="product-price">
-						<p>19.99$</p>
-					</div>
-					<div class="product-actions">
-						<span class="material-icons md-18">add_shopping_cart</span>
-						<span class="material-icons md-18">favorite</span>
-					</div>
-				</div>
-			</div>
-		</div>--%>
+		<jsp:include page="/common/components/scrollable-container/scrollable-container.jsp">
+			<jsp:param name="id" value="latest-products-scrollable-container" />
+			<jsp:param name="loading-text" value="Caricamento prodotti..." />
+		</jsp:include>
 	</div>
 	<footer>
 	</footer>
