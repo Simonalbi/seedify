@@ -3,6 +3,8 @@
 
   width: 100%;
   height: fit-content;
+
+  padding: 0 5px;
 }
 
 .scrollable-command-button {

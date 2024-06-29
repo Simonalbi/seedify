@@ -9,7 +9,11 @@ const SCROLL_AMOUNT = 400;
  */
 function addToScrollableContainer(id, element) {
     const container = document.getElementById(id);
-    container.getElementsByTagName("h6")[0].style.visibility = "hidden";
+
+    try {
+        container.getElementsByTagName("h6")[0].remove();
+        container.style.justifyContent = "flex-start";
+    } catch (ignored) {}
     container.appendChild(element);
 }
 
