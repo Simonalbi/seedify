@@ -1,21 +1,5 @@
 import {getAjaxRequestObject, getBaseOriginName, resolveResource, getProductCard } from '../../common/general/scripts/script.js';
-
-const SCROLL_AMOUNT = 400;
-function scrollLeft() {
-    const latestProducts = document.getElementById('latest-products');
-    latestProducts.scrollBy({
-        left: -SCROLL_AMOUNT,
-        behavior: 'smooth'
-    });
-}
-
-function scrollRight() {
-    const latestProducts = document.getElementById('latest-products');
-    latestProducts.scrollBy({
-        left: SCROLL_AMOUNT,
-        behavior: 'smooth'
-    });
-}
+import { addToScrollableContainer } from '../../common/components/scrollable-container/scripts/script.js';
 
 function getCategory(title, products) {
     const productsCategoryContainer = document.createElement("div");
@@ -50,19 +34,16 @@ function getCategory(title, products) {
 }
 
 function renderLatestProducts(products) {
-    const allProductsContainer = document.getElementById("latest-products");
-
     products.forEach(function (product) {
-        allProductsContainer.appendChild(
+        addToScrollableContainer(
+            "latest-products-scrollable-container",
             getProductCard (
                 product['nome'],
                 product['prezzo'],
                 resolveResource(product['immagine']).image
             )
-        );
+        )
     })
-
-    return allProductsContainer;
 }
 
 function renderAllProducts(products) {
@@ -91,19 +72,7 @@ function requestLatestProducts() {
     ajaxTableDataRequest.onreadystatechange = function () {
         if (ajaxTableDataRequest.readyState === 4) {
             if (ajaxTableDataRequest.status === 200) {
-                //TODO aggiungere prodotti nella barra dei prodotti recenti
                 const products = JSON.parse(ajaxTableDataRequest.responseText);
-
-                const latestProducts = document.getElementById("latest-products");
-                latestProducts.innerHTML = "";
-                latestProducts.style.justifyContent = "flex-start";
-
-
-                const controls = document.getElementsByClassName('scrollable-command-button');
-                Array.from(controls).forEach(function (control) {
-                    control.style.visibility = "visible";
-                })
-
                 renderLatestProducts(products);
             }
         }
@@ -120,7 +89,6 @@ function requestAllProducts() {
     ajaxTableDataRequest.onreadystatechange = function () {
         if (ajaxTableDataRequest.readyState === 4) {
             if (ajaxTableDataRequest.status === 200) {
-                //TODO aggiungere prodotti nella barra dei prodotti recenti
                 const products = JSON.parse(ajaxTableDataRequest.responseText);
                 renderAllProducts(products);
             }
@@ -133,12 +101,6 @@ function requestAllProducts() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const previousButton = document.getElementById('previous-button');
-    const nextButton = document.getElementById('next-button');
-
-    previousButton.addEventListener('click', scrollLeft);
-    nextButton.addEventListener('click', scrollRight);
-
     requestLatestProducts();
     requestAllProducts();
 });
