@@ -60,12 +60,12 @@
 }
 
 #sidebar lord-icon,
-#sidebar #account-details-container>.profile-picture {
+#sidebar #account-details-container > .profile-picture {
   width: 60px;
   height: 60px;
 }
 
-#sidebar #account-details-container>#account-details {
+#sidebar #account-details-container > #account-details {
   padding: 0 10px;
 }
 

@@ -65,7 +65,6 @@
       <div class="ui-block" id="table-container">
         <nav id="main-table-navbar">
           <%-- TODO Add ordini effettuati all'utente --%>
-          <%-- TODO Concatenare dati indirizzo --%>
           <select name="table-selector" id="table-selector" onchange="getTableData()">
             <option value="get_employees-nome,cognome,email">Dipendenti</option>
             <option value="get_customers-nome,cognome,email">Utenti</option>

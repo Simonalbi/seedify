@@ -34,7 +34,7 @@ function getProductCard(name, price, image) {
     productInfo.classList.add("product-info");
 
     const nameParagraph = document.createElement("p");
-    nameParagraph.classList.add("product-name", "rubik-600");
+    nameParagraph.classList.add("product-name", "rubik-500");
     nameParagraph.innerHTML = name;
 
     const priceParagraph = document.createElement("p");
@@ -86,7 +86,7 @@ function getCategory(title, products) {
     categoryTitle.classList.add("category-title");
 
     const h6Title = document.createElement("h6");
-    h6Title.classList.add("rubik-400");
+    h6Title.classList.add("rubik-500");
     h6Title.innerHTML = title;
 
     const categoryProducts = document.createElement("div");
@@ -97,17 +97,33 @@ function getCategory(title, products) {
 
     categoryTitle.appendChild(h6Title);
 
-    products.forEach(function (obj) {
+    products.forEach(function (product) {
         categoryProducts.appendChild(
             getProductCard (
-                obj['nome'],
-                obj['prezzo'],
-                resolveResource(obj['immagine']).image
+                product['nome'],
+                product['prezzo'],
+                resolveResource(product['immagine']).image
             )
         );
     })
 
     return productsCategoryContainer;
+}
+
+function renderLatestProducts(products) {
+    const allProductsContainer = document.getElementById("latest-products");
+
+    products.forEach(function (product) {
+        allProductsContainer.appendChild(
+            getProductCard (
+                product['nome'],
+                product['prezzo'],
+                resolveResource(product['immagine']).image
+            )
+        );
+    })
+
+    return allProductsContainer;
 }
 
 function renderAllProducts(products) {
@@ -124,8 +140,39 @@ function renderAllProducts(products) {
         const categorySeparator = document.createElement("div");
         categorySeparator.classList.add("category-separator");
 
+        const loadingAllProductsText = document.getElementById("loading-text-container");
+        loadingAllProductsText.remove();
+
         allProductsContainer.appendChild(categorySeparator);
     }
+}
+
+function requestLatestProducts() {
+    const ajaxTableDataRequest = getAjaxRequestObject();
+    ajaxTableDataRequest.onreadystatechange = function () {
+        if (ajaxTableDataRequest.readyState === 4) {
+            if (ajaxTableDataRequest.status === 200) {
+                //TODO aggiungere prodotti nella barra dei prodotti recenti
+                const products = JSON.parse(ajaxTableDataRequest.responseText);
+
+                const latestProducts = document.getElementById("latest-products");
+                latestProducts.innerHTML = "";
+                latestProducts.style.justifyContent = "flex-start";
+
+
+                const controls = document.getElementsByClassName('scrollable-command-button');
+                Array.from(controls).forEach(function (control) {
+                    control.style.visibility = "visible";
+                })
+
+                renderLatestProducts(products);
+            }
+        }
+    }
+
+    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo`;
+    ajaxTableDataRequest.open("get", url, true);
+    ajaxTableDataRequest.send(null);
 }
 
 // TODO Add error if code != 200 in -> ALL <- AJAX REQUESTS
@@ -146,4 +193,5 @@ function requestAllProducts() {
     ajaxTableDataRequest.send(null);
 }
 
+requestLatestProducts();
 requestAllProducts();

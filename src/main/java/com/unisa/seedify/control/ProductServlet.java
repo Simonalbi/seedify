@@ -37,6 +37,10 @@ public class ProductServlet extends HttpServlet {
                 products = productDao.getAllActiveProducts();
                 break;
             }
+            case "get_latest_products" : {
+                products = productDao.getAllActiveLatestProducts(10);
+                break;
+            }
             default: {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
             }
