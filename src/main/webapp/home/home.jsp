@@ -43,6 +43,10 @@
 			<!-- https://unsplash.com/it/foto/frutto-rotondo-rosso-su-terreno-marrone-hTKYAYwJoSQ -->
 			<img src="${pageContext.request.contextPath}/common/assets/img/growing_plant.jpg">
 		</div>
+		<div class="section-title">
+			<h5 class="rubik-600">Prodotti più recenti</h5>
+		</div>
+		<div class="section-title-breakline"></div>
 		<jsp:include page="/common/components/scrollable-container/scrollable-container.jsp">
 			<jsp:param name="id" value="latest-products-scrollable-container" />
 			<jsp:param name="loading-text" value="Caricamento prodotti..." />

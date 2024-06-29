@@ -1,5 +1,6 @@
 import { addToScrollableContainer } from "../../common/components/scrollable-container/scripts/script.js";
-import { getAjaxRequestObject, getBaseOriginName, getProductCard, resolveResource } from "../../common/general/scripts/script.js";
+import { getAjaxRequestObject, getBaseOriginName, resolveResource } from "../../common/general/scripts/script.js";
+import { getProductCard } from "../../common/general/scripts/products.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const ajaxTableDataRequest = getAjaxRequestObject();

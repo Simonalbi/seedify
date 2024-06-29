@@ -24,6 +24,12 @@ img {
   padding: 10px;
 }
 
+.section-title {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .section-title-breakline,
 .category-separator {
   width: 100%;

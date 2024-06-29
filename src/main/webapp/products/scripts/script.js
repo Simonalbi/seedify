@@ -1,4 +1,5 @@
-import {getAjaxRequestObject, getBaseOriginName, resolveResource, getProductCard } from '../../common/general/scripts/script.js';
+import {getAjaxRequestObject, getBaseOriginName, resolveResource } from '../../common/general/scripts/script.js';
+import { getProductCard } from "../../common/general/scripts/products.js";
 import { addToScrollableContainer } from '../../common/components/scrollable-container/scripts/script.js';
 
 function getCategory(title, products) {
