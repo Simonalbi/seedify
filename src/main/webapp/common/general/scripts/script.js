@@ -1,4 +1,4 @@
-export { getAjaxRequestObject };
+export { getAjaxRequestObject, getBaseOriginName, resolveResource };
 
 /**
  * Gets an AJAX request object.
@@ -23,4 +23,30 @@ function getAjaxRequestObject(){
         }
     }
     return request;
+}
+
+/**
+ * Gets the base origin name.
+ * @returns {String} The base origin name.
+ */
+function getBaseOriginName(){
+    return `${window.location.origin}/seedify_war`;
+}
+
+/**
+ * Resolves a resource URL to its actual URL.
+ * @param {String} resourceUrl The resource URL.
+ * @returns {Object} The resolution object.
+ */
+function resolveResource(resourceUrl) {
+    let resolution = {
+        image: null
+    }
+
+    if (resourceUrl.startsWith("image/")) {
+        const resourceParams = resourceUrl.replace("image/", "");
+        resolution.image = `${getBaseOriginName()}/resources-servlet?${resourceParams}`;
+    }
+
+    return resolution;
 }

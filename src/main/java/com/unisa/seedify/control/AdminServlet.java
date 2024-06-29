@@ -1,6 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.google.gson.*;
+import com.unisa.seedify.control.utils.JsonUtils;
 import com.unisa.seedify.model.*;
 import com.unisa.seedify.model.serializers.ProductBeanSerializer;
 
@@ -39,31 +40,6 @@ public class AdminServlet extends HttpServlet {
     private final Gson gson = new GsonBuilder()
             .registerTypeAdapter(ProductBean.class, new ProductBeanSerializer())
             .create();
-
-    private JsonArray filterJsonArray(JsonArray jsonArray, List<String> fields) {
-        JsonArray filteredData = new JsonArray();
-        for (JsonElement record : jsonArray) {
-            JsonObject filteredRecord = new JsonObject();
-            for (String field : fields) {
-                JsonObject object = record.getAsJsonObject();
-                String[] path = field.split("\\.");
-                for (String pathElement : path) {
-                    if (pathElement.equals(path[path.length - 1])) {
-                        try {
-                            filteredRecord.addProperty(pathElement, object.get(pathElement).getAsString());
-                        } catch (NullPointerException e) {
-                            filteredRecord.addProperty(pathElement, "N/A");
-                        }
-                    } else {
-                        object = object.getAsJsonObject(pathElement);
-                    }
-                }
-            }
-            filteredData.add(filteredRecord);
-        }
-
-        return filteredData;
-    }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         String rawProductPrimaryKey = request.getParameter("entity_primary_key");
@@ -121,7 +97,7 @@ public class AdminServlet extends HttpServlet {
         JsonObject jsonResponseObject = this.gson.toJsonTree(tableDataResponse).getAsJsonObject();
 
         JsonArray rawData = jsonResponseObject.get("data").getAsJsonArray();
-        JsonArray filteredData = this.filterJsonArray(rawData, fields);
+        JsonArray filteredData = JsonUtils.filterJsonArray(rawData, fields);
         jsonResponseObject.remove("data");
         jsonResponseObject.add("data", filteredData);
 

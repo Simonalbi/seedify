@@ -1,4 +1,4 @@
-import { getAjaxRequestObject } from '../../common/general/scripts/script.js';
+import { getAjaxRequestObject, getBaseOriginName, resolveResource } from '../../common/general/scripts/script.js';
 
 window.getTableData = getTableData;
 
@@ -128,11 +128,11 @@ function buildTable(tableData) {
             }
 
             const td = document.createElement('td');
-            if (record[key].startsWith("image/")) {
-                const resourceParams = record[key].replace("image/", "");
+            const resolvedResource = resolveResource(record[key]);
+            if (resolvedResource.image !== null) {
                 const img = document.createElement('img');
+                img.src = resolvedResource.image;
                 img.classList.add('table-image');
-                img.src = `${window.location.origin}/seedify_war/resources-servlet?${resourceParams}`
                 td.appendChild(img);
             } else {
                 td.textContent = record[key];
@@ -190,7 +190,7 @@ function getTableData() {
     }
 
     // TODO Capire come recuperare la prima parte dell'url fino a seedify_war compreso
-    const url = `${window.location.origin}/seedify_war/admin-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
+    const url = `${getBaseOriginName()}/admin-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
     ajaxTableDataRequest.open("get", url, true);
     ajaxTableDataRequest.send(null);
 }
