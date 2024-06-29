@@ -35,7 +35,7 @@ function sendDeleteRequest(target) {
         entity_primary_key: params[1].replace("entity_primary_key=", "")
     }
 
-    const url = `${window.location.origin}/seedify_war/admin-servlet?${target.value}`;
+    const url = `${getBaseOriginName()}/admin-servlet?${target.value}`;
     ajaxTableDataRequest.open("delete", url, true);
     ajaxTableDataRequest.send(JSON.stringify(body));
 }

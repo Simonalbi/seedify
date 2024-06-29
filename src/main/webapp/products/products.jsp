@@ -66,45 +66,45 @@
       </div>
     </div>
     <div id="all-products-container">
-    <div class="section-title">
-      <h5 class="rubik-500">Tutti i nostri prodotti</h5>
-    </div>
-    <div class="section-title-breakline"></div>
-    <div class="products-category-container">
-      <div class="category-title">
-        <h6 class="rubik-400">Categoria 1</h6>
+      <div class="section-title">
+        <h5 class="rubik-500">Tutti i nostri prodotti</h5>
       </div>
-      <div class="category-products">
-        <% for (int i = 0; i < 21; i++) { %>
-        <div class="product-container ui-block rubik-300">
-          <button class="favorite-button material-button">
-            <span class="material-icons-round md-18">favorite_border</span>
-          </button>
-          <div class="product-image-section">
-            <div class="product-image-container">
-              <img src="${pageContext.request.contextPath}/common/assets/img/product_placeholder.jpeg" alt="">
-            </div>
-          </div>
-          <div class="product-info-section">
-            <div class="product-info-container">
-              <div class="product-info">
-                <p class="product-title rubik-600">Piantina delicata</p>
-                <p class="product-price">1200.00 €</p>
-              </div>
-              <div class="product-actions">
-                <button class="cart-button material-button">
-                  <span class="material-icons-round md-18">add_shopping_cart</span>
-                  <span class="small-text">Aggiungi al carrello</span>
-                </button>
-              </div>
-            </div>
-          </div>
+      <div class="section-title-breakline"></div>
+      <%--<div class="products-category-container">
+        <div class="category-title">
+          <h6 class="rubik-400">Categoria 1</h6>
         </div>
-        <% } %>
+        <div class="category-products">
+          <% for (int i = 0; i < 21; i++) { %>
+            <div class="product-container ui-block rubik-300">
+              <button class="favorite-button material-button">
+                <span class="material-icons-round md-18">favorite_border</span>
+              </button>
+              <div class="product-image-section">
+                <div class="product-image-container">
+                  <img src="${pageContext.request.contextPath}/common/assets/img/product_placeholder.jpeg" alt="">
+                </div>
+              </div>
+              <div class="product-info-section">
+                <div class="product-info-container">
+                  <div class="product-info">
+                    <p class="product-name rubik-600">Piantina delicata</p>
+                    <p class="product-price">1200.00 €</p>
+                  </div>
+                  <div class="product-actions">
+                    <button class="cart-button material-button">
+                      <span class="material-icons-round md-18">add_shopping_cart</span>
+                      <span class="small-text">Aggiungi al carrello</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
       </div>
-    </div>
-    <div class="category-separator"></div>
-    <div class="products-category-container">
+      <div class="category-separator"></div>
+      <div class="products-category-container">
       <div class="category-title">
         <h6 class="rubik-400">Categoria 2</h6>
       </div>
@@ -136,8 +136,8 @@
         </div>
         <% } %>
       </div>
+    </div>--%>
     </div>
-  </div>
   </div>
 
   <jsp:include page="/common/components/chat-button/chat-button.jsp"/>
