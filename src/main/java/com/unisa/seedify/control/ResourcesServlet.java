@@ -1,7 +1,6 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.*;
-import org.apache.tika.Tika;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,15 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @WebServlet(name = "resourcesServlet", value = "/resources-servlet")
-public class ResourcesServlet extends HttpServlet {
-    private static final Tika tika = new Tika();
-
-    private static final ProductDao productDao = ProductDao.getInstance();
-
+public class ResourcesServlet extends HttpServlet implements JsonServlet {
     private byte[] getSessionUserProfilePicture(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         UserBean userBean = (UserBean) session.getAttribute("user");

@@ -3,8 +3,6 @@ package com.unisa.seedify.control;
 import com.google.gson.*;
 import com.unisa.seedify.control.utils.JsonUtils;
 import com.unisa.seedify.model.ProductBean;
-import com.unisa.seedify.model.ProductDao;
-import com.unisa.seedify.model.serializers.ProductBeanSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "productServlet", urlPatterns = {"/product-servlet"})
-public class ProductServlet extends HttpServlet {
-    private static final ProductDao productDao = ProductDao.getInstance();
-
-    private final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(ProductBean.class, new ProductBeanSerializer())
-            .create();
-
+public class ProductServlet extends HttpServlet implements JsonServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

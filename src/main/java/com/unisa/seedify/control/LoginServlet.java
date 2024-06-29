@@ -3,7 +3,6 @@ package com.unisa.seedify.control;
 import com.unisa.seedify.control.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
-import com.unisa.seedify.model.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +16,7 @@ import java.util.UUID;
 
 // TODO Accept AJAX request for input validation
 @WebServlet(name = "loginServlet", value = "/login-servlet")
-public class LoginServlet extends HttpServlet {
-    private static final UserDao userDao = UserDao.getInstance();
-
+public class LoginServlet extends HttpServlet implements JsonServlet {
     private void redirectUser(HttpServletRequest request, HttpServletResponse response, UserBean.Roles role) throws ServletException, IOException {
         switch (role) {
             case ADMIN:

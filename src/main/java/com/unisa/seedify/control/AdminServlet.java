@@ -3,7 +3,6 @@ package com.unisa.seedify.control;
 import com.google.gson.*;
 import com.unisa.seedify.control.utils.JsonUtils;
 import com.unisa.seedify.model.*;
-import com.unisa.seedify.model.serializers.ProductBeanSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 @WebServlet(name="adminServlet", value="/admin-servlet")
-public class AdminServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet implements JsonServlet {
     private static class TableDataResponse {
         private final boolean canEdit;
         private final String editCall;
@@ -32,14 +31,6 @@ public class AdminServlet extends HttpServlet {
             this.data = data;
         }
     }
-
-    private static final UserDao userDao = UserDao.getInstance();
-    private static final OrderDao orderDao = OrderDao.getInstance();
-    private static final ProductDao productDao = ProductDao.getInstance();
-
-    private final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(ProductBean.class, new ProductBeanSerializer())
-            .create();
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         String rawProductPrimaryKey = request.getParameter("entity_primary_key");

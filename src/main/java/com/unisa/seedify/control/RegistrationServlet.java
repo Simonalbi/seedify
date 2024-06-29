@@ -3,7 +3,6 @@ package com.unisa.seedify.control;
 import com.unisa.seedify.control.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
-import com.unisa.seedify.model.UserDao;
 
 import javax.imageio.ImageIO;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +17,7 @@ import java.sql.SQLException;
 
 // TODO: Validare l'input e in caso di errore far apparire nella pagina l'errore
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
-public class RegistrationServlet extends HttpServlet {
-    private static final UserDao userDao = UserDao.getInstance();
-
+public class RegistrationServlet extends HttpServlet implements JsonServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UserBean user = new UserBean();
 
