@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-.material-icons {
-  font-family: "Material Icons Outlined";
-}
-
 img {
   user-select: none;
 }

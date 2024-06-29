@@ -25,6 +25,7 @@
   </head>
   <body>
     <%@ include file="/common/components/main-navbar/main-navbar.jsp" %>
+
     <div class="main-page-content">
       <div id="info-container">
         <div class="ui-block" id="welcome-message-container">

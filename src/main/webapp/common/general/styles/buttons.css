@@ -22,7 +22,7 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     width: fit-content;
-    will-change: transform,opacity;
+    will-change: transform, opacity;
     z-index: 0;
 }
 

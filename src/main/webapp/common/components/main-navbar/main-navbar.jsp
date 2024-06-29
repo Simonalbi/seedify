@@ -34,7 +34,7 @@
 			</div>
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/products/products.jsp">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
@@ -87,7 +87,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/products/products.jsp">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>

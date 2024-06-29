@@ -135,7 +135,7 @@ nav {
   color: var(--dark-jungle-green);
 }
 
-#search-text:focus, #table-selector:focus{
+#search-text:focus, #table-selector:focus {
   outline: var(--android-green) solid 1px;
 }
 

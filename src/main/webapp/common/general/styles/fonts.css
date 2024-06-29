@@ -72,10 +72,10 @@ p, a, span {
   font-size: calc(25px + 0.390625vw);
 }
 
-.large-p {
+.large-text {
   font-size: calc(20px + 0.390625vw);
 }
 
-.small-p {
+.small-text {
   font-size: calc(10px + 0.390625vw);
 }
