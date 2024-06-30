@@ -106,7 +106,7 @@ public class AdminServlet extends HttpServlet implements JsonServlet {
 
         switch (action) {
             case "delete_product": {
-                deleteProduct(request, response);
+                this.deleteProduct(request, response);
                 break;
             }
             default: {
