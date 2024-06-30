@@ -51,18 +51,10 @@
 			<jsp:param name="loading-text" value="Caricamento prodotti..." />
 		</jsp:include>
 
-		<%--<jsp:include page="/common/components/edit-product/edit-product.jsp">
-			<jsp:param name="label" value="Nome" />
-			<jsp:param name="id" value="edit-product-name-input-box" />
-			<jsp:param name="type" value="text" />
-			<jsp:param name="name" value="name" />
-			<jsp:param name="pattern" value="[A-Za-z\s]+" />
-			<jsp:param name="errorMessage" value="Nome non valido" />
-			<jsp:param name="group" value="product-edit" />
-		</jsp:include>--%>
+		<jsp:include page="/common/components/edit-product/edit-product.jsp" />
 	</div>
 
-	<jsp:include page="/common/components/main-footer/main-footer.jsp"/>
-	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
+	<jsp:include page="/common/components/main-footer/main-footer.jsp" />
+	<jsp:include page="/common/components/chat-button/chat-button.jsp" />
 </body>
 </html>

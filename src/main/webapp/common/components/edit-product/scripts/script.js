@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const dropZone = document.getElementById('drop-zone-container');
+    const dropZone = document.getElementById('edit-product-image-container');
     const fileInput = document.getElementById('file-input');
     const fileList = document.getElementById('file-list');
 
