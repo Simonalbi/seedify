@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.material-icons-round {
+  cursor: pointer;
+}
+
 img {
   user-select: none;
 }
