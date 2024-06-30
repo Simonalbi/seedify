@@ -10,7 +10,7 @@
 		<div id="account-details-container">
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
-					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture">
 				</div>
 				<div id="account-details">
 					<span><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="sidebar-separator"></div>
 			<% if (mainNavbarUserBean != null) {
-                if (mainNavbarUserBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
+				if (mainNavbarUserBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
 					<div class="sidebar-option">
 						<a href="${pageContext.request.contextPath}/admin/admin.jsp">
 							<span class="material-icons-round md-18">display_settings</span>
@@ -114,7 +114,7 @@
 		<div class="action">
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
-					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture" alt="Foto">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture" alt="Foto">
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>

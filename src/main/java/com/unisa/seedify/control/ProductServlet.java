@@ -146,6 +146,14 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
             return;
         }
 
+        int productId;
+        try {
+            productId = jsonObject.get("product_id").getAsInt();
+        } catch (NullPointerException | JsonSyntaxException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
+            return;
+        }
+
         boolean success = false;
         switch (action) {
             case "add_to_favorites": {

@@ -10,7 +10,7 @@ public class ProductBeanSerializer implements JsonSerializer<ProductBean> {
     public JsonElement serialize(ProductBean productBean, Type typeOfSrc, JsonSerializationContext context) {
         Gson gson = new Gson();
         JsonObject jsonObject = gson.toJsonTree(productBean).getAsJsonObject();
-        jsonObject.addProperty("immagine", "image/resourceType=product_image&entity_primary_key=" + productBean.getPrimaryKey().toString());
+        jsonObject.addProperty("immagine", "image/resource_type=product_image&entity_primary_key=" + productBean.getPrimaryKey().toString());
         jsonObject.addProperty("entity_primary_key", productBean.getPrimaryKey().toString());
         return jsonObject;
     }
