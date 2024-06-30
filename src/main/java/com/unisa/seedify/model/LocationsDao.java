@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, DetailedDao<LocationsBean, AddressBean> {
-    private static final String TABLE_NAME = "locazione";
+    public static final String TABLE_NAME = "locazione";
 
     private static LocationsDao instance = null;
 

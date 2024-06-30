@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
-    private static final String TABLE_NAME = "indirizzi";
+    public static final String TABLE_NAME = "indirizzi";
 
     private static AddressDao instance = null;
 

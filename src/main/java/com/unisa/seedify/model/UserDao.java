@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends BaseDao implements GenericDao<UserBean> {
-    private static final String TABLE_NAME = "utenti";
+    public static final String TABLE_NAME = "utenti";
 
     private static UserDao instance = null;
 

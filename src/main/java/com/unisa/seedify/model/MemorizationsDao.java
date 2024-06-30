@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.List;
 
 public class MemorizationsDao extends BaseDao implements GenericDao<MemorizationsBean>, DetailedDao<MemorizationsBean, CreditCardBean> {
-    private static final String TABLE_NAME = "memorizzazioni";
+    public static final String TABLE_NAME = "memorizzazioni";
 
     private static MemorizationsDao instance = null;
 

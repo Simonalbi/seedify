@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsDao extends BaseDao implements GenericDao<GoodsBean> {
-    private static final String TABLE_NAME = "merce";
+    public static final String TABLE_NAME = "merce";
 
     private static GoodsDao instance = null;
 

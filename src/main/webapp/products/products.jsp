@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="com.unisa.seedify.model.ProductDao" %>
-
-<!-- TODO Add to favorites -->
 <!-- TODO Add to cart -->
 <!-- TODO Filter products -->
 

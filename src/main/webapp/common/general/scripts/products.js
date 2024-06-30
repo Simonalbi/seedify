@@ -88,6 +88,7 @@ function getProductCard(name, price, image, productId, isFavorite) {
     const productContainer = document.createElement("div");
     productContainer.classList.add("product-container", "ui-block", "rubik-300");
 
+    // Creating favorite button
     const favoriteButton = document.createElement("button");
     favoriteButton.classList.add("favorite-button", "material-button");
     favoriteButton.addEventListener(

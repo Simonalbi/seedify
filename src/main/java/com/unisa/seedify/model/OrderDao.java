@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
-    private static final String TABLE_NAME = "ordini";
+    public static final String TABLE_NAME = "ordini";
 
     private static OrderDao instance = null;
 

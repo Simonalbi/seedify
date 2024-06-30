@@ -114,6 +114,10 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                 products = productDao.getAllActiveLatestProducts(10);
                 break;
             }
+            case "get_most_purchased_products": {
+                products = productDao.getAllActiveMostPurchasedProducts(10);
+                break;
+            }
             default: {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
             }

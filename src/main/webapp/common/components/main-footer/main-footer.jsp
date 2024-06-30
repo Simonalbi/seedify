@@ -23,19 +23,19 @@
             <span class="footer-section-title rubik-600">Link utili</span>
             <div id="useful-links" class="footer-section-content">
                 <div class="footer-section-row">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/home/home.jsp">
                         <span class="material-icons-round">home</span>
                         <span>Home</span>
                     </a>
                 </div>
                 <div class="footer-section-row">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/products/products.jsp">
                         <span class="material-icons-round">shopping_bag</span>
                         <span>Prodotti</span>
                     </a>
                 </div>
                 <div class="footer-section-row">
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/about_us/about_us.jsp">
                         <span class="material-icons-round">info_outline</span>
                         <span>Chi Siamo</span>
                     </a>
