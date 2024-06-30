@@ -31,7 +31,7 @@
         <div class="ui-block" id="welcome-message-container">
           <div id="profile-picture-container">
             <div class="profile-picture">
-              <img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture" alt="Foto profilo">
+              <img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture" alt="Foto profilo">
             </div>
           </div>
           <div id="user-message-container">
