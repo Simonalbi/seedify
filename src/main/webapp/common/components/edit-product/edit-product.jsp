@@ -8,7 +8,7 @@
     <form id="edit-product-form">
       <div class="form-row rubik-300">
         <div id="edit-product-data-container">
-          <div id="edit-product-name-box">
+          <div id="edit-product-name-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Nome" />
               <jsp:param name="id" value="edit-product-name-input-box" />
@@ -19,7 +19,7 @@
               <jsp:param name="group" value="product-edit" />
             </jsp:include>
           </div>
-          <div id="edit-product-price-box">
+          <div id="edit-product-price-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Prezzo" />
               <jsp:param name="id" value="edit-product-price-input-box" />
@@ -30,7 +30,7 @@
               <jsp:param name="group" value="product-edit" />
             </jsp:include>
           </div>
-          <div id="edit-product-quantity-box">
+          <div id="edit-product-quantity-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Quantit&agrave;" />
               <jsp:param name="id" value="product-edit-quantity-input-box" />
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div id="edit-product-info-container">
-          <div id="edit-product-category-box">
+          <div id="edit-product-category-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Tipologia Pianta" />
               <jsp:param name="id" value="product-edit-category-input-box" />
@@ -52,7 +52,7 @@
               <jsp:param name="group" value="product-edit" />
             </jsp:include>
           </div>
-          <div id="edit-product-required-water-box">
+          <div id="edit-product-required-water-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Quantit&agrave; d'acqua:" />
               <jsp:param name="tag" value="select" />
@@ -62,7 +62,7 @@
               <jsp:param name="group" value="product-edit" />
             </jsp:include>
           </div>
-          <div id="edit-product-season-box">
+          <div id="edit-product-season-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Stagionalit&agrave;:" />
               <jsp:param name="tag" value="select" />
@@ -74,14 +74,14 @@
           </div>
         </div>
         <div id="edit-product-image-container">
-          Trascina qui il file o clicca per selezionarlo
+          Clicca qui o trascina un'immagine per caricarla
           <input type="file" id="file-input" hidden />
           <div id="file-list"></div>
         </div>
       </div>
-      <div id="edit-product-description-box" class="form-row rubik-300">
+      <div id="edit-product-description-box" class="dark form-row rubik-300">
         <jsp:include page="/common/components/input-box/input-box.jsp">
-          <jsp:param name="label" value="Descrizione:" />
+          <jsp:param name="label" value="Descrizione" />
           <jsp:param name="tag" value="textarea" />
           <jsp:param name="id" value="edit-product-description-input-box" />
           <jsp:param name="name" value="description" />

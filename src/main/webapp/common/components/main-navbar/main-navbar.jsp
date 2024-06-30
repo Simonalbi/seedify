@@ -10,7 +10,7 @@
 		<div id="account-details-container">
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
-					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture">
 				</div>
 				<div id="account-details">
 					<span><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
@@ -112,7 +112,7 @@
 		<div class="action">
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="profile-picture">
-					<img src="${pageContext.request.contextPath}/resources-servlet?resourceType=profile_picture" alt="Foto">
+					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture" alt="Foto">
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>

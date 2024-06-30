@@ -2,6 +2,8 @@ package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +36,8 @@ public class ResourcesServlet extends HttpServlet implements JsonServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String resourceType = request.getParameter("resourceType");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String resourceType = request.getParameter("resource_type");
 
         byte[] resource = null;
         switch (resourceType) {
@@ -46,6 +48,31 @@ public class ResourcesServlet extends HttpServlet implements JsonServlet {
             case "product_image": {
                 resource = this.getProductImage(request, response);
                 break;
+            }
+            case "product_page": {
+                int productId = Integer.parseInt(request.getParameter("product_id"));
+
+                ProductBean productBean = null;
+                ProductDao productDao = ProductDao.getInstance();
+                EntityPrimaryKey entityPrimaryKey = new EntityPrimaryKey();
+                entityPrimaryKey.addKey("codice_prodotto", productId);
+                try {
+                    productBean = productDao.doRetrive(entityPrimaryKey);
+                } catch (SQLException ignored) {
+                }
+
+                if (productBean == null) {
+                    response.sendRedirect(request.getContextPath() + "/common/error/404.jsp");
+                }
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("product/product.jsp");
+                request.setAttribute("product_bean", productBean);
+                dispatcher.forward(request, response);
+                return;
+            }
+            default: {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid resource type!");
+                return;
             }
         }
 

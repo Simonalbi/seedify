@@ -81,10 +81,13 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
                 preparedStatement.setString(2, cartBean.getUser().getEmail());
 
                 for (CartItemBean cartItemBean: cartBean.getCartItems()) {
-                    preparedStatement.setInt(3, cartItemBean.getProduct().getProductId());
-                    preparedStatement.setInt(1, cartItemBean.getQuantity());
-
-                    preparedStatement.executeUpdate();
+                    if (cartItemBean.getQuantity() == 0) {
+                        this.doDeleteOne(cartBean, cartItemBean);
+                    } else {
+                        preparedStatement.setInt(3, cartItemBean.getProduct().getProductId());
+                        preparedStatement.setInt(1, cartItemBean.getQuantity());
+                        preparedStatement.executeUpdate();
+                    }
                 }
                 connection.commit();
             } catch (SQLException e) {
@@ -192,5 +195,44 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
             }
         }
         return cartBean;
+    }
+
+    public boolean addToCart(CartBean cartBean, ProductBean productBean, int quantity) {
+        if (productBean.getQuantity() < quantity) {
+            return false;
+        }
+
+
+        CartItemBean cartItemBean = cartBean.getCartItems().stream()
+                .filter(cartItem -> cartItem.getProduct().equals(productBean))
+                .findFirst()
+                .orElse(null);
+
+        boolean newCartItem = cartItemBean == null;
+        if (cartItemBean == null) {
+            cartItemBean = new CartItemBean();
+            cartItemBean.setProduct(productBean);
+            cartItemBean.setQuantity(quantity);
+        } else {
+            if (productBean.getQuantity() < cartItemBean.getQuantity() + quantity) {
+                cartItemBean.setQuantity(productBean.getQuantity());
+            } else {
+                cartItemBean.setQuantity(cartItemBean.getQuantity() + quantity);
+            }
+        }
+
+        boolean success = false;
+        try {
+            if (newCartItem) {
+                this.doSaveOne(cartBean, cartItemBean);
+            } else {
+                this.doUpdate(cartBean);
+            }
+            success = true;
+        } catch (SQLException ignored) {
+        }
+
+        return success;
+
     }
 }
