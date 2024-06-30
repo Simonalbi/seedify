@@ -1,0 +1,131 @@
+footer {
+    background-color: var(--cultured);
+}
+
+footer .material-icons-round {
+    font-size: 18px;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--granite-gray);
+    font-size: 15px;
+}
+
+.footer-break-line {
+    border-top: 1px solid var(--platinum);
+    width: 94%;
+    margin: 0 3%;
+}
+
+#main-footer {
+    border-top: 1px solid var(--platinum);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding: 5px 20px 15px 20px;
+}
+
+#main-footer .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#main-footer .footer-section-title {
+    color: var(--arsenic);
+    font-size: calc(16px + 0.390625vw);
+}
+
+#main-footer .footer-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    color: var(--granite-gray);
+}
+
+#main-footer .footer-section-row,
+#main-footer .footer-section-row a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+#main-footer .footer-section-row a:hover :last-child {
+    text-decoration: underline;
+}
+
+#sub-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    padding: 5px 2%;
+
+    height: fit-content;
+
+    color: var(--granite-gray);
+}
+
+#sub-footer > #footer-copyright-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 50px;
+}
+
+#sub-footer > #footer-copyright-container > #footer-logo-container {
+    height: 50px;
+}
+
+#sub-footer > #footer-copyright-container > #footer-logo-container > img {
+    height: 100%;
+    object-fit: contain;
+}
+
+#sub-footer > #footer-social-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+
+    margin-right: 1%;
+
+    filter: invert(40%) sepia(8%) saturate(334%) hue-rotate(187deg) brightness(91%) contrast(84%);
+}
+
+@media (max-width: 580px) {
+    #main-footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #main-footer > .footer-section > #useful-links {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 470px) {
+    #sub-footer,
+    #sub-footer > #footer-copyright-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #sub-footer > #footer-copyright-container > #footer-copyright-text {
+        margin-top: 10px;
+    }
+
+    .footer-break-line {
+        margin-bottom: 20px;
+    }
+}

@@ -42,3 +42,7 @@
 <!-- edit-product -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit-product/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/edit-product/scripts/script.js" defer></script>
+
+<!-- main-footer -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-footer/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/main-footer/scripts/script.js" defer></script>
