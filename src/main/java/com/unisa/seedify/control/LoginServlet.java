@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.UUID;
 
 // TODO Accept AJAX request for input validation
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet implements JsonServlet {
     private void initSession(HttpServletRequest request, HttpServletResponse response, UserBean user) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-
-        UUID uuid = UUID.randomUUID();
-        session.setAttribute("token", uuid.toString());
-
         session.setAttribute("user", user);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("home/home.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -60,8 +61,5 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         } else {
             throw new IllegalArgumentException("Invalid email or password");
         }
-
-        // DUBUG
-        System.out.println("User " + user.getEmail() + " logged in");
     }
 }

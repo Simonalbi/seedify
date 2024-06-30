@@ -58,7 +58,7 @@
 			<% } %>
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="sidebar-option">
-					<a href="#">
+					<a href="${pageContext.request.contextPath}/login-servlet">
 						<span class="material-icons-round md-18">logout</span>
 						<span class="option-label">Esci</span>
 					</a>
