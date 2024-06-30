@@ -142,6 +142,27 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
         return ordersAmount;
     }
 
+    public int getTotalOrders(UserBean userBean) {
+        String query = "SELECT COUNT(*) AS orders_count FROM " + OrderDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        int ordersAmount = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userBean.getEmail());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    ordersAmount = resultSet.getInt("orders_count");
+                }
+            }
+        } catch (SQLException ignored) {
+        }
+
+        return ordersAmount;
+    }
+
     public List<OrderBean> getAllOrders() {
         String query = "SELECT * FROM " + OrderDao.TABLE_NAME;
 
@@ -185,24 +206,46 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
         return orders;
     }
 
-    public int getTotalOrdersByUser(UserBean userBean) {
-        String query = "SELECT COUNT(*) AS orders_count FROM " + OrderDao.TABLE_NAME +
-                       " WHERE email = ?";
+    public List<OrderBean> getAllOrders(UserBean userBean) {
+        String query = "SELECT * FROM " + OrderDao.TABLE_NAME +
+                       " WHERE email = ? ;";
 
-        int ordersAmount = 0;
+        List<OrderBean> orders = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, userBean.getEmail());
+            statement.setString(1, userBean.getEmail());
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    ordersAmount = resultSet.getInt("orders_count");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    OrderBean orderBean = new OrderBean();
+
+                    orderBean.setOrderId(resultSet.getInt("codice_ordine"));
+
+                    CreditCardBean creditCardBean = new CreditCardBean();
+                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
+                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
+                    creditCardBean.setName(resultSet.getString("nome"));
+                    creditCardBean.setSurname(resultSet.getString("cognome"));
+                    orderBean.setCreditCard(creditCardBean);
+                    orderBean.setUser(userBean);
+
+                    EntityPrimaryKey addressPrimaryKey = new EntityPrimaryKey();
+                    addressPrimaryKey.addKey("codice_indirizzo", resultSet.getInt("codice_indirizzo"));
+                    AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);
+                    orderBean.setAddress(addressBean);
+
+                    orderBean.setOrderDate(resultSet.getDate("data_ordine"));
+                    orderBean.setDeliveryDate(resultSet.getDate("data_consegna"));
+                    orderBean.setTotalPrice(resultSet.getFloat("prezzo_totale"));
+
+                    orders.add(orderBean);
                 }
             }
         } catch (SQLException ignored) {
         }
 
-        return ordersAmount;
+        return orders;
     }
 }

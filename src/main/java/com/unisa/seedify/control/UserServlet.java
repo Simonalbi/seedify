@@ -9,13 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.*;
 
-@WebServlet(name="adminServlet", value="/admin-servlet")
-public class AdminServlet extends HttpServlet implements JsonServlet {
+@WebServlet(name="userServlet", value="/user-servlet")
+public class UserServlet extends HttpServlet implements JsonServlet {
     private static class TableDataResponse {
         private final boolean canEdit;
         private final String editCall;
@@ -52,35 +53,54 @@ public class AdminServlet extends HttpServlet implements JsonServlet {
         ArrayList<String> fields = new ArrayList<>(Arrays.asList(request.getParameter("fields").split(",")));
         fields.add("entity_primary_key");
 
+        HttpSession session = request.getSession();
+        UserBean userBean = (UserBean) session.getAttribute("user");
+
         boolean canEdit = false;
         String editCall = null;
         boolean canDelete = false;
         String deleteCall = null;
 
         ArrayList<Object> data = null;
-        switch (action) {
-            case "get_employees": {
-                data = new ArrayList<>(userDao.getAllEmployee());
-                break;
+        if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
+            switch (action) {
+                case "get_employees": {
+                    data = new ArrayList<>(userDao.getAllEmployee());
+                    break;
+                }
+                case "get_customers" : {
+                    data = new ArrayList<>(userDao.getAllCustomers());
+                    break;
+                }
+                case "get_orders": {
+                    data = new ArrayList<>(orderDao.getAllOrders());
+                    break;
+                }
+                case "get_products": {
+                    canEdit = true;
+                    editCall = "";
+                    canDelete = true;
+                    deleteCall = "delete_product";
+                    data = new ArrayList<>(productDao.getAllActiveProducts());
+                    break;
+                }
+                default: {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+                }
             }
-            case "get_customers" : {
-                data = new ArrayList<>(userDao.getAllCustomers());
-                break;
-            }
-            case "get_orders": {
-                data = new ArrayList<>(orderDao.getAllOrders());
-                break;
-            }
-            case "get_products": {
-                canEdit = true;
-                editCall = "";
-                canDelete = true;
-                deleteCall = "delete_product";
-                data = new ArrayList<>(productDao.getAllActiveProducts());
-                break;
-            }
-            default: {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) {
+            switch (action) {
+                case "get_orders": {
+                    data = new ArrayList<>(orderDao.getAllOrders(userBean));
+                    break;
+                }
+                case "get_favorites": {
+                    /*data = new ArrayList<>(orderDao.getAllOrders(userBean));*/
+                    break;
+                }
+                default: {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+                }
             }
         }
 
@@ -104,13 +124,18 @@ public class AdminServlet extends HttpServlet implements JsonServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        switch (action) {
-            case "delete_product": {
-                this.deleteProduct(request, response);
-                break;
-            }
-            default: {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        HttpSession session = request.getSession();
+        UserBean userBean = (UserBean) session.getAttribute("user");
+
+        if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
+            switch (action) {
+                case "delete_product": {
+                    this.deleteProduct(request, response);
+                    break;
+                }
+                default: {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+                }
             }
         }
     }

@@ -47,17 +47,15 @@
 				</a>
 			</div>
 			<div class="sidebar-separator"></div>
-			<% if (mainNavbarUserBean != null) {
-                if (mainNavbarUserBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
-					<div class="sidebar-option">
-						<a href="${pageContext.request.contextPath}/admin/admin.jsp">
-							<span class="material-icons-round md-18">display_settings</span>
-							<span class="option-label">Gestione</span>
-						</a>
-					</div>
-					<div class="sidebar-separator"></div>	
-			<% 	}
-			} %>
+			<% if (mainNavbarUserBean != null) { %>
+				<div class="sidebar-option">
+					<a href="${pageContext.request.contextPath}/user/user.jsp">
+						<span class="material-icons-round md-18">display_settings</span>
+						<span class="option-label">Dashboard</span>
+					</a>
+				</div>
+				<div class="sidebar-separator"></div>
+			<% } %>
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="sidebar-option">
 					<a href="#">

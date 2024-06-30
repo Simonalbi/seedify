@@ -17,22 +17,6 @@ import java.util.UUID;
 // TODO Accept AJAX request for input validation
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet implements JsonServlet {
-    private void redirectUser(HttpServletRequest request, HttpServletResponse response, UserBean.Roles role) throws ServletException, IOException {
-        switch (role) {
-            case ADMIN:
-                response.sendRedirect("admin/admin.jsp");
-                break;
-            case EMPLOYEE:
-                // TODO Redirect to employee page
-                break;
-            case CUSTOMER:
-                // TODO Redirect to client page
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid role");
-        }
-    }
-
     private void initSession(HttpServletRequest request, HttpServletResponse response, UserBean user) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
 
@@ -69,7 +53,7 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         } else if (user.getPassword().equals(password)) {
             try {
                 this.initSession(request, response, user);
-                this.redirectUser(request, response, user.getRole());
+                response.sendRedirect("user/user.jsp");
             } catch (ServletException e) {
                 response.sendRedirect("/common/errors/404.jsp");
             }

@@ -13,7 +13,7 @@ public class UserBeanSerializer implements JsonSerializer<UserBean> {
     public JsonElement serialize(UserBean userBean, Type typeOfSrc, JsonSerializationContext context) {
         Gson gson = new Gson();
         JsonObject jsonObject = gson.toJsonTree(userBean).getAsJsonObject();
-        jsonObject.addProperty("ordini_effettuati", orderDao.getTotalOrdersByUser(userBean));
+        jsonObject.addProperty("ordini_effettuati", orderDao.getTotalOrders(userBean));
         return jsonObject;
     }
 }

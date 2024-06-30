@@ -35,7 +35,7 @@ function sendDeleteRequest(target) {
         entity_primary_key: params[1].replace("entity_primary_key=", "")
     }
 
-    const url = `${getBaseOriginName()}/admin-servlet?${target.value}`;
+    const url = `${getBaseOriginName()}/user-servlet?${target.value}`;
     ajaxTableDataRequest.open("DELETE", url, true);
     ajaxTableDataRequest.send(JSON.stringify(body));
 }
@@ -190,7 +190,7 @@ function getTableData() {
     }
 
     // TODO Capire come recuperare la prima parte dell'url fino a seedify_war compreso
-    const url = `${getBaseOriginName()}/admin-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
+    const url = `${getBaseOriginName()}/user-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
     ajaxTableDataRequest.open("GET", url, true);
     ajaxTableDataRequest.send(null);
 }
