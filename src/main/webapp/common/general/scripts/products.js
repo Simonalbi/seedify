@@ -54,7 +54,6 @@ function getProductCard(name, price, image, productId, isFavorite) {
     productContainer.classList.add("product-container", "ui-block", "rubik-300");
 
     // Creating favorite button
-    //TODO: cuore pieno al click -> action=add_to_favorites&entity_primary_key=product_id=1
     const favoriteButton = document.createElement("button");
     favoriteButton.classList.add("favorite-button", "material-button");
     favoriteButton.addEventListener(
