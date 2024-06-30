@@ -96,7 +96,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/about_us/about_us.jsp">
 					<span class="material-icons-round md-18">info_outline</span>
 					<span class="option-label">Chi Siamo</span>
 				</a>
