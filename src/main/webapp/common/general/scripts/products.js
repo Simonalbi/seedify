@@ -1,13 +1,36 @@
+import { getBaseOriginName } from "./script.js";
+
 export { getProductCard };
 
+function sendAddToFavoriteRequest(productId, favoriteButton) {
+    const ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function () {
+        if (ajaxRequest.readyState === 4) {
+            if (ajaxRequest.status === 200) {
+                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
+            }
+        }
+    }
+
+    const body = {
+        action: "add_to_favorites",
+        product_id: productId
+    };
+    const url = `${getBaseOriginName()}/product-servlet`;
+    ajaxRequest.open("POST", url, true);
+    ajaxRequest.send(JSON.stringify(body));
+}
+
 /**
- * Gets the product card.
- * @param {String} name The product name.
- * @param {Number} price The product price.
- * @param {String} image The product image.
- * @returns {HTMLDivElement} The product card.
+ *
+ * @param {string} name
+ * @param {number} price
+ * @param {string} image
+ * @param {number} productId
+ * @param {boolean} isFavorite
+ * @returns {HTMLDivElement}
  */
-function getProductCard(name, price, image) {
+function getProductCard(name, price, image, productId, isFavorite) {
     const productContainer = document.createElement("div");
     productContainer.classList.add("product-container", "ui-block", "rubik-300");
 
@@ -15,10 +38,26 @@ function getProductCard(name, price, image) {
     //TODO: cuore pieno al click -> action=add_to_favorites&entity_primary_key=product_id=1
     const favoriteButton = document.createElement("button");
     favoriteButton.classList.add("favorite-button", "material-button");
+    favoriteButton.addEventListener(
+        'click',
+        function () {
+            const iconContent = favoriteButton.getElementsByTagName("span")[0].innerHTML;
+            if (iconContent === "favorite") {
+                // TODO Remove from favorites
+                console.log("remove from favorites");
+            } else if (iconContent === "favorite_border") {
+                sendAddToFavoriteRequest(productId, favoriteButton);
+            }
+        }
+    )
 
     const favoriteIcon = document.createElement("span");
     favoriteIcon.classList.add("material-icons-round", "md-18");
-    favoriteIcon.innerHTML = "favorite_border";
+    if (isFavorite) {
+        favoriteIcon.innerHTML = "favorite";
+    } else {
+        favoriteIcon.innerHTML = "favorite_border";
+    }
 
     // Creating product image section
     const productImageSection = document.createElement("div");

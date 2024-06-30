@@ -26,7 +26,9 @@ function getCategory(title, products) {
             getProductCard (
                 product['nome'],
                 product['prezzo'],
-                resolveResource(product['immagine']).image
+                resolveResource(product['immagine']).image,
+                product['id_prodotto'],
+                JSON.parse(product['preferito'].toLowerCase())
             )
         );
     })
@@ -41,7 +43,9 @@ function renderLatestProducts(products) {
             getProductCard (
                 product['nome'],
                 product['prezzo'],
-                resolveResource(product['immagine']).image
+                resolveResource(product['immagine']).image,
+                product['id_prodotto'],
+                JSON.parse(product['preferito'].toLowerCase())
             )
         )
     })
@@ -79,8 +83,8 @@ function requestLatestProducts() {
         }
     }
 
-    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo`;
-    ajaxTableDataRequest.open("get", url, true);
+    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`;
+    ajaxTableDataRequest.open("GET", url, true);
     ajaxTableDataRequest.send(null);
 }
 
@@ -96,8 +100,8 @@ function requestAllProducts() {
         }
     }
 
-    const url = `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia&filter=tipologia`;
-    ajaxTableDataRequest.open("get", url, true);
+    const url = `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`;
+    ajaxTableDataRequest.open("GET", url, true);
     ajaxTableDataRequest.send(null);
 }
 

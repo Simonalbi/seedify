@@ -15,6 +15,7 @@
 
 <!-- GENERAL SCRIPTS -->
 <script type="module" src="${pageContext.request.contextPath}/common/general/scripts/script.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/common/general/scripts/products.js"></script>
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 <!-- COMPONENTS -->

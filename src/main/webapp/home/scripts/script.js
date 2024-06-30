@@ -8,13 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ajaxTableDataRequest.readyState === 4) {
             if (ajaxTableDataRequest.status === 200) {
                 const products = JSON.parse(ajaxTableDataRequest.responseText);
+
                 products.forEach(function (product) {
                     addToScrollableContainer(
                         "latest-products-scrollable-container",
                         getProductCard (
                             product['nome'],
                             product['prezzo'],
-                            resolveResource(product['immagine']).image
+                            resolveResource(product['immagine']).image,
+                            product['id_prodotto'],
+                            JSON.parse(product['preferito'].toLowerCase())
                         )
                     )
                 })
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo`;
-    ajaxTableDataRequest.open("get", url, true);
+    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`;
+    ajaxTableDataRequest.open("GET", url, true);
     ajaxTableDataRequest.send(null);
 });

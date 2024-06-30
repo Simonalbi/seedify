@@ -148,4 +148,23 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
         
         return favoritesBean;
     }
+
+    public boolean addToFavorites(UserBean user, ProductBean product) throws SQLException {
+        String query = "INSERT INTO " + FavoritesDao.TABLE_NAME +
+                       " (email, codice_prodotto) " +
+                       " VALUES (?, ?)";
+
+        boolean success = false;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setInt(2, product.getProductId());
+
+            preparedStatement.executeUpdate();
+            success = true;
+        }
+
+        return success;
+    }
 }
