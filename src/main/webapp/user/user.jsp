@@ -61,13 +61,13 @@
                 <span class="material-icons-round md-18">inventory_2</span>
                 <span class="rubik-300">Prodotti: <span class="stat-value rubik-400"><%= productDao.getTotalProducts() %></span></span>
               </div>
-            </div>
           <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
             <div class="stat">
               <span class="material-icons-round md-18">local_shipping</span>
               <span class="rubik-300">Ordini: <span class="stat-value rubik-400"><%= orderDao.getTotalOrders(userBean) %></span></span>
             </div>
           <% } %>
+          </div>
         </div>
       </div>
       <div class="ui-block" id="table-container">
@@ -79,6 +79,7 @@
               <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
             <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+              <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
             <% } %>
           </select>
