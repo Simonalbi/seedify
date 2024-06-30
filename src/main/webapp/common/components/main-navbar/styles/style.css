@@ -116,16 +116,6 @@
   background: linear-gradient(122deg, var(--dark-jungle-green) 26%, var(--royal-green) 55%, var(--android-green) 100%);
 }
 
-#main-navbar #logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 100%;
-
-  padding: 5px 0;
-}
-
 #burger-menu-icon {
   display: none;
 
@@ -135,6 +125,16 @@
   color: var(--pure-white);
 
   cursor: pointer;
+}
+
+#main-navbar #logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  padding: 5px 0;
 }
 
 #main-navbar #logo-container img {

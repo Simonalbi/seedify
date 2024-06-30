@@ -167,4 +167,22 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
 
         return success;
     }
+
+    public boolean removeFromFavorites(UserBean user, ProductBean product) throws SQLException {
+        String query = "DELETE FROM " + FavoritesDao.TABLE_NAME +
+                       " WHERE email = ? AND codice_prodotto = ?";
+
+        boolean success = false;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setInt(2, product.getProductId());
+
+            preparedStatement.executeUpdate();
+            success = true;
+        }
+
+        return success;
+    }
 }

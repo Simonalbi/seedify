@@ -17,7 +17,6 @@
 <body>
 	<jsp:include page="/common/components/login/login.jsp"/>
 	<jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
-	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 
 	<div id="main-container">
 		<div id="welcome-container">
@@ -52,7 +51,7 @@
 			<jsp:param name="loading-text" value="Caricamento prodotti..." />
 		</jsp:include>
 
-		<jsp:include page="/common/components/edit-product/edit-product.jsp">
+		<%--<jsp:include page="/common/components/edit-product/edit-product.jsp">
 			<jsp:param name="label" value="Nome" />
 			<jsp:param name="id" value="edit-product-name-input-box" />
 			<jsp:param name="type" value="text" />
@@ -60,8 +59,11 @@
 			<jsp:param name="pattern" value="[A-Za-z\s]+" />
 			<jsp:param name="errorMessage" value="Nome non valido" />
 			<jsp:param name="group" value="product-edit" />
-		</jsp:include>
+		</jsp:include>--%>
 	</div>
+
+	<jsp:include page="/common/components/chat-button/chat-button.jsp"/>
+
 	<footer>
 	</footer>
 </body>

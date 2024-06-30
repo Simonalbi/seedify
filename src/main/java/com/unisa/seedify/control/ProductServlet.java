@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "productServlet", urlPatterns = {"/product-servlet"})
 public class ProductServlet extends HttpServlet implements JsonServlet {
@@ -33,6 +32,24 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
             productPrimaryKey.addKey("codice_prodotto", productId);
             ProductBean productBean = productDao.doRetrive(productPrimaryKey);
             success = favoritesDao.addToFavorites(userBean, productBean);
+        } catch (NumberFormatException | SQLException ignored) {
+        }
+
+        return success;
+    }
+
+    private boolean removeProductFromFavorites(HttpSession session, int productId) {
+        UserBean userBean = (UserBean) session.getAttribute("user");
+        if (userBean == null) {
+            return false;
+        }
+
+        boolean success = false;
+        try {
+            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+            productPrimaryKey.addKey("codice_prodotto", productId);
+            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+            success = favoritesDao.removeFromFavorites(userBean, productBean);
         } catch (NumberFormatException | SQLException ignored) {
         }
 
@@ -136,6 +153,16 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                 try {
                     productId = jsonObject.get("product_id").getAsInt();
                     success = this.addProductToFavorites(request.getSession(), productId);
+                } catch (NullPointerException | JsonSyntaxException e) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
+                }
+                break;
+            }
+            case "remove_from_favorites": {
+                int productId;
+                try {
+                    productId = jsonObject.get("product_id").getAsInt();
+                    success = this.removeProductFromFavorites(request.getSession(), productId);
                 } catch (NullPointerException | JsonSyntaxException e) {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
                 }

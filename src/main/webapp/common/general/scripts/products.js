@@ -21,6 +21,25 @@ function sendAddToFavoriteRequest(productId, favoriteButton) {
     ajaxRequest.send(JSON.stringify(body));
 }
 
+function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
+    const ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function () {
+        if (ajaxRequest.readyState === 4) {
+            if (ajaxRequest.status === 200) {
+                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
+            }
+        }
+    }
+
+    const body = {
+        action: "remove_from_favorites",
+        product_id: productId
+    };
+    const url = `${getBaseOriginName()}/product-servlet`;
+    ajaxRequest.open("POST", url, true);
+    ajaxRequest.send(JSON.stringify(body));
+}
+
 /**
  *
  * @param {string} name
@@ -43,8 +62,7 @@ function getProductCard(name, price, image, productId, isFavorite) {
         function () {
             const iconContent = favoriteButton.getElementsByTagName("span")[0].innerHTML;
             if (iconContent === "favorite") {
-                // TODO Remove from favorites
-                console.log("remove from favorites");
+                sendRemoveFromFavoriteRequest(productId, favoriteButton);
             } else if (iconContent === "favorite_border") {
                 sendAddToFavoriteRequest(productId, favoriteButton);
             }
