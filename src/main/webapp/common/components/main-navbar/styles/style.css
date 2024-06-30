@@ -67,6 +67,13 @@
 
 #sidebar #account-details-container > #account-details {
   padding: 0 10px;
+  width: 100%;
+}
+
+#sidebar .account-details-value {
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #sidebar #options-container {
@@ -76,8 +83,6 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
-
-  overflow-y: scroll;
 }
 
 #sidebar .sidebar-option {
@@ -206,6 +211,7 @@
 #main-navbar .action {
   position: relative;
   display: flex;
+  cursor: pointer;
 }
 
 #main-navbar #actions-container lord-icon,

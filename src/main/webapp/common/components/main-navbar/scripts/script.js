@@ -4,7 +4,7 @@ function showSideBar() {
     const opacityLayer = document.getElementById("sidebar-opacity-layer");
 
     sidebarContent.style.visibility = "visible";
-    sidebar.style.width = "250px";
+    sidebar.style.width = "260px";
     opacityLayer.style.display = "block";
 }
 

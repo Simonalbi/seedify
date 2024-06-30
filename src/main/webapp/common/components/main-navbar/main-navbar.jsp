@@ -13,9 +13,9 @@
 					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture">
 				</div>
 				<div id="account-details">
-					<span><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
+					<span class="account-details-value"><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
 					<br>
-					<span><%= mainNavbarUserBean.getEmail()%></span>
+					<span class="account-details-value"><%= mainNavbarUserBean.getEmail()%></span>
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
@@ -109,13 +109,13 @@
 				<span>0</span>
 			</div>
 		</div>
-		<div class="action">
+		<div class="action" onclick="showSideBar()">
 			<% if (mainNavbarUserBean != null) { %>
-				<div class="profile-picture">
+				<div class="profile-picture" >
 					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture" alt="Foto">
 				</div>
 			<% } else { %>
-				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
+				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000" ></lord-icon>
 			<% } %>
 		</div>
 	</div>

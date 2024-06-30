@@ -7,6 +7,7 @@
 
 <!-- TODO Filter page access -->
 <!-- TODO Navbar style -->
+<!-- TODO Edit product -->
 <%
   UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
 
