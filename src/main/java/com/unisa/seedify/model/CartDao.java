@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDao<CartBean, CartItemBean> {
-    private static final String TABLE_NAME = "carrelli";
+    public static final String TABLE_NAME = "carrelli";
 
     private static CartDao instance = null;
 

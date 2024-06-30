@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
-    private static final String TABLE_NAME = "prodotti";
+    public static final String TABLE_NAME = "prodotti";
 
     private static ProductDao instance = null;
 

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReviewDao extends BaseDao implements GenericDao<ReviewBean> {
-    private static final String TABLE_NAME = "recensioni";
+    public static final String TABLE_NAME = "recensioni";
 
     private static ReviewDao instance = null;
 

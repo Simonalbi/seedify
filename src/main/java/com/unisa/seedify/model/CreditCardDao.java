@@ -5,7 +5,7 @@ import com.unisa.seedify.exceptions.NotImplementedException;
 import java.sql.*;
 
 public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean> {
-    private static final String TABLE_NAME = "carte_di_credito";
+    public static final String TABLE_NAME = "carte_di_credito";
 
     private static CreditCardDao instance = null;
 

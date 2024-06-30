@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, DetailedDao<FavoritesBean, ProductBean> {
-    private static final String TABLE_NAME = "preferiti";
+    public static final String TABLE_NAME = "preferiti";
 
     private static FavoritesDao instance = null;
 
