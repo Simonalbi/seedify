@@ -91,6 +91,9 @@ function getProductCard(name, price, image, productId, isFavorite) {
 
     const productImageContainer = document.createElement("div")
     productImageContainer.classList.add("product-image-container");
+    productImageContainer.addEventListener('click', function() {
+        window.location.href = `${getBaseOriginName()}/resources-servlet?resource_type=product_page&product_id=${productId}`;
+    });
 
     const productImage = document.createElement("img");
     productImage.src = image;
@@ -104,6 +107,9 @@ function getProductCard(name, price, image, productId, isFavorite) {
 
     const productInfo = document.createElement("div");
     productInfo.classList.add("product-info");
+    productInfo.addEventListener('click', function() {
+        window.location.href = `${getBaseOriginName()}/resources-servlet?resource_type=product_page&product_id=${productId}`;
+    });
 
     const nameParagraph = document.createElement("p");
     nameParagraph.classList.add("product-name", "rubik-500");
