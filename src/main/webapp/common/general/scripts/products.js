@@ -52,6 +52,31 @@ function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
 
 /**
  *
+ * @param {number} productId
+ * @param {number} quantity
+ */
+function sendAddToCartRequest(productId, quantity) {
+    const ajaxRequest = new XMLHttpRequest();
+    ajaxRequest.onreadystatechange = function () {
+        if (ajaxRequest.readyState === 4) {
+            if (ajaxRequest.status === 200) {
+                // TODO Update cart icon notification
+            }
+        }
+    }
+
+    const body = {
+        action: "add_to_cart",
+        product_id: productId,
+        quantity: quantity
+    };
+    const url = `${getBaseOriginName()}/product-servlet`;
+    ajaxRequest.open("POST", url, true);
+    ajaxRequest.send(JSON.stringify(body));
+}
+
+/**
+ *
  * @param {string} name
  * @param {number} price
  * @param {string} image
@@ -124,6 +149,12 @@ function getProductCard(name, price, image, productId, isFavorite) {
 
     const cartButton = document.createElement("button");
     cartButton.classList.add("cart-button", "material-button");
+    cartButton.addEventListener(
+        'click',
+        function () {
+            sendAddToCartRequest(productId, 1);
+        }
+    )
 
     const cartIcon = document.createElement("span");
     cartIcon.classList.add("material-icons-round", "md-18");

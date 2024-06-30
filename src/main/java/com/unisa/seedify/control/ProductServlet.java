@@ -75,6 +75,29 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         return favoritesProducts;
     }
 
+    private boolean addToCart(HttpSession session, int productId, int quantity) {
+        UserBean userBean = (UserBean) session.getAttribute("user");
+        if (userBean == null) {
+            return false;
+        }
+
+        boolean success = false;
+        try {
+            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+            productPrimaryKey.addKey("codice_prodotto", productId);
+            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+
+            EntityPrimaryKey cartPrimaryKey = new EntityPrimaryKey();
+            cartPrimaryKey.addKey("email", userBean.getEmail());
+            CartBean cartBean = cartDao.doRetrive(cartPrimaryKey);
+
+            success = cartDao.addToCart(cartBean, productBean, quantity);
+        } catch (NumberFormatException | SQLException ignored) {
+        }
+
+        return success;
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -157,23 +180,22 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         boolean success = false;
         switch (action) {
             case "add_to_favorites": {
-                int productId;
-                try {
-                    productId = jsonObject.get("product_id").getAsInt();
-                    success = this.addProductToFavorites(request.getSession(), productId);
-                } catch (NullPointerException | JsonSyntaxException e) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
-                }
+                success = this.addProductToFavorites(request.getSession(), productId);
                 break;
             }
             case "remove_from_favorites": {
-                int productId;
+                success = this.removeProductFromFavorites(request.getSession(), productId);
+                break;
+            }
+            case "add_to_cart": {
+                int quantity;
                 try {
-                    productId = jsonObject.get("product_id").getAsInt();
-                    success = this.removeProductFromFavorites(request.getSession(), productId);
+                    quantity = jsonObject.get("quantity").getAsInt();
                 } catch (NullPointerException | JsonSyntaxException e) {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
+                    return;
                 }
+                success = this.addToCart(request.getSession(), productId, quantity);
                 break;
             }
             default: {
