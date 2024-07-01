@@ -91,6 +91,7 @@ CREATE TABLE memorizzazioni (
     scadenza DATE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
+    stato ENUM("ATTIVO", "ELIMINATO") NOT NULL DEFAULT "ATTIVO",
 
     PRIMARY KEY(email, numero_carta, cvv, scadenza, nome, cognome),
 

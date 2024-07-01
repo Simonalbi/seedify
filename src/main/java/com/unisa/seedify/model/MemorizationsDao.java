@@ -1,6 +1,7 @@
 package com.unisa.seedify.model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemorizationsDao extends BaseDao implements GenericDao<MemorizationsBean>, DetailedDao<MemorizationsBean, CreditCardBean> {
@@ -110,7 +111,8 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     public void doDeleteOne(MemorizationsBean collection, CreditCardBean bean) throws SQLException {
         collection.getCreditCards().remove(bean);
 
-        String query = "DELETE FROM " + MemorizationsDao.TABLE_NAME +
+        String query = "UPDATE " + MemorizationsDao.TABLE_NAME +
+                       " SET stato = 'ELIMINATO' " +
                        " WHERE email = ? AND numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -169,5 +171,40 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 return memorizationsBean;
             }
         }
+    }
+
+    public ArrayList<CreditCardBean> getAllCreditCard(UserBean userBean)  {
+        ArrayList<CreditCardBean> creditCards = new ArrayList<>();
+
+        String query = "SELECT * FROM " + MemorizationsDao.TABLE_NAME +
+                       " WHERE email = ? AND stato = 'ATTIVO'";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userBean.getEmail());
+
+            MemorizationsBean memorizationsBean = null;
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                memorizationsBean = new MemorizationsBean();
+
+                creditCards = (ArrayList<CreditCardBean>) memorizationsBean.getCreditCards();
+                while (resultSet.next()) {
+                    CreditCardBean creditCardBean = new CreditCardBean();
+                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
+                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
+                    creditCardBean.setName(resultSet.getString("nome"));
+                    creditCardBean.setSurname(resultSet.getString("cognome"));
+
+                    memorizationsBean.getCreditCards().add(creditCardBean);
+                }
+
+            }catch (SQLException ignored){
+            }
+        }catch (SQLException ignored){
+        }
+        return creditCards;
     }
 }

@@ -46,3 +46,7 @@
 <!-- main-footer -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-footer/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/main-footer/scripts/script.js" defer></script>
+
+<%-- edit-credit-cart --%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit-credit-card/styles/style.css">
+<script src="${pageContext.request.contextPath}/common/components/edit-credit-card/scripts/script.js" defer></script>

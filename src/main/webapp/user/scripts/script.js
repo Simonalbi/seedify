@@ -159,6 +159,8 @@ function updateTable(tableData) {
         if (tableData['data_name'] === "all_saved_products") {
             onEdit = showEditProduct;
             recordIdentifier = "entity_primary_key";
+        } else if (tableData['data_name'] === "user_credit_cards") {
+            onEdit = showEditCreditCard;
         }
 
         newTableElement = buildTable(tableData, onEdit, recordIdentifier);
