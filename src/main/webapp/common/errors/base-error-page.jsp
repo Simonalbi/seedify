@@ -13,13 +13,13 @@
       <img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300_small.png" alt="">
     </div>
     <div class="message-container">
-      <div class="question">
+      <div class="question rubik-500">
         <h4>${param.errorMessage}</h4>
       </div>
-      <div class="message">
+      <div class="message rubik-400">
         <p>${param.errorDescription}</p>
       </div>
-      <div class="redirect-message">
+      <div class="redirect-message rubik-400">
         <span class="material-icons-round md-18">chevron_right</span>
         <span class="span-text"><b><a href="${pageContext.request.contextPath}/home/home.jsp">Clicca qui</a> per ritornare alla homepage di Seedify!</b></span>
       </div>
