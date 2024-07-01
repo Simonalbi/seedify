@@ -36,6 +36,8 @@
               <jsp:param name="id" value="edit-product-quantity-input-box" />
               <jsp:param name="type" value="number" />
               <jsp:param name="name" value="quantity" />
+              <jsp:param name="pattern" value="\d+" />
+              <jsp:param name="errorMessage" value="Qauntit&agrave; non valida" />
               <jsp:param name="group" value="product-edit" />
             </jsp:include>
           </div>

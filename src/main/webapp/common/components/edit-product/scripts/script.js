@@ -2,6 +2,8 @@ import {getBaseOriginName, sendAjaxRequest} from "../../../general/scripts/scrip
 
 export {showEditProduct, hideEditProduct};
 
+window.hideEditProduct = hideEditProduct;
+
 /**
  * Show the edit product overlay
  * @param {String} productIdentifier - The product identifier.
@@ -15,8 +17,6 @@ function showEditProduct(productIdentifier) {
         null,
         function (response) {
             const productData = JSON.parse(response)[0];
-
-            console.log(productData)
 
             document.getElementById("edit-product-name-input-box").value = productData['nome'];
             document.getElementById("edit-product-price-input-box").value = productData['prezzo'];

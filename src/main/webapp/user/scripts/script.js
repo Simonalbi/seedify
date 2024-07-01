@@ -1,4 +1,5 @@
-import { getAjaxRequestObject, getBaseOriginName, resolveResource } from '../../common/general/scripts/script.js';
+import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
+import { showEditProduct, hideEditProduct } from '../../common/components/edit-product/scripts/script.js';
 
 window.getTableData = getTableData;
 
@@ -15,33 +16,26 @@ function hideLoadingOverlay() {
 function sendDeleteRequest(target) {
     showLoadingOverlay();
 
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-            if (ajaxTableDataRequest.status === 200) {
-                getTableData()
-                hideLoadingOverlay();
-            }
+    // http://.../<servlet>?action=<action>&entity_primary_key=<primary_key>
+    const url = `${getBaseOriginName()}/${target.value}`;
+    sendAjaxRequest(
+        "DELETE",
+        url,
+        null,
+        function (response) {
+            getTableData();
+            hideLoadingOverlay();
         }
-    }
-
-    const params = target.value.split("&");
-    const body = {
-        action: params[0].replace("action=", ""),
-        entity_primary_key: params[1].replace("entity_primary_key=", "")
-    }
-
-    const url = `${getBaseOriginName()}/user-servlet?${target.value}`;
-    ajaxTableDataRequest.open("DELETE", url, true);
-    ajaxTableDataRequest.send(JSON.stringify(body));
+    )
 }
 
 /**
  * Builds a table element from the given data.
  * @param {Object} tableData - The data to build the table from.
  * @param {Function} onEdit - The function to call when the edit button is clicked.
+ * @param {string} recordIdentifier - The identifier of the record.
  */
-function buildTable(tableData, onEdit) {
+function buildTable(tableData, onEdit, recordIdentifier) {
     const canEdit = tableData['canEdit'];
     const canDelete = tableData['canDelete'];
     const haveActions = canEdit || canDelete;
@@ -80,7 +74,7 @@ function buildTable(tableData, onEdit) {
             td.classList.add("table-actions")
 
             if (canEdit) {
-                const editActionValue = `action=${tableData['editCall']}&entity_primary_key=${record['entity_primary_key']}`;
+                const editActionValue = `${tableData['editCall']}&entity_primary_key=${record['entity_primary_key']}`;
 
                 const editAction = document.createElement('button');
                 editAction.classList.add("material-button")
@@ -93,7 +87,7 @@ function buildTable(tableData, onEdit) {
 
                 if (onEdit !== null) {
                     editAction.onclick = function (event) {
-                        onEdit();
+                        onEdit(record[recordIdentifier]);
                     }
                 }
                 editAction.appendChild(span);
@@ -102,7 +96,7 @@ function buildTable(tableData, onEdit) {
             }
 
             if (canDelete) {
-                const deleteActionValue = `action=${tableData['deleteCall']}&entity_primary_key=${record['entity_primary_key']}`;
+                const deleteActionValue = `${tableData['deleteCall']}&entity_primary_key=${record['entity_primary_key']}`;
 
                 const deleteAction = document.createElement('button');
                 deleteAction.classList.add("material-button")
@@ -161,10 +155,13 @@ function updateTable(tableData) {
     let newTableElement = null;
     if (tableData['data'].length !== 0) {
         let onEdit = null;
+        let recordIdentifier = "";
         if (tableData['data_name'] === "all_saved_products") {
             onEdit = showEditProduct;
+            recordIdentifier = "entity_primary_key";
         }
-        newTableElement = buildTable(tableData, onEdit);
+
+        newTableElement = buildTable(tableData, onEdit, recordIdentifier);
     } else {
         newTableElement = document.createElement('p');
         newTableElement.classList.add('rubik-300', 'no-results-message');
@@ -183,22 +180,17 @@ function getTableData() {
 
     showLoadingOverlay();
 
-    // TODO Set timeout slide 43
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-             if (ajaxTableDataRequest.status === 200) {
-                 const tableData = JSON.parse(ajaxTableDataRequest.responseText);
-                 updateTable(tableData);
-                 hideLoadingOverlay();
-             }
-        }
-    }
-
-    // TODO Capire come recuperare la prima parte dell'url fino a seedify_war compreso
     const url = `${getBaseOriginName()}/user-servlet?action=${requestParams[0]}&fields=${requestParams[1]}`;
-    ajaxTableDataRequest.open("GET", url, true);
-    ajaxTableDataRequest.send(null);
+    sendAjaxRequest(
+        "GET",
+        url,
+        null,
+        function (response) {
+            const tableData = JSON.parse(response);
+            updateTable(tableData);
+            hideLoadingOverlay();
+        }
+    )
 }
 
 getTableData()

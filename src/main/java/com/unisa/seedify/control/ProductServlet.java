@@ -39,6 +39,18 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                 products = productDao.getAllActiveMostPurchasedProducts(10);
                 break;
             }
+            case "get_product": {
+                try {
+                    EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(request.getParameter("entity_primary_key"));
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+                    products = new ArrayList<>();
+                    products.add(productBean);
+                } catch (SQLException e) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid or missing param 'entity_primary_key'");
+                    return;
+                }
+                break;
+            }
             default: {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
             }
