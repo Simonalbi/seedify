@@ -1,7 +1,7 @@
 #sidebar-opacity-layer {
   display: none;
 
-  position: absolute;
+  position: fixed;
   z-index: 11;
 
   width: 100%;
@@ -11,7 +11,7 @@
 }
 
 #sidebar {
-  position: absolute;
+  position: fixed;
   z-index: 12;
 
   width: 0;
@@ -223,7 +223,8 @@
 #main-navbar .action .notification {
   position: absolute;
   z-index: 11;
-  right: -3px;
+  top: -4px;
+  right: -5px;
 
   display: flex;
   justify-content: center;

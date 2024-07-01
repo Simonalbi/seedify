@@ -117,7 +117,7 @@ form {
   height: 50px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 870px) {
   #edit-product {
     align-items: flex-start;
   }
