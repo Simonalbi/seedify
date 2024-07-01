@@ -133,3 +133,12 @@ img {
 .product-container .cart-button {
   border-radius: 15px;
 }
+
+.form-row {
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
