@@ -1,13 +1,11 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.exceptions.NotImplementedException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class BaseBean {
     public EntityPrimaryKey getPrimaryKey() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     public static EntityPrimaryKey parsePrimaryKey(String rawEntityPrimaryKey) {

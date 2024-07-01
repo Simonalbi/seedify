@@ -1,7 +1,5 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.exceptions.NotImplementedException;
-
 import java.sql.*;
 
 public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean> {
@@ -57,8 +55,8 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
     }
 
     @Override
-    public void doUpdate(CreditCardBean creditCardBean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdate(CreditCardBean creditCardBean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.exceptions.NotImplementedException;
-
 import java.sql.*;
 import java.util.List;
 
@@ -82,8 +80,8 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     }
 
     @Override
-    public void doUpdate(MemorizationsBean memorizationsBeans) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdate(MemorizationsBean memorizationsBeans) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -130,8 +128,8 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     }
 
     @Override
-    public void doUpdateOne(MemorizationsBean collection, CreditCardBean bean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdateOne(MemorizationsBean collection, CreditCardBean bean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override

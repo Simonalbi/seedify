@@ -1,7 +1,5 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.exceptions.NotImplementedException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,8 +66,8 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
     }
 
     @Override
-    public void doUpdate(FavoritesBean favoritesBean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdate(FavoritesBean favoritesBean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -108,8 +106,8 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
     }
 
     @Override
-    public void doUpdateOne(FavoritesBean favoritesBean, ProductBean productBean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdateOne(FavoritesBean favoritesBean, ProductBean productBean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override

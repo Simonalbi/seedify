@@ -1,7 +1,6 @@
 package com.unisa.seedify.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.unisa.seedify.exceptions.NotImplementedException;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,7 +1,5 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.exceptions.NotImplementedException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,8 +66,8 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
     }
 
     @Override
-    public void doUpdate(LocationsBean locationsBean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdate(LocationsBean locationsBean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -108,8 +106,8 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
     }
 
     @Override
-    public void doUpdateOne(LocationsBean locationsBean, AddressBean addressBean) throws SQLException, NotImplementedException {
-        throw new NotImplementedException();
+    public void doUpdateOne(LocationsBean locationsBean, AddressBean addressBean) throws SQLException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
