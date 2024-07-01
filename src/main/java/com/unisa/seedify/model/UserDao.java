@@ -117,8 +117,7 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
                     entityCount = resultSet.getInt("entity_count");
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return entityCount;
     }
@@ -145,8 +144,7 @@ public class UserDao extends BaseDao implements GenericDao<UserBean> {
                     customers.add(userBean);
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return customers;
     }

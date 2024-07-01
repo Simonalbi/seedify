@@ -41,7 +41,7 @@
 			</div>
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/about-us/about-us.jsp">
 					<span class="material-icons-round md-18">info_outline</span>
 					<span class="option-label">Chi Siamo</span>
 				</a>
@@ -94,7 +94,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="${pageContext.request.contextPath}/about_us/about_us.jsp">
+				<a href="${pageContext.request.contextPath}/about-us/about-us.jsp">
 					<span class="material-icons-round md-18">info_outline</span>
 					<span class="option-label">Chi Siamo</span>
 				</a>

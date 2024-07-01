@@ -201,10 +201,8 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                     memorizationsBean.getCreditCards().add(creditCardBean);
                 }
 
-            }catch (SQLException ignored){
-            }
-        }catch (SQLException ignored){
-        }
+            } catch (SQLException ignored){}
+        } catch (SQLException ignored){}
         return creditCards;
     }
 }

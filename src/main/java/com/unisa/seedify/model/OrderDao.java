@@ -136,8 +136,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
             if (resultSet.next()) {
                 ordersAmount = resultSet.getInt("orders_count");
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return ordersAmount;
     }
@@ -157,8 +156,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     ordersAmount = resultSet.getInt("orders_count");
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return ordersAmount;
     }
@@ -200,8 +198,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
                 orders.add(orderBean);
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return orders;
     }
@@ -243,8 +240,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     orders.add(orderBean);
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return orders;
     }

@@ -58,8 +58,7 @@ public class ResourcesServlet extends HttpServlet implements JsonServlet {
                 entityPrimaryKey.addKey("codice_prodotto", productId);
                 try {
                     productBean = productDao.doRetrive(entityPrimaryKey);
-                } catch (SQLException ignored) {
-                }
+                } catch (SQLException ignored) {}
 
                 if (productBean == null) {
                     response.sendRedirect(request.getContextPath() + "/common/error/404.jsp");

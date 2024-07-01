@@ -35,7 +35,7 @@
                     </a>
                 </div>
                 <div class="footer-section-row">
-                    <a href="${pageContext.request.contextPath}/about_us/about_us.jsp">
+                    <a href="${pageContext.request.contextPath}/about-us/about-us.jsp">
                         <span class="material-icons-round">info_outline</span>
                         <span>Chi Siamo</span>
                     </a>

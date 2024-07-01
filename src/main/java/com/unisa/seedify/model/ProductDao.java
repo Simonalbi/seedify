@@ -124,8 +124,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
             if (resultSet.next()) {
                 productsAmount = resultSet.getInt("products_count");
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return productsAmount;
     }
@@ -154,8 +153,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
 
                 products.add(productBean);
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return products;
     }
@@ -189,8 +187,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     products.add(productBean);
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return products;
     }
@@ -232,8 +229,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     products.add(productBean);
                 }
             }
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
 
         return products;
     }

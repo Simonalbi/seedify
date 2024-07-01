@@ -191,8 +191,7 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
         FavoritesBean favoritesBean = new FavoritesBean();
         try {
             favoritesBean = doRetrive(entityPrimaryKey);
-        } catch (SQLException ignored) {
-        }
+        } catch (SQLException ignored) {}
         return favoritesBean;
     }
 }

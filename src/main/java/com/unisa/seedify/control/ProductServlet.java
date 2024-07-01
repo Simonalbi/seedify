@@ -112,8 +112,7 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                         EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
                         ProductBean productBean = productDao.doRetrive(productPrimaryKey);
                         productDao.doDelete(productBean);
-                    } catch (SQLException ignored) {
-                    }
+                    } catch (SQLException ignored) {}
                     break;
                 }
                 default: {

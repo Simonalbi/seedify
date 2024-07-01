@@ -4,9 +4,9 @@
     <jsp:include page="/common/general/metadata.jsp"/>
     <title>La Nostra Storia - Seedify</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/about_us/styles/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/about-us/styles/style.css">
 
-    <script type="module" src="${pageContext.request.contextPath}/about_us/scripts/script.js" defer></script>
+    <script type="module" src="${pageContext.request.contextPath}/about-us/scripts/script.js" defer></script>
 
 </head>
 <body>
