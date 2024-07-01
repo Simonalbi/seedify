@@ -43,7 +43,7 @@ body {
   height: fit-content;
 }
 
-#welcome-message-container>.profile-picture {
+#welcome-message-container > .profile-picture {
   width: 100px;
   height: 100px;
 }
