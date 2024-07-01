@@ -36,7 +36,12 @@ function sendDeleteRequest(target) {
     ajaxTableDataRequest.send(JSON.stringify(body));
 }
 
-function buildTable(tableData) {
+/**
+ * Builds a table element from the given data.
+ * @param {Object} tableData - The data to build the table from.
+ * @param {Function} onEdit - The function to call when the edit button is clicked.
+ */
+function buildTable(tableData, onEdit) {
     const canEdit = tableData['canEdit'];
     const canDelete = tableData['canDelete'];
     const haveActions = canEdit || canDelete;
@@ -86,8 +91,10 @@ function buildTable(tableData) {
                 span.value = editActionValue;
                 span.innerHTML = "edit";
 
-                editAction.onclick = function (event) {
-                    document.getElementById("edit-product").style.visibility = "visible";
+                if (onEdit !== null) {
+                    editAction.onclick = function (event) {
+                        onEdit();
+                    }
                 }
                 editAction.appendChild(span);
 
@@ -153,7 +160,11 @@ function updateTable(tableData) {
 
     let newTableElement = null;
     if (tableData['data'].length !== 0) {
-        newTableElement = buildTable(tableData);
+        let onEdit = null;
+        if (tableData['data_name'] === "all_saved_products") {
+            onEdit = showEditProduct;
+        }
+        newTableElement = buildTable(tableData, onEdit);
     } else {
         newTableElement = document.createElement('p');
         newTableElement.classList.add('rubik-300', 'no-results-message');

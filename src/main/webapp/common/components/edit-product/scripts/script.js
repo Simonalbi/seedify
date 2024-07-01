@@ -1,15 +1,6 @@
 function showEditProduct() {
     const editProductOverlay = document.getElementById("edit-product");
     editProductOverlay.style.visibility = "visible";
-
-    editProductOverlay.addEventListener('click', function(event) {
-        const loginMainContainer = document.getElementById("edit-product-main-container");
-        const isClickOutside = !loginMainContainer.contains(event.target);
-
-        if (isClickOutside && editProductOverlay.style.visibility !== "hidden") {
-            editProductOverlay.style.visibility = "hidden";
-        }
-    });
 }
 
 function hideEditProduct() {

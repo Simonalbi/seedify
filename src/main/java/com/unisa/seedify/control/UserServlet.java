@@ -61,19 +61,23 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         boolean canDelete = false;
         String deleteCall = null;
 
+        String dataName = "";
         ArrayList<Object> data = null;
         if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
             switch (action) {
                 case "get_employees": {
                     data = new ArrayList<>(userDao.getAllEmployee());
+                    dataName = "employees";
                     break;
                 }
                 case "get_customers" : {
                     data = new ArrayList<>(userDao.getAllCustomers());
+                    dataName = "customers";
                     break;
                 }
                 case "get_orders": {
                     data = new ArrayList<>(orderDao.getAllOrders());
+                    dataName = "all_users_orders";
                     break;
                 }
                 case "get_products": {
@@ -81,7 +85,9 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     editCall = "";
                     canDelete = true;
                     deleteCall = "delete_product";
+
                     data = new ArrayList<>(productDao.getAllActiveProducts());
+                    dataName = "all_saved_products";
                     break;
                 }
                 default: {
@@ -92,10 +98,12 @@ public class UserServlet extends HttpServlet implements JsonServlet {
             switch (action) {
                 case "get_orders": {
                     data = new ArrayList<>(orderDao.getAllOrders(userBean));
+                    dataName = "user_orders";
                     break;
                 }
                 case "get_favorites": {
                     /*data = new ArrayList<>(orderDao.getAllOrders(userBean));*/
+                    dataName = "user_favorites_products";
                     break;
                 }
                 default: {
@@ -111,6 +119,7 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         JsonArray filteredData = JsonUtils.filterJsonArray(rawData, fields);
         jsonResponseObject.remove("data");
         jsonResponseObject.add("data", filteredData);
+        jsonResponseObject.add("data_name", new JsonPrimitive(dataName));
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
