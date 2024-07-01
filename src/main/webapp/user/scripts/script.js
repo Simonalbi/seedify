@@ -163,6 +163,8 @@ function updateTable(tableData) {
         let onEdit = null;
         if (tableData['data_name'] === "all_saved_products") {
             onEdit = showEditProduct;
+        } else if (tableData['data_name'] === "user_credit_cards") {
+            onEdit = showEditCreditCard;
         }
         newTableElement = buildTable(tableData, onEdit);
     } else {
