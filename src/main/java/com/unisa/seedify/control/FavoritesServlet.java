@@ -2,6 +2,7 @@ package com.unisa.seedify.control;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.unisa.seedify.model.BaseBean;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.ProductBean;
 import com.unisa.seedify.model.UserBean;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -48,12 +50,6 @@ public class FavoritesServlet extends HttpServlet implements JsonServlet {
                 } catch (SQLException ignored) {}
                 break;
             }
-            case "remove_from_favorites": {
-                try {
-                    success = favoritesDao.removeFromFavorites(userBean, productBean);
-                } catch (SQLException ignored) {}
-                break;
-            }
             default: {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
             }
@@ -63,6 +59,33 @@ public class FavoritesServlet extends HttpServlet implements JsonServlet {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An error occurred while processing the request");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        UserBean userBean = (UserBean) session.getAttribute("user");
+
+        String action = request.getParameter("action");
+        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
+        if (rawProductPrimaryKey == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+            return;
+        }
+
+        switch (action) {
+            case "remove_from_favorites": {
+                try {
+                    EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
+                    ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+                    favoritesDao.removeFromFavorites(userBean, productBean);
+                } catch (SQLException ignored) {}
+                break;
+            }
+            default: {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+            }
         }
     }
 }

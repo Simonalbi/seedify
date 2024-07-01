@@ -83,6 +83,7 @@
               <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
             <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+              <option value="get_favorites-immagine,nome,prezzo,stagione,,tipologia,descrizione">Preferiti</option>
               <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_credit_card-nome,cognome,numero_di_carta,cvv,data_di_scadenza">Carte di Credito</option>
             <% } %>

@@ -86,7 +86,7 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     break;
                 }
                 case "get_favorites": {
-                    deleteCall = "remove_from_favorites";
+                    deleteCall = "favorites-servlet?action=remove_from_favorites";
                     canDelete = true;
 
                     data = new ArrayList<>(favoritesDao.getUserFavorites(userBean).getProducts());
