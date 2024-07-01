@@ -60,7 +60,7 @@ h6 {
   font-size: calc(25px + 0.390625vw);
 }
 
-label, input {
+label, input, select {
   font-size: calc(18px + 0.390625vw);
 }
 
