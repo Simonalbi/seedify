@@ -1,4 +1,6 @@
 #edit-product {
+  visibility: hidden;
+
   position: fixed;
   z-index: 1;
 

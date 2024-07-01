@@ -1,4 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.regex.Matcher" %>
 <%@ page import="java.util.regex.Pattern" %>
@@ -13,7 +12,6 @@
     String inputRows = request.getParameter("rows");
     String inputCols = request.getParameter("cols");
     String inputErrorMessage = request.getParameter("errorMessage");
-
 
     HashMap<String, String> options = new HashMap<>();
     String rawInputOptions = request.getParameter("options");
@@ -33,7 +31,7 @@
     <div class="input-box-label-container">
       <label for="${param.id}">${param.label}</label>
     </div>
-    <div class="input-box-input-container">
+    <div class="input-box-input-container <% if ("select".equals(inputTag)) { %> select-dropdown <% } %>">
       <% if ("select".equals(inputTag)) { %>
         <select id="${param.id}"
             name="${param.name}"

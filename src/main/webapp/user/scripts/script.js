@@ -12,10 +12,6 @@ function hideLoadingOverlay() {
     loadingOverlay.style.visibility = 'hidden';
 }
 
-function sendEditRequest(target) {
-    console.log(target.value)
-}
-
 function sendDeleteRequest(target) {
     showLoadingOverlay();
 
@@ -91,8 +87,7 @@ function buildTable(tableData) {
                 span.innerHTML = "edit";
 
                 editAction.onclick = function (event) {
-                    // TODO Edit data
-                    sendEditRequest(event.target);
+                    document.getElementById("edit-product").style.visibility = "visible";
                 }
                 editAction.appendChild(span);
 

@@ -25,7 +25,11 @@
     <script type="module" src="${pageContext.request.contextPath}/user/scripts/script.js" defer></script>
   </head>
   <body>
-    <%@ include file="/common/components/main-navbar/main-navbar.jsp" %>
+    <jsp:include page="/common/components/main-navbar/main-navbar.jsp" />
+
+    <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
+      <%@ include file="/common/components/edit-product/edit-product.jsp" %>
+    <% } %>
 
     <div class="main-page-content">
       <div id="info-container">
