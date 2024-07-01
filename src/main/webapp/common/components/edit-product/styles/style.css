@@ -132,6 +132,11 @@ form {
 
     padding: 80px 20px;
   }
+
+  #edit-product-close-button {
+    top: 70px;
+  }
+
   #edit-product-form {
     gap: 30px;
   }

@@ -2,7 +2,7 @@
 
 <div id="edit-product">
   <div id="edit-product-main-container">
-    <div id="edit-product-close-button">
+    <div id="edit-product-close-button" onclick="hideEditProduct()">
       <span class="material-icons-round md-18">close</span>
     </div>
     <form id="edit-product-form">
