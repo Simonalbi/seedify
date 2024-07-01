@@ -106,6 +106,16 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     dataName = "user_favorites_products";
                     break;
                 }
+                case "get_credit_card": {
+                    canEdit = true;
+                    canDelete = true;
+                    editCall = "";
+                    deleteCall = "delete_credit_card";
+
+                    data = new ArrayList<>(memorizationsDao.getAllCreditCard(userBean));
+                    dataName = "user_credit_cards";
+                    break;
+                }
                 default: {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
                 }
