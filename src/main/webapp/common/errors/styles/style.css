@@ -18,6 +18,8 @@
   flex-direction: column;
   align-items: center;
 
+  margin-top: 20px;
+
   color: var(--pure-white);
 }
 
@@ -54,7 +56,7 @@
 }
 
 .redirect-message .material-icons-round {
-  vertical-align: middle;
+  vertical-align: bottom;
 }
 
 a {
