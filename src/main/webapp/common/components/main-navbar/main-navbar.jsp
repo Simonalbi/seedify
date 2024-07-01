@@ -105,7 +105,7 @@
 	<div id="actions-container">
 		<div class="action">
 			<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
-			<div class="notification">
+			<div class="notification" id="cart-items-counter">
 				<span>0</span>
 			</div>
 		</div>

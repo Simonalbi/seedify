@@ -202,12 +202,12 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
             return false;
         }
 
-
         CartItemBean cartItemBean = cartBean.getCartItems().stream()
                 .filter(cartItem -> cartItem.getProduct().equals(productBean))
                 .findFirst()
                 .orElse(null);
 
+        boolean cartReset = false;
         boolean newCartItem = cartItemBean == null;
         if (cartItemBean == null) {
             cartItemBean = new CartItemBean();
@@ -216,6 +216,7 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
         } else {
             if (productBean.getQuantity() < cartItemBean.getQuantity() + quantity) {
                 cartItemBean.setQuantity(productBean.getQuantity());
+                cartReset = true;
             } else {
                 cartItemBean.setQuantity(cartItemBean.getQuantity() + quantity);
             }
@@ -232,7 +233,7 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
         } catch (SQLException ignored) {
         }
 
-        return success;
+        return (success && !cartReset);
 
     }
 }

@@ -60,7 +60,8 @@ function sendAddToCartRequest(productId, quantity) {
     ajaxRequest.onreadystatechange = function () {
         if (ajaxRequest.readyState === 4) {
             if (ajaxRequest.status === 200) {
-                // TODO Update cart icon notification
+                const counter = document.querySelector("#cart-items-counter span");
+                counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
             }
         }
     }
