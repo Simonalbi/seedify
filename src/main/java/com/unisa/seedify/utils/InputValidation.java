@@ -1,4 +1,4 @@
-package com.unisa.seedify.control.utils;
+package com.unisa.seedify.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

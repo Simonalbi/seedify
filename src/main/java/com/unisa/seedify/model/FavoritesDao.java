@@ -183,4 +183,16 @@ public class FavoritesDao extends BaseDao implements GenericDao<FavoritesBean>, 
 
         return success;
     }
+
+    public FavoritesBean getUserFavorites(UserBean user) {
+        EntityPrimaryKey entityPrimaryKey = new EntityPrimaryKey();
+        entityPrimaryKey.addKey("email", user.getEmail());
+
+        FavoritesBean favoritesBean = new FavoritesBean();
+        try {
+            favoritesBean = doRetrive(entityPrimaryKey);
+        } catch (SQLException ignored) {
+        }
+        return favoritesBean;
+    }
 }

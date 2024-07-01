@@ -1,6 +1,6 @@
 package com.unisa.seedify.control;
 
-import com.unisa.seedify.control.utils.InputValidation;
+import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 
@@ -23,10 +23,11 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().invalidate();
+        request.getSession(true).invalidate();
         response.sendRedirect("home/home.jsp");
     }
 
+    // TODO Redirect instead of throwing exception
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter("email").trim().toLowerCase();
         if (!InputValidation.isEmailValid(email)) {

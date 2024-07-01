@@ -15,7 +15,7 @@ import java.sql.SQLException;
 @WebServlet(name = "resourcesServlet", value = "/resources-servlet")
 public class ResourcesServlet extends HttpServlet implements JsonServlet {
     private byte[] getSessionUserProfilePicture(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         UserBean userBean = (UserBean) session.getAttribute("user");
         return userBean.getProfilePicture();
     }

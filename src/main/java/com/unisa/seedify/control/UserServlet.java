@@ -1,7 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.google.gson.*;
-import com.unisa.seedify.control.utils.JsonUtils;
+import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
 
 import javax.servlet.ServletException;
@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.*;
 
-@WebServlet(name="userServlet", value="/user-servlet")
+@WebServlet(name = "userServlet", value = "/user-servlet")
 public class UserServlet extends HttpServlet implements JsonServlet {
     private static class TableDataResponse {
         private final boolean canEdit;
@@ -33,35 +32,20 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         }
     }
 
-    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
-        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
-        if (rawProductPrimaryKey == null) {
-            return;
-        }
-
-        try {
-            EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
-            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
-            productDao.doDelete(productBean);
-        } catch (SQLException ignored) {
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         ArrayList<String> fields = new ArrayList<>(Arrays.asList(request.getParameter("fields").split(",")));
         fields.add("entity_primary_key");
 
-        HttpSession session = request.getSession();
-        UserBean userBean = (UserBean) session.getAttribute("user");
+        UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
 
+        String dataName = "";
         boolean canEdit = false;
         String editCall = null;
         boolean canDelete = false;
         String deleteCall = null;
 
-        String dataName = "";
         ArrayList<Object> data = null;
         if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
             switch (action) {
@@ -82,9 +66,9 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                 }
                 case "get_products": {
                     canEdit = true;
-                    editCall = "";
+                    editCall = "product-servlet?action=edit_product";
                     canDelete = true;
-                    deleteCall = "delete_product";
+                    deleteCall = "product-servlet?action=delete_product";
 
                     data = new ArrayList<>(productDao.getAllActiveProducts());
                     dataName = "all_saved_products";
@@ -102,7 +86,10 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     break;
                 }
                 case "get_favorites": {
-                    /*data = new ArrayList<>(orderDao.getAllOrders(userBean));*/
+                    deleteCall = "remove_from_favorites";
+                    canDelete = true;
+
+                    data = new ArrayList<>(favoritesDao.getUserFavorites(userBean).getProducts());
                     dataName = "user_favorites_products";
                     break;
                 }
@@ -127,25 +114,5 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         PrintWriter out = response.getWriter();
         out.print(jsonResponseObject);
         out.flush();
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-
-        HttpSession session = request.getSession();
-        UserBean userBean = (UserBean) session.getAttribute("user");
-
-        if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
-            switch (action) {
-                case "delete_product": {
-                    this.deleteProduct(request, response);
-                    break;
-                }
-                default: {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
-                }
-            }
-        }
     }
 }

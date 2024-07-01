@@ -1,61 +1,51 @@
+import { getBaseOriginName, resolveResource, sendAjaxRequest} from "../../common/general/scripts/script.js";
 import { addToScrollableContainer } from "../../common/components/scrollable-container/scripts/script.js";
-import { getAjaxRequestObject, getBaseOriginName, resolveResource } from "../../common/general/scripts/script.js";
 import { getProductCard } from "../../common/general/scripts/products.js";
 
 function requestLatestProducts() {
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-            if (ajaxTableDataRequest.status === 200) {
-                const products = JSON.parse(ajaxTableDataRequest.responseText);
-
-                products.forEach(function (product) {
-                    addToScrollableContainer(
-                        "latest-products-scrollable-container",
-                        getProductCard (
-                            product['nome'],
-                            product['prezzo'],
-                            resolveResource(product['immagine']).image,
-                            product['id_prodotto'],
-                            JSON.parse(product['preferito'].toLowerCase())
-                        )
+    sendAjaxRequest(
+        "GET",
+        `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
+        null,
+        function (response) {
+            const products = JSON.parse(response);
+            products.forEach(function (product) {
+                addToScrollableContainer(
+                    "latest-products-scrollable-container",
+                    getProductCard (
+                        product['nome'],
+                        product['prezzo'],
+                        resolveResource(product['immagine']).image,
+                        product['id_prodotto'],
+                        JSON.parse(product['preferito'].toLowerCase())
                     )
-                })
-            }
+                )
+            })
         }
-    }
-
-    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`;
-    ajaxTableDataRequest.open("GET", url, true);
-    ajaxTableDataRequest.send(null);
+    )
 }
 
 function requestMostPurchasedProducts() {
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-            if (ajaxTableDataRequest.status === 200) {
-                const products = JSON.parse(ajaxTableDataRequest.responseText);
-
-                products.forEach(function (product) {
-                    addToScrollableContainer(
-                        "most-purchased-products-scrollable-container",
-                        getProductCard (
-                            product['nome'],
-                            product['prezzo'],
-                            resolveResource(product['immagine']).image,
-                            product['id_prodotto'],
-                            JSON.parse(product['preferito'].toLowerCase())
-                        )
+    sendAjaxRequest(
+        "GET",
+        `${getBaseOriginName()}/product-servlet?action=get_most_purchased_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
+        null,
+        function (response) {
+            const products = JSON.parse(response);
+            products.forEach(function (product) {
+                addToScrollableContainer(
+                    "most-purchased-products-scrollable-container",
+                    getProductCard (
+                        product['nome'],
+                        product['prezzo'],
+                        resolveResource(product['immagine']).image,
+                        product['id_prodotto'],
+                        JSON.parse(product['preferito'].toLowerCase())
                     )
-                })
-            }
+                )
+            })
         }
-    }
-
-    const url = `${getBaseOriginName()}/product-servlet?action=get_most_purchased_products&fields=immagine,nome,prezzo,id_prodotto,preferito`;
-    ajaxTableDataRequest.open("GET", url, true);
-    ajaxTableDataRequest.send(null);
+    )
 }
 
 document.addEventListener('DOMContentLoaded', () => {

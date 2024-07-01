@@ -1,6 +1,6 @@
 package com.unisa.seedify.control;
 
-import com.unisa.seedify.control.utils.InputValidation;
+import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
 
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 // TODO: Validare l'input e in caso di errore far apparire nella pagina l'errore
+// TODO Redirect instead of throwing exception
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
 public class RegistrationServlet extends HttpServlet implements JsonServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

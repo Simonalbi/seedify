@@ -1,7 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.google.gson.*;
-import com.unisa.seedify.control.utils.JsonUtils;
+import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
 
 import javax.servlet.ServletException;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -18,86 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(name = "productServlet", urlPatterns = {"/product-servlet"})
+@WebServlet(name = "productServlet", value = "/product-servlet")
 public class ProductServlet extends HttpServlet implements JsonServlet {
-    private boolean addProductToFavorites(HttpSession session, int productId) {
-        UserBean userBean = (UserBean) session.getAttribute("user");
-        if (userBean == null) {
-            return false;
-        }
-
-        boolean success = false;
-        try {
-            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
-            productPrimaryKey.addKey("codice_prodotto", productId);
-            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
-            success = favoritesDao.addToFavorites(userBean, productBean);
-        } catch (NumberFormatException | SQLException ignored) {
-        }
-
-        return success;
-    }
-
-    private boolean removeProductFromFavorites(HttpSession session, int productId) {
-        UserBean userBean = (UserBean) session.getAttribute("user");
-        if (userBean == null) {
-            return false;
-        }
-
-        boolean success = false;
-        try {
-            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
-            productPrimaryKey.addKey("codice_prodotto", productId);
-            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
-            success = favoritesDao.removeFromFavorites(userBean, productBean);
-        } catch (NumberFormatException | SQLException ignored) {
-        }
-
-        return success;
-    }
-
-    private List<ProductBean> getSessionUserFavoritesProducts(HttpSession session) {
-        List<ProductBean> favoritesProducts = new ArrayList<>();
-
-        UserBean userBean = (UserBean) session.getAttribute("user");
-        if (userBean == null) {
-            return favoritesProducts;
-        }
-
-        try {
-            EntityPrimaryKey entityPrimaryKey = new EntityPrimaryKey();
-            entityPrimaryKey.addKey("email", userBean.getEmail());
-            FavoritesBean favoritesBean = favoritesDao.doRetrive(entityPrimaryKey);
-            favoritesProducts = new ArrayList<>(favoritesBean.getProducts());
-        } catch (SQLException ignored) {
-        }
-
-        return favoritesProducts;
-    }
-
-    private boolean addToCart(HttpSession session, int productId, int quantity) {
-        UserBean userBean = (UserBean) session.getAttribute("user");
-        if (userBean == null) {
-            return false;
-        }
-
-        boolean success = false;
-        try {
-            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
-            productPrimaryKey.addKey("codice_prodotto", productId);
-            ProductBean productBean = productDao.doRetrive(productPrimaryKey);
-
-            EntityPrimaryKey cartPrimaryKey = new EntityPrimaryKey();
-            cartPrimaryKey.addKey("email", userBean.getEmail());
-            CartBean cartBean = cartDao.doRetrive(cartPrimaryKey);
-
-            success = cartDao.addToCart(cartBean, productBean, quantity);
-        } catch (NumberFormatException | SQLException ignored) {
-        }
-
-        return success;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -123,8 +44,14 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
             }
         }
 
+        UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
         JsonArray rawData = this.gson.toJsonTree(products).getAsJsonArray();
-        List<ProductBean> favoritesProducts = this.getSessionUserFavoritesProducts(request.getSession());
+
+        List<ProductBean> favoritesProducts = new ArrayList<>();
+        if (userBean != null) {
+            favoritesProducts = favoritesDao.getUserFavorites(userBean).getProducts();
+        }
+
         for (JsonElement record : rawData) {
             JsonObject jsonProduct = record.getAsJsonObject();
             boolean isFavorite = false;
@@ -155,62 +82,32 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader reader = request.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        String requestBody = stringBuilder.toString();
-        JsonObject jsonObject = JsonParser.parseString(requestBody).getAsJsonObject();
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        UserBean userBean = (UserBean) session.getAttribute("user");
 
-        String action = null;
-        try {
-            action = jsonObject.get("action").getAsString();
-        } catch (NullPointerException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'action' in request body");
+        String action = request.getParameter("action");
+        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
+        if (rawProductPrimaryKey == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
             return;
         }
 
-        int productId;
-        try {
-            productId = jsonObject.get("product_id").getAsInt();
-        } catch (NullPointerException | JsonSyntaxException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
-            return;
-        }
-
-        boolean success = false;
-        switch (action) {
-            case "add_to_favorites": {
-                success = this.addProductToFavorites(request.getSession(), productId);
-                break;
-            }
-            case "remove_from_favorites": {
-                success = this.removeProductFromFavorites(request.getSession(), productId);
-                break;
-            }
-            case "add_to_cart": {
-                int quantity;
-                try {
-                    quantity = jsonObject.get("quantity").getAsInt();
-                } catch (NullPointerException | JsonSyntaxException e) {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
-                    return;
+        if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
+            switch (action) {
+                case "delete_product": {
+                    try {
+                        EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
+                        ProductBean productBean = productDao.doRetrive(productPrimaryKey);
+                        productDao.doDelete(productBean);
+                    } catch (SQLException ignored) {
+                    }
+                    break;
                 }
-                success = this.addToCart(request.getSession(), productId, quantity);
-                break;
+                default: {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+                }
             }
-            default: {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
-            }
-        }
-
-        if (success) {
-            response.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An error occurred while processing the request");
         }
     }
 }

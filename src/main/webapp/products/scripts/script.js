@@ -1,4 +1,4 @@
-import {getAjaxRequestObject, getBaseOriginName, resolveResource } from '../../common/general/scripts/script.js';
+import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
 import { getProductCard } from "../../common/general/scripts/products.js";
 import { addToScrollableContainer } from '../../common/components/scrollable-container/scripts/script.js';
 
@@ -73,36 +73,28 @@ function renderAllProducts(products) {
 }
 
 function requestLatestProducts() {
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-            if (ajaxTableDataRequest.status === 200) {
-                const products = JSON.parse(ajaxTableDataRequest.responseText);
-                renderLatestProducts(products);
-            }
+    sendAjaxRequest(
+        "GET",
+        `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
+        null,
+        function (response) {
+            const products = JSON.parse(response);
+            renderLatestProducts(products);
         }
-    }
-
-    const url = `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`;
-    ajaxTableDataRequest.open("GET", url, true);
-    ajaxTableDataRequest.send(null);
+    )
 }
 
 // TODO Add error if code != 200 in -> ALL <- AJAX REQUESTS
 function requestAllProducts() {
-    const ajaxTableDataRequest = getAjaxRequestObject();
-    ajaxTableDataRequest.onreadystatechange = function () {
-        if (ajaxTableDataRequest.readyState === 4) {
-            if (ajaxTableDataRequest.status === 200) {
-                const products = JSON.parse(ajaxTableDataRequest.responseText);
-                renderAllProducts(products);
-            }
+    sendAjaxRequest(
+        "GET",
+        `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`,
+        null,
+        function (response) {
+            const products = JSON.parse(response);
+            renderAllProducts(products);
         }
-    }
-
-    const url = `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`;
-    ajaxTableDataRequest.open("GET", url, true);
-    ajaxTableDataRequest.send(null);
+    )
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -21,7 +21,7 @@ function sendAddToFavoriteRequest(productId, favoriteButton) {
         action: "add_to_favorites",
         product_id: productId
     };
-    const url = `${getBaseOriginName()}/product-servlet`;
+    const url = `${getBaseOriginName()}/favorites-servlet`;
     ajaxRequest.open("POST", url, true);
     ajaxRequest.send(JSON.stringify(body));
 }
@@ -45,7 +45,7 @@ function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
         action: "remove_from_favorites",
         product_id: productId
     };
-    const url = `${getBaseOriginName()}/product-servlet`;
+    const url = `${getBaseOriginName()}/favorites-servlet`;
     ajaxRequest.open("POST", url, true);
     ajaxRequest.send(JSON.stringify(body));
 }
@@ -71,7 +71,7 @@ function sendAddToCartRequest(productId, quantity) {
         product_id: productId,
         quantity: quantity
     };
-    const url = `${getBaseOriginName()}/product-servlet`;
+    const url = `${getBaseOriginName()}/cart-servlet`;
     ajaxRequest.open("POST", url, true);
     ajaxRequest.send(JSON.stringify(body));
 }

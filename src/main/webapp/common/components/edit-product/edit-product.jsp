@@ -33,7 +33,7 @@
           <div id="edit-product-quantity-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Quantit&agrave;" />
-              <jsp:param name="id" value="product-edit-quantity-input-box" />
+              <jsp:param name="id" value="edit-product-quantity-input-box" />
               <jsp:param name="type" value="number" />
               <jsp:param name="name" value="quantity" />
               <jsp:param name="group" value="product-edit" />
@@ -44,7 +44,7 @@
           <div id="edit-product-category-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
               <jsp:param name="label" value="Tipologia Pianta" />
-              <jsp:param name="id" value="product-edit-category-input-box" />
+              <jsp:param name="id" value="edit-product-category-input-box" />
               <jsp:param name="type" value="text" />
               <jsp:param name="name" value="category" />
               <jsp:param name="pattern" value="[A-Za-z\s]+" />
