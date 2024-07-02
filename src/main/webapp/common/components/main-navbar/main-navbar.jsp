@@ -1,7 +1,9 @@
 <%@ page import="com.unisa.seedify.model.UserBean" %>
+<%@ page import="com.unisa.seedify.model.CartBean" %>
 
 <%
 	UserBean mainNavbarUserBean = (UserBean) request.getSession(true).getAttribute("user");
+	CartBean mainNavbarCartBean = (CartBean) request.getSession(true).getAttribute("cart");
 %>
 
 <div id="sidebar-opacity-layer" onclick="hideSideBar()"></div>
@@ -106,7 +108,7 @@
 		<div class="action">
 			<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
 			<div class="notification" id="cart-items-counter">
-				<span>0</span>
+				<span><%= mainNavbarCartBean != null ? mainNavbarCartBean.getTotalCartItems() : 0 %></span>
 			</div>
 		</div>
 		<div class="action" onclick="showSideBar()">

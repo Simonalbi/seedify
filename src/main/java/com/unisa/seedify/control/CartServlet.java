@@ -2,16 +2,14 @@ package com.unisa.seedify.control;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.unisa.seedify.model.CartBean;
-import com.unisa.seedify.model.EntityPrimaryKey;
-import com.unisa.seedify.model.ProductBean;
-import com.unisa.seedify.model.UserBean;
+import com.unisa.seedify.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -20,7 +18,9 @@ public class CartServlet extends HttpServlet implements JsonServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
-        UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+
+        HttpSession httpSession = request.getSession(true);
+        CartBean cartBean = (CartBean) httpSession.getAttribute("cart");
 
         String action = null;
         try {
@@ -39,15 +39,10 @@ public class CartServlet extends HttpServlet implements JsonServlet {
         }
 
         ProductBean productBean = null;
-        CartBean cartBean = null;
         try {
             EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
             productPrimaryKey.addKey("codice_prodotto", productId);
             productBean = productDao.doRetrive(productPrimaryKey);
-
-            EntityPrimaryKey cartPrimaryKey = new EntityPrimaryKey();
-            cartPrimaryKey.addKey("email", userBean.getEmail());
-            cartBean = cartDao.doRetrive(cartPrimaryKey);
         } catch (SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request");
             return;

@@ -48,4 +48,10 @@ public class CartBean extends BaseBean implements Serializable {
     public int hashCode() {
         return Objects.hash(user, cartItems);
     }
+
+    public int getTotalCartItems() {
+        return this.cartItems.stream()
+                .mapToInt(CartItemBean::getQuantity)
+                .sum();
+    }
 }

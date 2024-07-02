@@ -1,5 +1,6 @@
 package com.unisa.seedify.control;
 
+import com.unisa.seedify.model.CartBean;
 import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
@@ -16,9 +17,14 @@ import java.sql.SQLException;
 // TODO Accept AJAX request for input validation
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet implements JsonServlet {
-    private void initSession(HttpServletRequest request, HttpServletResponse response, UserBean user) throws ServletException, IOException {
+    private void initSession(HttpServletRequest request, HttpServletResponse response, UserBean userBean) throws ServletException, SQLException {
         HttpSession session = request.getSession(true);
-        session.setAttribute("user", user);
+        session.setAttribute("user", userBean);
+
+        EntityPrimaryKey cartPrimaryKey = new EntityPrimaryKey();
+        cartPrimaryKey.addKey("email", userBean.getEmail());
+        CartBean cartBean = cartDao.doRetrive(cartPrimaryKey);
+        session.setAttribute("cart", cartBean);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
             try {
                 this.initSession(request, response, user);
                 response.sendRedirect("user/user.jsp");
-            } catch (ServletException e) {
+            } catch (ServletException | SQLException e) {
                 response.sendRedirect("/common/errors/404.jsp");
             }
         } else {
