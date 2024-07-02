@@ -54,6 +54,8 @@ function renderLatestProducts(products) {
 function renderAllProducts(products) {
     const allProductsContainer = document.getElementById("all-products-container");
 
+    console.log(products);
+
     for (let category in products) {
         allProductsContainer.appendChild(
             getCategory(
@@ -65,11 +67,11 @@ function renderAllProducts(products) {
         const categorySeparator = document.createElement("div");
         categorySeparator.classList.add("category-separator");
 
-        const loadingAllProductsText = document.getElementById("loading-text-container");
-        loadingAllProductsText.remove();
-
         allProductsContainer.appendChild(categorySeparator);
     }
+
+    const loadingAllProductsText = document.getElementById("loading-text-container");
+    loadingAllProductsText.remove();
 }
 
 function requestLatestProducts() {
