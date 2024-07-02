@@ -8,40 +8,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class MemorizationsBean extends BaseBean implements Serializable {
-    public enum States {
-        @SerializedName("ATTIVO")
-        ACTIVE("ATTIVO"),
-
-        @SerializedName("ELIMINATO")
-        DELETED("ELIMINATO");
-
-
-        private final String translation;
-        States(String translation) {
-            this.translation = translation;
-        }
-
-        @Override
-        public String toString() {
-            return this.translation;
-        }
-
-        public static MemorizationsBean.States fromString(String translation) {
-            for (MemorizationsBean.States state : MemorizationsBean.States.values()) {
-                if (state.translation.equals(translation)) {
-                    return state;
-                }
-            }
-            return null;
-        }
-    }
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("utente")
     private UserBean user;
+
+    @SerializedName("carte_di_credito")
     private List<CreditCardBean> creditCards;
 
     @SerializedName("stato")
-    private MemorizationsBean.States state;
+    private States state;
 
     public MemorizationsBean() {
         this.creditCards = new ArrayList<>();

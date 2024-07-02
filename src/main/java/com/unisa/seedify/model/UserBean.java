@@ -57,6 +57,18 @@ public class UserBean extends BaseBean implements Serializable {
     @SerializedName("ruolo")
     private Roles role;
 
+    public UserBean() {
+    }
+
+    public UserBean(String email, String password, byte[] profilePicture, String name, String surname, Roles role) {
+        this.email = email;
+        this.password = password;
+        this.profilePicture = profilePicture;
+        this.name = name;
+        this.surname = surname;
+        this.role = role;
+    }
+
     public String getEmail() {
         return email;
     }

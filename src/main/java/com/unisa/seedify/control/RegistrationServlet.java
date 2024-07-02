@@ -20,8 +20,6 @@ import java.sql.SQLException;
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
 public class RegistrationServlet extends HttpServlet implements JsonServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        UserBean user = new UserBean();
-
         String email = request.getParameter("email").toLowerCase();
         if (!InputValidation.isEmailValid(email)) {
             throw new IllegalArgumentException("Invalid email");
@@ -42,17 +40,17 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
             throw new IllegalArgumentException("Invalid surname");
         }
 
-        user.setEmail(email);
-        user.setPassword(InputValidation.sha256(password));
-        user.setName(name);
-        user.setSurname(surname);
-        user.setRole(UserBean.Roles.CUSTOMER);
-
         String imagePath = getServletContext().getRealPath("/common/assets/img/profile/default.png");
         BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
-        user.setProfilePicture(byteArrayOutputStream.toByteArray());
+
+        UserBean user = new UserBean(
+            email, password,
+            byteArrayOutputStream.toByteArray(),
+            name, surname,
+            UserBean.Roles.CUSTOMER
+        );
 
         try {
             EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
