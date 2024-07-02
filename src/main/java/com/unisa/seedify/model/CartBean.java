@@ -24,7 +24,7 @@ public class CartBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -32,7 +32,7 @@ public class CartBean extends BaseBean implements Serializable {
         return cartItems;
     }
 
-    public void setCartItems(List<CartItemBean> cartItems) {
+    protected void setCartItems(List<CartItemBean> cartItems) {
         this.cartItems = cartItems;
     }
 

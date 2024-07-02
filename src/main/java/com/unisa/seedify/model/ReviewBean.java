@@ -31,7 +31,7 @@ public class ReviewBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -39,7 +39,7 @@ public class ReviewBean extends BaseBean implements Serializable {
         return product;
     }
 
-    public void setProduct(ProductBean product) {
+    protected void setProduct(ProductBean product) {
         this.product = product;
     }
 
@@ -47,7 +47,7 @@ public class ReviewBean extends BaseBean implements Serializable {
         return comment;
     }
 
-    public void setComment(String comment) {
+    protected void setComment(String comment) {
         this.comment = comment;
     }
 
@@ -55,7 +55,7 @@ public class ReviewBean extends BaseBean implements Serializable {
         return starRating;
     }
 
-    public void setStarRating(int starRating) {
+    protected void setStarRating(int starRating) {
         this.starRating = starRating;
     }
 
@@ -63,7 +63,7 @@ public class ReviewBean extends BaseBean implements Serializable {
         return addedDate;
     }
 
-    public void setDateAdded(Date addedDate) {
+    protected void setDateAdded(Date addedDate) {
         this.addedDate = addedDate;
     }
 

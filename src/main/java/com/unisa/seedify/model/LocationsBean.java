@@ -19,7 +19,7 @@ public class LocationsBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -27,7 +27,7 @@ public class LocationsBean extends BaseBean implements Serializable {
         return addresses;
     }
 
-    public void setAddresses(List<AddressBean> addresses) {
+    protected void setAddresses(List<AddressBean> addresses) {
         this.addresses = addresses;
     }
 

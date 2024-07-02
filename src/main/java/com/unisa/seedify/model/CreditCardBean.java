@@ -31,7 +31,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
         return cardNumber;
     }
 
-    public void setCardNumber(String cardNumber) {
+    protected void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -39,7 +39,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
         return cvv;
     }
 
-    public void setCvv(String cvv) {
+    protected void setCvv(String cvv) {
         this.cvv = cvv;
     }
 
@@ -47,7 +47,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expiryDate) {
+    protected void setExpirationDate(Date expiryDate) {
         this.expirationDate = expiryDate;
     }
 
@@ -55,7 +55,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
@@ -63,7 +63,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    protected void setSurname(String surname) {
         this.surname = surname;
     }
 

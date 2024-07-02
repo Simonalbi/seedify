@@ -61,7 +61,7 @@ public class UserBean extends BaseBean implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    protected void setEmail(String email) {
         this.email = email;
     }
 
@@ -69,7 +69,7 @@ public class UserBean extends BaseBean implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    protected void setPassword(String password) {
         this.password = password;
     }
 
@@ -77,7 +77,7 @@ public class UserBean extends BaseBean implements Serializable {
         return profilePicture;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    protected void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
@@ -85,7 +85,7 @@ public class UserBean extends BaseBean implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
@@ -93,7 +93,7 @@ public class UserBean extends BaseBean implements Serializable {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    protected void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -101,7 +101,7 @@ public class UserBean extends BaseBean implements Serializable {
         return role;
     }
 
-    public void setRole(Roles role) {
+    protected void setRole(Roles role) {
         this.role = role;
     }
 

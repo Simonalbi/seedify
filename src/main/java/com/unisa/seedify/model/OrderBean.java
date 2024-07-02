@@ -38,7 +38,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return orderId;
     }
 
-    public void setOrderId(int id) {
+    protected void setOrderId(int id) {
         this.orderId = id;
     }
 
@@ -46,7 +46,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return address;
     }
 
-    public void setAddress(AddressBean address) {
+    protected void setAddress(AddressBean address) {
         this.address = address;
     }
 
@@ -54,7 +54,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -62,7 +62,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return creditCard;
     }
 
-    public void setCreditCard(CreditCardBean card) {
+    protected void setCreditCard(CreditCardBean card) {
         this.creditCard = card;
     }
 
@@ -70,7 +70,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    protected void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -78,7 +78,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Date deliveryDate) {
+    protected void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
@@ -86,7 +86,7 @@ public class OrderBean extends BaseBean implements Serializable {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    protected void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 

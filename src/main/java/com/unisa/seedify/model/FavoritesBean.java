@@ -24,7 +24,7 @@ public class FavoritesBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -32,7 +32,7 @@ public class FavoritesBean extends BaseBean implements Serializable {
         return products;
     }
 
-    public void setProducts(List<ProductBean> products) {
+    protected void setProducts(List<ProductBean> products) {
         this.products = products;
     }
 

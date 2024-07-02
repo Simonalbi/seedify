@@ -42,7 +42,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    protected void setAddressId(int addressId) {
         this.addressId = addressId;
     }
 
@@ -50,7 +50,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return province;
     }
 
-    public void setProvince(String province) {
+    protected void setProvince(String province) {
         this.province = province;
     }
 
@@ -58,7 +58,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return city;
     }
 
-    public void setCity(String city) {
+    protected void setCity(String city) {
         this.city = city;
     }
 
@@ -66,7 +66,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return cap;
     }
 
-    public void setCap(String cap) {
+    protected void setCap(String cap) {
         this.cap = cap;
     }
 
@@ -74,7 +74,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return street;
     }
 
-    public void setStreet(String street) {
+    protected void setStreet(String street) {
         this.street = street;
     }
 
@@ -82,7 +82,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
@@ -90,7 +90,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    protected void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -98,7 +98,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    protected void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -106,7 +106,7 @@ public class AddressBean extends BaseBean implements Serializable {
         return note;
     }
 
-    public void setNote(String note) {
+    protected void setNote(String note) {
         this.note = note;
     }
 

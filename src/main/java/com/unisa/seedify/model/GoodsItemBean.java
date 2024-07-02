@@ -21,7 +21,7 @@ public class GoodsItemBean extends BaseBean implements Serializable {
         return product;
     }
 
-    public void setProduct(ProductBean product) {
+    protected void setProduct(ProductBean product) {
         this.product = product;
     }
 
@@ -29,7 +29,7 @@ public class GoodsItemBean extends BaseBean implements Serializable {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    protected void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

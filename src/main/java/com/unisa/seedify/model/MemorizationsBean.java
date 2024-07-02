@@ -51,7 +51,7 @@ public class MemorizationsBean extends BaseBean implements Serializable {
         return user;
     }
 
-    public void setUser(UserBean user) {
+    protected void setUser(UserBean user) {
         this.user = user;
     }
 
@@ -59,7 +59,7 @@ public class MemorizationsBean extends BaseBean implements Serializable {
         return creditCards;
     }
 
-    public void setCreditCards(List<CreditCardBean> creditCards) {
+    protected void setCreditCards(List<CreditCardBean> creditCards) {
         this.creditCards = creditCards;
     }
 

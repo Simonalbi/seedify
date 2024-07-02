@@ -142,7 +142,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    protected void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -150,7 +150,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
@@ -158,7 +158,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    protected void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -166,7 +166,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return price;
     }
 
-    public void setPrice(float price) {
+    protected void setPrice(float price) {
         this.price = price;
     }
 
@@ -174,7 +174,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    protected void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -182,7 +182,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return requiredWater;
     }
 
-    public void setRequiredWater(RequiredWater requiredWater) {
+    protected void setRequiredWater(RequiredWater requiredWater) {
         this.requiredWater = requiredWater;
     }
 
@@ -190,7 +190,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return season;
     }
 
-    public void setSeason(Seasons season) {
+    protected void setSeason(Seasons season) {
         this.season = season;
     }
 
@@ -198,7 +198,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return plantType;
     }
 
-    public void setPlantType(String plantType) {
+    protected void setPlantType(String plantType) {
         this.plantType = plantType;
     }
 
@@ -206,7 +206,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    protected void setDescription(String description) {
         this.description = description;
     }
 
@@ -214,7 +214,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return addedDate;
     }
 
-    public void setAddedDate(Date addedDate) {
+    protected void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
 
@@ -222,7 +222,7 @@ public class ProductBean extends BaseBean implements Serializable {
         return state;
     }
 
-    public void setState(States state) {
+    protected void setState(States state) {
         this.state = state;
     }
 

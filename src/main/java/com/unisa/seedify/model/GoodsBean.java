@@ -24,7 +24,7 @@ public class GoodsBean extends BaseBean implements Serializable {
         return order;
     }
 
-    public void setOrder(OrderBean order) {
+    protected void setOrder(OrderBean order) {
         this.order = order;
     }
 
@@ -32,7 +32,7 @@ public class GoodsBean extends BaseBean implements Serializable {
         return goods;
     }
 
-    public void setGoods(List<GoodsItemBean> goods) {
+    protected void setGoods(List<GoodsItemBean> goods) {
         this.goods = goods;
     }
 
