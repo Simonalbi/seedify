@@ -107,6 +107,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     productBean.setPlantType(resultSet.getString("tipologia_pianta"));
                     productBean.setDescription(resultSet.getString("descrizione"));
                     productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                    productBean.setState(States.fromString(resultSet.getString("stato")));
                 }
             }
         }
@@ -150,6 +151,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                 productBean.setPlantType(resultSet.getString("tipologia_pianta"));
                 productBean.setDescription(resultSet.getString("descrizione"));
                 productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                productBean.setState(States.fromString(resultSet.getString("stato")));
 
                 products.add(productBean);
             }
@@ -183,6 +185,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     productBean.setPlantType(resultSet.getString("tipologia_pianta"));
                     productBean.setDescription(resultSet.getString("descrizione"));
                     productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                    productBean.setState(States.fromString(resultSet.getString("stato")));
 
                     products.add(productBean);
                 }
@@ -225,6 +228,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
                     productBean.setPlantType(resultSet.getString("tipologia_pianta"));
                     productBean.setDescription(resultSet.getString("descrizione"));
                     productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                    productBean.setState(States.fromString(resultSet.getString("stato")));
 
                     products.add(productBean);
                 }
