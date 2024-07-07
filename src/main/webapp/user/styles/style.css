@@ -202,6 +202,7 @@ tr:nth-child(even) {
   border-right: 2px solid var(--pure-white);
 
   position: sticky;
+  z-index: 10;
   top: 0;
 }
 
