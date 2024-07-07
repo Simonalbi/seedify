@@ -15,9 +15,8 @@
 					<img src="${pageContext.request.contextPath}/resources-servlet?resource_type=profile_picture">
 				</div>
 				<div id="account-details">
-					<span class="account-details-value"><%= mainNavbarUserBean.getName() %> (<%= mainNavbarUserBean.getRole().toString() %>)</span>
-					<br>
-					<span class="account-details-value"><%= mainNavbarUserBean.getEmail()%></span>
+					<p class="account-details-value"><%= mainNavbarUserBean.getName() %></p>
+					<p class="account-details-value"><%= mainNavbarUserBean.getEmail()%></p>
 				</div>
 			<% } else { %>
 				<lord-icon src="https://cdn.lordicon.com/kthelypq.json" trigger="hover" colors="primary:#000000"></lord-icon>
