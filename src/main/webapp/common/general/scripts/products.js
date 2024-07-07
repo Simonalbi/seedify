@@ -1,79 +1,65 @@
-import { getBaseOriginName } from "./script.js";
+import { getBaseOriginName, sendAjaxRequest } from "./script.js";
 
 export { getProductCard };
 
 /**
- *
- * @param productId
- * @param favoriteButton
+ * Sends a request to add a product to the favorites.
+ * @param {number} productId
+ * @param {HTMLButtonElement} favoriteButton
  */
 function sendAddToFavoriteRequest(productId, favoriteButton) {
-    const ajaxRequest = new XMLHttpRequest();
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState === 4) {
-            if (ajaxRequest.status === 200) {
-                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
-            }
-        }
-    }
-
     const body = {
         action: "add_to_favorites",
         product_id: productId
     };
-    const url = `${getBaseOriginName()}/favorites-servlet`;
-    ajaxRequest.open("POST", url, true);
-    ajaxRequest.send(JSON.stringify(body));
+
+    sendAjaxRequest(
+        "POST",
+        `${getBaseOriginName()}/favorites-servlet`,
+        JSON.stringify(body),
+        function () {
+            favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
+        }
+    );
 }
 
 /**
- *
- * @param productId
- * @param favoriteButton
+ * Sends a request to remove a product from the favorites.
+ * @param {number} productId
+ * @param {HTMLButtonElement} favoriteButton
  */
 function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
-    const ajaxRequest = new XMLHttpRequest();
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState === 4) {
-            if (ajaxRequest.status === 200) {
-                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
-            }
+    sendAjaxRequest(
+        "DELETE",
+        `${getBaseOriginName()}/favorites-servlet?action=remove_from_favorites&product_id=${productId}`,
+        null,
+        function () {
+            favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
         }
-    }
-
-    const body = {
-        action: "remove_from_favorites",
-        product_id: productId
-    };
-    const url = `${getBaseOriginName()}/favorites-servlet`;
-    ajaxRequest.open("POST", url, true);
-    ajaxRequest.send(JSON.stringify(body));
+    );
 }
 
 /**
- *
+ * Sends a request to add a product to the cart.
  * @param {number} productId
  * @param {number} quantity
  */
 function sendAddToCartRequest(productId, quantity) {
-    const ajaxRequest = new XMLHttpRequest();
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState === 4) {
-            if (ajaxRequest.status === 200) {
-                const counter = document.querySelector("#cart-items-counter span");
-                counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
-            }
-        }
-    }
-
     const body = {
         action: "add_to_cart",
         product_id: productId,
         quantity: quantity
     };
-    const url = `${getBaseOriginName()}/cart-servlet`;
-    ajaxRequest.open("POST", url, true);
-    ajaxRequest.send(JSON.stringify(body));
+
+    sendAjaxRequest(
+        "POST",
+        `${getBaseOriginName()}/cart-servlet`,
+        JSON.stringify(body),
+        function () {
+            const counter = document.querySelector("#cart-items-counter span");
+            counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
+        }
+    )
 }
 
 /**

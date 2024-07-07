@@ -68,16 +68,19 @@ public class FavoritesServlet extends HttpServlet implements JsonServlet {
         UserBean userBean = (UserBean) session.getAttribute("user");
 
         String action = request.getParameter("action");
-        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
-        if (rawProductPrimaryKey == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameter 'action'");
             return;
         }
 
         switch (action) {
             case "remove_from_favorites": {
                 try {
-                    EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
+                    int productId = Integer.parseInt(request.getParameter("product_id"));
+
+                    EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                    productPrimaryKey.addKey("codice_prodotto", productId);
+
                     ProductBean productBean = productDao.doRetrive(productPrimaryKey);
                     favoritesDao.removeFromFavorites(userBean, productBean);
                 } catch (SQLException ignored) {}
