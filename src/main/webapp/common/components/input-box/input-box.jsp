@@ -21,7 +21,7 @@
         while (matcher.find()) {
             String group = matcher.group();
             String[] rawParams = group.substring(1,group.length() - 1).split(",");
-            options.put(rawParams[0], rawParams[1]);
+            options.put(rawParams[0].trim(), rawParams[1].trim());
         }
     }
 %>
