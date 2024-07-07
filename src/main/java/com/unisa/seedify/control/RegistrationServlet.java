@@ -29,6 +29,7 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
         if (!InputValidation.isPasswordStrong(password)) {
             throw new IllegalArgumentException("Password is not strong enough");
         }
+        password = InputValidation.sha256(password);
 
         String name = request.getParameter("name");
         if (!InputValidation.isNameValid(name)) {
