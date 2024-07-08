@@ -1,11 +1,27 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%@ page import="com.unisa.seedify.model.ProductBean" %>
 <%@ page import="java.util.Base64" %>
 <%@ page import="org.apache.tika.Tika" %>
+<%@ page import="com.unisa.seedify.model.FavoritesBean" %>
+<%@ page import="com.unisa.seedify.model.UserBean" %>
+<%@ page import="com.unisa.seedify.model.FavoritesDao" %>
 
 <%
   ProductBean productBean = (ProductBean) request.getAttribute("product_bean");
+
+  boolean isFavorite = false;
+  try {
+    UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+    FavoritesDao favoritesDao = FavoritesDao.getInstance();
+    FavoritesBean userFavorites = favoritesDao.getUserFavorites(userBean);
+
+    if (userFavorites.getProducts().contains(productBean)) {
+      isFavorite = true;
+    }
+  } catch (Exception ignored) {}
+
+  String favoriteIcon = isFavorite ? "favorite" : "favorite_border";
 
   byte[] image = productBean.getImage();
   Tika tika = new Tika();
@@ -20,7 +36,7 @@
 
   <link rel="stylesheet" href="${pageContext.request.contextPath}/product/styles/style.css">
 
-  <script src="${pageContext.request.contextPath}/product/scripts/script.js" defer></script>
+  <script type="module" src="${pageContext.request.contextPath}/product/scripts/script.js" defer></script>
 </head>
 <body>
   <jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
@@ -85,6 +101,18 @@
         <div class="other-info">
           <span class="rubik-400">Categoria:</span>
           <span class="season"><%= productBean.getPlantType().toUpperCase().charAt(0) + productBean.getPlantType().toLowerCase().substring(1) %></span>
+        </div>
+      </div>
+      <div id="user-actions-container" class="rubik-300">
+        <button id="add-to-favorites-button" class="material-button" onclick="addOrRemoveFromFavorites(this, <%= productBean.getProductId() %>)">
+          <span class="material-icons-round md-18"><%= favoriteIcon %></span>
+          <span class="small-text">Aggiungi ai preferiti</span>
+        </button>
+        <div id="add-to-cart-form-container">
+          <button id="add-to-cart-button" class="material-button" onclick="sendAddToCartRequest(<%= productBean.getProductId() %>, 1)">
+            <span class="material-icons-round md-18">add_shopping_cart</span>
+            <span class="small-text">Aggiungi al carrello</span>
+          </button>
         </div>
       </div>
     </div>

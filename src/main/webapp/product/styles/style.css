@@ -24,6 +24,10 @@
 }
 
 #product-other-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   width: 20%;
   height: 100%;
 }
@@ -58,18 +62,21 @@
   height: fit-content;
 }
 
-#product-other-info-section #other-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-
+#product-other-info-section #other-info-container,
+#product-other-info-section #user-actions-container {
   width: 100%;
   height: fit-content;
 
   padding: 5px;
 
   background-color: var(--pure-white);
+}
+
+#product-other-info-section #other-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 #product-other-info-section .other-info {
@@ -89,3 +96,16 @@
 #product-other-info-section .season {
   margin-right: 10px;
 }
+
+#product-other-info-section #user-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.material-button {
+  gap: 10px;
+  width: 100%;
+  border-radius: 25px;
+}
+

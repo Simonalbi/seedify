@@ -1,7 +1,7 @@
 import { getBaseOriginName, sendAjaxRequest } from "./script.js";
 import { toast } from "./toast.js";
 
-export { getProductCard };
+export { getProductCard, sendAddToFavoriteRequest, sendRemoveFromFavoriteRequest, sendAddToCartRequest };
 
 /**
  * Sends a request to add a product to the favorites.
@@ -67,7 +67,7 @@ function sendAddToCartRequest(productId, quantity) {
 }
 
 /**
- *
+ * Returns a product card.
  * @param {string} name
  * @param {number} price
  * @param {string} image
