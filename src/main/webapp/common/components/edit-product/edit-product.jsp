@@ -56,9 +56,9 @@
           </div>
           <div id="edit-product-required-water-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
-              <jsp:param name="label" value="Quantit&agrave; d'acqua:" />
+              <jsp:param name="label" value="Quantit&agrave; d'acqua" />
               <jsp:param name="tag" value="select" />
-              <jsp:param name="options" value="[(Poca, Value1) (Normale, Value2) (Tanta, Value3)]" />
+              <jsp:param name="options" value="[(Poca, POCA) (Normale, NORMALE) (Molta, MOLTA)]" />
               <jsp:param name="id" value="edit-product-required-water-input-box" />
               <jsp:param name="name" value="required-water" />
               <jsp:param name="group" value="edit-product" />
@@ -66,9 +66,9 @@
           </div>
           <div id="edit-product-season-box" class="dark">
             <jsp:include page="/common/components/input-box/input-box.jsp">
-              <jsp:param name="label" value="Stagionalit&agrave;:" />
+              <jsp:param name="label" value="Stagionalit&agrave;" />
               <jsp:param name="tag" value="select" />
-              <jsp:param name="options" value="[(Primavera, Value1) (Estate, Value2) (Autunno, Value3) (Inverno, Value4)]" />
+              <jsp:param name="options" value="[(Autunno, AUTUNNO), (Estate, ESTATE), (Inverno, INVERNO), (Primavera, PRIMAVERA)]" />
               <jsp:param name="id" value="edit-product-season-input-box" />
               <jsp:param name="name" value="season" />
               <jsp:param name="group" value="edit-product" />
@@ -76,9 +76,16 @@
           </div>
         </div>
         <div id="edit-product-image-container">
-          Clicca qui o trascina un'immagine per caricarla
-          <input type="file" id="file-input" hidden />
-          <div id="file-list"></div>
+          <div id="edit-product-image-box" class="dark">
+            <jsp:include page="/common/components/input-box/input-box.jsp">
+              <jsp:param name="label" value="Immagine" />
+              <jsp:param name="tag" value="file" />
+              <jsp:param name="id" value="edit-product-image-input-box" />
+              <jsp:param name="name" value="image" />
+              <jsp:param name="placeholder" value="Clicca qui o trascina un'immagine per caricarla" />
+              <jsp:param name="group" value="edit-product" />
+            </jsp:include>
+          </div>
         </div>
       </div>
       <div id="edit-product-description-box" class="dark form-row rubik-300">
@@ -90,6 +97,7 @@
           <jsp:param name="placeholder" value="Descrivi il prodotto..." />
           <jsp:param name="errorMessage" value="Descrizione non valida" />
           <jsp:param name="group" value="edit-product" />
+          <jsp:param name="textAreaMaxLength" value="250" />
         </jsp:include>
       </div>
       <div id="edit-product-submit-box" class="dark rubik-400">

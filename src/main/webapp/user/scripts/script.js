@@ -1,5 +1,5 @@
 import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
-import { showEditProduct, hideEditProduct } from '../../common/components/edit-product/scripts/script.js';
+import { showEditProduct } from '../../common/components/edit-product/scripts/script.js';
 
 window.getTableData = getTableData;
 
