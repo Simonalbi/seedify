@@ -4,6 +4,9 @@
       <img src="${pageContext.request.contextPath}/common/assets/img/login_background.jpg"/>
     </div>
     <div id="login-right-container">
+      <div id="login-close-button" onclick="hideLogin()">
+        <span class="material-icons-round md-18">close</span>
+      </div>
       <lord-icon id="animated-bird" src="https://cdn.lordicon.com/xzbjjswf.json" trigger="loop" colors="primary:#b5d73c,secondary:#FFFFFF"></lord-icon>
       <div id="redirect-to-registration-page" class="rubik-300">
         <span>Non hai un account? <a href="${pageContext.request.contextPath}/registration/registration.jsp">Registrati</a>!</span>

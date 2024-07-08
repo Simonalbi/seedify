@@ -11,3 +11,8 @@ function showLogin() {
         }
     });
 }
+
+function hideLogin() {
+    const loginOverlay = document.getElementById("login");
+    loginOverlay.style.display = "none";
+}
