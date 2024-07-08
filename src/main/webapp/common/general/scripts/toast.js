@@ -18,7 +18,7 @@ const ToastIcons = {
  */
 function drawToasts(toasts) {
     toasts.forEach((toast, index) => {
-        toast.style.top = `calc(20px + ${index * 60}px)`;
+        toast.style.top = `calc(20px + ${index * 65}px)`;
     });
 }
 
