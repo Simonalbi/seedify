@@ -1,3 +1,7 @@
+/**
+ * Toggle the visibility of the password in the form
+ * @param {String} formId - The id of the password form
+ */
 function togglePassword(formId) {
     const passwordForm = document.getElementById(formId);
     const passwordIcon = document.getElementById(`${formId}-toggle-icon`);
@@ -10,11 +14,19 @@ function togglePassword(formId) {
     }
 }
 
+/**
+ * Enable the submit button of the form
+ * @param {String} group - The group of the input boxes
+ */
 function enableSubmitButton(group) {
     const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
     submitButton.disabled = false;
 }
 
+/**
+ * Disable the submit button of the form
+ * @param {String} group - The group of the input boxes
+ */
 function disableSubmitButton(group) {
     const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
     submitButton.disabled = true;

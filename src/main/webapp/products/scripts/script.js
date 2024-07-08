@@ -2,6 +2,12 @@ import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../commo
 import { getProductCard } from "../../common/general/scripts/products.js";
 import { addToScrollableContainer } from '../../common/components/scrollable-container/scripts/script.js';
 
+/**
+ * Returns a category container with its products.
+ * @param {String} title
+ * @param {Array} products
+ * @returns {HTMLDivElement}
+ */
 function getCategory(title, products) {
     const productsCategoryContainer = document.createElement("div");
     productsCategoryContainer.classList.add("products-category-container");
@@ -36,6 +42,10 @@ function getCategory(title, products) {
     return productsCategoryContainer;
 }
 
+/**
+ * Renders the latest products.
+ * @param {Array} products
+ */
 function renderLatestProducts(products) {
     products.forEach(function (product) {
         addToScrollableContainer(
@@ -51,6 +61,10 @@ function renderLatestProducts(products) {
     })
 }
 
+/**
+ * Renders all the products.
+ * @param {Object} products
+ */
 function renderAllProducts(products) {
     const allProductsContainer = document.getElementById("all-products-container");
 
@@ -72,6 +86,9 @@ function renderAllProducts(products) {
     loadingAllProductsText.remove();
 }
 
+/**
+ * Requests the latest products.
+ */
 function requestLatestProducts() {
     sendAjaxRequest(
         "GET",
@@ -86,7 +103,9 @@ function requestLatestProducts() {
     )
 }
 
-// TODO Add error if code != 200 in -> ALL <- AJAX REQUESTS
+/**
+ * Requests all the products.
+ */
 function requestAllProducts() {
     sendAjaxRequest(
         "GET",

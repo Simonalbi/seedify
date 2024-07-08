@@ -2,6 +2,9 @@ import { getBaseOriginName, resolveResource, sendAjaxRequest} from "../../common
 import { addToScrollableContainer } from "../../common/components/scrollable-container/scripts/script.js";
 import { getProductCard } from "../../common/general/scripts/products.js";
 
+/**
+ * Requests the latest products and adds them to the scrollable container.
+ */
 function requestLatestProducts() {
     sendAjaxRequest(
         "GET",
@@ -26,6 +29,9 @@ function requestLatestProducts() {
         })
 }
 
+/**
+ * Requests the most purchased products and adds them to the scrollable container.
+ */
 function requestMostPurchasedProducts() {
     sendAjaxRequest(
         "GET",

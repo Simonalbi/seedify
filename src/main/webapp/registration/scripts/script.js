@@ -1,3 +1,7 @@
+/**
+ * Validates the step by changing the icon to a checkmark.
+ * @param {string} elementId - The ID of the element to validate
+ */
 function validateStep(elementId) {
     const constraintElement = document.getElementById(elementId);
     const icon = constraintElement.querySelector("span");
@@ -5,6 +9,10 @@ function validateStep(elementId) {
     icon.innerHTML = "done";
 }
 
+/**
+ * Invalidates the step by changing the icon to a cross icon.
+ * @param {string} elementId - The ID of the element to invalidate
+ */
 function invalidateStep(elementId) {
     const constraintElement = document.getElementById(elementId);
     const icon = constraintElement.querySelector("span");
@@ -12,6 +20,11 @@ function invalidateStep(elementId) {
     icon.innerHTML = "close";
 }
 
+/**
+ * Validates the password.
+ * @param {string} password - The password to validate
+ * @returns {boolean} - Whether the password is valid
+ */
 function validatePassword(password) {
     let completedSteps = 0;
 
@@ -49,6 +62,10 @@ function validatePassword(password) {
     return completedSteps === 4;
 }
 
+/**
+ * Checks if the passwords match.
+ * @returns {boolean} - Whether the passwords match
+ */
 function checkPasswordsMatch() {
     const password = passwordBox.querySelector("input").value;
     const confirmationPassword = passwordConfirmationBox.querySelector("input").value;

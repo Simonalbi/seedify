@@ -1,3 +1,6 @@
+/**
+ * Show login overlay
+ */
 function showLogin() {
     const loginOverlay = document.getElementById("login");
     loginOverlay.style.display = "block";
@@ -12,6 +15,9 @@ function showLogin() {
     });
 }
 
+/**
+ * Hide login overlay
+ */
 function hideLogin() {
     const loginOverlay = document.getElementById("login");
     loginOverlay.style.display = "none";

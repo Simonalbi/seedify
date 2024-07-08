@@ -1,5 +1,4 @@
 import { getBaseOriginName, sendAjaxRequest } from "../../../general/scripts/script.js";
-import {toast} from "../../../general/scripts/toast";
 
 export { showEditProduct };
 

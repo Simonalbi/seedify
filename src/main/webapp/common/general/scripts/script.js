@@ -32,7 +32,7 @@ function getAjaxRequestObject(){
  * @param {String} method The method of the request.
  * @param {String} url The URL of the request.
  * @param {String} body The body of the request.
- * @param {Object} callbacks The callback function.
+ * @param {Object} callbacks The callbacks of the request.
  */
 function sendAjaxRequest(method, url, body, callbacks) {
     if (!(401 in callbacks)) {

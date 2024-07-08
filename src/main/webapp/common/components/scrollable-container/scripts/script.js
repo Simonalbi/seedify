@@ -17,6 +17,10 @@ function addToScrollableContainer(id, element) {
     container.appendChild(element);
 }
 
+/**
+ * Scrolls left the scrollable container.
+ * @param {HTMLElement} scrollableContainer The scrollable container.
+ */
 function scrollLeft(scrollableContainer) {
     scrollableContainer.scrollBy({
         left: -SCROLL_AMOUNT,
@@ -24,6 +28,10 @@ function scrollLeft(scrollableContainer) {
     });
 }
 
+/**
+ * Scrolls right the scrollable container.
+ * @param {HTMLElement} scrollableContainer The scrollable container.
+ */
 function scrollRight(scrollableContainer) {
     scrollableContainer.scrollBy({
         left: SCROLL_AMOUNT,

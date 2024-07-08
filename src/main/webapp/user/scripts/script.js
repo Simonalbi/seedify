@@ -4,16 +4,26 @@ import { toast } from "../../common/general/scripts/toast.js";
 
 window.getTableData = getTableData;
 
+/**
+ * Shows the edit credit card modal.
+ */
 function showLoadingOverlay() {
     const loadingOverlay = document.getElementById('table-loading-overlay');
     loadingOverlay.style.visibility = 'visible';
 }
 
+/**
+ * Hides the edit credit card modal.
+ */
 function hideLoadingOverlay() {
     const loadingOverlay = document.getElementById('table-loading-overlay');
     loadingOverlay.style.visibility = 'hidden';
 }
 
+/**
+ * Sends a delete request to the server.
+ * @param {HTMLButtonElement} target - The button that triggered the event.
+ */
 function sendDeleteRequest(target) {
     showLoadingOverlay();
 
@@ -147,6 +157,10 @@ function buildTable(tableData, onEdit, recordIdentifier) {
     return table;
 }
 
+/**
+ * Updates the table with the given data.
+ * @param {Object} tableData - The data to update the table with.
+ */
 function updateTable(tableData) {
     const mainTable = document.getElementById('main-table');
 
@@ -180,6 +194,9 @@ function updateTable(tableData) {
     }
 }
 
+/**
+ * Gets the data to populate the table.
+ */
 function getTableData() {
     const requestParams = document.getElementById('table-selector').value.split("-");
 
