@@ -1,25 +1,27 @@
-#toast-container {
+.toast {
     position: fixed;
+
     top: 20px;
     right: 20px;
-    z-index: 10;
-}
+    transition: top 0.5s ease;
 
-.toast {
+    z-index: 10;
+
+    width: fit-content;
+    height: fit-content;
+
     background-color: var(--pure-white);
     display: flex;
+    align-items: center;
     gap: 5px;
 
     padding: 15px;
     margin-bottom: 10px;
-    border-radius: 5px;
-    border: solid 1px var(--dark-jungle-green);
+    border-radius: 15px;
+    border: 1px solid var(--dark-jungle-green);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation: fadeInOut 4s forwards;
-}
 
-.material-icons-round {
-    vertical-align: text-bottom;
+    animation: fadeInOut 4s forwards;
 }
 
 .toast-success .material-icons-round {
@@ -38,4 +40,3 @@
     0%, 100% { opacity: 0; }
     10%, 90% { opacity: 1; }
 }
-

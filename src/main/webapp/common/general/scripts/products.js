@@ -1,5 +1,5 @@
 import { getBaseOriginName, sendAjaxRequest } from "./script.js";
-import {toast} from "./toast.js";
+import { toast } from "./toast.js";
 
 export { getProductCard };
 
@@ -20,7 +20,7 @@ function sendAddToFavoriteRequest(productId, favoriteButton) {
         JSON.stringify(body),
         function () {
             favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
-            toast("Aggiunto ai preferiti", "success");
+            toast("Aggiunto ai preferiti", "SUCCESS");
         }
     );
 }
@@ -37,7 +37,7 @@ function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
         null,
         function () {
             favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
-            toast("Rimosso dai preferiti", "warning")
+            toast("Rimosso dai preferiti", "SUCCESS")
         }
     );
 }
@@ -61,7 +61,7 @@ function sendAddToCartRequest(productId, quantity) {
         function () {
             const counter = document.querySelector("#cart-items-counter span");
             counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
-            toast("Aggiunto al carrello", "success");
+            toast("Aggiunto al carrello", "SUCCESS");
         }
     )
 }
