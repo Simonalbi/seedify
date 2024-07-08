@@ -7,7 +7,7 @@ function showLogin() {
         const isClickOutside = !loginMainContainer.contains(event.target);
 
         if (isClickOutside && loginOverlay.style.display !== "none") {
-            loginOverlay.style.display = "none";
+            hideLogin();
         }
     });
 }
