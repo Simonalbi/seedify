@@ -108,7 +108,7 @@ def generateRandomExpiryDate() -> str:
 def createDatabase(sqlScriptPath: str) -> None:
     connection = mysql.connector.connect(**dbConfig)
     cursor = connection.cursor()
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DATABASE_NAME}")
+    cursor.execute(f"DROP DATABASE {DATABASE_NAME}; CREATE DATABASE IF NOT EXISTS {DATABASE_NAME};", multi=True)
     connection.commit()
     dbConfig["database"] = DATABASE_NAME
     connection.database = DATABASE_NAME
