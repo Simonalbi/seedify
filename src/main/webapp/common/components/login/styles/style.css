@@ -1,4 +1,6 @@
 #login {
+  display: none;
+
   position: fixed;
   z-index: 100;
 
@@ -13,10 +15,10 @@
 
   background-color: var(--dark-jungle-green);
 
-  width: 50%;
+  width: 70%;
   height: 500px;
 
-  margin: 50px 25%;
+  margin: 80px 15%;
 
   display: flex;
 
@@ -25,7 +27,7 @@
 }
 
 #login-left-container {
-  background-color: #0F210F;
+  background-color: var(--dark-jungle-green);
   width: 40%;
   height: 100%;
 
@@ -55,9 +57,26 @@
 #animated-bird {
   position: absolute;
   right: -27px;
+  top: 30px;
 
   width: 90px;
   height: 90px;
+}
+
+#redirect-to-registration-page {
+  position: absolute;
+
+  width: fit-content;
+  height: 25px;
+
+  bottom: 15px;
+  color: var(--pure-white);
+}
+
+#redirect-to-registration-page a {
+  color: var(--android-green);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #login-form-container {
@@ -97,20 +116,5 @@
 @media screen and (max-width: 450px) {
   #animated-bird {
     display: none;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  #login-main-container {
-    width: 90%;
-    margin: 50px 5%;
-  }
-
-  #login-left-container {
-    display: none;
-  }
-
-  #login-right-container {
-    width: 100%;
   }
 }
