@@ -32,31 +32,31 @@
 <div class="input-box">
   <% if (!"submit".equals(inputType)) { %>
     <div class="input-box-label-container">
-      <label for="${param.id}"> <%= inputLabel %> </label>
+      <label for="${param.id}"><%= inputLabel %></label>
     </div>
-    <div class="input-box-input-container <% if ("select".equals(inputTag)) { %> select-dropdown <% } %>">
+    <div class="input-box-input-container <% if ("select".equals(inputTag)) { %>select-dropdown<% } %>">
       <% if ("select".equals(inputTag)) { %>
         <select id="${param.id}"
                 name="${param.name}"
-                class="<% if (inputGroup != null) { %> ${param.group}-input-box-group <% } %>">
+                class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>">
                 <% for (String optionName : options.keySet()) { %>
-                  <option value="<%= options.get(optionName) %>"> <%= optionName %> </option>
+                  <option value="<%= options.get(optionName) %>"><%= optionName %></option>
                 <% } %>
         </select>
       <% } else if ("textarea".equals(inputTag)) { %>
         <textarea id="${param.id}"
                   name="${param.name}"
-                  class="<% if (inputGroup != null) { %> ${param.group}-input-box-group <% } %>"
-                  placeholder="<% if (inputPlaceholder != null) { %> ${param.placeholder} <% } %>"
-                  <% if (inputRows != null) { %> rows="${param.rows}" <% } %>
-                  <% if (inputCols != null) { %> cols="${param.cols}" <% } %>
-                  <% if (textAreaMaxLength != null) { %> maxlength="${param.textAreaMaxLength}" <% } %>>
+                  class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>"
+                  placeholder="<% if (inputPlaceholder != null) { %>${param.placeholder}<% } %>"
+                  <% if (inputRows != null) { %>rows="${param.rows}"<% } %>
+                  <% if (inputCols != null) { %>cols="${param.cols}"<% } %>
+                  <% if (textAreaMaxLength != null) { %>maxlength="${param.textAreaMaxLength}"<% } %>>
         </textarea>
       <% } else if ("file".equals(inputTag)) { %>
         <div class="file-drag-and-drop-container">
-          <span> <%= inputPlaceholder %> </span>
+          <span><%= inputPlaceholder %></span>
           <input id="${param.id}"
-                 class="<% if (inputGroup != null) { %> ${param.group}-input-box-group <% } %>"
+                 class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>"
                  type="file"
                  hidden
           />
@@ -64,11 +64,11 @@
         </div>
       <% } else if (inputTag == null) { %>
         <input id="${param.id}"
-               class="<% if (inputGroup != null) { %> ${param.group}-input-box-group <% } %>"
-               type="<% if (inputType != null) { %> ${param.type}<% } %>"
+               class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>"
+               type="<% if (inputType != null) { %>${param.type}<% } %>"
                name="${param.name}"
                placeholder="${param.placeholder}"
-               <% if (inputPattern != null) { %> pattern="${param.pattern}" <% } %>
+               <% if (inputPattern != null) { %>pattern="${param.pattern}"<% } %>
         />
         <% } if ("password".equals(inputType)) { %>
           <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons-round md-18" onClick="togglePassword('${param.id}')">visibility</span>
@@ -89,7 +89,7 @@
              class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>"
              type="submit"
              value="${param.value}"
-             <% if ("false".equals(inputEnabled)) { %> disabled <% } %>
+             <% if ("false".equals(inputEnabled)) { %>disabled<% } %>
       />
     </div>
   <% } %>
