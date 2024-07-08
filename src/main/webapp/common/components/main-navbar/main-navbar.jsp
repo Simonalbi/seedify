@@ -35,7 +35,7 @@
 			</div>
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
-				<a href="${pageContext.request.contextPath}/products-page">
+				<a href="${pageContext.request.contextPath}/products">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
@@ -86,7 +86,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="${pageContext.request.contextPath}/products-page">
+				<a href="${pageContext.request.contextPath}/products">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>

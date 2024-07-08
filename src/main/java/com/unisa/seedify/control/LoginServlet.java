@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         } else if (user.getPassword().equals(password)) {
             try {
                 this.initSession(request, response, user);
-                response.sendRedirect("user");
+                response.sendRedirect("dashboard");
             } catch (ServletException | SQLException e) {
                 response.sendRedirect("/common/errors/404.jsp");
             }

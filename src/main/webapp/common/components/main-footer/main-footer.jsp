@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="footer-section-row">
-                    <a href="${pageContext.request.contextPath}/products-page">
+                    <a href="${pageContext.request.contextPath}/products">
                         <span class="material-icons-round">shopping_bag</span>
                         <span>Prodotti</span>
                     </a>
