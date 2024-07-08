@@ -64,6 +64,10 @@ label, input, select {
   font-size: calc(18px + 0.390625vw);
 }
 
+textarea {
+  font-size: calc(15px + 0.390625vw);
+}
+
 p, a, span {
   font-size: calc(15px + 0.390625vw);
 }
