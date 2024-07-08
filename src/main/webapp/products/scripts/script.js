@@ -54,8 +54,6 @@ function renderLatestProducts(products) {
 function renderAllProducts(products) {
     const allProductsContainer = document.getElementById("all-products-container");
 
-    console.log(products);
-
     for (let category in products) {
         allProductsContainer.appendChild(
             getCategory(
