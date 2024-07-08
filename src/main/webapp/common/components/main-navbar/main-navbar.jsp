@@ -28,21 +28,21 @@
 		<div class="sidebar-separator"></div>
 		<div id="options-container">
 			<div class="sidebar-option">
-				<a href="${pageContext.request.contextPath}/home/home.jsp">
+				<a href="${pageContext.request.contextPath}/home">
 					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
 			</div>
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
-				<a href="${pageContext.request.contextPath}/products/products.jsp">
+				<a href="${pageContext.request.contextPath}/products-page">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
 			</div>
 			<div class="sidebar-separator"></div>
 			<div class="sidebar-option">
-				<a href="${pageContext.request.contextPath}/about-us/about-us.jsp">
+				<a href="${pageContext.request.contextPath}/about-us">
 					<span class="material-icons-round md-18">info_outline</span>
 					<span class="option-label">Chi Siamo</span>
 				</a>
@@ -50,7 +50,7 @@
 			<div class="sidebar-separator"></div>
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="sidebar-option">
-					<a href="${pageContext.request.contextPath}/user/user.jsp">
+					<a href="${pageContext.request.contextPath}/user">
 						<span class="material-icons-round md-18">display_settings</span>
 						<span class="option-label">Dashboard</span>
 					</a>
@@ -77,7 +77,7 @@
 	<div id="menu-container">
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="${pageContext.request.contextPath}/home/home.jsp">
+				<a href="${pageContext.request.contextPath}/home">
 					<span class="material-icons-round md-18">home</span>
 					<span class="option-label">Home</span>
 				</a>
@@ -86,7 +86,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="${pageContext.request.contextPath}/products/products.jsp">
+				<a href="${pageContext.request.contextPath}/products-page">
 					<span class="material-icons-round md-18">shopping_bag</span>
 					<span class="option-label">Prodotti</span>
 				</a>
@@ -95,7 +95,7 @@
 		</div>
 		<div class="menu-option">
 			<div class="menu-option-content-container">
-				<a href="${pageContext.request.contextPath}/about-us/about-us.jsp">
+				<a href="${pageContext.request.contextPath}/about-us">
 					<span class="material-icons-round md-18">info_outline</span>
 					<span class="option-label">Chi Siamo</span>
 				</a>

@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession(true).invalidate();
-        response.sendRedirect("home/home.jsp");
+        response.sendRedirect("home");
     }
 
     // TODO Redirect instead of throwing exception
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         } else if (user.getPassword().equals(password)) {
             try {
                 this.initSession(request, response, user);
-                response.sendRedirect("user/user.jsp");
+                response.sendRedirect("user");
             } catch (ServletException | SQLException e) {
                 response.sendRedirect("/common/errors/404.jsp");
             }

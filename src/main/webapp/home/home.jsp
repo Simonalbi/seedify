@@ -27,7 +27,7 @@
 				<% if (userBean == null) { %>
 					<div id="login-container" class="oleo-400">
 						<div id="sign-up-button" class="animated-round-button">
-							<a href="${pageContext.request.contextPath}/registration/registration.jsp">
+							<a href="${pageContext.request.contextPath}/registration">
 								<lord-icon class="round-button" src="https://cdn.lordicon.com/ysonqgnt.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"></lord-icon>
 								<span>Registrati</span>
 							</a>

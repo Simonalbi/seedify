@@ -9,7 +9,7 @@
       </div>
       <lord-icon id="animated-bird" src="https://cdn.lordicon.com/xzbjjswf.json" trigger="loop" colors="primary:#b5d73c,secondary:#FFFFFF"></lord-icon>
       <div id="redirect-to-registration-page" class="rubik-300">
-        <span>Non hai un account? <a href="${pageContext.request.contextPath}/registration/registration.jsp">Registrati</a>!</span>
+        <span>Non hai un account? <a href="${pageContext.request.contextPath}/registration">Registrati</a>!</span>
       </div>
       <div id="login-form-container">
         <div id="login-logo-container">
