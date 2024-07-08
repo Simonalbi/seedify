@@ -77,9 +77,11 @@ function requestLatestProducts() {
         "GET",
         `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
         null,
-        function (response) {
-            const products = JSON.parse(response);
-            renderLatestProducts(products);
+        {
+            200: function (response) {
+                const products = JSON.parse(response);
+                renderLatestProducts(products);
+            }
         }
     )
 }
@@ -90,9 +92,11 @@ function requestAllProducts() {
         "GET",
         `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`,
         null,
-        function (response) {
-            const products = JSON.parse(response);
-            renderAllProducts(products);
+        {
+            200: function (response) {
+                const products = JSON.parse(response);
+                renderAllProducts(products);
+            }
         }
     )
 }

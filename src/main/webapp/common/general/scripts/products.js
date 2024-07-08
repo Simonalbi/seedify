@@ -18,9 +18,11 @@ function sendAddToFavoriteRequest(productId, favoriteButton) {
         "POST",
         `${getBaseOriginName()}/favorites-servlet`,
         JSON.stringify(body),
-        function () {
-            favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
-            toast("Aggiunto ai preferiti", "SUCCESS");
+        {
+            200: function () {
+                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite";
+                toast("Aggiunto ai preferiti", "SUCCESS");
+            }
         }
     );
 }
@@ -35,9 +37,11 @@ function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
         "DELETE",
         `${getBaseOriginName()}/favorites-servlet?action=remove_from_favorites&product_id=${productId}`,
         null,
-        function () {
-            favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
-            toast("Rimosso dai preferiti", "SUCCESS")
+        {
+            200: function () {
+                favoriteButton.getElementsByTagName("span")[0].innerHTML = "favorite_border";
+                toast("Rimosso dai preferiti", "SUCCESS");
+            }
         }
     );
 }
@@ -58,10 +62,12 @@ function sendAddToCartRequest(productId, quantity) {
         "POST",
         `${getBaseOriginName()}/cart-servlet`,
         JSON.stringify(body),
-        function () {
-            const counter = document.querySelector("#cart-items-counter span");
-            counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
-            toast("Aggiunto al carrello", "SUCCESS");
+        {
+            200: function () {
+                const counter = document.querySelector("#cart-items-counter span");
+                counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
+                toast("Aggiunto al carrello", "SUCCESS");
+            }
         }
     )
 }

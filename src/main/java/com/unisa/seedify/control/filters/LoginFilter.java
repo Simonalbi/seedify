@@ -16,7 +16,7 @@ public class LoginFilter implements Filter {
 
         UserBean userBean = (UserBean) httpRequest.getSession(true).getAttribute("user");
         if (userBean == null) {
-            httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "User not logged in");
+            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not logged in");
             return;
         }
 

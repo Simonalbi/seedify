@@ -1,3 +1,5 @@
+import { toast } from "./toast.js";
+
 export { getBaseOriginName, resolveResource, sendAjaxRequest };
 
 /**
@@ -30,15 +32,27 @@ function getAjaxRequestObject(){
  * @param {String} method The method of the request.
  * @param {String} url The URL of the request.
  * @param {String} body The body of the request.
- * @param {Function} callback The callback function.
+ * @param {Object} callbacks The callback function.
  */
-function sendAjaxRequest(method, url, body, callback) {
+function sendAjaxRequest(method, url, body, callbacks) {
+    if (!(401 in callbacks)) {
+        callbacks[401] = function () {
+            toast("Login richiesto", "WARNING")
+        }
+    }
+
     // TODO Set timeout (slide 43 ajax)
     const ajaxRequest = getAjaxRequestObject();
     ajaxRequest.onreadystatechange = function () {
         if (ajaxRequest.readyState === 4) {
-            if (ajaxRequest.status === 200) {
-                callback(ajaxRequest.responseText);
+            const status = ajaxRequest.status;
+            if (status in callbacks) {
+                callbacks[status](ajaxRequest.responseText);
+            } else if ("defaultCallback" in callbacks) {
+                console.log(`Status ${status} not handled, using defaultCallback.`);
+                callbacks.defaultCallback();
+            } else {
+                console.error(`Status ${status} not handled and no defaultCallback provided.`);
             }
         }
     }

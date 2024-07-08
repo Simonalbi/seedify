@@ -1,5 +1,6 @@
 import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
 import { showEditProduct } from '../../common/components/edit-product/scripts/script.js';
+import { toast } from "../../common/general/scripts/toast.js";
 
 window.getTableData = getTableData;
 
@@ -22,9 +23,11 @@ function sendDeleteRequest(target) {
         "DELETE",
         url,
         null,
-        function (response) {
-            getTableData();
-            hideLoadingOverlay();
+        {
+            200: function () {
+                getTableData();
+                hideLoadingOverlay();
+            }
         }
     )
 }
@@ -187,10 +190,16 @@ function getTableData() {
         "GET",
         url,
         null,
-        function (response) {
-            const tableData = JSON.parse(response);
-            updateTable(tableData);
-            hideLoadingOverlay();
+        {
+            200: function (response) {
+                const tableData = JSON.parse(response);
+                updateTable(tableData);
+                hideLoadingOverlay();
+            },
+            defaultCallback: function () {
+                toast("Errore durante il recupero dei dati", "ERROR");
+                hideLoadingOverlay();
+            }
         }
     )
 }

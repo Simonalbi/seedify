@@ -7,22 +7,23 @@ function requestLatestProducts() {
         "GET",
         `${getBaseOriginName()}/product-servlet?action=get_latest_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
         null,
-        function (response) {
-            const products = JSON.parse(response);
-            products.forEach(function (product) {
-                addToScrollableContainer(
-                    "latest-products-scrollable-container",
-                    getProductCard (
-                        product['nome'],
-                        product['prezzo'],
-                        resolveResource(product['immagine']).image,
-                        product['id_prodotto'],
-                        JSON.parse(product['preferito'].toLowerCase())
-                    )
-                )
-            })
-        }
-    )
+        {
+            200: function (response) {
+                const products = JSON.parse(response);
+                products.forEach(function (product) {
+                    addToScrollableContainer(
+                        "latest-products-scrollable-container",
+                        getProductCard (
+                            product['nome'],
+                            product['prezzo'],
+                            resolveResource(product['immagine']).image,
+                            product['id_prodotto'],
+                            JSON.parse(product['preferito'].toLowerCase())
+                        )
+                    );
+                });
+            }
+        })
 }
 
 function requestMostPurchasedProducts() {
@@ -30,22 +31,23 @@ function requestMostPurchasedProducts() {
         "GET",
         `${getBaseOriginName()}/product-servlet?action=get_most_purchased_products&fields=immagine,nome,prezzo,id_prodotto,preferito`,
         null,
-        function (response) {
-            const products = JSON.parse(response);
-            products.forEach(function (product) {
-                addToScrollableContainer(
-                    "most-purchased-products-scrollable-container",
-                    getProductCard (
-                        product['nome'],
-                        product['prezzo'],
-                        resolveResource(product['immagine']).image,
-                        product['id_prodotto'],
-                        JSON.parse(product['preferito'].toLowerCase())
-                    )
-                )
-            })
-        }
-    )
+        {
+            200: function (response) {
+                const products = JSON.parse(response);
+                products.forEach(function (product) {
+                    addToScrollableContainer(
+                        "most-purchased-products-scrollable-container",
+                        getProductCard (
+                            product['nome'],
+                            product['prezzo'],
+                            resolveResource(product['immagine']).image,
+                            product['id_prodotto'],
+                            JSON.parse(product['preferito'].toLowerCase())
+                        )
+                    );
+                });
+            }
+        })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
