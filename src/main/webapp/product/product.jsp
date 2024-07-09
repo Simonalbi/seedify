@@ -8,11 +8,12 @@
 <%@ page import="com.unisa.seedify.model.FavoritesDao" %>
 
 <%
-  ProductBean productBean = (ProductBean) request.getAttribute("product_bean");
+  HttpSession userSession = request.getSession(true);
+  ProductBean productBean = (ProductBean) userSession.getAttribute("watching_product");
 
   boolean isFavorite = false;
   try {
-    UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
+    UserBean userBean = (UserBean) userSession.getAttribute("user");
     FavoritesDao favoritesDao = FavoritesDao.getInstance();
     FavoritesBean userFavorites = favoritesDao.getUserFavorites(userBean);
 
@@ -56,11 +57,11 @@
       </div>
       <div id="product-main-info">
         <div id="product-price-container" class="rubik-400">
-          <span>1200.0 €</span>
+          <span><%= productBean.getPrice() %> €</span>
         </div>
         <div id="product-description-container" class="rubik-300">
           <div class="section-title">
-            <span class="rubik-500">Descrizione prodotto</span>
+            <span class="rubik-500">Descrizione</span>
           </div>
           <div class="product-section-breakline"></div>
           <div id="product-description"><%= productBean.getDescription() %></div>
@@ -100,7 +101,7 @@
         </div>
         <div class="other-info">
           <span class="rubik-400">Categoria:</span>
-          <span class="season"><%= productBean.getPlantType().toUpperCase().charAt(0) + productBean.getPlantType().toLowerCase().substring(1) %></span>
+          <span id="product-category"><%= productBean.getPlantType().toUpperCase().charAt(0) + productBean.getPlantType().toLowerCase().substring(1) %></span>
         </div>
       </div>
       <div id="user-actions-container" class="rubik-300">
@@ -115,6 +116,16 @@
           </button>
         </div>
       </div>
+    </div>
+    <div id="related-products-section">
+      <div class="section-title">
+        <h6 class="rubik-600">Prodotti simili</h6>
+      </div>
+      <div class="section-title-breakline"></div>
+      <jsp:include page="/common/components/scrollable-container/scrollable-container.jsp">
+        <jsp:param name="id" value="related-products-scrollable-container" />
+        <jsp:param name="loading-text" value="Caricamento prodotti correlati..." />
+      </jsp:include>
     </div>
   </div>
 

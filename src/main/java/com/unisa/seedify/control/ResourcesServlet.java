@@ -64,9 +64,12 @@ public class ResourcesServlet extends HttpServlet implements JsonServlet {
                     response.sendRedirect(request.getContextPath() + "/common/error/404.jsp");
                 }
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("product");
-                request.setAttribute("product_bean", productBean);
-                dispatcher.forward(request, response);
+                request.getSession(true).setAttribute("watching_product", productBean);
+                response.sendRedirect("product");
+
+                /*RequestDispatcher dispatcher = request.getRequestDispatcher("product");
+                request.setAttribute("watching_product", productBean);
+                dispatcher.forward(request, response);*/
                 return;
             }
             default: {

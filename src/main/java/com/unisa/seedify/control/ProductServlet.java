@@ -39,6 +39,17 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                 products = productDao.getAllActiveMostPurchasedProducts(10);
                 break;
             }
+            case "get_related_products": {
+                String category = request.getParameter("category");
+                products = productDao.getAllActiveCategoryProducts(20, category);
+
+                ProductBean watchingProduct = (ProductBean) request.getSession(true).getAttribute("watching_product");
+                if (watchingProduct != null) {
+                    products.remove(watchingProduct);
+                }
+
+                break;
+            }
             case "get_product": {
                 try {
                     EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(request.getParameter("entity_primary_key"));
