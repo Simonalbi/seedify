@@ -50,7 +50,7 @@
 			<div class="sidebar-separator"></div>
 			<% if (mainNavbarUserBean != null) { %>
 				<div class="sidebar-option">
-					<a href="${pageContext.request.contextPath}/user">
+					<a href="${pageContext.request.contextPath}/dashboard">
 						<span class="material-icons-round md-18">display_settings</span>
 						<span class="option-label">Dashboard</span>
 					</a>
