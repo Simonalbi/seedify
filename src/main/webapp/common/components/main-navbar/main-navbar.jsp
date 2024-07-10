@@ -65,6 +65,21 @@
 					</a>
 				</div>
 				<div class="sidebar-separator"></div>
+			<% } else { %>
+				<div class="sidebar-option">
+					<a href="${pageContext.request.contextPath}/common/components/login/login.jsp">
+						<span class="material-icons-round md-18">key</span>
+						<span class="option-label">Accedi</span>
+					</a>
+				</div>
+				<div class="sidebar-separator"></div>
+				<div class="sidebar-option">
+					<a href="${pageContext.request.contextPath}/registration">
+						<span class="material-icons-round md-18">compost</span>
+						<span class="option-label">Registrati</span>
+					</a>
+				</div>
+				<div class="sidebar-separator"></div>
 			<% } %>
 		</div>
 	</div>
