@@ -159,7 +159,7 @@ function buildTable(tableData, onEdit, recordIdentifier) {
 
 /**
  * Updates the table with the given data.
- * @param {Object} tableData - The data to update the table with.
+ * @param {Object} tableData - The data to update the table width.
  */
 function updateTable(tableData) {
     const mainTable = document.getElementById('main-table');
