@@ -79,4 +79,15 @@ public class CreditCardBean extends BaseBean implements Serializable {
     public int hashCode() {
         return Objects.hash(cardNumber, cvv, expirationDate, name, surname);
     }
+
+    @Override
+    public EntityPrimaryKey getPrimaryKey() {
+        EntityPrimaryKey primaryKey = new EntityPrimaryKey();
+        primaryKey.addKey("nome", this.name);
+        primaryKey.addKey("cognome", this.surname);
+        primaryKey.addKey("numero_carta", this.cardNumber);
+        primaryKey.addKey("cvv", this.cvv);
+        primaryKey.addKey("scadenza", this.expirationDate);
+        return primaryKey;
+    }
 }
