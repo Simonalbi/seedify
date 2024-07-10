@@ -33,12 +33,21 @@ body {
   background-color: var(--pure-white);
 }
 
+.dashboard-action-button {
+  gap: 10px;
+  border-radius: 10px;
+}
+
 #profile-picture-container {
   width: 150px;
   height: 150px;
 }
 
 #user-message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   width: 60%;
   height: fit-content;
 }
