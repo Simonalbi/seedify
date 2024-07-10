@@ -40,7 +40,13 @@
             </div>
           </div>
           <div id="user-message-container">
-            <span class="rubik-400" id="user-message">Ciao <%= userBean.getName() %> benvenuto nella tua dashboard!</span>
+            <span class="rubik-400" id="user-message">Ciao <%= userBean.getName() %> benvenuto nella tua dashboard! <br></span>
+            <% if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+            <button class="material-button dashboard-action-button">
+              <span class="material-icons-round md-18">add_card</span>
+              <span class="rubik-300">Aggiungi carta</span>
+            </button>
+            <% } %>
           </div>
         </div>
         <div class="ui-block" id="stats-container">
