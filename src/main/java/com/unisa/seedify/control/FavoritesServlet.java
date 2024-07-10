@@ -2,7 +2,6 @@ package com.unisa.seedify.control;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.unisa.seedify.model.BaseBean;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.ProductBean;
 import com.unisa.seedify.model.UserBean;
