@@ -49,7 +49,7 @@
             <% } else { %>
               <button class="material-button dashboard-action-button">
                 <span class="material-icons-round md-18">library_add</span>
-                <span class="rubik-300">Aggiungi un nuovo prodotto</span>
+                <span class="rubik-300">Aggiungi nuovo prodotto</span>
               </button>
             <% } %>
           </div>
