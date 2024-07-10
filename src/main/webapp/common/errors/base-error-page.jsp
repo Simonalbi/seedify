@@ -21,7 +21,7 @@
       </div>
       <div class="redirect-message rubik-400">
         <span class="material-icons-round md-18">chevron_right</span>
-        <span class="span-text"><b><a href="${pageContext.request.contextPath}/home/home.jsp">Clicca qui</a> per ritornare alla homepage di Seedify!</b></span>
+        <span class="span-text"><b><a href="${pageContext.request.contextPath}/home">Clicca qui</a> per ritornare alla homepage di Seedify!</b></span>
       </div>
     </div>
   </div>
