@@ -47,7 +47,7 @@
                   <span class="rubik-300">Aggiungi carta</span>
                 </button>
             <% } else { %>
-              <button class="material-button dashboard-action-button">
+              <button class="material-button dashboard-action-button" onclick="showEditProduct(null)">
                 <span class="material-icons-round md-18">library_add</span>
                 <span class="rubik-300">Aggiungi nuovo prodotto</span>
               </button>

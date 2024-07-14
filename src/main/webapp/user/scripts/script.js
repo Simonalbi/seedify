@@ -3,6 +3,7 @@ import { showEditProduct } from '../../common/components/edit-product/scripts/sc
 import { toast } from "../../common/general/scripts/toast.js";
 
 window.getTableData = getTableData;
+window.showEditProduct = showEditProduct;
 
 /**
  * Shows the edit credit card modal.
