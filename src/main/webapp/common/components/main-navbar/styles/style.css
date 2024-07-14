@@ -92,7 +92,8 @@
   height: 40px;
 }
 
-#sidebar .sidebar-option a {
+#sidebar .sidebar-option a,
+#sidebar .sidebar-option div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -102,6 +103,8 @@
 
   color: var(--granite-gray);
   text-decoration: none;
+
+  cursor: pointer;
 }
 
 #main-navbar {

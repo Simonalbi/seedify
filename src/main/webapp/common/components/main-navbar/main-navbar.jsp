@@ -66,8 +66,8 @@
 				</div>
 				<div class="sidebar-separator"></div>
 			<% } else { %>
-				<div class="sidebar-option">
-					<a href="${pageContext.request.contextPath}/common/components/login/login.jsp">
+				<div class="sidebar-option" onclick="showLogin()">
+					<a>
 						<span class="material-icons-round md-18">key</span>
 						<span class="option-label">Accedi</span>
 					</a>
