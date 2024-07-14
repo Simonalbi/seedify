@@ -78,6 +78,7 @@ body {
   transition: padding ease 0.3s;
 
   border-radius: 25px;
+  cursor: pointer;
 }
 .animated-round-button a,
 .animated-round-button span {
