@@ -41,7 +41,6 @@ function sendAjaxRequest(method, url, body, callbacks) {
         }
     }
 
-    // TODO Set timeout (slide 43 ajax)
     const ajaxRequest = getAjaxRequestObject();
     ajaxRequest.onreadystatechange = function () {
         if (ajaxRequest.readyState === 4) {
@@ -59,6 +58,12 @@ function sendAjaxRequest(method, url, body, callbacks) {
 
     ajaxRequest.open(method, url, true);
     ajaxRequest.send(body);
+
+    setTimeout(function () {
+        if (ajaxRequest.readyState < 4) {
+            ajaxRequest.abort();
+        }
+    }, 15000 );
 }
 
 /**
