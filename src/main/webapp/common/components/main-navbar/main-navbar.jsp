@@ -120,6 +120,18 @@
 	</div>
 	<div id="actions-container">
 		<div class="action">
+			<div id="search-container" class="input-box">
+				<jsp:include page="/common/components/input-box/input-box.jsp">
+					<jsp:param name="id" value="search-bar" />
+					<jsp:param name="type" value="text" />
+					<jsp:param name="name" value="query" />
+					<jsp:param name="placeholder" value="Cerca..." />
+					<jsp:param name="group" value="search" />
+				</jsp:include>
+				<span id="search-icon" class="material-icons-round md-18">search</span>
+			</div>
+		</div>
+		<div class="action">
 			<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
 			<div class="notification" id="cart-items-counter">
 				<span><%= mainNavbarCartBean != null ? mainNavbarCartBean.getTotalCartItems() : 0 %></span>

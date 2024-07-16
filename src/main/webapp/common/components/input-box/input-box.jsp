@@ -31,9 +31,11 @@
 
 <div class="input-box">
   <% if (!"submit".equals(inputType)) { %>
-    <div class="input-box-label-container">
-      <label for="${param.id}"><%= inputLabel %></label>
-    </div>
+    <% if (inputLabel != null) { %>
+      <div class="input-box-label-container">
+        <label for="${param.id}"><%= inputLabel %></label>
+      </div>
+    <% } %>
     <div class="input-box-input-container <% if ("select".equals(inputTag)) { %>select-dropdown<% } %>">
       <% if ("select".equals(inputTag)) { %>
         <select id="${param.id}"
@@ -75,15 +77,6 @@
           <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons-round md-18" onClick="togglePassword('${param.id}')">visibility</span>
         <% } %>
     </div>
-    <% if (!("file".equals(inputTag))) { %>
-      <div class="input-box-error-container">
-        <% if (inputErrorMessage != null) { %>
-          <p class="error-text">${param.errorMessage}</p>
-        <% } else { %>
-          <br>
-        <% } %>
-      </div>
-    <% } %>
   <% } else { %>
     <div class="input-box-input-container">
       <input id="${param.id}"

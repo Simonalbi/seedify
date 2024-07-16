@@ -51,7 +51,7 @@ body {
 }
 
 @media screen and (min-width: 1701px) {
-  main-page-content {
+  .main-page-content {
     padding: 100px 20px 50px 20px;
   }
 

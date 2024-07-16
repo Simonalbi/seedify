@@ -23,3 +23,36 @@ function hideSideBar() {
     sidebarContent.style.visibility = "hidden";
     opacityLayer.style.display = "none";
 }
+
+/*
+ * Show and hide the search bar and search icon
+*/
+document.addEventListener('DOMContentLoaded', (event) => {
+    const searchIcon = document.getElementById('search-icon');
+    const searchBar = document.getElementById('search-bar');
+
+    searchIcon.addEventListener('click', toggleSearchBar);
+
+    searchBar.addEventListener('blur', () => {
+        if (searchBar.value.trim() === "") {
+            hideSearchBar();
+        }
+    });
+
+    function toggleSearchBar() {
+        if (searchBar.classList.contains('active')) {
+            searchBar.classList.remove('active');
+            searchBar.blur();
+            searchIcon.classList.remove('hidden');
+        } else {
+            searchBar.classList.add('active');
+            searchBar.focus();
+            searchIcon.classList.add('hidden');
+        }
+    }
+
+    function hideSearchBar() {
+        searchBar.classList.remove('active');
+        searchIcon.classList.remove('hidden');
+    }
+});
