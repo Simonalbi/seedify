@@ -120,7 +120,7 @@
 	</div>
 	<div id="actions-container">
 		<div class="action">
-			<div id="search-container">
+			<div id="search-container" class="input-box">
 				<jsp:include page="/common/components/input-box/input-box.jsp">
 					<jsp:param name="id" value="search-bar" />
 					<jsp:param name="type" value="text" />
