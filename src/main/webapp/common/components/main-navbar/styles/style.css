@@ -217,6 +217,44 @@
   cursor: pointer;
 }
 
+#search-form {
+  position: relative;
+}
+
+#search-container {
+  display: flex;
+  align-items: flex-end;
+
+  position: absolute;
+  top: -20px;
+  right: -8px;
+
+  width: 200px;
+}
+
+#search-bar {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#search-icon {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+#search-bar.active {
+  max-height: 40px;
+  visibility: visible;
+  opacity: 1;
+}
+
+#search-icon.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 #main-navbar #actions-container lord-icon,
 #main-navbar #actions-container .profile-picture {
   width: 35px;
