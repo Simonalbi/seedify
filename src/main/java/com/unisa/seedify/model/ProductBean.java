@@ -108,6 +108,20 @@ public class ProductBean extends BaseBean implements Serializable {
     public ProductBean() {
     }
 
+    public ProductBean(int productId, String name, byte[] image, float price, int quantity, Seasons season, RequiredWater requiredWater, String plantType, String description, Date addedDate) {
+        this.productId = productId;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.quantity = quantity;
+        this.season = season;
+        this.requiredWater = requiredWater;
+        this.plantType = plantType;
+        this.description = description;
+        this.addedDate = addedDate;
+        this.state = States.ACTIVE;
+    }
+
     public int getProductId() {
         return productId;
     }

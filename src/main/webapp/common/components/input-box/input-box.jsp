@@ -58,6 +58,7 @@
           <input id="${param.id}"
                  class="<% if (inputGroup != null) { %>${param.group}-input-box-group<% } %>"
                  type="file"
+                 name="${param.name}"
                  hidden
           />
           <div id="${param.id}-file-list"></div>

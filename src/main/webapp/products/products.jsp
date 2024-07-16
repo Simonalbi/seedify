@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- TODO Add to cart -->
 <!-- TODO Filter products -->
 
 <html>

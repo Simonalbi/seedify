@@ -32,30 +32,33 @@ function disableSubmitButton(group) {
     submitButton.disabled = true;
 }
 
-// TODO Permettere di inserire un solo file per volta
 /**
  * Handle the files that have been dropped or selected
  * @param {Array} files - The list of files that have been dropped or selected
  * @param {HTMLElement} fileListContainer - The container where the list of files will be displayed
  */
 function handleFiles(files, fileListContainer) {
-    files.forEach(file => {
-        const listItem = document.createElement('div');
-        listItem.textContent = file.name;
-        fileListContainer.appendChild(listItem);
-    });
+    const file = files[0];
+    fileListContainer.innerHTML = '';
+
+    const listItem = document.createElement('div');
+    listItem.textContent = file.name;
+    fileListContainer.appendChild(listItem);
 }
 
 document.addEventListener("input", (event) => {
     const classesArray = Array.from(event.target.classList);
+    console.log(classesArray);
+
     const group = classesArray.find(c => c.endsWith("-input-box-group"));
+    console.log(group);
 
     let isFormFilled = true;
     let isFormValid = true;
 
     const inputBoxes = document.getElementsByClassName("input-box");
     for (let i = 0; i < inputBoxes.length; i++) {
-        const input = inputBoxes[i].querySelector("input, textarea");
+        const input = inputBoxes[i].querySelector("input, textarea, select");
         if (input.classList.contains(group)) {
             isFormFilled = isFormFilled && input.value !== "";
             isFormValid = isFormValid && input.checkValidity();

@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%--TODO Modificare la regx di input box in modo che il prezzo accetti anche numeri decimali--%>
 <div id="edit-product">
   <div id="edit-product-main-container" class="ui-block">
     <div id="edit-product-close-button" onclick="hideEditProduct()">
       <span class="material-icons-round md-18">close</span>
     </div>
-    <form id="edit-product-form" method="post">
+    <form id="edit-product-form" action="${pageContext.request.contextPath}/product-servlet?action=add_product" method="post" enctype="multipart/form-data">
       <div class="form-row rubik-300">
         <div id="edit-product-data-container">
           <div id="edit-product-name-box" class="dark">
@@ -48,7 +49,7 @@
               <jsp:param name="label" value="Tipologia Pianta" />
               <jsp:param name="id" value="edit-product-category-input-box" />
               <jsp:param name="type" value="text" />
-              <jsp:param name="name" value="category" />
+              <jsp:param name="name" value="plantType" />
               <jsp:param name="pattern" value="[A-Za-z\s]+" />
               <jsp:param name="errorMessage" value="Tipologia non valida" />
               <jsp:param name="group" value="edit-product" />
@@ -105,7 +106,7 @@
           <jsp:param name="id" value="edit-product-submit-button" />
           <jsp:param name="type" value="submit" />
           <jsp:param name="value" value="Applica" />
-          <jsp:param name="enabled" value="true" />
+          <jsp:param name="enabled" value="false" />
           <jsp:param name="group" value="edit-product" />
         </jsp:include>
       </div>

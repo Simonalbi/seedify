@@ -60,7 +60,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
     @Override
     public void doUpdate(ProductBean productBean) throws SQLException {
         String query = "UPDATE " + ProductDao.TABLE_NAME +
-                       " SET nome = ?, immagine = ?, prezzo = ?, quantita = ?, stagionalita = ?, quantita_acqua = ?, tipologia_pianta = ?, descrizione = ?, data_aggiunta = ?" +
+                       " SET nome = ?, immagine = ?, prezzo = ?, quantita = ?, stagionalita = ?, quantita_acqua = ?, tipologia_pianta = ?, descrizione = ?" +
                        " WHERE codice_prodotto = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -74,8 +74,7 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
             preparedStatement.setString(6, productBean.getRequiredWater().toString());
             preparedStatement.setString(7, productBean.getPlantType());
             preparedStatement.setString(8, productBean.getDescription());
-            preparedStatement.setDate(9, productBean.getAddedDate());
-            preparedStatement.setInt(10, productBean.getProductId());
+            preparedStatement.setInt(9, productBean.getProductId());
 
             preparedStatement.executeUpdate();
         }

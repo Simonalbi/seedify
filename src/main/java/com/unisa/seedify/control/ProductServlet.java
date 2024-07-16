@@ -5,20 +5,40 @@ import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet(name = "productServlet", value = "/product-servlet")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10) // 2MB, 10MB, 10MB
 public class ProductServlet extends HttpServlet implements JsonServlet {
+    private static final String UPLOAD_DIR_NAME = "uploads";
+    private static Path UPLOAD_DIR_PATH;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        UPLOAD_DIR_PATH = Paths.get(getServletContext().getRealPath("") + UPLOAD_DIR_NAME);
+        try {
+            Files.createDirectories(UPLOAD_DIR_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -102,6 +122,77 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         PrintWriter out = response.getWriter();
         out.print(filteredData);
         out.flush();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'action' in request body");
+            return;
+        }
+
+        HashMap<String, Object> parts = new HashMap<>();
+        for (Part part : request.getParts()) {
+            String fileName = part.getSubmittedFileName();
+            if (fileName != null && !fileName.isEmpty()) {
+                Path tempFilePath = Paths.get(UPLOAD_DIR_PATH.toString() + File.separator + fileName);
+                part.write(tempFilePath.toString());
+                parts.put("image", Files.readAllBytes(tempFilePath));
+                Files.delete(tempFilePath);
+            } else {
+                String fieldName = part.getName();
+                String fieldValue = request.getParameter(fieldName);
+                parts.put(fieldName, fieldValue);
+            }
+        }
+
+        try {
+            String name = (String) parts.get("name");
+            float price = Float.parseFloat((String) parts.get("price"));
+            int quantity = Integer.parseInt((String) parts.get("quantity"));
+            String plantType = (String) parts.get("plantType");
+            ProductBean.RequiredWater requiredWater = ProductBean.RequiredWater.fromString((String) parts.get("required-water"));
+            ProductBean.Seasons season = ProductBean.Seasons.fromString((String) parts.get("season"));
+            String description = (String) parts.get("description");
+            byte[] image = (byte[]) parts.get("image");
+
+            boolean success = false;
+            switch (action) {
+                case "add_product": {
+                    try {
+                        ProductBean productBean = new ProductBean(0, name, image, price, quantity, season, requiredWater, plantType, description, new Date(System.currentTimeMillis()));
+                        productDao.doSave(productBean);
+                        success = true;
+                    } catch (SQLException ignored) {}
+                    break;
+                }
+                case "edit_product": {
+                    try {
+                        String rawProductPrimaryKey = request.getParameter("entity_primary_key");
+                        EntityPrimaryKey productPrimaryKey = BaseBean.parsePrimaryKey(rawProductPrimaryKey);
+                        ProductBean oldProduct = productDao.doRetrive(productPrimaryKey);
+
+                        ProductBean newProduct = new ProductBean(oldProduct.getProductId(), name, image, price, quantity, season, requiredWater, plantType, description, new Date(System.currentTimeMillis()));
+                        productDao.doUpdate(newProduct);
+
+                        success = true;
+                    } catch (SQLException ignored) {}
+                    break;
+                }
+                default: {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+                }
+            }
+
+            if (success) {
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An error occurred while processing the request");
+            }
+        } catch (NullPointerException | ClassCastException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing or invalid parameter in request body");
+        }
     }
 
     @Override

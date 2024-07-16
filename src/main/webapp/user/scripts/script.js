@@ -1,9 +1,10 @@
 import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
-import { showEditProduct } from '../../common/components/edit-product/scripts/script.js';
+import { showAddProductForm, showEditProductForm } from '../../common/components/edit-product/scripts/script.js';
 import { toast } from "../../common/general/scripts/toast.js";
 
 window.getTableData = getTableData;
-window.showEditProduct = showEditProduct;
+window.showAddProductForm = showAddProductForm;
+window.showEditProductForm = showEditProductForm;
 
 /**
  * Shows the edit credit card modal.
@@ -96,12 +97,12 @@ function buildTable(tableData, onEdit, recordIdentifier) {
 
                 const span = document.createElement('span');
                 span.classList.add("material-icons-round", "md-18");
-                span.value = editActionValue;
+                // span.value = editActionValue;
                 span.innerHTML = "edit";
 
                 if (onEdit !== null) {
                     editAction.onclick = function (event) {
-                        onEdit(record[recordIdentifier]);
+                        onEdit(record[recordIdentifier], editActionValue);
                     }
                 }
                 editAction.appendChild(span);
@@ -118,7 +119,7 @@ function buildTable(tableData, onEdit, recordIdentifier) {
 
                 const span = document.createElement('span');
                 span.classList.add("material-icons-round", "md-18");
-                span.value = deleteActionValue
+                // span.value = deleteActionValue
                 span.innerHTML = "delete"
 
                 deleteAction.onclick = function (event) {
@@ -175,7 +176,7 @@ function updateTable(tableData) {
         let onEdit = null;
         let recordIdentifier = "";
         if (tableData['data_name'] === "all_saved_products") {
-            onEdit = showEditProduct;
+            onEdit = showEditProductForm;
             recordIdentifier = "entity_primary_key";
         } else if (tableData['data_name'] === "user_credit_cards") {
             onEdit = showEditCreditCard;

@@ -1,16 +1,10 @@
 import { getBaseOriginName, sendAjaxRequest } from "../../../general/scripts/script.js";
 
-export { showEditProduct };
+export { showAddProductForm, showEditProductForm };
 
-window.hideEditProduct = hideEditProduct;
+window.hideEditProduct = hideForm;
 
-/**
- * Show the edit product overlay
- * @param {String} productIdentifier - The product identifier.
- */
-function showEditProduct(productIdentifier) {
-    const editProductOverlay = document.getElementById("edit-product");
-
+function resetForm() {
     document.getElementById("edit-product-name-input-box").value = null;
     document.getElementById("edit-product-price-input-box").value = null;
     document.getElementById("edit-product-quantity-input-box").value = null;
@@ -18,7 +12,42 @@ function showEditProduct(productIdentifier) {
     document.getElementById("edit-product-season-input-box").value = null;
     document.getElementById("edit-product-required-water-input-box").value= null;
     document.getElementById("edit-product-description-input-box").value = null;
+}
 
+function showForm() {
+    const editProductOverlay = document.getElementById("edit-product");
+    editProductOverlay.style.visibility = "visible";
+}
+
+/**
+ * Hide the edit product overlay
+ */
+function hideForm() {
+    const editProductOverlay = document.getElementById("edit-product");
+    editProductOverlay.style.visibility = "hidden";
+}
+
+/**
+ * Show the add product overlay
+ */
+function showAddProductForm() {
+    const form = document.getElementById("edit-product-form");
+    form.action = `${getBaseOriginName()}/product-servlet?action=add_product`;
+
+    resetForm();
+    showForm();
+}
+
+/**
+ * Show the edit product overlay
+ * @param {String} productIdentifier - The product identifier.
+ * @param {String} editCall - The endpoint to call to edit the product.
+ */
+function showEditProductForm(productIdentifier, editCall) {
+    const form = document.getElementById("edit-product-form");
+    form.action = `${getBaseOriginName()}/${editCall}`;
+
+    resetForm();
     if (productIdentifier !== null) {
         sendAjaxRequest(
             "GET",
@@ -38,14 +67,5 @@ function showEditProduct(productIdentifier) {
             }
         )
     }
-
-    editProductOverlay.style.visibility = "visible";
-}
-
-/**
- * Hide the edit product overlay
- */
-function hideEditProduct() {
-    const editProductOverlay = document.getElementById("edit-product");
-    editProductOverlay.style.visibility = "hidden";
+    showForm();
 }

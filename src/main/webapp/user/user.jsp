@@ -5,9 +5,7 @@
 <%@ page import="com.unisa.seedify.model.OrderDao" %>
 <%@ page import="com.unisa.seedify.model.ProductDao" %>
 
-<!-- TODO Filter page access -->
 <!-- TODO Navbar style -->
-<!-- TODO Edit product -->
 <%
   UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
 
@@ -47,7 +45,7 @@
                   <span class="rubik-300">Aggiungi carta</span>
                 </button>
             <% } else { %>
-              <button class="material-button dashboard-action-button" onclick="showEditProduct(null)">
+              <button class="material-button dashboard-action-button" onclick="showAddProductForm()">
                 <span class="material-icons-round md-18">library_add</span>
                 <span class="rubik-300">Aggiungi nuovo prodotto</span>
               </button>
