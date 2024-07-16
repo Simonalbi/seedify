@@ -1,3 +1,5 @@
+export { showLogin };
+
 /**
  * Show login overlay
  */

@@ -1,6 +1,9 @@
 import { getBaseOriginName, resolveResource, sendAjaxRequest} from "../../common/general/scripts/script.js";
 import { addToScrollableContainer } from "../../common/components/scrollable-container/scripts/script.js";
 import { getProductCard } from "../../common/general/scripts/products.js";
+import { showLogin } from "../../common/components/login/scripts/script.js";
+
+window.showLogin = showLogin;
 
 /**
  * Requests the latest products and adds them to the scrollable container.

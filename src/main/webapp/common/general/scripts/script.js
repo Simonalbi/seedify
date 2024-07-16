@@ -1,4 +1,5 @@
 import { toast } from "./toast.js";
+import { showLogin } from "../../components/login/scripts/script.js";
 
 export { getBaseOriginName, resolveResource, sendAjaxRequest };
 
@@ -37,6 +38,7 @@ function getAjaxRequestObject(){
 function sendAjaxRequest(method, url, body, callbacks) {
     if (!(401 in callbacks)) {
         callbacks[401] = function () {
+            showLogin();
             toast("Login richiesto", "WARNING")
         }
     }
