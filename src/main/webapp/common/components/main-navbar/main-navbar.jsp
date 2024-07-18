@@ -120,14 +120,7 @@
 	</div>
 	<div id="actions-container">
 		<div class="action">
-			<div id="search-container" class="input-box">
-				<jsp:include page="/common/components/input-box/input-box.jsp">
-					<jsp:param name="id" value="search-bar" />
-					<jsp:param name="type" value="text" />
-					<jsp:param name="name" value="query" />
-					<jsp:param name="placeholder" value="Cerca..." />
-					<jsp:param name="group" value="search" />
-				</jsp:include>
+			<div id="search" onclick="showSearchBar()">
 				<span id="search-icon" class="material-icons-round md-18">search</span>
 			</div>
 		</div>
@@ -148,3 +141,17 @@
 		</div>
 	</div>
 </nav>
+<div id="search-bar-container">
+	<div id="search-bar-box">
+		<jsp:include page="/common/components/input-box/input-box.jsp">
+			<jsp:param name="id" value="search-bar" />
+			<jsp:param name="type" value="text" />
+			<jsp:param name="name" value="query" />
+			<jsp:param name="placeholder" value="Cerca..." />
+			<jsp:param name="group" value="search" />
+		</jsp:include>
+	</div>
+	<div id="close-search-bar-icon" onclick="hideSearchBar()">
+		<span class="material-icons-round md-18">close</span>
+	</div>
+</div>

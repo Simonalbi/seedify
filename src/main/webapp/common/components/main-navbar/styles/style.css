@@ -217,42 +217,36 @@
   cursor: pointer;
 }
 
-#search-form {
-  position: relative;
+#search #search-icon {
+  font-size: 30px;
 }
 
-#search-container {
-  display: flex;
-  align-items: flex-end;
-
+#search-bar-container {
   position: absolute;
-  top: -15px;
-  right: -8px;
+  z-index: 10;
 
-  width: 200px;
+  display: none;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+
+  margin-top: 100px;
+  padding: 0 80px;
 }
 
-#search-bar {
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  max-height: 0;
-  visibility: hidden;
-  opacity: 0;
+#search-bar-box {
+  width: 20px;
+  transition: width ease 0.5s;
 }
 
-#search-icon {
-  cursor: pointer;
-  transition: opacity 0.3s ease;
+#search-bar-container .input-box input {
+  border: 2px solid var(--android-green);
 }
 
-#search-bar.active {
-  max-height: 40px;
-  visibility: visible;
-  opacity: 1;
-}
-
-#search-icon.hidden {
-  opacity: 0;
-  pointer-events: none;
+#close-search-bar-icon {
+  position: absolute;
+  top: 12px;
+  right: 95px;
 }
 
 #main-navbar #actions-container lord-icon,
