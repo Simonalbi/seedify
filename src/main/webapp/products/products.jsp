@@ -14,7 +14,7 @@
   <jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
 
   <div class="main-page-content">
-    <div id="latest-products-container">
+    <div id="featured-products-container">
       <div class="section-title">
         <h5 class="rubik-600">Prodotti più recenti</h5>
       </div>
@@ -23,8 +23,6 @@
         <jsp:param name="id" value="latest-products-scrollable-container" />
         <jsp:param name="loading-text" value="Caricamento prodotti..." />
       </jsp:include>
-    </div
-    <div id="most_purchased_products-container">
       <div class="section-title">
         <h5 class="rubik-600">Prodotti più venduti</h5>
       </div>
