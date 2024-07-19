@@ -148,7 +148,7 @@
 <div id="search-bar-container">
 	<div id="search-bar-box">
 		<jsp:include page="/common/components/input-box/input-box.jsp">
-			<jsp:param name="id" value="search-bar" />
+			<jsp:param name="id" value="search-bar-input-box" />
 			<jsp:param name="type" value="text" />
 			<jsp:param name="name" value="query" />
 			<jsp:param name="placeholder" value="Cerca..." />

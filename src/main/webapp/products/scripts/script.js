@@ -134,9 +134,16 @@ function requestLatestProducts() {
  * Requests all the products.
  */
 function requestAllProducts() {
+    let requestUri = `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`
+
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('keywords')) {
+        requestUri += `&keywords=${searchParams.get('keywords')}`;
+    }
+
     sendAjaxRequest(
         "GET",
-        `${getBaseOriginName()}/product-servlet?action=get_all_products&fields=immagine,nome,prezzo,tipologia,id_prodotto,preferito&filter=tipologia`,
+        requestUri,
         null,
         {
             200: function (response) {

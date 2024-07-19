@@ -49,6 +49,10 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         switch (action) {
             case "get_all_products": {
                 String keywords = request.getParameter("keywords");
+                if (keywords != null) {
+                    keywords = keywords.replace("%20", " ");
+                }
+
                 products = productDao.getAllActiveProducts(keywords);
                 break;
             }

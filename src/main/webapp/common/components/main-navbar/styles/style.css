@@ -129,6 +129,8 @@
 
   margin-right: 5px;
 
+  width: 30px;
+
   font-size: 36px;
   color: var(--pure-white);
 
@@ -146,7 +148,7 @@
 }
 
 #main-navbar #logo-container img {
-  width: 100%;
+  width: calc(100% - 30px);
   height: 100%;
   object-fit: contain;
 }
@@ -222,7 +224,7 @@
 }
 
 #search-bar-container {
-  position: absolute;
+  position: fixed;
   z-index: 10;
 
   display: flex;
