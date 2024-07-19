@@ -48,7 +48,8 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         List<ProductBean> products = null;
         switch (action) {
             case "get_all_products": {
-                products = productDao.getAllActiveProducts();
+                String keywords = request.getParameter("keywords");
+                products = productDao.getAllActiveProducts(keywords);
                 break;
             }
             case "get_latest_products" : {

@@ -129,34 +129,50 @@ public class ProductDao extends BaseDao implements GenericDao<ProductBean> {
         return productsAmount;
     }
 
-    public List<ProductBean> getAllActiveProducts() {
+    public List<ProductBean> getAllActiveProducts(String keywords) {
         String query = "SELECT * FROM " + ProductDao.TABLE_NAME +
                        "  WHERE stato = 'ATTIVO'";
 
+        boolean keywordsPresent = keywords != null && !keywords.trim().isEmpty();
+        if (keywordsPresent) {
+            query += " AND (nome LIKE ? OR tipologia_pianta LIKE ?)";
+        }
+
         List<ProductBean> products = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            while (resultSet.next()) {
-                ProductBean productBean = new ProductBean();
-                productBean.setProductId(resultSet.getInt("codice_prodotto"));
-                productBean.setName(resultSet.getString("nome"));
-                productBean.setImage(resultSet.getBytes("immagine"));
-                productBean.setPrice(resultSet.getFloat("prezzo"));
-                productBean.setQuantity(resultSet.getInt("quantita"));
-                productBean.setSeason(ProductBean.Seasons.fromString(resultSet.getString("stagionalita")));
-                productBean.setRequiredWater(ProductBean.RequiredWater.fromString(resultSet.getString("quantita_acqua")));
-                productBean.setPlantType(resultSet.getString("tipologia_pianta"));
-                productBean.setDescription(resultSet.getString("descrizione"));
-                productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
-                productBean.setState(States.fromString(resultSet.getString("stato")));
-
-                products.add(productBean);
+            if (keywordsPresent) {
+                preparedStatement.setString(1, "%" + keywords + "%");
+                preparedStatement.setString(2, "%" + keywords + "%");
             }
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    ProductBean productBean = new ProductBean();
+                    productBean.setProductId(resultSet.getInt("codice_prodotto"));
+                    productBean.setName(resultSet.getString("nome"));
+                    productBean.setImage(resultSet.getBytes("immagine"));
+                    productBean.setPrice(resultSet.getFloat("prezzo"));
+                    productBean.setQuantity(resultSet.getInt("quantita"));
+                    productBean.setSeason(ProductBean.Seasons.fromString(resultSet.getString("stagionalita")));
+                    productBean.setRequiredWater(ProductBean.RequiredWater.fromString(resultSet.getString("quantita_acqua")));
+                    productBean.setPlantType(resultSet.getString("tipologia_pianta"));
+                    productBean.setDescription(resultSet.getString("descrizione"));
+                    productBean.setAddedDate(resultSet.getDate("data_aggiunta"));
+                    productBean.setState(States.fromString(resultSet.getString("stato")));
+
+                    products.add(productBean);
+                }
+            }
+
         } catch (SQLException ignored) {}
 
         return products;
+    }
+
+    public List<ProductBean> getAllActiveProducts() {
+        return getAllActiveProducts(null);
     }
 
     public List<ProductBean> getAllActiveLatestProducts(int amount) {
