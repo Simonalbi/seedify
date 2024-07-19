@@ -225,18 +225,22 @@
   position: absolute;
   z-index: 10;
 
-  display: none;
+  display: flex;
   justify-content: center;
+  align-items: center;
+
   width: 100%;
   height: fit-content;
 
-  margin-top: 100px;
-  padding: 0 80px;
+  margin-top: 65px;
+  padding: 0 10%;
 }
 
 #search-bar-box {
-  width: 20px;
-  transition: width ease 0.5s;
+  width: 0;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 
 #search-bar-container .input-box input {
@@ -244,9 +248,17 @@
 }
 
 #close-search-bar-icon {
+  position: relative;
+  float: right;
+
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+}
+
+#close-search-bar-icon > span {
   position: absolute;
-  top: 12px;
-  right: 95px;
+  left: -30px;
+  top: -12px;
 }
 
 #main-navbar #actions-container lord-icon,
@@ -277,7 +289,7 @@
   font-size: 13px;
 }
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 650px) {
   #burger-menu-icon {
     display: block;
   }

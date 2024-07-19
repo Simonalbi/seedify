@@ -28,18 +28,23 @@ function hideSideBar() {
  * Show the search bar
 */
 function showSearchBar() {
-    const searchBarOverlay = document.getElementById("search-bar-container");
     const searchBox = document.getElementById("search-bar-box");
-    searchBarOverlay.style.display = "flex";
-    searchBox.style.width = "100%";
+    const closeSearchBarIcon = document.getElementById("close-search-bar-icon");
+
+    searchBox.style.width = "80%";
+    searchBox.style.opacity = "1";
+    searchBox.style.transform = "scaleX(1)";
+    closeSearchBarIcon.style.opacity = "1";
 }
 
 /*
  * Hide the search bar
  */
 function hideSearchBar() {
-    const searchBarOverlay = document.getElementById("search-bar-container");
     const searchBox = document.getElementById("search-bar-box");
-    searchBarOverlay.style.display = "none";
-    searchBox.style.width = "20px";
+    const closeSearchBarIcon = document.getElementById("close-search-bar-icon");
+
+    searchBox.style.opacity = "0";
+    searchBox.style.transform = "scaleX(0)";
+    closeSearchBarIcon.style.opacity = "0";
 }

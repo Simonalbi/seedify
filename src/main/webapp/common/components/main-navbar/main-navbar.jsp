@@ -121,7 +121,8 @@
 	<div id="actions-container">
 		<div class="action">
 			<div id="search" onclick="showSearchBar()">
-				<span id="search-icon" class="material-icons-round md-18">search</span>
+				<lord-icon src="https://cdn.lordicon.com/kkvxgpti.json" trigger="hover" colors="primary:#000000">
+				</lord-icon>
 			</div>
 		</div>
 		<div class="action">
