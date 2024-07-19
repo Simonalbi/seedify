@@ -48,11 +48,8 @@ function handleFiles(files, fileListContainer) {
 
 document.addEventListener("input", (event) => {
     const classesArray = Array.from(event.target.classList);
-    console.log(classesArray);
 
     const group = classesArray.find(c => c.endsWith("-input-box-group"));
-    console.log(group);
-
     let isFormFilled = true;
     let isFormValid = true;
 

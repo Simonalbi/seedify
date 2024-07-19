@@ -68,7 +68,8 @@ img {
   background-color: var(--pure-white);
 }
 
-.product-container .favorite-button {
+.product-container .favorite-button,
+.product-container .remove-from-cart-button {
   visibility: hidden;
 
   position: absolute;
@@ -79,12 +80,14 @@ img {
   height: 40px;
 }
 
-.product-container .favorite-button .material-icons-round {
+.product-container .favorite-button .material-icons-round,
+.product-container .remove-from-cart-button .material-icons-round {
   position: relative;
   top: 1.5px;
 }
 
-.product-container:hover .favorite-button {
+.product-container:hover .favorite-button,
+.product-container .remove-from-cart-button  {
   visibility: visible;
 }
 

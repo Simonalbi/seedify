@@ -126,10 +126,13 @@
 			</div>
 		</div>
 		<div class="action">
-			<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
-			<div class="notification" id="cart-items-counter">
-				<span><%= mainNavbarCartBean != null ? mainNavbarCartBean.getTotalCartItems() : 0 %></span>
-			</div>
+			<%--TODO Aggiungere il link solo se l'utente è loggato--%>
+			<a <% if (mainNavbarUserBean != null) { %> href="${pageContext.request.contextPath}/cart" <% } else { %> href="#" <% } %>>
+				<lord-icon src="https://cdn.lordicon.com/mfmkufkr.json" trigger="hover" colors="primary:#000000"></lord-icon>
+				<div class="notification" id="cart-items-counter">
+					<span><%= mainNavbarCartBean != null ? mainNavbarCartBean.getTotalCartItems() : 0 %></span>
+				</div>
+			</a>
 		</div>
 		<div class="action" onclick="showSideBar()">
 			<% if (mainNavbarUserBean != null) { %>

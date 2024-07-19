@@ -1,7 +1,7 @@
 import { getBaseOriginName, sendAjaxRequest } from "./script.js";
 import { toast } from "./toast.js";
 
-export { getProductCard, sendAddToFavoriteRequest, sendRemoveFromFavoriteRequest, sendAddToCartRequest };
+export { getProductCard, sendAddToFavoriteRequest, sendRemoveFromFavoriteRequest, sendAddToCartRequest, goToProductPage };
 
 /**
  * Sends a request to add a product to the favorites.
@@ -73,6 +73,14 @@ function sendAddToCartRequest(productId, quantity) {
 }
 
 /**
+ * Redirects to the product page.
+ * @param {number} productId
+ */
+function goToProductPage(productId) {
+    window.location.href = `${getBaseOriginName()}/resources-servlet?resource_type=product_page&product_id=${productId}`;
+}
+
+/**
  * Returns a product card.
  * @param {string} name
  * @param {number} price
@@ -115,7 +123,7 @@ function getProductCard(name, price, image, productId, isFavorite) {
     const productImageContainer = document.createElement("div")
     productImageContainer.classList.add("product-image-container");
     productImageContainer.addEventListener('click', function() {
-        window.location.href = `${getBaseOriginName()}/resources-servlet?resource_type=product_page&product_id=${productId}`;
+        goToProductPage(productId);
     });
 
     const productImage = document.createElement("img");
@@ -131,7 +139,7 @@ function getProductCard(name, price, image, productId, isFavorite) {
     const productInfo = document.createElement("div");
     productInfo.classList.add("product-info");
     productInfo.addEventListener('click', function() {
-        window.location.href = `${getBaseOriginName()}/resources-servlet?resource_type=product_page&product_id=${productId}`;
+        goToProductPage(productId);
     });
 
     const nameParagraph = document.createElement("p");

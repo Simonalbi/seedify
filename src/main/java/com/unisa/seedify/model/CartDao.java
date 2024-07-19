@@ -226,10 +226,11 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
         try {
             if (newCartItem) {
                 this.doSaveOne(cartBean, cartItemBean);
+                cartBean.getCartItems().add(cartItemBean);
             } else {
                 this.doUpdate(cartBean);
             }
-            cartBean.getCartItems().add(cartItemBean);
+
             success = true;
         } catch (SQLException ignored) {}
 

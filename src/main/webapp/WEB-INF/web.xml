@@ -78,6 +78,15 @@
         <url-pattern>/about-us</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <jsp-file>/cart/cart.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
     <!-- Pagine di errore -->
     <error-page>
         <error-code>404</error-code>
