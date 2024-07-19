@@ -1,5 +1,7 @@
 export { showLogin };
 
+window.hideLogin = hideLogin;
+
 /**
  * Show login overlay
  */
