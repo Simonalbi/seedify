@@ -87,7 +87,7 @@
 <nav id="main-navbar" class="rubik-300">
 	<div id="logo-container">
 		<span class="material-icons-round" id="burger-menu-icon" onclick="showSideBar()">menu</span>
-		<img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300.png" alt="">
+		<a href="home"><img src="${pageContext.request.contextPath}/common/assets/img/logo/logo_900x300.png" alt=""></a>
 	</div>
 	<div id="menu-container">
 		<div class="menu-option">
