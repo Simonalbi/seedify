@@ -41,14 +41,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/scrollable-container/styles/style.css">
 <script type="module" src="${pageContext.request.contextPath}/common/components/scrollable-container/scripts/script.js" defer></script>
 
-<!-- edit-product -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit-product/styles/style.css">
-<script type="module" src="${pageContext.request.contextPath}/common/components/edit-product/scripts/script.js" defer></script>
-
 <!-- main-footer -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-footer/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/main-footer/scripts/script.js" defer></script>
 
+<!-- edit -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit/styles/style.css">
+<script type="module" src="${pageContext.request.contextPath}/common/components/edit/scripts/script.js" defer></script>
+
+<!-- edit-product -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit/edit-product/styles/style.css">
+<script type="module" src="${pageContext.request.contextPath}/common/components/edit/edit-product/scripts/script.js" defer></script>
+
 <!-- edit-credit-cart -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit-credit-card/styles/style.css">
-<script src="${pageContext.request.contextPath}/common/components/edit-credit-card/scripts/script.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit/edit-credit-card/styles/style.css">
+<script type="module" src="${pageContext.request.contextPath}/common/components/edit/edit-credit-card/scripts/script.js" defer></script>

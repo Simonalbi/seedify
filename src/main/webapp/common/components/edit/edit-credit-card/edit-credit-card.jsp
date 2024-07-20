@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div id="edit-credit-card">
+<div id="edit-credit-card-overlay">
     <div id="edit-credit-card-main-container">
         <div id="edit-credit-card-close-button">
-            <span class="material-icons-round md-18" onclick="hideEditCreditCard()">close</span>
+            <span class="material-icons-round md-18" onclick="hideCreditCardForm()">close</span>
         </div>
         <form id="edit-credit-card-form" method="post">
             <div class="form-row rubik-300">
@@ -36,8 +36,10 @@
                 <jsp:include page="/common/components/input-box/input-box.jsp">
                     <jsp:param name="label" value="Numero Carta:" />
                     <jsp:param name="id" value="edit-credit-card-number-input-box" />
-                    <jsp:param name="type" value="\d{16}" />
+                    <jsp:param name="type" value="text" />
                     <jsp:param name="name" value="credit_card_number" />
+                    <jsp:param name="pattern" value="\d{16}" />
+                    <jsp:param name="errorMessage" value="Numero carta non valido" />
                     <jsp:param name="group" value="edit-credit-card" />
                 </jsp:include>
             </div>
@@ -60,6 +62,7 @@
                             <jsp:param name="id" value="edit-credit-card-expiration-date-input-box" />
                             <jsp:param name="type" value="date" />
                             <jsp:param name="name" value="expiration_date" />
+                            <jsp:param name="errorMessage" value="Data non valida" />
                             <jsp:param name="group" value="edit-credit-card" />
                         </jsp:include>
                     </div>
@@ -69,8 +72,8 @@
                 <jsp:include page="/common/components/input-box/input-box.jsp">
                     <jsp:param name="id" value="edit-credit-card-submit-button" />
                     <jsp:param name="type" value="submit" />
-                    <jsp:param name="value" value="Applica Modifica" />
-                    <jsp:param name="enabled" value="true" />
+                    <jsp:param name="value" value="Salva" />
+                    <jsp:param name="enabled" value="false" />
                     <jsp:param name="group" value="edit-credit-card" />
                 </jsp:include>
             </div>

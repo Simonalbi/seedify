@@ -5,7 +5,6 @@
 <%@ page import="com.unisa.seedify.model.OrderDao" %>
 <%@ page import="com.unisa.seedify.model.ProductDao" %>
 
-<!-- TODO Navbar style -->
 <%
   UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
 
@@ -25,8 +24,9 @@
   <body>
     <jsp:include page="/common/components/main-navbar/main-navbar.jsp" />
 
+    <%@ include file="/common/components/edit/edit-credit-card/edit-credit-card.jsp" %>
     <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
-      <%@ include file="/common/components/edit-product/edit-product.jsp" %>
+      <%@ include file="/common/components/edit/edit-product/edit-product.jsp" %>
     <% } %>
 
     <div class="main-page-content">
@@ -39,18 +39,17 @@
           </div>
           <div id="user-message-container">
             <span class="rubik-400" id="user-message">Ciao <%= userBean.getName() %> benvenuto nella tua dashboard! <br></span>
-            <% if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
-                <button class="material-button dashboard-action-button">
-                  <span class="material-icons-round md-18">add_card</span>
-                  <span class="rubik-300">Aggiungi carta</span>
+            <button class="material-button dashboard-action-button" onclick="showAddCreditCardOverlay()">
+              <span class="material-icons-round md-18">payment</span>
+              <span class="rubik-300">Aggiungi carta di credito</span>
+            </button>
+            <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
+                <button class="material-button dashboard-action-button" onclick="showAddProductForm()">
+                  <span class="material-icons-round md-18">library_add</span>
+                  <span class="rubik-300">Aggiungi nuovo prodotto</span>
                 </button>
-            <% } else { %>
-              <button class="material-button dashboard-action-button" onclick="showAddProductForm()">
-                <span class="material-icons-round md-18">library_add</span>
-                <span class="rubik-300">Aggiungi nuovo prodotto</span>
-              </button>
+              </div>
             <% } %>
-          </div>
         </div>
         <div class="ui-block" id="stats-container">
           <div id="stats-title">

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%--TODO Modificare la regx di input box in modo che il prezzo accetti anche numeri decimali--%>
-<div id="edit-product">
+<div id="edit-product-overlay">
   <div id="edit-product-main-container" class="ui-block">
-    <div id="edit-product-close-button" onclick="hideEditProduct()">
+    <div id="edit-product-close-button" onclick="hideProductForm()">
       <span class="material-icons-round md-18">close</span>
     </div>
     <form id="edit-product-form" action="${pageContext.request.contextPath}/product-servlet?action=add_product" method="post" enctype="multipart/form-data">
@@ -105,7 +105,7 @@
         <jsp:include page="/common/components/input-box/input-box.jsp">
           <jsp:param name="id" value="edit-product-submit-button" />
           <jsp:param name="type" value="submit" />
-          <jsp:param name="value" value="Applica" />
+          <jsp:param name="value" value="Salva" />
           <jsp:param name="enabled" value="false" />
           <jsp:param name="group" value="edit-product" />
         </jsp:include>

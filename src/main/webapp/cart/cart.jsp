@@ -8,8 +8,6 @@
     CartBean cartBean = (CartBean) request.getSession(true).getAttribute("cart");
 %>
 
-<%--TODO Errore nella costruzione del cart bean, un prodotto viene aggiunto una volta per quantità invece di aumentare solo il contatore--%>
-
 <html lang="en">
 <head>
     <jsp:include page="/common/general/metadata.jsp"/>

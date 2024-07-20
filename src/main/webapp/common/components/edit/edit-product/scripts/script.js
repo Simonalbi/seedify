@@ -1,8 +1,11 @@
-import { getBaseOriginName, sendAjaxRequest } from "../../../general/scripts/script.js";
+import { getBaseOriginName, sendAjaxRequest } from "../../../../general/scripts/script.js";
+import { showOverlay, hideOverlay } from "../../scripts/script.js";
 
 export { showAddProductForm, showEditProductForm };
 
-window.hideEditProduct = hideForm;
+window.hideProductForm = function () {
+    hideOverlay("edit-product-overlay");
+}
 
 function resetForm() {
     document.getElementById("edit-product-name-input-box").value = null;
@@ -14,19 +17,6 @@ function resetForm() {
     document.getElementById("edit-product-description-input-box").value = null;
 }
 
-function showForm() {
-    const editProductOverlay = document.getElementById("edit-product");
-    editProductOverlay.style.visibility = "visible";
-}
-
-/**
- * Hide the edit product overlay
- */
-function hideForm() {
-    const editProductOverlay = document.getElementById("edit-product");
-    editProductOverlay.style.visibility = "hidden";
-}
-
 /**
  * Show the add product overlay
  */
@@ -35,7 +25,7 @@ function showAddProductForm() {
     form.action = `${getBaseOriginName()}/product-servlet?action=add_product`;
 
     resetForm();
-    showForm();
+    showOverlay("edit-product-overlay");
 }
 
 /**
@@ -67,5 +57,5 @@ function showEditProductForm(productIdentifier, editCall) {
             }
         )
     }
-    showForm();
+    showOverlay("edit-product-overlay");
 }

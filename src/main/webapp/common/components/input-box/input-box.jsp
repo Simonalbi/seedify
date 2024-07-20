@@ -77,6 +77,13 @@
           <span id="${param.id}-toggle-icon" class="password-toggle-icon password-icon material-icons-round md-18" onClick="togglePassword('${param.id}')">visibility</span>
         <% } %>
     </div>
+    <div class="input-box-error-container">
+      <% if (inputErrorMessage != null) { %>
+        <p class="error-text"><%= inputErrorMessage %></p>
+      <% } else { %>
+        <br>
+      <% } %>
+    </div>
   <% } else { %>
     <div class="input-box-input-container">
       <input id="${param.id}"

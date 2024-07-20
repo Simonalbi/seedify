@@ -1,4 +1,4 @@
-#edit-product {
+#edit-product-overlay {
   visibility: hidden;
 
   position: fixed;
@@ -75,21 +75,6 @@ form {
   height: 300px;
 }
 
-/*#edit-product-image-container {
-  border: 2px dashed var(--metallic-green);
-  border-radius: 5px;
-
-  padding: 10px;
-
-  height: 250px;
-
-  text-align: center;
-  color: var(--argent);
-  cursor: pointer;
-
-  transition: background-color 0.3s ease;
-}*/
-
 .drop-zone.dragover {
   background-color: var(--pure-white);
   border-color: var(--black-leather-jacket);
@@ -134,7 +119,7 @@ form {
 }
 
 @media (max-width: 870px) {
-  #edit-product {
+  #edit-product-overlay {
     align-items: flex-start;
   }
 
