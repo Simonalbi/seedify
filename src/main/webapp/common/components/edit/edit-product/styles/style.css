@@ -2,7 +2,7 @@
   visibility: hidden;
 
   position: fixed;
-  z-index: 3;
+  z-index: 11;
 
   display: flex;
   justify-content: center;
