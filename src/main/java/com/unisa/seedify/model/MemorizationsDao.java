@@ -173,7 +173,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
         }
     }
 
-    public ArrayList<CreditCardBean> getAllCreditCard(UserBean userBean)  {
+    public ArrayList<CreditCardBean> getAllCreditCard(UserBean userBean) {
         ArrayList<CreditCardBean> creditCards = new ArrayList<>();
 
         String query = "SELECT * FROM " + MemorizationsDao.TABLE_NAME +
@@ -201,8 +201,11 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                     memorizationsBean.getCreditCards().add(creditCardBean);
                 }
 
-            } catch (SQLException ignored){}
-        } catch (SQLException ignored){}
+            } catch (SQLException ignored) {
+            }
+        } catch (SQLException ignored) {
+        }
+
         return creditCards;
     }
 }
