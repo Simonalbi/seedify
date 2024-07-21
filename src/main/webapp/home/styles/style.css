@@ -116,15 +116,15 @@ body {
 }
 
 #sign-up-button {
-  background: #132A13;
-  box-shadow: inset 20px 20px 60px #0d1d0d,
-  inset -20px -20px 60px #193719;
+  background: var(--dark-jungle-green);
+  box-shadow: inset 20px 20px 60px var(--licorice),
+  inset -20px -20px 60px var(--phthalo-green);
 }
 
 #sign-in-button {
-  background: #31572C;
-  box-shadow: inset 20px 20px 60px #223c1e,
-  inset -20px -20px 60px #40723a;
+  background: var(--mughal-green);
+  box-shadow: inset 20px 20px 60px var(--black-leather-jacket),
+  inset -20px -20px 60px var(--japanese-laurel);
 }
 
 #main-container .section-title {
