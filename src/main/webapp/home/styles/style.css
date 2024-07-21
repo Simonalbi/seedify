@@ -130,3 +130,9 @@ body {
 #main-container .section-title {
   margin-top: 30px;
 }
+
+@media screen and (max-width: 920px) {
+  #main-container {
+    padding: 90px 20px 50px 20px;
+  }
+}

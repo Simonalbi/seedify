@@ -71,14 +71,14 @@
             <div id="cart-summary-container" class="ui-block">
                 <div class="summary-info">
                     <span class="rubik-400">Prodotti:</span>
-                    <span id="total-cart-products" class="rubik-300"><%= cartBean.getCartItems().size() %></span>
+                    <span id="total-cart-products" class="rubik-300"><%= cartBean.getCartItems().stream().map((CartItemBean::getQuantity)).reduce(0, Integer::sum) %></span>
                 </div>
                 <div class="summary-info">
                     <span class="rubik-400">Totale:</span>
                     <span class="rubik-300"><span id="total-cart-price"><%= new DecimalFormat("0.00", new java.text.DecimalFormatSymbols(java.util.Locale.US)).format(cartBean.getTotalCartPrice()) %></span> €</span>
                 </div>
             </div>
-            <form action="${pageContext.request.contextPath}/registration-servlet" method="POST">
+            <form action="${pageContext.request.contextPath}/order-servlet" method="POST">
                 <div id="choose-address-box" class="dark rubik-300">
                     <jsp:include page="/common/components/input-box/input-box.jsp">
                         <jsp:param name="label" value="Indirizzo" />
@@ -86,7 +86,7 @@
                         <jsp:param name="options" value="<%= addressOptions %>" />
                         <jsp:param name="id" value="edit-product-season-input-box" />
                         <jsp:param name="name" value="address_code" />
-                        <jsp:param name="group" value="edit-product" />
+                        <jsp:param name="group" value="checkout" />
                     </jsp:include>
                 </div>
                 <div id="choose-credit-card-box" class="dark rubik-300">
@@ -96,7 +96,7 @@
                         <jsp:param name="options" value="<%= creditCardOptions %>" />
                         <jsp:param name="id" value="edit-product-season-input-box" />
                         <jsp:param name="name" value="credit_card_code" />
-                        <jsp:param name="group" value="edit-product" />
+                        <jsp:param name="group" value="checkout" />
                     </jsp:include>
                 </div>
                 <div id="cart-actions-container">

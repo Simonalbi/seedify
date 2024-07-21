@@ -60,4 +60,8 @@ public class CartBean extends BaseBean implements Serializable {
                 .mapToDouble(cartItemBean -> cartItemBean.getProduct().getPrice() * cartItemBean.getQuantity())
                 .sum();
     }
+
+    public void emptyCart() {
+        this.cartItems.clear();
+    }
 }
