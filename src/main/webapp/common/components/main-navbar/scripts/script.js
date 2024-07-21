@@ -1,3 +1,10 @@
+import { getBaseOriginName } from "../../../general/scripts/script.js";
+
+window.showSideBar = showSideBar;
+window.hideSideBar = hideSideBar;
+window.showSearchBar = showSearchBar;
+window.hideSearchBar = hideSearchBar;
+
 /**
  * Show the sidebar
  */
@@ -48,3 +55,12 @@ function hideSearchBar() {
     searchBox.style.transform = "scaleX(0)";
     closeSearchBarIcon.style.opacity = "0";
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBar = document.getElementById('search-bar-input-box');
+    searchBar.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            window.location.href = `${getBaseOriginName()}/products?keywords=${searchBar.value}`
+        }
+    });
+});

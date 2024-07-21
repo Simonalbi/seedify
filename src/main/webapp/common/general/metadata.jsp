@@ -23,7 +23,7 @@
 <!-- COMPONENTS -->
 <!-- main-navbar -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-navbar/styles/style.css">
-<script src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js"></script>
+<script type="module" src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js"></script>
 
 <!-- input-box -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/input-box/styles/style.css">

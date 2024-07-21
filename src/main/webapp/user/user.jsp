@@ -26,9 +26,7 @@
 
     <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
       <%@ include file="/common/components/edit/edit-product/edit-product.jsp" %>
-    <% } %>
-
-    <% if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+    <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
       <%@ include file="/common/components/edit/edit-credit-card/edit-credit-card.jsp" %>
     <% } %>
 
@@ -47,8 +45,7 @@
                   <span class="material-icons-round md-18">library_add</span>
                   <span class="rubik-300">Aggiungi nuovo prodotto</span>
                 </button>
-            <% } %>
-            <% if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+            <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
               <button class="material-button dashboard-action-button" onclick="showAddCreditCardOverlay()">
                 <span class="material-icons-round md-18">payment</span>
                 <span class="rubik-300">Aggiungi carta di credito</span>
@@ -88,9 +85,9 @@
           <label class="rubik-300" for="table-selector">Seleziona tabella:</label>
           <select name="table-selector" id="table-selector" onchange="getTableData()">
             <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
-            <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
-            <option value="get_customers-nome,cognome,email,ordini_effettuati">Utenti</option>
-            <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
+              <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
+              <option value="get_customers-nome,cognome,email,ordini_effettuati">Utenti</option>
+              <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
             <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
               <option value="get_favorites-immagine,nome,prezzo,stagione,tipologia,descrizione">Preferiti</option>
               <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
