@@ -26,8 +26,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
     @Override
     public void doSave(OrderBean orderBean) throws SQLException {
         String query = "INSERT INTO " + OrderDao.TABLE_NAME +
-                       " (codice_indirizzo, email, codice_carta, data_ordine, data_consegna, prezzo_totale) " +
-                       " VALUES (?, ?, ?, ?, ?, ?)";
+                       " (codice_indirizzo, email, codice_carta, data_ordine, prezzo_totale) " +
+                       " VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -35,9 +35,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
             preparedStatement.setInt(1, orderBean.getAddress().getAddressId());
             preparedStatement.setString(2, orderBean.getUser().getEmail());
             preparedStatement.setInt(3, orderBean.getCreditCard().getCardId());
-            preparedStatement.setDate(8, orderBean.getOrderDate());
-            preparedStatement.setDate(9, orderBean.getDeliveryDate());
-            preparedStatement.setFloat(10, orderBean.getTotalPrice());
+            preparedStatement.setDate(4, orderBean.getOrderDate());
+            preparedStatement.setDouble(5, orderBean.getTotalPrice());
 
             preparedStatement.executeUpdate();
         }

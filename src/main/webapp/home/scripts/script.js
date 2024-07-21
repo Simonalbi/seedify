@@ -3,8 +3,6 @@ import { addToScrollableContainer } from "../../common/components/scrollable-con
 import { getProductCard } from "../../common/general/scripts/products.js";
 import { showLogin } from "../../common/components/login/scripts/script.js";
 
-window.showLogin = showLogin;
-
 /**
  * Requests the latest products and adds them to the scrollable container.
  */

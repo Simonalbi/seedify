@@ -28,10 +28,18 @@ public class OrderBean extends BaseBean implements Serializable {
     private Date deliveryDate;
 
     @SerializedName("prezzo_totale")
-    private float totalPrice;
+    private double totalPrice;
 
     public OrderBean() {
         totalPrice = 0.0f;
+    }
+
+    public OrderBean(CreditCardBean creditCard, UserBean user, AddressBean address, Date orderDate, double totalPrice) {
+        this.creditCard = creditCard;
+        this.user = user;
+        this.address = address;
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
     }
 
     public int getOrderId() {
@@ -82,11 +90,11 @@ public class OrderBean extends BaseBean implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-    public float getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    protected void setTotalPrice(float totalPrice) {
+    protected void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

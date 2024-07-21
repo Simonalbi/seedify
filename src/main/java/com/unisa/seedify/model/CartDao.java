@@ -235,6 +235,16 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
         } catch (SQLException ignored) {}
 
         return (success && !cartReset);
+    }
 
+    public boolean emptyCart(CartBean cartBean) {
+        boolean success = false;
+        try {
+            this.doDelete(cartBean);
+            cartBean.emptyCart();
+            success = true;
+        } catch (SQLException ignored) {}
+
+        return success;
     }
 }

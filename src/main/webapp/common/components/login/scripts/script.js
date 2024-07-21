@@ -1,5 +1,6 @@
 export { showLogin };
 
+window.showLogin = showLogin;
 window.hideLogin = hideLogin;
 
 /**
