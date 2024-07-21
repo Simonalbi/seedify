@@ -31,6 +31,8 @@ function hideLoadingOverlay() {
 function sendDeleteRequest(target) {
     showLoadingOverlay();
 
+    console.log(target)
+
     // http://.../<servlet>?action=<action>&entity_primary_key=<primary_key>
     const url = `${getBaseOriginName()}/${target.value}`;
     sendAjaxRequest(
@@ -121,7 +123,7 @@ function buildTable(tableData, onEdit, recordIdentifier) {
 
                 const span = document.createElement('span');
                 span.classList.add("material-icons-round", "md-18");
-                // span.value = deleteActionValue
+                span.value = deleteActionValue
                 span.innerHTML = "delete"
 
                 deleteAction.onclick = function (event) {
@@ -180,8 +182,6 @@ function updateTable(tableData) {
         if (tableData['data_name'] === "all_saved_products") {
             onEdit = showEditProductForm;
             recordIdentifier = "entity_primary_key";
-        } else if (tableData['data_name'] === "user_credit_cards") {
-            onEdit = showEditCreditCard;
         }
 
         newTableElement = buildTable(tableData, onEdit, recordIdentifier);

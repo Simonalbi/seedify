@@ -21,6 +21,7 @@
         <url-pattern>/cart-servlet</url-pattern>
         <url-pattern>/favorites-servlet</url-pattern>
         <url-pattern>/user-servlet</url-pattern>
+<!--        <url-pattern>/credit-card-servlet</url-pattern>-->
     </filter-mapping>
 
     <!-- Servlet e mapping per tutti i file .jsp -->

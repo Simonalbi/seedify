@@ -41,9 +41,6 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         }
 
         String password = request.getParameter("password");
-        if (!InputValidation.isPasswordStrong(password)) {
-            throw new IllegalArgumentException("Password is not strong enough");
-        }
         password = InputValidation.sha256(password);
 
         EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();

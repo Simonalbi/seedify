@@ -3,7 +3,11 @@ package com.unisa.seedify.control;
 import com.google.gson.*;
 import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.utils.SecurityUtils;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +32,20 @@ public class UserServlet extends HttpServlet implements JsonServlet {
             this.canDelete = canDelete;
             this.deleteCall = deleteCall;
             this.data = data;
+        }
+    }
+
+    private static String ENCRYPTION_KEY = "";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        try {
+            InitialContext initialContext = new InitialContext();
+            Context environmentContext = (Context) initialContext.lookup("java:/comp/env");
+            ENCRYPTION_KEY = (String) environmentContext.lookup("dataEncryptionKey");
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -92,13 +110,18 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     dataName = "user_favorites_products";
                     break;
                 }
-                case "get_credit_card": {
-                    canEdit = true;
-                    canDelete = true;
-                    editCall = "";
-                    deleteCall = "delete_credit_card";
+                case "get_credit_cards": {
+                    data = new ArrayList<>();
 
-                    data = new ArrayList<>(memorizationsDao.getAllCreditCard(userBean));
+                    ArrayList<CreditCardBean> creditCards = new ArrayList<>(memorizationsDao.getAllCreditCards(userBean));
+                    for (CreditCardBean card : creditCards) {
+                        data.add(new CreditCardBean(
+                            "••••••••••••" + SecurityUtils.decrypt(card.getCardNumber(), ENCRYPTION_KEY).substring(12),
+                            "•••",
+                            card.getExpirationDate(), card.getName(), card.getSurname()
+                        ));
+                    }
+
                     dataName = "user_credit_cards";
                     break;
                 }

@@ -191,7 +191,7 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
             }
 
             if (success) {
-                response.setStatus(HttpServletResponse.SC_OK);
+                response.sendRedirect("dashboard");
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An error occurred while processing the request");
             }

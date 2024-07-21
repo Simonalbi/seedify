@@ -529,14 +529,14 @@ def main():
     print("> Adding random products...")
     createRandomProducts(PRODUCTS_AMOUNT)
 
-    print("> Adding random credit cards...")
-    createRandomCreditCards(CREDIT_CARDS_AMOUNT)
+    # print("> Adding random credit cards...")
+    # createRandomCreditCards(CREDIT_CARDS_AMOUNT)
 
-    print("> Creating random associations between users and credit cards...")
-    createRandomCreditCardsAssociations()
+    # print("> Creating random associations between users and credit cards...")
+    # createRandomCreditCardsAssociations()
 
-    print("> Creating random orders...")
-    createRandomOrders(100)
+    # print("> Creating random orders...")
+    # createRandomOrders(100)
 
 if __name__ == "__main__":
     main()

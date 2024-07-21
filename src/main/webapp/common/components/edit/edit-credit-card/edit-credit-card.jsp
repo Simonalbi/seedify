@@ -5,7 +5,7 @@
         <div id="edit-credit-card-close-button">
             <span class="material-icons-round md-18" onclick="hideCreditCardForm()">close</span>
         </div>
-        <form id="edit-credit-card-form" method="post">
+        <form id="edit-credit-card-form" action="${pageContext.request.contextPath}/credit-card-servlet?action=add_credit_card" method="post">
             <div class="form-row rubik-300">
                 <div id="edit-credit-card-data-container" >
                     <div id="edit-credit-card-name-box" class="dark">
@@ -50,7 +50,7 @@
                             <jsp:param name="label" value="CVV:" />
                             <jsp:param name="id" value="edit-credit-card-cvv-input-box" />
                             <jsp:param name="type" value="text" />
-                            <jsp:param name="name" value="category" />
+                            <jsp:param name="name" value="cvv" />
                             <jsp:param name="pattern" value="\d{3}" />
                             <jsp:param name="errorMessage" value="CVV non valido" />
                             <jsp:param name="group" value="edit-credit-card" />

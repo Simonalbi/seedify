@@ -1,4 +1,3 @@
-import { getBaseOriginName, sendAjaxRequest } from "../../../../general/scripts/script.js";
 import { showOverlay, hideOverlay } from "../../scripts/script.js";
 
 export { showAddCreditCardOverlay };
