@@ -3,7 +3,11 @@ package com.unisa.seedify.control;
 import com.google.gson.*;
 import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.utils.SecurityUtils;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +35,20 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         }
     }
 
+    private static String ENCRYPTION_KEY = "";
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        try {
+            InitialContext initialContext = new InitialContext();
+            Context environmentContext = (Context) initialContext.lookup("java:/comp/env");
+            ENCRYPTION_KEY = (String) environmentContext.lookup("dataEncryptionKey");
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -48,11 +66,6 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         ArrayList<Object> data = null;
         if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
             switch (action) {
-                case "get_employees": {
-                    data = new ArrayList<>(userDao.getAllEmployee());
-                    dataName = "employees";
-                    break;
-                }
                 case "get_customers" : {
                     data = new ArrayList<>(userDao.getAllCustomers());
                     dataName = "customers";
@@ -92,13 +105,8 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     dataName = "user_favorites_products";
                     break;
                 }
-                case "get_credit_card": {
-                    canEdit = true;
-                    canDelete = true;
-                    editCall = "";
-                    deleteCall = "delete_credit_card";
-
-                    data = new ArrayList<>(memorizationsDao.getAllCreditCard(userBean));
+                case "get_credit_cards": {
+                    data = new ArrayList<>(memorizationsDao.getAllCreditCards(userBean));
                     dataName = "user_credit_cards";
                     break;
                 }

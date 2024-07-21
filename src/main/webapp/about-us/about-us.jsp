@@ -82,6 +82,5 @@
     </div>
 
     <jsp:include page="/common/components/main-footer/main-footer.jsp"/>
-    <jsp:include page="/common/components/chat-button/chat-button.jsp"/>
 </body>
 </html>

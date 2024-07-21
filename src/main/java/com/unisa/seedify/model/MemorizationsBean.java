@@ -23,6 +23,11 @@ public class MemorizationsBean extends BaseBean implements Serializable {
         this.creditCards = new ArrayList<>();
     }
 
+    public MemorizationsBean(UserBean user, List<CreditCardBean> creditCards) {
+        this.user = user;
+        this.creditCards = creditCards;
+    }
+
     public UserBean getUser() {
         return user;
     }

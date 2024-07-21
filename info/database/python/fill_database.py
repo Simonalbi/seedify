@@ -1,3 +1,8 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+import base64
+
 import mysql.connector
 import random
 import datetime
@@ -14,6 +19,22 @@ USERS_AMOUNT = 100
 ADDRESSES_AMOUNT = 90
 PRODUCTS_AMOUNT = 300
 CREDIT_CARDS_AMOUNT = 70
+
+ENCRYPTION_KEY = '8!\)r9bg$/hH?[RcF5cqBc4d9bm01h%A'
+
+def encrypt(data, key):
+  if len(key) not in (16, 24, 32):
+    raise ValueError("Encryption key must be 16, 24, or 32 bytes long")
+  
+  secret_key = key.encode()
+  iv = get_random_bytes(AES.block_size)
+  cipher = AES.new(secret_key, AES.MODE_CBC, iv)
+  padded_data = pad(data.encode(), AES.block_size)
+  encrypted_data = cipher.encrypt(padded_data)
+  combined_data = iv + encrypted_data
+  encoded_data = base64.b64encode(combined_data).decode('utf-8')
+
+  return encoded_data
 
 # ------------------- RANDOM FUNCTIONS -------------------
 def generateRandomFirstName() -> str:
@@ -290,7 +311,7 @@ def createRandomUsers(numEntries: int) -> None:
         connection = mysql.connector.connect(**dbConfig)
         cursor = connection.cursor()
 
-        userTypeOptions = ["CLIENTE", "DIPENDENTE"]
+        userTypeOptions = ["CLIENTE"]
         for i in range(numEntries):
             name = generateRandomFirstName()
             surname = generateRandomLastName()
@@ -418,8 +439,8 @@ def createRandomCreditCards(numEntries: int) -> None:
         cursor = connection.cursor()
 
         for _ in range(numEntries):
-            cardNumber = generateRandomCardNumber()
-            cvv = generateRandomCVV()
+            cardNumber = encrypt(generateRandomCardNumber(), ENCRYPTION_KEY)
+            cvv = encrypt(generateRandomCVV(), ENCRYPTION_KEY)
             expiryDate = generateRandomExpiryDate()
             name = generateRandomFirstName()
             surname = generateRandomLastName()

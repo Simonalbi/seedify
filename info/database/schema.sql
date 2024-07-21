@@ -38,14 +38,14 @@ CREATE TABLE utenti (
     foto_profilo MEDIUMBLOB NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
-    ruolo ENUM("AMMINISTRATORE", "DIPENDENTE", "CLIENTE") NOT NULL,
+    ruolo ENUM("AMMINISTRATORE", "CLIENTE") NOT NULL,
 
     PRIMARY KEY(email)
 );
 
 CREATE TABLE carte_di_credito (
-    numero_carta CHAR(16) NOT NULL,
-    cvv CHAR(3) NOT NULL,
+    numero_carta VARCHAR(256) NOT NULL,
+    cvv VARCHAR(256) NOT NULL,
     scadenza DATE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE ordini (
     codice_ordine INT AUTO_INCREMENT NOT NULL,
     codice_indirizzo INT NOT NULL,
     email VARCHAR(100) NOT NULL,
-    numero_carta CHAR(16) NOT NULL,
-    cvv CHAR(3) NOT NULL,
+    numero_carta VARCHAR(256) NOT NULL,
+    cvv VARCHAR(256) NOT NULL,
     scadenza DATE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
@@ -86,8 +86,8 @@ CREATE TABLE merce (
 
 CREATE TABLE memorizzazioni (
     email VARCHAR(100) NOT NULL,
-    numero_carta CHAR(16) NOT NULL,
-    cvv CHAR(3) NOT NULL,
+    numero_carta VARCHAR(256) NOT NULL,
+    cvv VARCHAR(256) NOT NULL,
     scadenza DATE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,

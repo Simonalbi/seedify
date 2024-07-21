@@ -26,8 +26,8 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, creditCardBean.getCardNumber());
-            preparedStatement.setString(2, creditCardBean.getCvv());
+            preparedStatement.setString(1, encrypt(creditCardBean.getCardNumber()));
+            preparedStatement.setString(2, encrypt(creditCardBean.getCvv()));
             preparedStatement.setDate(3, creditCardBean.getExpirationDate());
             preparedStatement.setString(4, creditCardBean.getName());
             preparedStatement.setString(5, creditCardBean.getSurname());
@@ -83,8 +83,8 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
-                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
+                    creditCardBean.setCvv("•••");
                     creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
                     creditCardBean.setName(resultSet.getString("nome"));
                     creditCardBean.setSurname(resultSet.getString("cognome"));

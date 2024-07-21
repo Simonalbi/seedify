@@ -96,8 +96,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
                     CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
-                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
+                    creditCardBean.setCvv("•••");
                     creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
                     creditCardBean.setName(resultSet.getString("nome"));
                     creditCardBean.setSurname(resultSet.getString("cognome"));
@@ -175,8 +175,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                 orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
                 CreditCardBean creditCardBean = new CreditCardBean();
-                creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
-                creditCardBean.setCvv(resultSet.getString("cvv"));
+                creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
+                creditCardBean.setCvv("•••");
                 creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
                 creditCardBean.setName(resultSet.getString("nome"));
                 creditCardBean.setSurname(resultSet.getString("cognome"));
@@ -220,8 +220,8 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
                     orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
                     CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber(resultSet.getString("numero_carta"));
-                    creditCardBean.setCvv(resultSet.getString("cvv"));
+                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
+                    creditCardBean.setCvv("•••");
                     creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
                     creditCardBean.setName(resultSet.getString("nome"));
                     creditCardBean.setSurname(resultSet.getString("cognome"));

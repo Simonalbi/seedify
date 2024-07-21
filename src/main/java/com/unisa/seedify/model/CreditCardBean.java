@@ -27,6 +27,14 @@ public class CreditCardBean extends BaseBean implements Serializable {
     public CreditCardBean() {
     }
 
+    public CreditCardBean(String cardNumber, String cvv, Date expirationDate, String name, String surname) {
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.expirationDate = expirationDate;
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getCardNumber() {
         return cardNumber;
     }

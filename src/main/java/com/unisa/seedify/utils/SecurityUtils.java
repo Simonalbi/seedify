@@ -1,4 +1,4 @@
-package com.unisa.seedify.model;
+package com.unisa.seedify.utils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -6,29 +6,17 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.security.*;
 import java.util.Base64;
 
-public abstract class BaseDao {
-    protected static DataSource dataSource;
-    static {
-        try {
-            Context initialContext = new InitialContext();
-            Context enviromentContext = (Context) initialContext.lookup("java:comp/env");
-            dataSource = (DataSource) enviromentContext.lookup("jdbc/seedify");
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
+public class SecurityUtils {
+    public static String encrypt(String data, String key) {
+        // Verifica che la chiave sia della lunghezza corretta per AES
+        if (key.length() != 16 && key.length() != 24 && key.length() != 32) {
+            throw new IllegalArgumentException("Encryption key must be 16, 24, or 32 bytes long");
         }
-    }
 
-    private static final String ENCRYPTION_KEY = "8!\\)r9bg$/hH?[RcF5cqBc4d9bm01h%A";
-
-    protected static String encrypt(String data) {
-        Key secretKey = new SecretKeySpec(ENCRYPTION_KEY.getBytes(), "AES");
+        Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
 
         // Genera un Initialization Vector (IV)
         byte[] iv = new byte[16];
@@ -40,8 +28,7 @@ public abstract class BaseDao {
         try {
             cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
-                 InvalidAlgorithmParameterException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new RuntimeException(e);
         }
 
@@ -61,13 +48,13 @@ public abstract class BaseDao {
         return Base64.getEncoder().encodeToString(ivAndEncryptedBytes);
     }
 
-    protected static String decrypt(String encryptedData) {
+    public static String decrypt(String encryptedData, String key) {
         // Verifica che la chiave sia della lunghezza corretta per AES
-        if (ENCRYPTION_KEY.length() != 16 && ENCRYPTION_KEY.length() != 24 && ENCRYPTION_KEY.length() != 32) {
+        if (key.length() != 16 && key.length() != 24 && key.length() != 32) {
             throw new IllegalArgumentException("Encryption key must be 16, 24, or 32 bytes long");
         }
 
-        Key secretKey = new SecretKeySpec(ENCRYPTION_KEY.getBytes(), "AES");
+        Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
 
         // Decodifica la stringa base64
         byte[] ivAndEncryptedBytes = Base64.getDecoder().decode(encryptedData);

@@ -10,9 +10,6 @@ public class UserBean extends BaseBean implements Serializable {
         @SerializedName("AMMINISTRATORE")
         ADMIN("AMMINISTRATORE"),
 
-        @SerializedName("DIPENDENTE")
-        EMPLOYEE("DIPENDENTE"),
-
         @SerializedName("CLIENTE")
         CUSTOMER("CLIENTE");
 
