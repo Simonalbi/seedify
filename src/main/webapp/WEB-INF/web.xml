@@ -92,6 +92,11 @@
 
     <!-- Pagine di errore -->
     <error-page>
+        <error-code>401</error-code>
+        <location>/common/errors/401.jsp</location>
+    </error-page>
+
+    <error-page>
         <error-code>404</error-code>
         <location>/common/errors/404.jsp</location>
     </error-page>
