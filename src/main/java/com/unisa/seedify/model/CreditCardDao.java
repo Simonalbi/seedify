@@ -39,16 +39,12 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
     @Override
     public void doDelete(CreditCardBean creditCardBean) throws SQLException {
         String query = "DELETE FROM " + CreditCardDao.TABLE_NAME +
-                       " WHERE numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
+                       " WHERE codice_carta = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, creditCardBean.getCardNumber());
-            preparedStatement.setString(2, creditCardBean.getCvv());
-            preparedStatement.setDate(3, creditCardBean.getExpirationDate());
-            preparedStatement.setString(4, creditCardBean.getName());
-            preparedStatement.setString(5, creditCardBean.getSurname());
+            preparedStatement.setInt(1, creditCardBean.getCardCode());
 
             preparedStatement.executeUpdate();
         }
@@ -61,28 +57,21 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
 
     @Override
     public CreditCardBean doRetrive(EntityPrimaryKey primaryKey) throws SQLException {
-        String cardNumber = (String) primaryKey.getKey("numero_carta");
-        String cvv = (String) primaryKey.getKey("cvv");
-        Date expirationDate = (Date) primaryKey.getKey("scadenza");
-        String name = (String) primaryKey.getKey("nome");
-        String surname = (String) primaryKey.getKey("cognome");
+        int cardCodce = (Integer) primaryKey.getKey("codice_carta");
 
         String query = "SELECT * FROM " + CreditCardDao.TABLE_NAME +
-                       " WHERE numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
+                       " WHERE codice_carta = ?";
 
         CreditCardBean creditCardBean = null;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, cardNumber);
-            preparedStatement.setString(2, cvv);
-            preparedStatement.setDate(3, expirationDate);
-            preparedStatement.setString(4, name);
-            preparedStatement.setString(5, surname);
+            preparedStatement.setInt(1, cardCodce);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     creditCardBean = new CreditCardBean();
+                    creditCardBean.setCardCode(resultSet.getInt("codice_carta"));
                     creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
                     creditCardBean.setCvv("•••");
                     creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));

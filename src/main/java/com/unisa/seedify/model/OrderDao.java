@@ -11,6 +11,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
     private static final AddressDao addressDao = AddressDao.getInstance();
     private static final UserDao userDao = UserDao.getInstance();
+    private static final CreditCardDao creditCardDao = CreditCardDao.getInstance();
 
     private OrderDao() {
     }
@@ -25,19 +26,15 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
     @Override
     public void doSave(OrderBean orderBean) throws SQLException {
         String query = "INSERT INTO " + OrderDao.TABLE_NAME +
-                       " (codice_indirizzo, email, numero_carta, cvv, scadenza, nome, cognome, data_ordine, data_consegna, prezzo_totale) " +
-                       " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                       " (codice_indirizzo, email, codice_carta, data_ordine, data_consegna, prezzo_totale) " +
+                       " VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, orderBean.getAddress().getAddressId());
             preparedStatement.setString(2, orderBean.getUser().getEmail());
-            preparedStatement.setString(3, orderBean.getCreditCard().getCardNumber());
-            preparedStatement.setString(4, orderBean.getCreditCard().getCvv());
-            preparedStatement.setDate(5, orderBean.getCreditCard().getExpirationDate());
-            preparedStatement.setString(6, orderBean.getCreditCard().getName());
-            preparedStatement.setString(7, orderBean.getCreditCard().getSurname());
+            preparedStatement.setInt(3, orderBean.getCreditCard().getCardCode());
             preparedStatement.setDate(8, orderBean.getOrderDate());
             preparedStatement.setDate(9, orderBean.getDeliveryDate());
             preparedStatement.setFloat(10, orderBean.getTotalPrice());
@@ -95,12 +92,9 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
                     orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
-                    CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
-                    creditCardBean.setCvv("•••");
-                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
-                    creditCardBean.setName(resultSet.getString("nome"));
-                    creditCardBean.setSurname(resultSet.getString("cognome"));
+                    EntityPrimaryKey creditCardPrimaryKey = new EntityPrimaryKey();
+                    creditCardPrimaryKey.addKey("codice_carta", resultSet.getInt("codice_carta"));
+                    CreditCardBean creditCardBean = creditCardDao.doRetrive(creditCardPrimaryKey);
                     orderBean.setCreditCard(creditCardBean);
 
                     EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
@@ -174,12 +168,9 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
                 orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
-                CreditCardBean creditCardBean = new CreditCardBean();
-                creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
-                creditCardBean.setCvv("•••");
-                creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
-                creditCardBean.setName(resultSet.getString("nome"));
-                creditCardBean.setSurname(resultSet.getString("cognome"));
+                EntityPrimaryKey creditCardPrimaryKey = new EntityPrimaryKey();
+                creditCardPrimaryKey.addKey("codice_carta", resultSet.getInt("codice_carta"));
+                CreditCardBean creditCardBean = creditCardDao.doRetrive(creditCardPrimaryKey);
                 orderBean.setCreditCard(creditCardBean);
 
                 EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
@@ -219,12 +210,9 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
                     orderBean.setOrderId(resultSet.getInt("codice_ordine"));
 
-                    CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
-                    creditCardBean.setCvv("•••");
-                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
-                    creditCardBean.setName(resultSet.getString("nome"));
-                    creditCardBean.setSurname(resultSet.getString("cognome"));
+                    EntityPrimaryKey creditCardPrimaryKey = new EntityPrimaryKey();
+                    creditCardPrimaryKey.addKey("codice_carta", resultSet.getInt("codice_carta"));
+                    CreditCardBean creditCardBean = creditCardDao.doRetrive(creditCardPrimaryKey);
                     orderBean.setCreditCard(creditCardBean);
                     orderBean.setUser(userBean);
 

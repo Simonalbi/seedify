@@ -12,6 +12,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     private static MemorizationsDao instance = null;
 
     private static final UserDao userDao = UserDao.getInstance();
+    private static final CreditCardDao creditCardDao = CreditCardDao.getInstance();
 
     private MemorizationsDao() {
     }
@@ -26,8 +27,8 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     @Override
     public void doSave(MemorizationsBean memorizationsBeans) throws SQLException {
         String query = "INSERT INTO " + MemorizationsDao.TABLE_NAME +
-                       " (email, numero_carta, cvv, scadenza, nome, cognome) " +
-                       " VALUES (?, ?, ?, ?, ?, ?)";
+                       " (email, codice_carta) " +
+                       " VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -38,11 +39,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 preparedStatement.setString(1, memorizationsBeans.getUser().getEmail());
 
                 for (CreditCardBean creditCardBean : memorizationsBeans.getCreditCards()) {
-                    preparedStatement.setString(2, creditCardBean.getCardNumber());
-                    preparedStatement.setString(3, creditCardBean.getCvv());
-                    preparedStatement.setDate(4, creditCardBean.getExpirationDate());
-                    preparedStatement.setString(5, creditCardBean.getName());
-                    preparedStatement.setString(6, creditCardBean.getSurname());
+                    preparedStatement.setInt(2, creditCardBean.getCardCode());
 
                     preparedStatement.executeUpdate();
                 }
@@ -57,7 +54,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
     @Override
     public void doDelete(MemorizationsBean memorizationsBeans) throws SQLException {
         String query = "DELETE FROM " + MemorizationsDao.TABLE_NAME +
-                       " WHERE email = ? AND numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
+                       " WHERE email = ? AND codice_carta = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -66,11 +63,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 preparedStatement.setString(1, memorizationsBeans.getUser().getEmail());
 
                 for (CreditCardBean creditCardBean : memorizationsBeans.getCreditCards()) {
-                    preparedStatement.setString(2, creditCardBean.getCardNumber());
-                    preparedStatement.setString(3, creditCardBean.getCvv());
-                    preparedStatement.setDate(4, creditCardBean.getExpirationDate());
-                    preparedStatement.setString(5, creditCardBean.getName());
-                    preparedStatement.setString(6, creditCardBean.getSurname());
+                    preparedStatement.setInt(2, creditCardBean.getCardCode());
 
                     preparedStatement.executeUpdate();
                 }
@@ -92,18 +85,14 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
         memorizationsBean.getCreditCards().add(creditCardBean);
 
         String query = "INSERT INTO " + MemorizationsDao.TABLE_NAME +
-                       " (email, numero_carta, cvv, scadenza, nome, cognome) " +
-                       " VALUES (?, ?, ?, ?, ?, ?)";
+                       " (email, codice_carta) " +
+                       " VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, memorizationsBean.getUser().getEmail());
-            preparedStatement.setString(2, creditCardBean.getCardNumber());
-            preparedStatement.setString(3, creditCardBean.getCvv());
-            preparedStatement.setDate(4, creditCardBean.getExpirationDate());
-            preparedStatement.setString(5, creditCardBean.getName());
-            preparedStatement.setString(6, creditCardBean.getSurname());
+            preparedStatement.setInt(2, creditCardBean.getCardCode());
 
             preparedStatement.executeUpdate();
         }
@@ -115,17 +104,13 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
 
         String query = "UPDATE " + MemorizationsDao.TABLE_NAME +
                        " SET stato = 'ELIMINATO' " +
-                       " WHERE email = ? AND numero_carta = ? AND cvv = ? AND scadenza = ? AND nome = ? AND cognome = ?";
+                       " WHERE email = ? AND codice_carta = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, collection.getUser().getEmail());
-            preparedStatement.setString(2, bean.getCardNumber());
-            preparedStatement.setString(3, bean.getCvv());
-            preparedStatement.setDate(4, bean.getExpirationDate());
-            preparedStatement.setString(5, bean.getName());
-            preparedStatement.setString(6, bean.getSurname());
+            preparedStatement.setInt(2, bean.getCardCode());
 
             preparedStatement.executeUpdate();
         }
@@ -141,7 +126,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
         String email = (String) primaryKey.getKey("email");
 
         String query = "SELECT * FROM " + MemorizationsDao.TABLE_NAME +
-                       " WHERE email = ?";
+                       " WHERE email = ? AND stato = 'ATTIVO'";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -160,14 +145,10 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
 
                 List<CreditCardBean> creditCards = memorizationsBean.getCreditCards();
                 while (resultSet.next()) {
-                    CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
-                    creditCardBean.setCvv("•••");
-                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
-                    creditCardBean.setName(resultSet.getString("nome"));
-                    creditCardBean.setSurname(resultSet.getString("cognome"));
-
-                    memorizationsBean.getCreditCards().add(creditCardBean);
+                    EntityPrimaryKey creditCardPrimaryKey = new EntityPrimaryKey();
+                    creditCardPrimaryKey.addKey("codice_carta", resultSet.getInt("codice_carta"));
+                    CreditCardBean creditCardBean = creditCardDao.doRetrive(creditCardPrimaryKey);
+                    memorizationsBean.getCreditCards().add(creditCardBean);;
                 }
 
                 return memorizationsBean;
@@ -193,14 +174,10 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
 
                 creditCards = (ArrayList<CreditCardBean>) memorizationsBean.getCreditCards();
                 while (resultSet.next()) {
-                    CreditCardBean creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
-                    creditCardBean.setCvv("•••");
-                    creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));
-                    creditCardBean.setName(resultSet.getString("nome"));
-                    creditCardBean.setSurname(resultSet.getString("cognome"));
-
-                    memorizationsBean.getCreditCards().add(creditCardBean);
+                    EntityPrimaryKey creditCardPrimaryKey = new EntityPrimaryKey();
+                    creditCardPrimaryKey.addKey("codice_carta", resultSet.getInt("codice_carta"));
+                    CreditCardBean creditCardBean = creditCardDao.doRetrive(creditCardPrimaryKey);
+                    creditCards.add(creditCardBean);
                 }
 
             } catch (SQLException ignored){}

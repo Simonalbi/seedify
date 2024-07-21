@@ -16,9 +16,6 @@ public class MemorizationsBean extends BaseBean implements Serializable {
     @SerializedName("carte_di_credito")
     private List<CreditCardBean> creditCards;
 
-    @SerializedName("stato")
-    private States state;
-
     public MemorizationsBean() {
         this.creditCards = new ArrayList<>();
     }

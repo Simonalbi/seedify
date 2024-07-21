@@ -9,6 +9,9 @@ import java.util.Objects;
 public class CreditCardBean extends BaseBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @SerializedName("codice_carta")
+    private int cardCode;
+
     @SerializedName("numero_di_carta")
     private String cardNumber;
 
@@ -33,6 +36,14 @@ public class CreditCardBean extends BaseBean implements Serializable {
         this.expirationDate = expirationDate;
         this.name = name;
         this.surname = surname;
+    }
+
+    public int getCardCode() {
+        return cardCode;
+    }
+
+    public void setCardCode(int cardCode) {
+        this.cardCode = cardCode;
     }
 
     public String getCardNumber() {

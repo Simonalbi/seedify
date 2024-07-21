@@ -44,24 +44,22 @@ CREATE TABLE utenti (
 );
 
 CREATE TABLE carte_di_credito (
+    codice_carta INT AUTO_INCREMENT NOT NULL,
     numero_carta VARCHAR(256) NOT NULL,
     cvv VARCHAR(256) NOT NULL,
     scadenza DATE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
 
-    PRIMARY KEY(numero_carta, cvv, scadenza, nome, cognome)
+    PRIMARY KEY(codice_carta),
+    UNIQUE(numero_carta, cvv, scadenza, nome, cognome)
 );
 
 CREATE TABLE ordini (
     codice_ordine INT AUTO_INCREMENT NOT NULL,
     codice_indirizzo INT NOT NULL,
     email VARCHAR(100) NOT NULL,
-    numero_carta VARCHAR(256) NOT NULL,
-    cvv VARCHAR(256) NOT NULL,
-    scadenza DATE NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    cognome VARCHAR(50) NOT NULL,
+    codice_carta INT NOT NULL,
     data_ordine DATE NOT NULL,
     data_consegna DATE,
     prezzo_totale DECIMAL(10, 2) NOT NULL,
@@ -70,7 +68,7 @@ CREATE TABLE ordini (
 
     FOREIGN KEY(codice_indirizzo) REFERENCES indirizzi(codice_indirizzo),
     FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
-    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome)
+    FOREIGN KEY(codice_carta) REFERENCES carte_di_credito(codice_carta)
 );
 
 CREATE TABLE merce (
@@ -86,17 +84,13 @@ CREATE TABLE merce (
 
 CREATE TABLE memorizzazioni (
     email VARCHAR(100) NOT NULL,
-    numero_carta VARCHAR(256) NOT NULL,
-    cvv VARCHAR(256) NOT NULL,
-    scadenza DATE NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    cognome VARCHAR(50) NOT NULL,
+    codice_carta INT NOT NULL,
     stato ENUM("ATTIVO", "ELIMINATO") NOT NULL DEFAULT "ATTIVO",
 
-    PRIMARY KEY(email, numero_carta, cvv, scadenza, nome, cognome),
+    PRIMARY KEY(email, codice_carta),
 
     FOREIGN KEY(email) REFERENCES utenti(email) ON UPDATE CASCADE,
-    FOREIGN KEY(numero_carta, cvv, scadenza, nome, cognome) REFERENCES carte_di_credito(numero_carta, cvv, scadenza, nome, cognome) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(codice_carta) REFERENCES carte_di_credito(codice_carta) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE locazione (
