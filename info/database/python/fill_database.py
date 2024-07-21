@@ -311,7 +311,7 @@ def createRandomUsers(numEntries: int) -> None:
         connection = mysql.connector.connect(**dbConfig)
         cursor = connection.cursor()
 
-        userTypeOptions = ["CLIENTE", "DIPENDENTE"]
+        userTypeOptions = ["CLIENTE"]
         for i in range(numEntries):
             name = generateRandomFirstName()
             surname = generateRandomLastName()

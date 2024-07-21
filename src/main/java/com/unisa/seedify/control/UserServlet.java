@@ -111,17 +111,7 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     break;
                 }
                 case "get_credit_cards": {
-                    data = new ArrayList<>();
-
-                    ArrayList<CreditCardBean> creditCards = new ArrayList<>(memorizationsDao.getAllCreditCards(userBean));
-                    for (CreditCardBean card : creditCards) {
-                        data.add(new CreditCardBean(
-                            "••••••••••••" + SecurityUtils.decrypt(card.getCardNumber(), ENCRYPTION_KEY).substring(12),
-                            "•••",
-                            card.getExpirationDate(), card.getName(), card.getSurname()
-                        ));
-                    }
-
+                    data = new ArrayList<>(memorizationsDao.getAllCreditCards(userBean));
                     dataName = "user_credit_cards";
                     break;
                 }

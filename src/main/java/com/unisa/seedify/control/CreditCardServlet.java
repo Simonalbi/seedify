@@ -1,11 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.*;
-import com.unisa.seedify.utils.SecurityUtils;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,23 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO Memorizzare i dati in modo sicuro
 @WebServlet(name = "creditCardServlet", urlPatterns = {"/credit-card-servlet"})
 public class CreditCardServlet extends HttpServlet implements JsonServlet {
-    private static String ENCRYPTION_KEY = "";
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        try {
-            InitialContext initialContext = new InitialContext();
-            Context environmentContext = (Context) initialContext.lookup("java:/comp/env");
-            ENCRYPTION_KEY = (String) environmentContext.lookup("dataEncryptionKey");
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
@@ -54,10 +35,7 @@ public class CreditCardServlet extends HttpServlet implements JsonServlet {
                     String name = request.getParameter("name");
                     String surname = request.getParameter("surname");
 
-                    CreditCardBean creditCardBean = new CreditCardBean(
-                        SecurityUtils.encrypt(creditCardNumber, ENCRYPTION_KEY),
-                        SecurityUtils.encrypt(cvv, ENCRYPTION_KEY),
-                        expirationDate, name, surname);
+                    CreditCardBean creditCardBean = new CreditCardBean(creditCardNumber, cvv, expirationDate, name, surname);
 
                     List<CreditCardBean> creditCardBeans = new ArrayList<>();
                     creditCardBeans.add(creditCardBean);
