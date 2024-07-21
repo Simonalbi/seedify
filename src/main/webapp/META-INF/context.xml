@@ -9,5 +9,5 @@
               password="06102003"
               url="jdbc:mysql://localhost:3306/seedify?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
 
-    <Environment name="dataEncryptionKey" value="H1Y@RCwfYvpv(j?+wOl43tbDQsA$.]#t" type="java.lang.String"/>
+    <Environment name="dataEncryptionKey" value="8!\)r9bg$/hH?[RcF5cqBc4d9bm01h%A" type="java.lang.String"/>
 </Context>
