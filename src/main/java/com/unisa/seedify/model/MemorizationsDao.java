@@ -1,7 +1,5 @@
 package com.unisa.seedify.model;
 
-import com.unisa.seedify.utils.SecurityUtils;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +37,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 preparedStatement.setString(1, memorizationsBeans.getUser().getEmail());
 
                 for (CreditCardBean creditCardBean : memorizationsBeans.getCreditCards()) {
-                    preparedStatement.setInt(2, creditCardBean.getCardCode());
+                    preparedStatement.setInt(2, creditCardBean.getCardId());
 
                     preparedStatement.executeUpdate();
                 }
@@ -63,7 +61,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
                 preparedStatement.setString(1, memorizationsBeans.getUser().getEmail());
 
                 for (CreditCardBean creditCardBean : memorizationsBeans.getCreditCards()) {
-                    preparedStatement.setInt(2, creditCardBean.getCardCode());
+                    preparedStatement.setInt(2, creditCardBean.getCardId());
 
                     preparedStatement.executeUpdate();
                 }
@@ -92,7 +90,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, memorizationsBean.getUser().getEmail());
-            preparedStatement.setInt(2, creditCardBean.getCardCode());
+            preparedStatement.setInt(2, creditCardBean.getCardId());
 
             preparedStatement.executeUpdate();
         }
@@ -110,7 +108,7 @@ public class MemorizationsDao extends BaseDao implements GenericDao<Memorization
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, collection.getUser().getEmail());
-            preparedStatement.setInt(2, bean.getCardCode());
+            preparedStatement.setInt(2, bean.getCardId());
 
             preparedStatement.executeUpdate();
         }

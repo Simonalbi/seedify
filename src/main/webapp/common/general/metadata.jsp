@@ -52,3 +52,7 @@
 <!-- edit-credit-cart -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit/edit-credit-card/styles/style.css">
 <script type="module" src="${pageContext.request.contextPath}/common/components/edit/edit-credit-card/scripts/script.js" defer></script>
+
+<!-- address -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/edit/edit-address/styles/style.css">
+<script type="module" src="${pageContext.request.contextPath}/common/components/edit/edit-address/scripts/script.js" defer></script>

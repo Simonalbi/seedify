@@ -1,12 +1,14 @@
 import { getBaseOriginName, resolveResource, sendAjaxRequest } from '../../common/general/scripts/script.js';
 import { showAddProductForm, showEditProductForm } from '../../common/components/edit/edit-product/scripts/script.js';
 import { showAddCreditCardOverlay } from '../../common/components/edit/edit-credit-card/scripts/script.js';
+import { showAddressOverlay } from '../../common/components/edit/edit-address/scripts/script.js';
 import { toast } from "../../common/general/scripts/toast.js";
 
 window.getTableData = getTableData;
 window.showAddProductForm = showAddProductForm;
 window.showEditProductForm = showEditProductForm;
 window.showAddCreditCardOverlay = showAddCreditCardOverlay;
+window.showAddressOverlay = showAddressOverlay;
 
 /**
  * Shows the edit credit card modal.

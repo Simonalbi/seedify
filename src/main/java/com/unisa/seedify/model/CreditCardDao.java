@@ -24,7 +24,7 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
                        "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, encrypt(creditCardBean.getCardNumber()));
             preparedStatement.setString(2, encrypt(creditCardBean.getCvv()));
@@ -33,6 +33,15 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
             preparedStatement.setString(5, creditCardBean.getSurname());
 
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+                    creditCardBean.setCardId(generatedId);
+                } else {
+                    throw new SQLException("Creating address failed, no ID obtained.");
+                }
+            }
         }
     }
 
@@ -44,7 +53,7 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, creditCardBean.getCardCode());
+            preparedStatement.setInt(1, creditCardBean.getCardId());
 
             preparedStatement.executeUpdate();
         }
@@ -71,7 +80,7 @@ public class CreditCardDao extends BaseDao implements GenericDao<CreditCardBean>
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     creditCardBean = new CreditCardBean();
-                    creditCardBean.setCardCode(resultSet.getInt("codice_carta"));
+                    creditCardBean.setCardId(resultSet.getInt("codice_carta"));
                     creditCardBean.setCardNumber("••••••••••••" + decrypt(resultSet.getString("numero_carta")).substring(12));
                     creditCardBean.setCvv("•••");
                     creditCardBean.setExpirationDate(resultSet.getDate("scadenza"));

@@ -10,7 +10,7 @@ public class CreditCardBean extends BaseBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @SerializedName("codice_carta")
-    private int cardCode;
+    private int cardId;
 
     @SerializedName("numero_di_carta")
     private String cardNumber;
@@ -38,12 +38,12 @@ public class CreditCardBean extends BaseBean implements Serializable {
         this.surname = surname;
     }
 
-    public int getCardCode() {
-        return cardCode;
+    public int getCardId() {
+        return cardId;
     }
 
-    public void setCardCode(int cardCode) {
-        this.cardCode = cardCode;
+    public void setCardId(int cardCode) {
+        this.cardId = cardCode;
     }
 
     public String getCardNumber() {

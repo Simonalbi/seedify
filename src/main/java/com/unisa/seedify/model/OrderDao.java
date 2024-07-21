@@ -34,7 +34,7 @@ public class OrderDao extends BaseDao implements GenericDao<OrderBean> {
 
             preparedStatement.setInt(1, orderBean.getAddress().getAddressId());
             preparedStatement.setString(2, orderBean.getUser().getEmail());
-            preparedStatement.setInt(3, orderBean.getCreditCard().getCardCode());
+            preparedStatement.setInt(3, orderBean.getCreditCard().getCardId());
             preparedStatement.setDate(8, orderBean.getOrderDate());
             preparedStatement.setDate(9, orderBean.getDeliveryDate());
             preparedStatement.setFloat(10, orderBean.getTotalPrice());

@@ -1,11 +1,34 @@
-<%@ page import="com.unisa.seedify.model.CartBean" %>
-<%@ page import="com.unisa.seedify.model.ProductBean" %>
-<%@ page import="com.unisa.seedify.model.CartItemBean" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="com.unisa.seedify.model.*" %>
+<%@ page import="java.util.ArrayList" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
     CartBean cartBean = (CartBean) request.getSession(true).getAttribute("cart");
+
+    MemorizationsDao memorizationsDao = MemorizationsDao.getInstance();
+    LocationsDao locationsDao = LocationsDao.getInstance();
+
+    ArrayList<AddressBean> userAddresses = locationsDao.getAllAddresses(userBean);
+    ArrayList<String> rawAddressOptions = new ArrayList<>();
+    for (AddressBean addressBean : userAddresses) {
+        rawAddressOptions.add("(" +
+                addressBean.getStreet() + " - " +
+                addressBean.getCity() + " " +
+                "(" + addressBean.getProvince() + ")" +
+                ", " + addressBean.getAddressId() + ")"
+        );
+    }
+    String addressOptions = "[" + String.join(", ", rawAddressOptions) + "]";
+
+    ArrayList<CreditCardBean> userCreditCards = memorizationsDao.getAllCreditCards(userBean);
+    ArrayList<String> rawCreditCardOptions = new ArrayList<>();
+    for (CreditCardBean creditCardBean : userCreditCards) {
+        rawCreditCardOptions.add("(" + "************" + creditCardBean.getCardNumber().substring(12) + ", " + creditCardBean.getCardId() + ")");
+    }
+    String creditCardOptions = "[" + String.join(", ", rawCreditCardOptions) + "]";
 %>
 
 <html lang="en">
@@ -55,12 +78,34 @@
                     <span class="rubik-300"><span id="total-cart-price"><%= new DecimalFormat("0.00", new java.text.DecimalFormatSymbols(java.util.Locale.US)).format(cartBean.getTotalCartPrice()) %></span> €</span>
                 </div>
             </div>
-            <div id="cart-actions-container">
-                <button id="go-to-checkout-button" class="material-button">
-                    <span class="material-icons-round md-18">credit_score</span>
-                    <span class="small-text">Procedi all'acquisto</span>
-                </button>
-            </div>
+            <form action="${pageContext.request.contextPath}/registration-servlet" method="POST">
+                <div id="choose-address-box" class="dark rubik-300">
+                    <jsp:include page="/common/components/input-box/input-box.jsp">
+                        <jsp:param name="label" value="Indirizzo" />
+                        <jsp:param name="tag" value="select" />
+                        <jsp:param name="options" value="<%= addressOptions %>" />
+                        <jsp:param name="id" value="edit-product-season-input-box" />
+                        <jsp:param name="name" value="address_code" />
+                        <jsp:param name="group" value="edit-product" />
+                    </jsp:include>
+                </div>
+                <div id="choose-credit-card-box" class="dark rubik-300">
+                    <jsp:include page="/common/components/input-box/input-box.jsp">
+                        <jsp:param name="label" value="Carta di credito" />
+                        <jsp:param name="tag" value="select" />
+                        <jsp:param name="options" value="<%= creditCardOptions %>" />
+                        <jsp:param name="id" value="edit-product-season-input-box" />
+                        <jsp:param name="name" value="credit_card_code" />
+                        <jsp:param name="group" value="edit-product" />
+                    </jsp:include>
+                </div>
+                <div id="cart-actions-container">
+                    <button id="go-to-checkout-button" class="material-button" type="submit">
+                        <span class="material-icons-round md-18">credit_score</span>
+                        <span class="small-text">Procedi all'acquisto</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

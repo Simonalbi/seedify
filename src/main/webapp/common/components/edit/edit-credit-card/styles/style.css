@@ -106,6 +106,5 @@ form {
     #edit-credit-card-data-container,
     #edit-credit-card-info-container {
         flex-direction: column;
-        width: 100%;
     }
 }

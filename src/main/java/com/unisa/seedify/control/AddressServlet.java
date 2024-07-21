@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(name = "creditCardServlet", urlPatterns = {"/credit-card-servlet"})
-public class CreditCardServlet extends HttpServlet implements JsonServlet {
+@WebServlet(name = "addressServlet", urlPatterns = {"/address-servlet"})
+public class AddressServlet  extends HttpServlet implements JsonServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserBean userBean = (UserBean) request.getSession(true).getAttribute("user");
@@ -27,27 +25,29 @@ public class CreditCardServlet extends HttpServlet implements JsonServlet {
 
         boolean success = false;
         switch (action) {
-            case "add_credit_card": {
+            case "add_address": {
                 try {
-                    String creditCardNumber = request.getParameter("credit_card_number");
-                    String cvv = request.getParameter("cvv");
-                    Date expirationDate = Date.valueOf(request.getParameter("expiration_date"));
-                    String name = request.getParameter("name");
-                    String surname = request.getParameter("surname");
+                    String street = request.getParameter("street");
+                    String city = request.getParameter("city");
+                    String zipCode = request.getParameter("zip_code");
+                    String province = request.getParameter("province");
+                    String firstName = request.getParameter("first_name");
+                    String lastName = request.getParameter("last_name");
+                    String phone = request.getParameter("phone");
+                    String notes = request.getParameter("notes");
 
-                    CreditCardBean creditCardBean = new CreditCardBean(creditCardNumber, cvv, expirationDate, name, surname);
-
-                    List<CreditCardBean> creditCardBeans = new ArrayList<>();
-                    creditCardBeans.add(creditCardBean);
-                    MemorizationsBean memorizationsBean = new MemorizationsBean(userBean, creditCardBeans);
+                    AddressBean addressBean = new AddressBean(province, city, zipCode, street, firstName, lastName, phone, notes);
 
                     try {
-                        creditCardDao.doSave(creditCardBean);
+                        addressDao.doSave(addressBean);
                     } catch (SQLException e) {
                         System.out.println("An error occurred while processing the request" + e.getMessage());
                     }
 
-                    memorizationsDao.doSave(memorizationsBean);
+                    ArrayList<AddressBean> addresses = new ArrayList<>();
+                    addresses.add(addressBean);
+                    LocationsBean locationsBean = new LocationsBean(userBean, addresses);
+                    locationsDao.doSave(locationsBean);
 
                     success = true;
                 } catch (SQLException e) {

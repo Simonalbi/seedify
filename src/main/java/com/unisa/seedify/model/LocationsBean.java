@@ -20,6 +20,11 @@ public class LocationsBean extends BaseBean implements Serializable {
         this.addresses = new ArrayList<>();
     }
 
+    public LocationsBean(UserBean user, List<AddressBean> addresses) {
+        this.user = user;
+        this.addresses = new ArrayList<>(addresses);
+    }
+
     public UserBean getUser() {
         return user;
     }

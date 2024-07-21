@@ -27,6 +27,7 @@
     <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
       <%@ include file="/common/components/edit/edit-product/edit-product.jsp" %>
     <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+      <%@ include file="/common/components/edit/edit-address/edit-address.jsp" %>
       <%@ include file="/common/components/edit/edit-credit-card/edit-credit-card.jsp" %>
     <% } %>
 
@@ -46,6 +47,10 @@
                   <span class="rubik-300">Aggiungi nuovo prodotto</span>
                 </button>
             <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+              <button class="material-button dashboard-action-button" onclick="showAddressOverlay()">
+                <span class="material-icons-round md-18">add_home_work</span>
+                <span class="rubik-300">Aggiungi indirizzo</span>
+              </button>
               <button class="material-button dashboard-action-button" onclick="showAddCreditCardOverlay()">
                 <span class="material-icons-round md-18">payment</span>
                 <span class="rubik-300">Aggiungi carta di credito</span>
@@ -92,6 +97,7 @@
               <option value="get_favorites-immagine,nome,prezzo,stagione,tipologia,descrizione">Preferiti</option>
               <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_credit_cards-nome,cognome,numero_di_carta,cvv,data_di_scadenza">Carte di Credito</option>
+              <option value="get_addresses-via,città,provincia,cap,nome,cognome,telefono,note">Indirizzi</option>
             <% } %>
           </select>
         </nav>

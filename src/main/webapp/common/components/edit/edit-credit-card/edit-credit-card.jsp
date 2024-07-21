@@ -10,7 +10,7 @@
                 <div id="edit-credit-card-data-container" >
                     <div id="edit-credit-card-name-box" class="dark">
                         <jsp:include page="/common/components/input-box/input-box.jsp">
-                            <jsp:param name="label" value="Nome:" />
+                            <jsp:param name="label" value="Nome" />
                             <jsp:param name="id" value="edit-credit-card-name-input-box" />
                             <jsp:param name="type" value="text" />
                             <jsp:param name="name" value="name" />
@@ -21,7 +21,7 @@
                     </div>
                     <div id="edit-credit-card-surname-box" class="dark">
                         <jsp:include page="/common/components/input-box/input-box.jsp">
-                            <jsp:param name="label" value="Cognome:" />
+                            <jsp:param name="label" value="Cognome" />
                             <jsp:param name="id" value="edit-credit-card-surname-input-box" />
                             <jsp:param name="type" value="text" />
                             <jsp:param name="name" value="surname" />
@@ -34,7 +34,7 @@
             </div>
             <div id="edit-credit-card-number-box" class="dark form-row rubik-300">
                 <jsp:include page="/common/components/input-box/input-box.jsp">
-                    <jsp:param name="label" value="Numero Carta:" />
+                    <jsp:param name="label" value="Numero Carta" />
                     <jsp:param name="id" value="edit-credit-card-number-input-box" />
                     <jsp:param name="type" value="text" />
                     <jsp:param name="name" value="credit_card_number" />
@@ -47,7 +47,7 @@
                 <div id="edit-credit-card-info-container">
                     <div id="edit-credit-card-cvv-box" class="dark">
                         <jsp:include page="/common/components/input-box/input-box.jsp">
-                            <jsp:param name="label" value="CVV:" />
+                            <jsp:param name="label" value="CVV" />
                             <jsp:param name="id" value="edit-credit-card-cvv-input-box" />
                             <jsp:param name="type" value="text" />
                             <jsp:param name="name" value="cvv" />
@@ -58,7 +58,7 @@
                     </div>
                     <div id="edit-credit-card-expiration-date-box" class="dark">
                         <jsp:include page="/common/components/input-box/input-box.jsp">
-                            <jsp:param name="label" value="Data di Scadenza:" />
+                            <jsp:param name="label" value="Data di Scadenza" />
                             <jsp:param name="id" value="edit-credit-card-expiration-date-input-box" />
                             <jsp:param name="type" value="date" />
                             <jsp:param name="name" value="expiration_date" />

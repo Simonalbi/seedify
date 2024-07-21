@@ -59,6 +59,7 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
             UserBean userBean = userDao.doRetrive(userPrimaryKey);
             if (userBean == null) {
                 userDao.doSave(user);
+                request.getSession(true).setAttribute("user", user);
                 response.sendRedirect("home");
             } else {
                 throw new IllegalArgumentException("User already exists");

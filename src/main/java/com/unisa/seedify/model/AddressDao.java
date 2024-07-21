@@ -1,9 +1,6 @@
 package com.unisa.seedify.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
     public static final String TABLE_NAME = "indirizzi";
@@ -27,7 +24,7 @@ public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
                        " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, addressBean.getProvince());
             preparedStatement.setString(2, addressBean.getCity());
@@ -39,6 +36,15 @@ public class AddressDao extends BaseDao implements GenericDao<AddressBean> {
             preparedStatement.setString(8, addressBean.getNote());
 
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+                    addressBean.setAddressId(generatedId);
+                } else {
+                    throw new SQLException("Creating address failed, no ID obtained.");
+                }
+            }
         }
     }
 

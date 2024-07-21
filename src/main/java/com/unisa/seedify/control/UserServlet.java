@@ -110,6 +110,11 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     dataName = "user_credit_cards";
                     break;
                 }
+                case "get_addresses": {
+                    data = new ArrayList<>(locationsDao.getAllAddresses(userBean));
+                    dataName = "user_addresses";
+                    break;
+                }
                 default: {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
                 }

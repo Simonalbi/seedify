@@ -38,6 +38,17 @@ public class AddressBean extends BaseBean implements Serializable {
     public AddressBean() {
     }
 
+    public AddressBean(String province, String city, String cap, String street, String name, String surname, String phone, String note) {
+        this.province = province;
+        this.city = city;
+        this.cap = cap;
+        this.street = street;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.note = note;
+    }
+
     public int getAddressId() {
         return addressId;
     }

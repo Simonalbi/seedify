@@ -170,7 +170,7 @@ def generateRandomCity(provincia: str) -> str:
     elif provincia == "CA":
         return random.choice(["Cagliari", "Sassari", "Nuoro", "Oristano", "Olbia"])
     else:
-        return "Città casuale"
+        return "Luogo casuale"
     
 def generateRandomCAP() -> str:
     return ''.join(random.choices('0123456789', k=5))

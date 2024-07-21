@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, DetailedDao<LocationsBean, AddressBean> {
@@ -147,5 +148,31 @@ public class LocationsDao extends BaseDao implements GenericDao<LocationsBean>, 
         }
 
         return locationsBean;
+    }
+
+    public ArrayList<AddressBean> getAllAddresses(UserBean userBean) {
+        String query = "SELECT codice_indirizzo FROM " + LocationsDao.TABLE_NAME +
+                       " WHERE email = ?";
+
+        ArrayList<AddressBean> addresses = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userBean.getEmail());
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int addressId = resultSet.getInt("codice_indirizzo");
+                    EntityPrimaryKey addressPrimaryKey = new EntityPrimaryKey();
+                    addressPrimaryKey.addKey("codice_indirizzo", addressId);
+                    AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);
+                    addresses.add(addressBean);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("An error occurred while processing the request" + e.getMessage());
+        }
+
+        return addresses;
     }
 }

@@ -19,7 +19,7 @@
     HashMap<String, String> options = new HashMap<>();
     String rawInputOptions = request.getParameter("options");
     if (rawInputOptions != null) {
-        Pattern pattern = Pattern.compile("\\(\\w+, \\w+\\)");
+        Pattern pattern = Pattern.compile("\\([^,]+, [^,]+\\)");
         Matcher matcher = pattern.matcher(rawInputOptions);
         while (matcher.find()) {
             String group = matcher.group();
