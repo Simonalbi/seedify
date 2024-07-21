@@ -11,21 +11,6 @@
         <res-auth>Container</res-auth>
     </resource-ref>
 
-    <!-- Filtri -->
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>com.unisa.seedify.control.filters.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/cart-servlet</url-pattern>
-        <url-pattern>/favorites-servlet</url-pattern>
-        <url-pattern>/user-servlet</url-pattern>
-        <url-pattern>/credit-card-servlet</url-pattern>
-        <url-pattern>/address-servlet</url-pattern>
-        <url-pattern>/order-servlet</url-pattern>
-    </filter-mapping>
-
     <!-- Servlet e mapping per tutti i file .jsp -->
     <servlet>
         <servlet-name>Home</servlet-name>
@@ -89,6 +74,23 @@
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
+
+    <!-- Filtri -->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.unisa.seedify.control.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/cart-servlet</url-pattern>
+        <url-pattern>/favorites-servlet</url-pattern>
+        <url-pattern>/user-servlet</url-pattern>
+        <url-pattern>/credit-card-servlet</url-pattern>
+        <url-pattern>/address-servlet</url-pattern>
+        <url-pattern>/order-servlet</url-pattern>
+        <url-pattern>/cart</url-pattern>
+        <url-pattern>/dashboard</url-pattern>
+    </filter-mapping>
 
     <!-- Pagine di errore -->
     <error-page>
