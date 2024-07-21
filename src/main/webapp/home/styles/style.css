@@ -130,3 +130,14 @@ body {
 #main-container .section-title {
   margin-top: 30px;
 }
+
+@media screen and (max-width: 520px) {
+  #slogan {
+    display: none;
+  }
+
+  #login-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
