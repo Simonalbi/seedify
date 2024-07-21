@@ -63,10 +63,6 @@
           <div id="stats">
             <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
               <div class="stat">
-                <span class="material-icons-round md-18">badge</span>
-                <span class="rubik-300">Dipendenti: <span class="stat-value rubik-400"><%= userDao.getTotalEmployees() %></span></span>
-              </div>
-              <div class="stat">
                 <span class="material-icons-round md-18">people</span>
                 <span class="rubik-300">Utenti: <span class="stat-value rubik-400"><%= userDao.getTotalCustomers() %></span></span>
               </div>
@@ -94,7 +90,6 @@
             <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
             <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
             <option value="get_customers-nome,cognome,email,ordini_effettuati">Utenti</option>
-            <option value="get_employees-nome,cognome,email">Dipendenti</option>
             <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
             <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
               <option value="get_favorites-immagine,nome,prezzo,stagione,tipologia,descrizione">Preferiti</option>

@@ -66,11 +66,6 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         ArrayList<Object> data = null;
         if (userBean.getRole().equals(UserBean.Roles.ADMIN)) {
             switch (action) {
-                case "get_employees": {
-                    data = new ArrayList<>(userDao.getAllEmployee());
-                    dataName = "employees";
-                    break;
-                }
                 case "get_customers" : {
                     data = new ArrayList<>(userDao.getAllCustomers());
                     dataName = "customers";

@@ -38,7 +38,7 @@ CREATE TABLE utenti (
     foto_profilo MEDIUMBLOB NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
-    ruolo ENUM("AMMINISTRATORE", "DIPENDENTE", "CLIENTE") NOT NULL,
+    ruolo ENUM("AMMINISTRATORE", "CLIENTE") NOT NULL,
 
     PRIMARY KEY(email)
 );

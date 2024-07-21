@@ -21,10 +21,6 @@
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 <!-- COMPONENTS -->
-<!-- chat-button -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/chat-button/styles/style.css">
-<script src="${pageContext.request.contextPath}/common/components/chat-button/scripts/script.js" defer></script>
-
 <!-- main-navbar -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/common/components/main-navbar/styles/style.css">
 <script src="${pageContext.request.contextPath}/common/components/main-navbar/scripts/script.js"></script>
