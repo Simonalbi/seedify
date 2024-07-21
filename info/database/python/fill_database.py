@@ -219,10 +219,10 @@ def getRandomUserEmail(cursor) -> str:
     email = cursor.fetchone()[0]
     return email
 
-def getRandomCreditCard(cursor, email: str) -> tuple:
-    cursor.execute("SELECT numero_carta, cvv, scadenza, nome, cognome FROM memorizzazioni WHERE email = %s ORDER BY RAND() LIMIT 1", (email,))
+def getRandomCreditCardCode(cursor, email: str) -> tuple:
+    cursor.execute("SELECT codice_carta FROM memorizzazioni WHERE email = %s ORDER BY RAND() LIMIT 1", (email,))
     creditCard = cursor.fetchone()
-    return creditCard
+    return creditCard[0]
 
 def generateRandomOrderDate() -> datetime.date:
     startDate = datetime.date(2023, 1, 1)
@@ -467,21 +467,19 @@ def createRandomCreditCardsAssociations() -> None:
         cursor.execute("SELECT email FROM utenti WHERE ruolo != 'AMMINISTRATORE'")
         users = cursor.fetchall()
 
-        cursor.execute("SELECT numero_carta, cvv, scadenza, nome, cognome FROM carte_di_credito")
+        cursor.execute("SELECT codice_carta FROM carte_di_credito")
         creditCards = cursor.fetchall()
 
         for userEmail in users:
-            numAssociations = random.randint(1, 3)
+            numAssociations = random.randint(1, 5)
 
-            selected_cards = random.sample(creditCards, numAssociations)
-            for card in selected_cards:
-                cardNumber, cvv, expirationDate, name, surname = card
-
+            selectedCards = random.sample(creditCards, numAssociations)
+            for card in selectedCards:
                 insert_query = """
-                INSERT INTO memorizzazioni (email, numero_carta, cvv, scadenza, nome, cognome)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                INSERT INTO memorizzazioni (email, codice_carta)
+                VALUES (%s, %s)
                 """
-                cursor.execute(insert_query, (userEmail[0], cardNumber, cvv, expirationDate, name, surname))
+                cursor.execute(insert_query, (userEmail[0], card[0]))
         
         connection.commit()
     except mysql.connector.Error as e:
@@ -499,16 +497,16 @@ def createRandomOrders(amount: int) -> None:
         for _ in range(amount):
             addressId = getRandomAddressCode(cursor)
             email = getRandomUserEmail(cursor)
-            creditCardNumber, cvv, expiryDate, name, surname = getRandomCreditCard(cursor, email)
+            cardCode = getRandomCreditCardCode(cursor, email)
             orderDate = generateRandomOrderDate()
             deliveryDate = generateRandomDeliveryDate(orderDate)
             totalPrice = calculateTotalPrice(cursor)
 
             insertQuery = """
-            INSERT INTO ordini (codice_indirizzo, email, numero_carta, cvv, scadenza, nome, cognome, data_ordine, data_consegna, prezzo_totale)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO ordini (codice_indirizzo, email, codice_carta, data_ordine, data_consegna, prezzo_totale)
+            VALUES (%s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(insertQuery, (addressId, email, creditCardNumber, cvv, expiryDate, name, surname, orderDate, deliveryDate, totalPrice))
+            cursor.execute(insertQuery, (addressId, email, cardCode, orderDate, deliveryDate, totalPrice))
             orderId = cursor.lastrowid
 
             products = getRandomProducts(cursor)
