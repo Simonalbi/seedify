@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
+import com.unisa.seedify.utils.SecurityUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
 
-        String email = jsonBody.get("email").getAsString().toLowerCase();
+        String email = SecurityUtils.normalizeString(jsonBody.get("email").getAsString().toLowerCase());
         if (!InputValidation.isEmailValid(email)) {
             response.setStatus(400);
             return;
@@ -34,13 +35,13 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
         }
         password = InputValidation.sha256(password);
 
-        String name = jsonBody.get("name").getAsString();
+        String name = SecurityUtils.normalizeString(jsonBody.get("name").getAsString());
         if (!InputValidation.isNameValid(name)) {
             response.setStatus(400);
             return;
         }
 
-        String surname = jsonBody.get("surname").getAsString();
+        String surname = SecurityUtils.normalizeString(jsonBody.get("surname").getAsString());
         if (!InputValidation.isNameValid(surname)) {
             response.setStatus(400);
             return;

@@ -1,6 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.utils.SecurityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,11 +30,11 @@ public class CreditCardServlet extends HttpServlet implements JsonServlet {
         switch (action) {
             case "add_credit_card": {
                 try {
-                    String creditCardNumber = request.getParameter("credit_card_number");
-                    String cvv = request.getParameter("cvv");
+                    String creditCardNumber = SecurityUtils.normalizeString(request.getParameter("credit_card_number"));
+                    String cvv = SecurityUtils.normalizeString(request.getParameter("cvv"));
                     Date expirationDate = Date.valueOf(request.getParameter("expiration_date"));
-                    String name = request.getParameter("name");
-                    String surname = request.getParameter("surname");
+                    String name = SecurityUtils.normalizeString(request.getParameter("name"));
+                    String surname = SecurityUtils.normalizeString(request.getParameter("surname"));
 
                     CreditCardBean creditCardBean = new CreditCardBean(creditCardNumber, cvv, expirationDate, name, surname);
 

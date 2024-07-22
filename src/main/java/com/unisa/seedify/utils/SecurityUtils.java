@@ -6,10 +6,27 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.*;
 import java.util.Base64;
 
 public class SecurityUtils {
+    public enum ValidFileTypes {
+        IMAGE("image/");
+
+        private final String type;
+
+        ValidFileTypes(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return this.type;
+        }
+    }
+
     public static String encrypt(String data, String key) {
         // Verifica che la chiave sia della lunghezza corretta per AES
         if (key.length() != 16 && key.length() != 24 && key.length() != 32) {
@@ -86,5 +103,39 @@ public class SecurityUtils {
 
         // Restituisce la stringa decifrata, rimuovendo eventuali spazi di padding
         return new String(decryptedBytes).trim();
+    }
+
+    public static boolean validateFile(Path path, ValidFileTypes type) throws IOException {
+        if (!Files.exists(path)) {
+            return false;
+        }
+
+        String mimeType = Files.probeContentType(path);
+        return mimeType != null && mimeType.startsWith(type.getType());
+    }
+
+    public static String normalizeString(String string) {
+        StringBuffer buffer = new StringBuffer(string.length());
+        char c;
+        for (int i = 0; i < string.length(); i++) {
+            c = string.charAt(i);
+            switch (c) {
+                case '<':
+                    buffer.append("&lt;");
+                    break;
+                case '>':
+                    buffer.append("&gt;");
+                    break;
+                case '&':
+                    buffer.append("&amp;");
+                    break;
+                case '"':
+                    buffer.append("&quot;");
+                    break;
+                default:
+                    buffer.append(c);
+            }
+        }
+        return buffer.toString();
     }
 }

@@ -1,6 +1,7 @@
 package com.unisa.seedify.control;
 
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.utils.SecurityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,14 +28,14 @@ public class AddressServlet  extends HttpServlet implements JsonServlet {
         switch (action) {
             case "add_address": {
                 try {
-                    String street = request.getParameter("street");
-                    String city = request.getParameter("city");
-                    String zipCode = request.getParameter("zip_code");
-                    String province = request.getParameter("province");
-                    String firstName = request.getParameter("first_name");
-                    String lastName = request.getParameter("last_name");
-                    String phone = request.getParameter("phone");
-                    String notes = request.getParameter("notes");
+                    String street = SecurityUtils.normalizeString(request.getParameter("street"));
+                    String city = SecurityUtils.normalizeString(request.getParameter("city"));
+                    String zipCode = SecurityUtils.normalizeString(request.getParameter("zip_code"));
+                    String province = SecurityUtils.normalizeString(request.getParameter("province"));
+                    String firstName = SecurityUtils.normalizeString(request.getParameter("first_name"));
+                    String lastName = SecurityUtils.normalizeString(request.getParameter("last_name"));
+                    String phone = SecurityUtils.normalizeString(request.getParameter("phone"));
+                    String notes = SecurityUtils.normalizeString(request.getParameter("notes"));
 
                     AddressBean addressBean = new AddressBean(province, city, zipCode, street, firstName, lastName, phone, notes);
 

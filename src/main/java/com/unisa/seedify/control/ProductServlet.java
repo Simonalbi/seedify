@@ -3,6 +3,7 @@ package com.unisa.seedify.control;
 import com.google.gson.*;
 import com.unisa.seedify.utils.JsonUtils;
 import com.unisa.seedify.model.*;
+import com.unisa.seedify.utils.SecurityUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -144,7 +145,13 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
                 Path tempFilePath = Paths.get(UPLOAD_DIR_PATH.toString() + File.separator + fileName);
                 part.write(tempFilePath.toString());
                 parts.put("image", Files.readAllBytes(tempFilePath));
+
+                boolean isImage = SecurityUtils.validateFile(tempFilePath, SecurityUtils.ValidFileTypes.IMAGE);
                 Files.delete(tempFilePath);
+
+                if (!isImage) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid file type");
+                }
             } else {
                 String fieldName = part.getName();
                 String fieldValue = request.getParameter(fieldName);
@@ -153,13 +160,13 @@ public class ProductServlet extends HttpServlet implements JsonServlet {
         }
 
         try {
-            String name = (String) parts.get("name");
+            String name = SecurityUtils.normalizeString((String) parts.get("name"));
             float price = Float.parseFloat((String) parts.get("price"));
             int quantity = Integer.parseInt((String) parts.get("quantity"));
-            String plantType = (String) parts.get("plantType");
+            String plantType = SecurityUtils.normalizeString((String) parts.get("plantType"));
             ProductBean.RequiredWater requiredWater = ProductBean.RequiredWater.fromString((String) parts.get("required-water"));
             ProductBean.Seasons season = ProductBean.Seasons.fromString((String) parts.get("season"));
-            String description = (String) parts.get("description");
+            String description = SecurityUtils.normalizeString((String) parts.get("description"));
             byte[] image = (byte[]) parts.get("image");
 
             boolean success = false;

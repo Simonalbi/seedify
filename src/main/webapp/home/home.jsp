@@ -26,7 +26,7 @@
 					</div>
 				<% } else { %>
 					<div id="slogan-container">
-						<h2 id="welcome-slogan" class="oleo-400">Ciao <%= userBean.getName() %></h2>
+						<h2 id="welcome-slogan" class="oleo-400">Ciao <%= userBean.getName() %>!</h2>
 					</div>
 				<% } %>
 				<% if (userBean == null) { %>
