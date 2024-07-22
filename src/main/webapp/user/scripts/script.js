@@ -9,6 +9,8 @@ window.showAddProductForm = showAddProductForm;
 window.showEditProductForm = showEditProductForm;
 window.showAddCreditCardOverlay = showAddCreditCardOverlay;
 window.showAddressOverlay = showAddressOverlay;
+window.getFilteredOrders = getFilteredOrders;
+window.resetOrdersFilter = resetOrdersFilter;
 
 /**
  * Shows the edit credit card modal.
@@ -186,6 +188,16 @@ function updateTable(tableData) {
             recordIdentifier = "entity_primary_key";
         }
 
+        console.log(tableData['data_name']);
+        const ordersFilters = document.getElementById('filter-orders-action-container');
+        if (tableData['data_name'] === "all_users_orders" || tableData['data_name'] === "user_orders") {
+            console.log("Showing filters");
+            ordersFilters.style.visibility = "visible";
+        } else {
+            console.log("Hiding filters");
+            ordersFilters.style.visibility = "hidden";
+        }
+
         newTableElement = buildTable(tableData, onEdit, recordIdentifier);
     } else {
         newTableElement = document.createElement('p');
@@ -227,4 +239,62 @@ function getTableData() {
     )
 }
 
-getTableData()
+/*
+ * Gets the data to populate the table.
+ */
+function getFilteredOrders() {
+    const startDate = document.getElementById('orders-start-date-input-box').value;
+    const endDate = document.getElementById('orders-end-date-input-box').value;
+
+    showLoadingOverlay();
+
+    const url = `${getBaseOriginName()}/user-servlet?action=get_orders&fields=id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note&start_date=${startDate}&end_date=${endDate}`;
+    sendAjaxRequest(
+        "GET",
+        url,
+        null,
+        {
+            200: function (response) {
+                const tableData = JSON.parse(response);
+                updateTable(tableData);
+                hideLoadingOverlay();
+            },
+            defaultCallback: function () {
+                toast("Errore durante il recupero dei dati", "ERROR");
+                hideLoadingOverlay();
+            }
+        }
+    )
+}
+
+/*
+ * Gets the data to populate the table.
+ */
+function resetOrdersFilter() {
+    document.getElementById('orders-start-date-input-box').value = null;
+    document.getElementById('orders-end-date-input-box').value = null;
+
+    showLoadingOverlay();
+
+    const url = `${getBaseOriginName()}/user-servlet?action=get_orders&fields=id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note`;
+    sendAjaxRequest(
+        "GET",
+        url,
+        null,
+        {
+            200: function (response) {
+                const tableData = JSON.parse(response);
+                updateTable(tableData);
+                hideLoadingOverlay();
+            },
+            defaultCallback: function () {
+                toast("Errore durante il recupero dei dati", "ERROR");
+                hideLoadingOverlay();
+            }
+        }
+    )
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    getTableData();
+});

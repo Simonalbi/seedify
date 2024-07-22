@@ -44,36 +44,40 @@
 
     <div class="main-page-content">
         <div id="cart-products-container">
-            <% for (CartItemBean cartItemBean : cartBean.getCartItems()) {
-                ProductBean productBean = cartItemBean.getProduct(); %>
-                <div class="product-container ui-block rubik-300" onclick="goToProductPage(<%= productBean.getProductId() %>)">
-                    <button class="remove-from-cart-button material-button" onclick="sendRemoveFromCartRequest(this, <%= productBean.getProductId() %>, <%= cartItemBean.getQuantity() %>, <%= cartItemBean.getProduct().getPrice() %>)">
-                        <span class="material-icons-round md-18">delete</span>
-                    </button>
-                    <div class="product-image-section">
-                        <div class="product-image-container">
-                            <img src="http://localhost:8080/seedify_war/resources-servlet?resource_type=product_image&amp;entity_primary_key=codice_prodotto=<%= productBean.getProductId() %>">
-                        </div>
-                    </div>
-                    <div class="product-info-section">
-                        <div class="product-info-container">
-                            <div class="product-info">
-                                <p class="product-name rubik-500"><%= productBean.getName() %></p>
-                                <p class="product-price"><span class="price"><%= productBean.getPrice() %></span> €</p>
+            <% if (cartBean.getCartItems().isEmpty()) { %>
+                <h5 class="rubik-400">Nessun prodotto nel carrello</h5>
+            <% } else { %>
+                <% for (CartItemBean cartItemBean : cartBean.getCartItems()) {
+                    ProductBean productBean = cartItemBean.getProduct(); %>
+                    <div class="product-container ui-block rubik-300" onclick="goToProductPage(<%= productBean.getProductId() %>)">
+                        <button class="remove-from-cart-button material-button" onclick="sendRemoveFromCartRequest(this, <%= productBean.getProductId() %>, <%= cartItemBean.getQuantity() %>, <%= cartItemBean.getProduct().getPrice() %>)">
+                            <span class="material-icons-round md-18">delete</span>
+                        </button>
+                        <div class="product-image-section">
+                            <div class="product-image-container">
+                                <img src="http://localhost:8080/seedify_war/resources-servlet?resource_type=product_image&amp;entity_primary_key=codice_prodotto=<%= productBean.getProductId() %>">
                             </div>
                         </div>
+                        <div class="product-info-section">
+                            <div class="product-info-container">
+                                <div class="product-info">
+                                    <p class="product-name rubik-500"><%= productBean.getName() %></p>
+                                    <p class="product-price"><span class="price"><%= productBean.getPrice() %></span> €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="product-quantity">Quantità: <span class="quantity-value"><%= cartItemBean.getQuantity() %></span></p>
+                        <div class="product-change-quantity-actions-container">
+                            <button class="material-button cart-change-quantity" onclick="sendRemoveOneFromCart(this, <%= productBean.getProductId() %>)">
+                                <span class="material-icons-round md-18">remove</span>
+                            </button>
+                            <button class="material-button cart-change-quantity" onclick="sendAddOneToCart(this, <%= productBean.getProductId() %>)">
+                                <span class="material-icons-round md-18">add</span>
+                            </button>
+                        </div>
                     </div>
-                    <p class="product-quantity">Quantità: <span class="quantity-value"><%= cartItemBean.getQuantity() %></span></p>
-                    <div class="product-change-quantity-actions-container">
-                        <button class="material-button cart-change-quantity" onclick="sendRemoveOneFromCart(this, <%= productBean.getProductId() %>)">
-                            <span class="material-icons-round md-18">remove</span>
-                        </button>
-                        <button class="material-button cart-change-quantity" onclick="sendAddOneToCart(this, <%= productBean.getProductId() %>)">
-                            <span class="material-icons-round md-18">add</span>
-                        </button>
-                    </div>
-                </div>
-            <% } %>
+                <% }
+            } %>
         </div>
         <div id="cart-menu" class="ui-block">
             <div id="cart-summary-container" class="ui-block">
@@ -92,7 +96,7 @@
                         <jsp:param name="label" value="Indirizzo" />
                         <jsp:param name="tag" value="select" />
                         <jsp:param name="options" value="<%= addressOptions %>" />
-                        <jsp:param name="id" value="edit-product-season-input-box" />
+                        <jsp:param name="id" value="choose-address-input-box" />
                         <jsp:param name="name" value="address_code" />
                         <jsp:param name="group" value="checkout" />
                     </jsp:include>
@@ -102,7 +106,7 @@
                         <jsp:param name="label" value="Carta di credito" />
                         <jsp:param name="tag" value="select" />
                         <jsp:param name="options" value="<%= creditCardOptions %>" />
-                        <jsp:param name="id" value="edit-product-season-input-box" />
+                        <jsp:param name="id" value="choose-credit-card-input-box" />
                         <jsp:param name="name" value="credit_card_code" />
                         <jsp:param name="group" value="checkout" />
                     </jsp:include>

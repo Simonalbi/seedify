@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.*;
 
 @WebServlet(name = "userServlet", value = "/user-servlet")
@@ -72,7 +73,20 @@ public class UserServlet extends HttpServlet implements JsonServlet {
                     break;
                 }
                 case "get_orders": {
+                    String startDate = request.getParameter("start_date");
+                    String endDate = request.getParameter("end_date");
+
                     data = new ArrayList<>(orderDao.getAllOrders());
+
+                    if (startDate != null && !startDate.isEmpty()) {
+                        Date start = Date.valueOf(startDate);
+                        Date end = (endDate != null && !endDate.isEmpty()) ? Date.valueOf(endDate) : null;
+                        data.removeIf(order -> {
+                            Date orderDate = ((OrderBean) order).getOrderDate();
+                            return !(orderDate.after(start) && (end == null || orderDate.before(end)));
+                        });
+                    }
+
                     dataName = "all_users_orders";
                     break;
                 }
@@ -93,7 +107,20 @@ public class UserServlet extends HttpServlet implements JsonServlet {
         } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) {
             switch (action) {
                 case "get_orders": {
+                    String startDate = request.getParameter("start_date");
+                    String endDate = request.getParameter("end_date");
+
                     data = new ArrayList<>(orderDao.getAllOrders(userBean));
+
+                    if (startDate != null && !startDate.isEmpty()) {
+                        Date start = Date.valueOf(startDate);
+                        Date end = (endDate != null && !endDate.isEmpty()) ? Date.valueOf(endDate) : null;
+                        data.removeIf(order -> {
+                            Date orderDate = ((OrderBean) order).getOrderDate();
+                            return !(orderDate.after(start) && (end == null || orderDate.before(end)));
+                        });
+                    }
+
                     dataName = "user_orders";
                     break;
                 }

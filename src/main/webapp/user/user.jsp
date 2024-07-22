@@ -87,19 +87,48 @@
       </div>
       <div class="ui-block" id="table-container">
         <nav id="main-table-navbar">
-          <label class="rubik-300" for="table-selector">Seleziona tabella:</label>
-          <select name="table-selector" id="table-selector" onchange="getTableData()">
-            <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
+          <div id="table-selector-container">
+            <label class="rubik-300" for="table-selector">Seleziona tabella:</label>
+            <select name="table-selector" id="table-selector" onchange="getTableData()">
+              <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
               <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
               <option value="get_customers-nome,cognome,email,ordini_effettuati">Utenti</option>
               <option value="get_orders-id_ordine,utente.email,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
-            <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
+              <% } else if (userBean.getRole().equals(UserBean.Roles.CUSTOMER)) { %>
               <option value="get_favorites-immagine,nome,prezzo,stagione,tipologia,descrizione">Preferiti</option>
               <option value="get_orders-id_ordine,prezzo_totale,data_ordine,data_consegna,carta_di_credito.numero_di_carta,indirizzo.città,indirizzo.provincia,indirizzo.cap,indirizzo.via,indirizzo.telefono,indirizzo.note">Ordini</option>
               <option value="get_credit_cards-nome,cognome,numero_di_carta,cvv,data_di_scadenza">Carte di Credito</option>
               <option value="get_addresses-via,città,provincia,cap,nome,cognome,telefono,note">Indirizzi</option>
-            <% } %>
-          </select>
+              <% } %>
+            </select>
+          </div>
+          <div id="filter-orders-action-container">
+            <div id="orders-start-date-box" class="rubik-300">
+              <jsp:include page="/common/components/input-box/input-box.jsp">
+                <jsp:param name="label" value="Da" />
+                <jsp:param name="id" value="orders-start-date-input-box" />
+                <jsp:param name="type" value="date" />
+                <jsp:param name="name" value="start_date" />
+                <jsp:param name="group" value="table-filter" />
+              </jsp:include>
+            </div>
+            <div id="orders-end-date-box" class="rubik-300">
+              <jsp:include page="/common/components/input-box/input-box.jsp">
+                <jsp:param name="label" value="A" />
+                <jsp:param name="id" value="orders-end-date-input-box" />
+                <jsp:param name="type" value="date" />
+                <jsp:param name="name" value="end_date" />
+                <jsp:param name="group" value="table-filter" />
+              </jsp:include>
+            </div>
+            <button id="filter-orders-button" class="material-button" onclick="getFilteredOrders()">
+              <span class="material-icons-round md-18">filter_alt</span>
+              <span class="small-text">Filtra</span>
+            </button>
+            <button id="reset-filter-orders-button" class="material-button" onclick="resetOrdersFilter()">
+              <span class="material-icons-round md-18">restart_alt</span>
+            </button>
+          </div>
         </nav>
         <div id="main-table">
           <div id="table-loading-overlay">
