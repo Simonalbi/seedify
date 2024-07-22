@@ -5,6 +5,7 @@
 	UserBean mainNavbarUserBean = (UserBean) request.getSession(true).getAttribute("user");
 	CartBean mainNavbarCartBean = (CartBean) request.getSession(true).getAttribute("cart");
 %>
+<jsp:include page="/common/components/login/login.jsp"/>
 
 <div id="sidebar-opacity-layer" onclick="hideSideBar()"></div>
 <aside id="sidebar" class="rubik-300">

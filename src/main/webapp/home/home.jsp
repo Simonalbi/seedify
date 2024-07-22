@@ -15,7 +15,6 @@
 	<script type="module" src="${pageContext.request.contextPath}/home/scripts/script.js" defer></script>
 </head>
 <body>
-	<jsp:include page="/common/components/login/login.jsp"/>
 	<jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
 
 	<div id="main-container">
@@ -27,7 +26,7 @@
 					</div>
 				<% } else { %>
 					<div id="slogan-container">
-						<h2 id="welcome-slogan" class="oleo-400">Ciao <%= userBean.getName() %>!</h2>
+						<h2 id="welcome-slogan" class="oleo-400">Ciao <%= userBean.getName() %></h2>
 					</div>
 				<% } %>
 				<% if (userBean == null) { %>

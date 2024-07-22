@@ -11,6 +11,7 @@
 </head>
 <body>
     <jsp:include page="/common/components/main-navbar/main-navbar.jsp"/>
+
     <div id="about-us-main-container">
         <div id="about-us-decorations-container">
             <div class="dec-row dec-row-left">
