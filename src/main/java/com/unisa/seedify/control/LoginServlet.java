@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// TODO Accept AJAX request for input validation
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet implements JsonServlet {
     private void initSession(HttpServletRequest request, HttpServletResponse response, UserBean userBean) throws ServletException, SQLException {
@@ -34,7 +33,6 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         response.sendRedirect("home");
     }
 
-    // TODO Redirect instead of throwing exception
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
 
