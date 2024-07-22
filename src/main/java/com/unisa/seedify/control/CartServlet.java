@@ -18,35 +18,51 @@ import java.util.List;
 public class CartServlet extends HttpServlet implements JsonServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
+        boolean skipJsonBody = false;
+        JsonObject jsonBody = null;
+        try {
+            jsonBody = JsonServlet.parsePostRequestBody(request);
+        } catch (IllegalStateException e) {
+            skipJsonBody = true;
+        }
 
         HttpSession httpSession = request.getSession(true);
         CartBean cartBean = (CartBean) httpSession.getAttribute("cart");
 
         String action = null;
         try {
-            action = jsonBody.get("action").getAsString();
+            if (skipJsonBody) {
+                action = request.getParameter("action");
+            } else {
+                action = jsonBody.get("action").getAsString();
+            }
         } catch (NullPointerException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'action' in request body");
-            return;
+            if (!skipJsonBody) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'action' in request body");
+                return;
+            }
         }
 
-        int productId;
+        Integer productId = null;
         try {
             productId = jsonBody.get("product_id").getAsInt();
         } catch (NullPointerException | JsonSyntaxException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
-            return;
+            if (!skipJsonBody) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
+                return;
+            }
         }
 
         ProductBean productBean = null;
-        try {
-            EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
-            productPrimaryKey.addKey("codice_prodotto", productId);
-            productBean = productDao.doRetrive(productPrimaryKey);
-        } catch (SQLException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request");
-            return;
+        if (!skipJsonBody) {
+            try {
+                EntityPrimaryKey productPrimaryKey = new EntityPrimaryKey();
+                productPrimaryKey.addKey("codice_prodotto", productId);
+                productBean = productDao.doRetrive(productPrimaryKey);
+            } catch (SQLException | NullPointerException e) {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request");
+                return;
+            }
         }
 
         boolean success = false;
@@ -57,6 +73,17 @@ public class CartServlet extends HttpServlet implements JsonServlet {
                     success = cartDao.addToCart(cartBean, productBean, quantity);
                 } catch (NullPointerException | JsonSyntaxException e) {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
+                }
+                break;
+            }
+            case "empty_cart": {
+                try {
+                    cartDao.emptyCart(cartBean);
+                    success = true;
+                    response.sendRedirect("cart");
+                    return;
+                } catch (SQLException e) {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request");
                 }
                 break;
             }

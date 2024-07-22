@@ -53,11 +53,20 @@ body {
     gap: 10px;
 }
 
-#cart-actions-container .material-button {
-    background-color: var(--android-green);
+#go-to-checkout-button,
+#empty-cart-button {
     gap: 10px;
     width: 100%;
     border-radius: 25px;
+}
+
+#go-to-checkout-button {
+    background-color: var(--android-green);
+}
+
+#empty-cart-button {
+    background-color: var(--dark-jungle-green);
+    color: var(--pure-white);
 }
 
 @media screen and (max-width: 920px) {

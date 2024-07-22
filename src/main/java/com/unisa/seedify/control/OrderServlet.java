@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 @WebServlet(name = "orderServlet", urlPatterns = {"/order-servlet"})
 public class OrderServlet extends HttpServlet implements JsonServlet {
@@ -33,11 +32,11 @@ public class OrderServlet extends HttpServlet implements JsonServlet {
             AddressBean addressBean = addressDao.doRetrive(addressPrimaryKey);
 
             OrderBean orderBean = new OrderBean(
-                    creditCardBean,
-                    userBean,
-                    addressBean,
-                    new Date(System.currentTimeMillis()),
-                    cartBean.getTotalCartPrice()
+                creditCardBean,
+                userBean,
+                addressBean,
+                new Date(System.currentTimeMillis()),
+                cartBean.getTotalCartPrice()
             );
 
             orderDao.doSave(orderBean);
@@ -52,7 +51,7 @@ public class OrderServlet extends HttpServlet implements JsonServlet {
         if (success) {
             response.sendRedirect("dashboard");
         } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An error occurred while processing the request");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request");
         }
     }
 }

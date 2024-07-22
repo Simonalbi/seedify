@@ -106,6 +106,12 @@
                     </button>
                 </div>
             </form>
+            <form action="${pageContext.request.contextPath}/cart-servlet?action=empty_cart" method="POST">
+                <button id="empty-cart-button" class="material-button" type="submit">
+                    <span class="material-icons-round md-18">restart_alt</span>
+                    <span class="small-text">Svuota carrello</span>
+                </button>
+            </form>
         </div>
     </div>
 
