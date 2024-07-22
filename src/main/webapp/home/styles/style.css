@@ -59,6 +59,11 @@ body {
   text-align: center;
 }
 
+#welcome-slogan {
+  color: var(--pure-white);
+  text-align: center;
+}
+
 #login-container {
   display: flex;
   justify-content: center;
@@ -134,5 +139,16 @@ body {
 @media screen and (max-width: 920px) {
   #main-container {
     padding: 90px 20px 50px 20px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  #slogan {
+    display: none;
+  }
+
+  #login-container {
+    flex-direction: column;
+    gap: 40px;
   }
 }

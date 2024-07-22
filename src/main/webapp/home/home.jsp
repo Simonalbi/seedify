@@ -21,9 +21,15 @@
 	<div id="main-container">
 		<div id="welcome-container">
 			<div id="welcome-message-container">
-				<div id="slogan-container">
-					<h2 id="slogan" class="oleo-400">Dove ogni seme è un sogno in attesa di fiorire</h2>
-				</div>
+				<% if (userBean == null) { %>
+					<div id="slogan-container">
+						<h2 id="slogan" class="oleo-400">Dove ogni seme è un sogno in attesa di fiorire</h2>
+					</div>
+				<% } else { %>
+					<div id="slogan-container">
+						<h2 id="welcome-slogan" class="oleo-400">Ciao <%= userBean.getName() %>!</h2>
+					</div>
+				<% } %>
 				<% if (userBean == null) { %>
 					<div id="login-container" class="oleo-400">
 						<div id="sign-up-button" class="animated-round-button">
