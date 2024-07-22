@@ -50,7 +50,8 @@
     </div>
     <div class="product-page-section" id="product-main-info-section">
       <div id="product-title">
-        <div class="section-title">
+        <div id="product-page-product-title" class="section-title">
+          <lord-icon id="share-icon" onclick="copyProductUrlToClipboard(<%= productBean.getProductId() %>)" src="https://cdn.lordicon.com/ercyvufy.json" trigger="hover"></lord-icon>
           <h4 class="rubik-600"><%= productBean.getName() %></h4>
         </div>
         <div class="section-title-breakline"></div>

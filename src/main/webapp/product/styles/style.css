@@ -59,6 +59,17 @@
   margin-bottom: 10px;
 }
 
+#product-page-product-title {
+  position: relative;
+}
+
+#share-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  cursor: pointer;
+}
+
 #product-description-container {
   height: fit-content;
 }

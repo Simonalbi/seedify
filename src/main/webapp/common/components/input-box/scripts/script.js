@@ -19,8 +19,10 @@ function togglePassword(formId) {
  * @param {String} group - The group of the input boxes
  */
 function enableSubmitButton(group) {
-    const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
-    submitButton.disabled = false;
+    try {
+        const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
+        submitButton.disabled = false;
+    } catch (ignored) {}
 }
 
 /**
@@ -28,8 +30,10 @@ function enableSubmitButton(group) {
  * @param {String} group - The group of the input boxes
  */
 function disableSubmitButton(group) {
-    const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
-    submitButton.disabled = true;
+    try {
+        const submitButton = document.querySelectorAll(`input[type="submit"].${group}`)[0]
+        submitButton.disabled = true;
+    } catch (ignored) {}
 }
 
 /**
