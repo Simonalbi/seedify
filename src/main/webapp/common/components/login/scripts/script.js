@@ -1,3 +1,6 @@
+import {getBaseOriginName, sendAjaxRequest} from "../../../general/scripts/script.js";
+import { toast } from "../../../general/scripts/toast.js";
+
 export { showLogin };
 
 window.showLogin = showLogin;
@@ -27,3 +30,29 @@ function hideLogin() {
     const loginOverlay = document.getElementById("login");
     loginOverlay.style.display = "none";
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = {
+            "email": document.getElementById("login-email-input-box").value,
+            "password": document.getElementById("login-password-input-box").value
+        };
+
+        sendAjaxRequest(
+            "POST",
+            `${getBaseOriginName()}/login-servlet`,
+            JSON.stringify(formData),
+            {
+                200: function () {
+                  window.location.href = `${getBaseOriginName()}/dashboard`;
+                },
+                400: function (){
+                    toast("Credeziali errate", "ERROR");
+                }
+            }
+        )
+    })
+})

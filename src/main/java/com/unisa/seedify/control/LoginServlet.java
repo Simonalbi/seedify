@@ -1,5 +1,6 @@
 package com.unisa.seedify.control;
 
+import com.google.gson.JsonObject;
 import com.unisa.seedify.model.CartBean;
 import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
@@ -35,12 +36,14 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
 
     // TODO Redirect instead of throwing exception
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("email").trim().toLowerCase();
+        JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
+
+        String email = jsonBody.get("email").getAsString().trim().toLowerCase();
         if (!InputValidation.isEmailValid(email)) {
             throw new IllegalArgumentException("Invalid email");
         }
 
-        String password = request.getParameter("password");
+        String password =  jsonBody.get("password").getAsString();
         password = InputValidation.sha256(password);
 
         EntityPrimaryKey userPrimaryKey = new EntityPrimaryKey();
@@ -49,21 +52,19 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         UserBean user = null;
         try {
             user = userDao.doRetrive(userPrimaryKey);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (SQLException ignored) {}
 
         if (user == null) {
-            throw new IllegalArgumentException("Invalid email or password");
+            response.setStatus(400);
         } else if (user.getPassword().equals(password)) {
             try {
                 this.initSession(request, response, user);
-                response.sendRedirect("dashboard");
+                response.setStatus(200);
             } catch (ServletException | SQLException e) {
-                response.sendRedirect("/common/errors/404.jsp");
+                response.setStatus(400);
             }
         } else {
-            throw new IllegalArgumentException("Invalid email or password");
+            response.setStatus(400);
         }
     }
 }
