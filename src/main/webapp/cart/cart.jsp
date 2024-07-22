@@ -59,11 +59,19 @@
                         <div class="product-info-container">
                             <div class="product-info">
                                 <p class="product-name rubik-500"><%= productBean.getName() %></p>
-                                <p class="product-price"><%= productBean.getPrice() %> €</p>
+                                <p class="product-price"><span class="price"><%= productBean.getPrice() %></span> €</p>
                             </div>
                         </div>
                     </div>
-                    <p class="product-quantity">Quantità: <%= cartItemBean.getQuantity() %></p>
+                    <p class="product-quantity">Quantità: <span class="quantity-value"><%= cartItemBean.getQuantity() %></span></p>
+                    <div class="product-change-quantity-actions-container">
+                        <button class="material-button cart-change-quantity" onclick="sendRemoveOneFromCart(this, <%= productBean.getProductId() %>)">
+                            <span class="material-icons-round md-18">remove</span>
+                        </button>
+                        <button class="material-button cart-change-quantity" onclick="sendAddOneToCart(this, <%= productBean.getProductId() %>)">
+                            <span class="material-icons-round md-18">add</span>
+                        </button>
+                    </div>
                 </div>
             <% } %>
         </div>

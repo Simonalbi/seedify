@@ -25,6 +25,17 @@ body {
     margin-right: 10px;
 }
 
+.product-change-quantity-actions-container {
+    position: absolute;
+    left: 170px;
+    bottom: 35px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 #cart-menu {
     width: 25%;
     display: flex;

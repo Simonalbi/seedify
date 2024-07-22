@@ -1,8 +1,64 @@
-import {getBaseOriginName, sendAjaxRequest} from "../../common/general/scripts/script.js";
-import {goToProductPage} from "../../common/general/scripts/products.js";
-import {toast} from "../../common/general/scripts/toast.js";
+import { getBaseOriginName, sendAjaxRequest } from "../../common/general/scripts/script.js";
+import { goToProductPage, sendAddToCartRequest } from "../../common/general/scripts/products.js";
+import { toast } from "../../common/general/scripts/toast.js";
 
 window.sendRemoveFromCartRequest = sendRemoveFromCartRequest;
+
+function updateCartSummary(newTotalItems, newTotalPrice) {
+    const totalCartProducts = document.getElementById("total-cart-products");
+    totalCartProducts.innerHTML = `${newTotalItems}`;
+
+    console.log("FN", newTotalPrice);
+
+    const totalCartPrice = document.getElementById("total-cart-price");
+    totalCartPrice.innerHTML = `${newTotalPrice.toFixed(2)}`;
+}
+
+/*
+ * Sends a request to add a product to the cart.
+ */
+window.sendAddOneToCart = function (button, productId) {
+    const oldValue = Number(document.querySelector("#cart-items-counter span").innerHTML);
+    sendAddToCartRequest(productId, 1, function () {
+        const productCard =  button.parentNode.parentNode;
+
+        const newValue = Number(document.querySelector("#cart-items-counter span").innerHTML);
+        if (newValue !== oldValue) {
+            const currentValue = Number(productCard.querySelector(".quantity-value").innerHTML);
+            productCard.querySelector(".quantity-value").innerHTML = `${currentValue + 1}`
+
+            updateCartSummary(
+                newValue,
+                Number(document.getElementById("total-cart-price").innerHTML) + Number(productCard.querySelector(".price").innerHTML)
+            );
+        }
+    });
+}
+
+/*
+ * Sends a request to remove a product from the cart.
+ */
+window.sendRemoveOneFromCart = function (button, productId) {
+    const oldValue = Number(document.querySelector("#cart-items-counter span").innerHTML);
+    sendAddToCartRequest(productId, -1, function () {
+        const productCard =  button.parentNode.parentNode;
+
+        const newValue = Number(document.querySelector("#cart-items-counter span").innerHTML);
+        if (newValue !== oldValue) {
+            const currentValue = Number(productCard.querySelector(".quantity-value").innerHTML);
+            if (currentValue === 1) {
+                productCard.remove();
+            } else {
+                productCard.querySelector(".quantity-value").innerHTML = `${currentValue - 1}`
+            }
+
+            updateCartSummary(
+                newValue,
+                Number(document.getElementById("total-cart-price").innerHTML) - Number(productCard.querySelector(".price").innerHTML)
+            );
+        }
+    });
+}
 
 /**
  * Sends a request to add a product to the cart.
@@ -53,8 +109,14 @@ function sendRemoveFromCartRequest(deleteFromCartButton, productId, quantity, pr
 
 document.addEventListener('DOMContentLoaded', () => {
     const removeButtons = document.getElementsByClassName("remove-from-cart-button");
-
     Array.from(removeButtons).forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopImmediatePropagation();
+        });
+    });
+
+    const actionsButtons = document.getElementsByClassName("cart-change-quantity");
+    Array.from(actionsButtons).forEach(button => {
         button.addEventListener('click', (event) => {
             event.stopImmediatePropagation();
         });

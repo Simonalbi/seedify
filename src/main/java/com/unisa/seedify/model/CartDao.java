@@ -237,6 +237,38 @@ public class CartDao extends BaseDao implements GenericDao<CartBean>, DetailedDa
         return (success && !cartReset);
     }
 
+    public boolean removeFromCart(CartBean cartBean, ProductBean productBean, int quantity) {
+        CartItemBean cartItemBean = cartBean.getCartItems().stream()
+                .filter(cartItem -> cartItem.getProduct().equals(productBean))
+                .findFirst()
+                .orElse(null);
+
+        if (cartItemBean == null) {
+            return false;
+        }
+
+        boolean cartReset = false;
+        if (cartItemBean.getQuantity() - quantity <= 0) {
+            cartReset = true;
+        } else {
+            cartItemBean.setQuantity(cartItemBean.getQuantity() - quantity);
+        }
+
+        boolean success = false;
+        try {
+            if (cartReset) {
+                this.doDeleteOne(cartBean, cartItemBean);
+                cartBean.getCartItems().remove(cartItemBean);
+            } else {
+                this.doUpdate(cartBean);
+            }
+
+            success = true;
+        } catch (SQLException ignored) {}
+
+        return success;
+    }
+
     public void emptyCart(CartBean cartBean) throws SQLException {
         this.doDelete(cartBean);
         cartBean.emptyCart();

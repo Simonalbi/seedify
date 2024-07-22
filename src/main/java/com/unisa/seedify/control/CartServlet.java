@@ -69,8 +69,19 @@ public class CartServlet extends HttpServlet implements JsonServlet {
         switch (action) {
             case "add_to_cart": {
                 try {
+                    if (productBean == null) {
+                        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Product not found");
+                        return;
+                    }
+
                     int quantity = jsonBody.get("quantity").getAsInt();
-                    success = cartDao.addToCart(cartBean, productBean, quantity);
+                    if (quantity > 0) {
+                        success = cartDao.addToCart(cartBean, productBean, quantity);
+                    } else if (quantity < 0) {
+                        success = cartDao.removeFromCart(cartBean, productBean, -quantity);
+                    } else {
+                        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid quantity");
+                    }
                 } catch (NullPointerException | JsonSyntaxException e) {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing param 'product_id' in request body");
                 }

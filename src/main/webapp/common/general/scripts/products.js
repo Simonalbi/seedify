@@ -50,8 +50,9 @@ function sendRemoveFromFavoriteRequest(productId, favoriteButton) {
  * Sends a request to add a product to the cart.
  * @param {number} productId
  * @param {number} quantity
+ * @param {function} callback
  */
-function sendAddToCartRequest(productId, quantity) {
+function sendAddToCartRequest(productId, quantity, callback) {
     const body = {
         action: "add_to_cart",
         product_id: productId,
@@ -65,8 +66,15 @@ function sendAddToCartRequest(productId, quantity) {
         {
             200: function () {
                 const counter = document.querySelector("#cart-items-counter span");
-                counter.innerHTML = `${parseInt(counter.innerHTML) + 1}`;
-                toast("Aggiunto al carrello", "SUCCESS");
+                counter.innerHTML = `${parseInt(counter.innerHTML) + quantity}`;
+                if (quantity > 0) {
+                    toast("Aggiunto al carrello", "SUCCESS");
+                } else {
+                    toast("Rimosso dal carrello", "SUCCESS");
+                }
+                if (callback !== null) {
+                    callback();
+                }
             }
         }
     )

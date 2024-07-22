@@ -80,6 +80,11 @@ img {
   height: 40px;
 }
 
+.product-container .cart-change-quantity {
+  width: 30px;
+  height: 30px;
+}
+
 .product-container .favorite-button .material-icons-round,
 .product-container .remove-from-cart-button .material-icons-round {
   position: relative;

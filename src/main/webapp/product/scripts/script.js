@@ -3,7 +3,7 @@ import { getBaseOriginName, resolveResource, sendAjaxRequest } from "../../commo
 import { addToScrollableContainer } from "../../common/components/scrollable-container/scripts/script.js";
 
 window.sendAddToCartRequest = function(productId, quantity) {
-    sendAddToCartRequest(productId, quantity);
+    sendAddToCartRequest(productId, quantity, null);
 }
 
 window.addOrRemoveFromFavorites = function(favoriteButton, productId) {
