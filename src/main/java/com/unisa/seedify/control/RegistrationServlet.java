@@ -1,5 +1,6 @@
 package com.unisa.seedify.control;
 
+import com.google.gson.JsonObject;
 import com.unisa.seedify.utils.InputValidation;
 import com.unisa.seedify.model.EntityPrimaryKey;
 import com.unisa.seedify.model.UserBean;
@@ -15,30 +16,34 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-// TODO: Validare l'input e in caso di errore far apparire nella pagina l'errore
-// TODO Redirect instead of throwing exception
 @WebServlet(name = "registrationServlet", value = "/registration-servlet")
 public class RegistrationServlet extends HttpServlet implements JsonServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("email").toLowerCase();
+        JsonObject jsonBody = JsonServlet.parsePostRequestBody(request);
+
+        String email = jsonBody.get("email").getAsString().toLowerCase();
         if (!InputValidation.isEmailValid(email)) {
-            throw new IllegalArgumentException("Invalid email");
+            response.setStatus(400);
+            return;
         }
 
-        String password = request.getParameter("password");
+        String password = jsonBody.get("password").getAsString();
         if (!InputValidation.isPasswordStrong(password)) {
-            throw new IllegalArgumentException("Password is not strong enough");
+            response.setStatus(400);
+            return;
         }
         password = InputValidation.sha256(password);
 
-        String name = request.getParameter("name");
+        String name = jsonBody.get("name").getAsString();
         if (!InputValidation.isNameValid(name)) {
-            throw new IllegalArgumentException("Invalid name");
+            response.setStatus(400);
+            return;
         }
 
-        String surname = request.getParameter("surname");
+        String surname = jsonBody.get("surname").getAsString();
         if (!InputValidation.isNameValid(surname)) {
-            throw new IllegalArgumentException("Invalid surname");
+            response.setStatus(400);
+            return;
         }
 
         String imagePath = getServletContext().getRealPath("/common/assets/img/profile/default.png");
@@ -62,10 +67,10 @@ public class RegistrationServlet extends HttpServlet implements JsonServlet {
                 request.getSession(true).setAttribute("user", user);
                 response.sendRedirect("home");
             } else {
-                throw new IllegalArgumentException("User already exists");
+                response.setStatus(401);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            response.setStatus(401);
         }
     }
 }

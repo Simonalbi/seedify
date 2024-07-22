@@ -1,3 +1,6 @@
+import { getBaseOriginName, sendAjaxRequest } from "../../common/general/scripts/script.js";
+import { toast } from "../../common/general/scripts/toast.js";
+
 /**
  * Validates the step by changing the icon to a checkmark.
  * @param {string} elementId - The ID of the element to validate
@@ -104,3 +107,34 @@ passwordConfirmationBox.addEventListener("input", (event) => {
         event.target.setCustomValidity("");
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const registrationForm = document.getElementById("registration-form");
+    registrationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = {
+            "name": document.getElementById("registration-name-input-box").value,
+            "surname": document.getElementById("registration-surname-input-box").value,
+            "email": document.getElementById("registration-email-input-box").value,
+            "password": document.getElementById("registration-password-input-box").value
+        };
+
+        sendAjaxRequest(
+            "POST",
+            `${getBaseOriginName()}/registration-servlet`,
+            JSON.stringify(formData),
+            {
+                200: function () {
+                    window.location.href = `${getBaseOriginName()}/dashboard`;
+                },
+                400: function() {
+                    toast("Dati non validi", "ERROR");
+                },
+                401: function (){
+                    toast("Email già in uso", "ERROR");
+                }
+            }
+        )
+    })
+})

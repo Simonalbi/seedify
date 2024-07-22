@@ -55,16 +55,16 @@ public class LoginServlet extends HttpServlet implements JsonServlet {
         } catch (SQLException ignored) {}
 
         if (user == null) {
-            response.setStatus(400);
+            response.setStatus(401);
         } else if (user.getPassword().equals(password)) {
             try {
                 this.initSession(request, response, user);
                 response.setStatus(200);
             } catch (ServletException | SQLException e) {
-                response.setStatus(400);
+                response.setStatus(401);
             }
         } else {
-            response.setStatus(400);
+            response.setStatus(401);
         }
     }
 }

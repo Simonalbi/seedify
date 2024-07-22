@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 200: function () {
                   window.location.href = `${getBaseOriginName()}/dashboard`;
                 },
-                400: function (){
+                401: function (){
                     toast("Credeziali errate", "ERROR");
                 }
             }

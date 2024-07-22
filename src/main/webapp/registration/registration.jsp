@@ -5,7 +5,7 @@
 
   <link rel="stylesheet" href="${pageContext.request.contextPath}/registration/styles/style.css">
 
-  <script src="${pageContext.request.contextPath}/registration/scripts/script.js" defer></script>
+  <script type="module" src="${pageContext.request.contextPath}/registration/scripts/script.js" defer></script>
 </head>
 <body>
   <jsp:include page="/common/components/login/login.jsp"/>
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div id="registration-form-container">
-          <form action="${pageContext.request.contextPath}/registration-servlet" method="POST">
+          <form id="registration-form" action="${pageContext.request.contextPath}/registration-servlet" method="POST">
             <div id="registration-boxes-container">
               <div id="registration-name-box" class="dark rubik-400">
                 <jsp:include page="/common/components/input-box/input-box.jsp">
