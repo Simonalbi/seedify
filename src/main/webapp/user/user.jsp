@@ -88,7 +88,7 @@
       <div class="ui-block" id="table-container">
         <nav id="main-table-navbar">
           <div id="table-selector-container">
-            <label class="rubik-300" for="table-selector">Seleziona tabella:</label>
+            <label id="table-selector-label" class="rubik-300" for="table-selector">Seleziona tabella:</label>
             <select name="table-selector" id="table-selector" onchange="getTableData()">
               <% if (userBean.getRole().equals(UserBean.Roles.ADMIN)) { %>
               <option value="get_products-immagine,id_prodotto,nome,prezzo,quantità,stagione,acqua_richiesta,tipologia,descrizione">Prodotti</option>
