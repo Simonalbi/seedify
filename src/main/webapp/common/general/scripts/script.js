@@ -65,7 +65,7 @@ function sendAjaxRequest(method, url, body, callbacks) {
         if (ajaxRequest.readyState < 4) {
             ajaxRequest.abort();
         }
-    }, 10000 );
+    }, 10000);
 }
 
 /**

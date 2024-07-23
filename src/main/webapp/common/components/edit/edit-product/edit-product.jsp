@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--TODO Modificare la regx di input box in modo che il prezzo accetti anche numeri decimali--%>
 <div id="edit-product-overlay">
   <div id="edit-product-main-container" class="ui-block">
     <div id="edit-product-close-button" onclick="hideProductForm()">

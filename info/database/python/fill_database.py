@@ -11,7 +11,7 @@ import hashlib
 DATABASE_NAME = "seedify"
 dbConfig = {
     "user": "root",
-    "password": "06102003",
+    "password": "...",
     "host": "localhost",
 }
 

@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- TODO Filter products -->
-
 <html>
 <head>
   <jsp:include page="/common/general/metadata.jsp"/>
